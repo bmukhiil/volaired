@@ -6,7 +6,8 @@ import { Button } from "@/components/ui/button";
 import { DatePickerWithRange } from "@/components/ui/date-range-picker";
 import { format } from "date-fns";
 import { Loader2 } from "lucide-react";
-import { DepartureSelect } from "@/components/ui/departure-select";
+import { DepartureSelect } from "@/components/ui/departure/departure-select";
+import { ArrivalSelect } from "@/components/ui/arrival/arrival-select";
 
 export default function Home() {
   const [flights, setFlights] = useState([]);
@@ -85,6 +86,7 @@ export default function Home() {
           placeholder="Destination"
         />
         <DepartureSelect />
+        <ArrivalSelect />
         <DatePickerWithRange onDateChange={updateDateRange} />
         {loading ? (
           <Button disabled={loading} variant="secondary">
