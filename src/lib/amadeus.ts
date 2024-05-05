@@ -66,8 +66,11 @@ async function getAmadeusToken(): Promise<string | null> {
 
 // Function to search for flights using the Amadeus API.
 // It requires flight search parameters and a valid token.
-export async function searchFlights(body: any) {
+export async function searchFlights(searchParams: any) {
   const token = await getAmadeusToken();
+  console.log("Token:", token);
+
+  console.log(searchParams);
 
   try {
     console.log("Searching for flights...");
@@ -79,8 +82,10 @@ export async function searchFlights(body: any) {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
+        body: JSON.stringify(searchParams),
       },
-    );
+    ).then((res) => res.json());
+    return response;
   } catch (error) {
     console.error("Error searching for flights:", error);
   }
