@@ -6,7 +6,9 @@ import { Button } from "@/components/ui/button";
 import { DatePickerWithRange } from "@/components/ui/date-range-picker";
 import { format } from "date-fns";
 import { Loader2 } from "lucide-react";
-import { DepartureSelect } from "@/components/ui/departure-select";
+import { DepartureSelect } from "@/components/ui/departure/departure-select";
+import { ArrivalSelect } from "@/components/ui/arrival/arrival-select";
+import { AirportSelect } from "@/components/ui/airport-select";
 
 export default function Home() {
   const [flights, setFlights] = useState([]);
@@ -23,6 +25,7 @@ export default function Home() {
       return;
     }
     console.log("searching...");
+    console.log(searchParams);
     setLoading(true);
     const response = await fetch("/api/v1/flights", {
       method: "POST",
@@ -34,13 +37,13 @@ export default function Home() {
         originDestinations: [
           {
             id: "1",
-            originLocationCode: searchParams.departure,
-            destinationLocationCode: searchParams.destination,
+            originLocationCode: searchParams.departure.iata_code,
+            destinationLocationCode: searchParams.destination.iata_code,
             departureDateTimeRange: {
-              date: format(searchParams.dateRange.from, "yyyy-MM-dd"),
+              date: searchParams.dateRange.from,
             },
             arrivalDateTimeRange: {
-              date: format(searchParams.dateRange.to, "yyyy-MM-dd"),
+              date: searchParams.dateRange.to,
             },
           },
         ],
@@ -61,30 +64,42 @@ export default function Home() {
     setFlights(data);
   };
 
-  const handleDepartureChange = (e) => {
-    setSearchParams({ ...searchParams, departure: e.target.value });
-  };
-
-  const handleDestinationChange = (e) => {
-    setSearchParams({ ...searchParams, destination: e.target.value });
+  const handleAirportChange = (airport, type) => {
+    setSearchParams((prevParams) => ({
+      ...prevParams,
+      [type === "departure" ? "departure" : "destination"]: airport,
+    }));
   };
 
   const updateDateRange = (dateRange) => {
-    setSearchParams((prevParams) => ({ ...prevParams, dateRange }));
+    const { from, to } = dateRange;
+    const formattedDateRange = {
+      from: format(from, "yyyy-MM-dd"),
+      to: format(to, "yyyy-MM-dd"),
+    };
+    setSearchParams((prevParams) => ({
+      ...prevParams,
+      dateRange: formattedDateRange,
+    }));
   };
 
   return (
     <main className="px-6 pt-12">
       <div className="flex flex-col gap-y-4">
-        <Input
-          onChange={(e) => handleDepartureChange(e)}
-          placeholder="Departure"
+        <AirportSelect
+          type="departure"
+          airport={searchParams.departure}
+          onAirportChange={(airport) =>
+            handleAirportChange(airport, "departure")
+          }
         />
-        <Input
-          onChange={(e) => handleDestinationChange(e)}
-          placeholder="Destination"
+        <AirportSelect
+          type="destination"
+          airport={searchParams.destination}
+          onAirportChange={(airport) =>
+            handleAirportChange(airport, "destination")
+          }
         />
-        <DepartureSelect />
         <DatePickerWithRange onDateChange={updateDateRange} />
         {loading ? (
           <Button disabled={loading} variant="secondary">
