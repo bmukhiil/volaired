@@ -10,9 +10,9 @@ export async function POST(req: NextRequest) {
 
     const flightData = await searchFlights(body);
     console.log("Flight data:", flightData);
+    return NextResponse.json({ flightData: flightData });
   } catch (error) {
     console.error(error);
+    return NextResponse.error(error);
   }
-
-  return NextResponse.json({ message: "Hello, world!" });
 }
