@@ -6,6 +6,7 @@ import {
 } from "react-instantsearch";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { cn } from "@/lib/utils";
 
 export default function CustomSearchBox(props: UseSearchBoxProps) {
   const { query, refine } = useSearchBox(props);
@@ -67,8 +68,9 @@ export default function CustomSearchBox(props: UseSearchBoxProps) {
             variant="ghost"
             size="icon"
             type="reset"
-            className="text-muted-foreground"
-            hidden={inputValue.length === 0 || isSearchStalled}
+            className={cn("text-muted-foreground", {
+              hidden: inputValue.length === 0 || isSearchStalled,
+            })}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
