@@ -1,12 +1,18 @@
 import { fetchWebhookSecret, verifyWebhook } from "@/lib/clerk-webhook";
 import { NextRequest, NextResponse } from "next/server";
+import { createClerkSupabaseClient } from "@/lib/supabase/server";
+
+async function handleCommunicationEvent(data) {
+    const supabaseClient = await createClerkSupabaseClient();
+
+    const 
 
 export async function POST(req: NextRequest) {
   const WEBHOOK_SECRET = fetchWebhookSecret("communication-events");
 
   if (!WEBHOOK_SECRET) {
     throw new Error(
-      "Please add WEBHOOK_SECRET from Clerk Dashboard to .env or .env.local",
+      "Please add WEBHOOK_SECRET from Clerk Dashboard to .env or .env.local"
     );
   }
 
@@ -14,10 +20,7 @@ export async function POST(req: NextRequest) {
 
   // Do something with the payload
   // For this guide, you simply log the payload to the console
-  const { id } = evt.data;
   const eventType = evt.type;
-  console.log(`Webhook with and ID of ${id} and type of ${eventType}`);
-  console.log("Webhook body:", body);
 
-  return new Response("", { status: 200 });
+  return NextResponse.json({ status: 200 });
 }
