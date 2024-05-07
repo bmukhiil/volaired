@@ -13,6 +13,6 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ flightData: flightData });
   } catch (error) {
     console.error(error);
-    return NextResponse.error(error);
+    return NextResponse.error();
   }
 }

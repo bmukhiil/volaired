@@ -1,15 +1,23 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { Input } from "@/components/ui/input";
+import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { DatePickerWithRange } from "@/components/ui/date-range-picker";
 import { format } from "date-fns";
 import { Loader2 } from "lucide-react";
-import { DepartureSelect } from "@/components/ui/departure/departure-select";
-import { ArrivalSelect } from "@/components/ui/arrival/arrival-select";
 import { AirportSelect } from "@/components/ui/airport-select";
+import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+
 import {
   Card,
   CardContent,
@@ -18,21 +26,56 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
 
 export default function Home() {
   const [flightData, setFlightData] = useState({ data: [], meta: {} });
   const [searchParams, setSearchParams] = useState({});
   const [loading, setLoading] = useState(false);
+  const [airlineCodes, setAirlineCodes] = useState({});
+
+  const ongoingFetches = useRef(new Set());
+
+  const fetchAirlineCodes = async (iataCode) => {
+    // Check if already fetching or data already exists
+    if (airlineCodes[iataCode] || ongoingFetches.current.has(iataCode)) {
+      return;
+    }
+    ongoingFetches.current.add(iataCode);
+    setLoading(true);
+    try {
+      const response = await fetch(`/api/v1/airline-codes?iata=${iataCode}`);
+      const data = await response.json();
+      setAirlineCodes((prev) => ({
+        ...prev,
+        [iataCode]: data,
+      }));
+    } catch (error) {
+      console.error("Failed to fetch airline codes:", error);
+    } finally {
+      setLoading(false);
+      ongoingFetches.current.delete(iataCode);
+    }
+  };
 
   const handleSearch = async () => {
-    // if (
-    //   !searchParams.departure ||
-    //   !searchParams.destination ||
-    //   !searchParams.dateRange
-    // ) {
-    //   console.log("Missing search parameters");
-    //   return;
-    // }
+    if (
+      !searchParams.departure ||
+      !searchParams.destination ||
+      !searchParams.dateRange
+    ) {
+      console.log("Missing search parameters");
+      return;
+    }
     console.log("searching...");
     console.log(searchParams);
     setLoading(true);
@@ -359,6 +402,39 @@ export default function Home() {
     },
   };
 
+  useEffect(() => {
+    console.log(airlineCodes);
+  }, [airlineCodes]);
+
+  useEffect(() => {
+    setFlightData(testData);
+    setSearchParams({
+      departure: {
+        iata_code: "YVR",
+        name: "Vancouver",
+        city: "Vancouver",
+        country: "Canada",
+      },
+      destination: {
+        iata_code: "YYZ",
+        name: "Toronto",
+        city: "Toronto",
+        country: "Canada",
+      },
+      dateRange: { from: "2024-12-01", to: "2024-12-02" },
+    });
+  }, []);
+
+  useEffect(() => {
+    flightData.data.forEach((flight) => {
+      const carrierCode = flight.itineraries[0].segments[0].carrierCode;
+      if (carrierCode && !airlineCodes[carrierCode]) {
+        fetchAirlineCodes(carrierCode);
+      }
+    });
+    console.log(airlineCodes);
+  }, [flightData.data]);
+
   const updateDateRange = (dateRange) => {
     const { from, to } = dateRange;
     const formattedDateRange = {
@@ -409,32 +485,142 @@ export default function Home() {
       <div className="my-8">
         <Separator />
       </div>
-      <div className="flex flex-col gap-y-4">
-        {testData && Array.isArray(testData.data) ? (
-          testData.data.map((flight) => {
+      <div className="flex flex-col gap-y-4 mb-8">
+        {flightData && Array.isArray(flightData.data) ? (
+          flightData.data.map((flight) => {
             const [firstDepartureTime, lastArrivalTime] =
               getFirstDepartureAndLastArrival(flight);
             const duration = parseDuration(flight.itineraries[0].duration);
+            const stops = flight.itineraries[0].segments.length - 1;
 
             return (
-              <Card key={flight.id} className="">
-                <CardHeader>
-                  <CardTitle>
-                    <div className="flex items-center justify-between">
-                      <span>{firstDepartureTime}</span>
-                      <span>{duration}</span>
-                      <span>{lastArrivalTime}</span>
-                    </div>
-                  </CardTitle>
-                  <CardDescription>Card Description</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <p>Card Content</p>
-                </CardContent>
-                <CardFooter>
-                  <p>Card Footer</p>
-                </CardFooter>
-              </Card>
+              <Drawer key={flight.id} className="">
+                <DrawerTrigger>
+                  <Card className="flex flex-col items-center">
+                    <CardHeader className="w-full">
+                      <div className="flex items-center gap-x-2">
+                        <div className="flex flex-col items-center">
+                          <h2 className="text-xl font-semibold tracking-tight">
+                            {firstDepartureTime}
+                          </h2>
+                          <h3 className="text-xs text-muted-foreground font-medium">
+                            {
+                              flight.itineraries[0].segments[0].departure
+                                .iataCode
+                            }
+                          </h3>
+                        </div>
+                        <Separator className="flex shrink" />
+                        <div className="flex flex-col items-center">
+                          <h2 className="text-sm text-nowrap font-semibold tracking-tight">
+                            {duration}
+                          </h2>
+                          <Badge
+                            variant="secondary"
+                            className="text-nowrap text-xs font-semibold"
+                          >
+                            {stops} stops
+                          </Badge>
+                        </div>
+                        <Separator className="flex shrink" />
+                        <div className="flex flex-col items-center">
+                          <h2 className="text-xl font-semibold tracking-tight">
+                            {lastArrivalTime}
+                          </h2>
+                          <h3 className="text-xs text-muted-foreground font-medium">
+                            {
+                              flight.itineraries[flight.itineraries.length - 1]
+                                .segments[0].arrival.iataCode
+                            }
+                          </h3>
+                        </div>
+                      </div>
+                      <CardDescription>Card Description</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <p>Card Content</p>
+                    </CardContent>
+                    <Separator className="my-2 w-full" />
+                    <CardFooter className="flex flex-col gap-y-2 w-full">
+                      <h2 className="font-semibold text-xl tracking-tight">
+                        ${flight.price.total}
+                        {flight.price.currency}
+                      </h2>
+                      <Button className="w-full">Select</Button>
+                    </CardFooter>
+                  </Card>
+                </DrawerTrigger>
+                <DrawerContent className="flex flex-col justify-center items-center h-[85vh]">
+                  <DrawerHeader>
+                    <DrawerTitle className="">Trip Details</DrawerTitle>
+                    <Separator className="my-2 w-full" />
+                    <DrawerDescription>
+                      <ScrollArea className="w-full h-full">
+                        <div>
+                          <h2 className="text-2xl font-bold tracking-tight text-foreground">
+                            To {searchParams.destination?.city},{" "}
+                            {searchParams.destination?.country}
+                          </h2>
+                          {flight.itineraries[0].segments.map((segment) => (
+                            <div
+                              key={segment.id}
+                              className="flex items-center flex-col"
+                            >
+                              <div className="">
+                                <h2 className="text-2xl font-bold tracking-tight text-foreground">
+                                  {formatTime(segment.departure.at)}
+                                </h2>
+                                <span className="font-medium text-sm">
+                                  {segment.departure.iataCode}
+                                </span>
+                              </div>
+                              <div className="flex flex-col items-center gap-y-2">
+                                <Separator
+                                  className="w-[1px] h-[6vh]"
+                                  orientation="vertical"
+                                />
+                                <h2>{duration}</h2>
+                                <Separator
+                                  className="w-[1px] h-[6vh]"
+                                  orientation="vertical"
+                                />
+                              </div>
+                              <div>
+                                <h2 className="text-2xl font-bold tracking-tight text-foreground">
+                                  {formatTime(segment.arrival.at)}
+                                </h2>
+                                <span className="font-medium text-sm">
+                                  {segment.arrival.iataCode}
+                                </span>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                        <h2>
+                          {
+                            airlineCodes[
+                              flight.itineraries[0].segments[0].carrierCode
+                            ]?.airlineCode?.data[0]?.businessName
+                          }
+                        </h2>
+                      </ScrollArea>
+                    </DrawerDescription>
+                  </DrawerHeader>
+                  <DrawerFooter className="w-full flex justify-center">
+                    <Separator className="my-2" />
+                    <h2 className="text-center font-semibold text-xl tracking-tight">
+                      ${flight.price.total}
+                      {flight.price.currency}
+                    </h2>
+                    <Button className="w-full">Select</Button>
+                    <DrawerClose>
+                      <Button variant="outline" className="w-full">
+                        Cancel
+                      </Button>
+                    </DrawerClose>
+                  </DrawerFooter>
+                </DrawerContent>
+              </Drawer>
             );
           })
         ) : (

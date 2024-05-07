@@ -90,3 +90,24 @@ export async function searchFlights(searchParams: any) {
     console.error("Error searching for flights:", error);
   }
 }
+
+export async function getAirlineCode(code: string) {
+  const token = await getAmadeusToken();
+  console.log("Token:", token);
+
+  try {
+    console.log("Searching for airline code...");
+    const response = await fetch(
+      `https://test.api.amadeus.com/v1/reference-data/airlines?airlineCodes=${code}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      },
+    ).then((res) => res.json());
+    return response;
+  } catch (error) {
+    console.error("Error searching for airline code:", error);
+  }
+}
