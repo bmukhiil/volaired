@@ -10,6 +10,8 @@
     "format": "prettier --write ."
   },
   "dependencies": {
+    "@supabase/ssr": "^0.3.0",
+    "@supabase/supabase-js": "^2.43.1",
     "@clerk/elements": "^0.3.2",
     "@clerk/nextjs": "^5.0.6",
     "@radix-ui/react-dialog": "^1.0.5",
