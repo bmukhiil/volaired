@@ -89,16 +89,16 @@ export default function Home() {
         originDestinations: [
           {
             id: "1",
-            originLocationCode: "YVR",
-            destinationLocationCode: "YYZ",
-            departureDateTimeRange: {
-              date: "2024-12-01",
-            },
-            // originLocationCode: searchParams.departure.iata_code,
-            // destinationLocationCode: searchParams.destination.iata_code,
+            // originLocationCode: "YVR",
+            // destinationLocationCode: "YYZ",
             // departureDateTimeRange: {
-            //   date: searchParams.dateRange.from,
+            //   date: "2024-12-01",
             // },
+            originLocationCode: searchParams.departure.iata_code,
+            destinationLocationCode: searchParams.destination.iata_code,
+            departureDateTimeRange: {
+              date: searchParams.dateRange.from,
+            },
             // api does not allow for departureDateTimeRange + arrivalDateTimeRange
             // arrivalDateTimeRange: {
             //   date: searchParams.dateRange.to,
@@ -407,7 +407,7 @@ export default function Home() {
   }, [airlineCodes]);
 
   useEffect(() => {
-    setFlightData(testData);
+    // setFlightData(testData);
     setSearchParams({
       departure: {
         iata_code: "YVR",
@@ -456,7 +456,7 @@ export default function Home() {
   };
 
   return (
-    <main className="px-6 pt-12">
+    <main className="p-6">
       <div className="flex flex-col gap-y-4">
         <AirportSelect
           type="departure"
@@ -596,13 +596,13 @@ export default function Home() {
                             </div>
                           ))}
                         </div>
-                        <h2>
+                        {/* <h2>
                           {
                             airlineCodes[
                               flight.itineraries[0].segments[0].carrierCode
                             ]?.airlineCode?.data[0]?.businessName
                           }
-                        </h2>
+                        </h2> */}
                       </ScrollArea>
                     </DrawerDescription>
                   </DrawerHeader>

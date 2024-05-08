@@ -213,8 +213,8 @@ import { SignUp } from "@clerk/nextjs";
 
 export default function Page() {
   return (
-    <div>
-      <SignUp path="/sign-up" />
+    <div className="w-screen h-[90vh] flex justify-center items-center">
+      <SignIn path="/sign-in" />
     </div>
   );
 }
