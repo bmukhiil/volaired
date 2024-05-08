@@ -10,7 +10,6 @@ export async function GET(req: NextRequest) {
     console.log("fetching airline code..");
 
     const airlineCode = await getAirlineCode(code);
-    console.log("Airline code:", airlineCode);
     return NextResponse.json({ airlineCode: airlineCode });
   } catch (error) {
     console.error(error);

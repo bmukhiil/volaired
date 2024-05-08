@@ -68,10 +68,6 @@ async function getAmadeusToken(): Promise<string | null> {
 // It requires flight search parameters and a valid token.
 export async function searchFlights(searchParams: any) {
   const token = await getAmadeusToken();
-  console.log("Token:", token);
-
-  console.log(searchParams);
-
   try {
     console.log("Searching for flights...");
     const response = await fetch(
@@ -93,7 +89,6 @@ export async function searchFlights(searchParams: any) {
 
 export async function getAirlineCode(code: string) {
   const token = await getAmadeusToken();
-  console.log("Token:", token);
 
   try {
     console.log("Searching for airline code...");
