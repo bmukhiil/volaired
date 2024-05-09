@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import { Separator } from "../ui/separator";
+import { Loader2 } from "lucide-react";
 
 const World = dynamic(() => import("../ui/globe").then((m) => m.World), {
   ssr: false,
@@ -49,7 +50,14 @@ export default function Footer() {
 
   useEffect(() => {
     async function fetchArcs() {
-      const response = await fetch(`/api/v1/flights/paths/yesterday?limit=800`);
+      const response = await fetch(
+        `/api/v1/flights/paths/yesterday?limit=800`,
+        {
+          next: {
+            revalidate: 43200,
+          },
+        },
+      );
       const data = await response.json();
       console.log(data.data.length);
 
@@ -81,8 +89,12 @@ export default function Footer() {
 
   return (
     <main className="w-screen px-6">
-      {arcs.length > 0 && (
-        <div>
+      {loading ? (
+        <div className="flex items-center justify-center">
+          <Loader2 className="text-indigo-500 animate-spin w-8 h-8" />
+        </div>
+      ) : (
+        <div className="flex items-center justify-center">
           <World data={arcs} globeConfig={globeConfig} />
         </div>
       )}
