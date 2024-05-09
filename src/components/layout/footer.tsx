@@ -9,6 +9,7 @@ import { EnrichedFlightDetails } from "@/types";
 import { Button } from "../ui/button";
 import { ModeToggle } from "@/components/ui/mode-toggle";
 import Link from "next/link";
+import { CustomDashedCard } from "../ui/custom-card";
 
 const World = dynamic(() => import("../ui/globe").then((m) => m.World), {
   ssr: false,
@@ -104,7 +105,7 @@ export default function Footer() {
             yesterday at exactly this time.
           </h3>
         </div>
-        <div className="shadow-sm my-6 p-6 w-full h-42 rounded-lg border border-border border-dashed flex items-center justify-center bg-zinc-100 dark:bg-zinc-800">
+        <CustomDashedCard className="my-6 w-full flex items-center justify-center">
           {loading ? (
             <div className="flex items-center justify-center">
               <Loader2 className="text-indigo-500 animate-spin w-8 h-8" />
@@ -114,7 +115,7 @@ export default function Footer() {
               <World data={arcs} globeConfig={globeConfig} />
             </div>
           )}
-        </div>
+        </CustomDashedCard>
       </div>
       <Separator className="my-4 -mx-6 w-screen" />
       <div className="py-2 text-center flex gap-y-4 flex-col items-center font-bold text-3xl">
