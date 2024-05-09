@@ -232,8 +232,8 @@ export default function Home() {
             Planning a trip with friends?
           </h2>
           <h3 className="text-muted-foreground">
-            We've got you covered. From splitting bills to planning the
-            itinerary, we've got everything you need to make your trip a
+            W&apos;ve got you covered. From splitting bills to planning the
+            itinerary, we&apos;ve got everything you need to make your trip a
             success.
           </h3>
         </div>
