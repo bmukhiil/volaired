@@ -38,7 +38,6 @@ import { cn } from "@/lib/utils";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-
 export default function Home() {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
@@ -48,7 +47,7 @@ export default function Home() {
   const [tripJoined, setTripJoined] = useState(false);
   const [tripDeclined, setTripDeclined] = useState(false);
   const [tripJoinedTriggered, setTripJoinedTriggered] = useState(false);
-  
+
   const data = {
     labels: ["<30 min", "30-60 min", "60-120 min", "Over 120 min/cancelled"],
     datasets: [
@@ -456,7 +455,7 @@ export default function Home() {
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 20 20"
                       fill="currentColor"
-                      className="w-5 h-5"
+                      className="w-4 h-4"
                     >
                       <path
                         fill-rule="evenodd"
@@ -464,7 +463,7 @@ export default function Home() {
                         clip-rule="evenodd"
                       />
                     </svg>
-                    Text message sent.
+                    Text message sent
                   </div>
                   <span className="border-indigo-500 border-dashed border w-[0.1px] h-24" />
                 </div>
@@ -479,8 +478,8 @@ export default function Home() {
                         Volaired Assistant
                       </h4>
                       <p className="text-xs">
-                        Your flight to Toronto is is likely (~42%) to be delayed
-                        by 30-60 minutes.
+                        Your flight to Toronto is is likely to be delayed by
+                        30-60 minutes.
                       </p>
                     </div>
                   </div>
