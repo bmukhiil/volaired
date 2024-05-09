@@ -23,13 +23,13 @@ async function fetchToken(): Promise<CachedToken> {
           "Content-Type": "application/x-www-form-urlencoded",
         },
         body: `grant_type=client_credentials&client_id=${process.env.AMADEUS_CLIENT_API_KEY}&client_secret=${process.env.AMADEUS_CLIENT_API_SECRET}`,
-      },
+      }
     );
 
     const tokenData = await response.json();
     if (!response.ok) {
       throw new Error(
-        `Failed to fetch token: ${response.status} ${response.statusText}`,
+        `Failed to fetch token: ${response.status} ${response.statusText}`
       );
     }
 
@@ -83,7 +83,7 @@ export async function searchFlights(searchParams: any) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(searchParams),
-      },
+      }
     ).then((res) => res.json());
     return response;
   } catch (error) {
@@ -98,12 +98,12 @@ export async function fetchAirport(airportCode: string) {
   try {
     console.log("Fetching airport information...");
     const response = await fetch(
-      `https://test.api.amadeus.com/v1/reference-data/locations/${departureAirportCode}`,
+      `https://test.api.amadeus.com/v1/reference-data/locations/${airportCode}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-      },
+      }
     ).then((res) => res.json());
     return response;
   } catch (error) {
