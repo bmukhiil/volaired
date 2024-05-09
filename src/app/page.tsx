@@ -35,6 +35,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 import { cn } from "@/lib/utils";
+import { Label } from "@/components/ui/label";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -372,7 +373,7 @@ export default function Home() {
                           "absolute right-[0.5px] top-[0.5px] transform translate-x-1/2 -translate-y-1/2",
                           {
                             hidden: tripJoinedTriggered,
-                          },
+                          }
                         )}
                       >
                         <div className="bg-indigo-400 w-2 h-2 rounded-full">
@@ -418,6 +419,88 @@ export default function Home() {
                         {tripJoined ? "Joined" : "Join"}
                       </Button>
                     </div>
+                  </div>
+                </div>
+              </CardDescription>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+      <div className="pb-28 flex flex-col gap-y-6">
+        <div className="flex flex-col gap-y-2">
+          <h2 className="text-3xl font-bold tracking-tight">
+            Find the prime time to fly.
+          </h2>
+          <h3 className="text-muted-foreground">
+            When searching for flights, we&apos;ll give you insight on the most
+            optimal times to fly.
+          </h3>
+        </div>
+        <div>
+          <Card className="border-dashed bg-secondary shadow">
+            {/* <CardHeader>
+              <CardTitle>Group trips, made easy.</CardTitle>
+            </CardHeader> */}
+            <CardContent className="p-6">
+              <CardDescription className="flex flex-col gap-y-1 rounded-lg">
+                <div className="bg-background rounded-lg">
+                  <div className="flex flex-col gap-y-2 pb-6 border-border border p-4 rounded-lg shadow">
+                    <div>
+
+                    <Label className="text-foreground">Flying from</Label>
+                    <Button
+                      variant="outline"
+                      className="justify-start w-full font-normal items-center"
+                      >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                        className="mr-2 w-5 h-5 text-foreground"
+                        >
+                        <path
+                          fill-rule="evenodd"
+                          d="m9.69 18.933.003.001C9.89 19.02 10 19 10 19s.11.02.308-.066l.002-.001.006-.003.018-.008a5.741 5.741 0 0 0 .281-.14c.186-.096.446-.24.757-.433.62-.384 1.445-.966 2.274-1.765C15.302 14.988 17 12.493 17 9A7 7 0 1 0 3 9c0 3.492 1.698 5.988 3.355 7.584a13.731 13.731 0 0 0 2.273 1.765 11.842 11.842 0 0 0 .976.544l.062.029.018.008.006.003ZM10 11.25a2.25 2.25 0 1 0 0-4.5 2.25 2.25 0 0 0 0 4.5Z"
+                          clip-rule="evenodd"
+                          />
+                      </svg>
+                      <span
+                        className={cn(
+                          "truncate flex-none overflow-hidden text-foreground"
+                          )}
+                          >
+                        Vancouver, Canada (YVR)
+                      </span>
+                    </Button>
+                        </div>
+                        <div>
+
+                    <Label className="text-foreground">Flying to</Label>
+                    <Button
+                      variant="outline"
+                      className="justify-start w-full font-normal items-center"
+                      >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                        className="mr-2 w-5 h-5 text-foreground"
+                        >
+                        <path
+                          fill-rule="evenodd"
+                          d="m9.69 18.933.003.001C9.89 19.02 10 19 10 19s.11.02.308-.066l.002-.001.006-.003.018-.008a5.741 5.741 0 0 0 .281-.14c.186-.096.446-.24.757-.433.62-.384 1.445-.966 2.274-1.765C15.302 14.988 17 12.493 17 9A7 7 0 1 0 3 9c0 3.492 1.698 5.988 3.355 7.584a13.731 13.731 0 0 0 2.273 1.765 11.842 11.842 0 0 0 .976.544l.062.029.018.008.006.003ZM10 11.25a2.25 2.25 0 1 0 0-4.5 2.25 2.25 0 0 0 0 4.5Z"
+                          clip-rule="evenodd"
+                          />
+                      </svg>
+                      <span
+                        className={cn(
+                          "truncate flex-none overflow-hidden text-foreground"
+                          )}
+                          >
+                        Toronto, Canada (YYZ)
+                      </span>
+                    </Button>
+                        </div>
                   </div>
                 </div>
               </CardDescription>
