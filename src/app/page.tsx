@@ -247,7 +247,7 @@ export default function Home() {
           </h3>
         </div>
         <div>
-          <Card className="border-dashed bg-zinc-100 dark:bg-zinc-800 shadow">
+          <Card className="border-dashed bg-secondary shadow">
             {/* <CardHeader>
               <CardTitle>Group trips, made easy.</CardTitle>
             </CardHeader> */}
@@ -435,7 +435,7 @@ export default function Home() {
           </h3>
         </div>
         <div>
-          <Card className="border-dashed bg-zinc-100 dark:bg-zinc-800 shadow">
+          <Card className="border-dashed bg-secondary shadow">
             {/* <CardHeader>
               <CardTitle>Group trips, made easy.</CardTitle>
             </CardHeader> */}
