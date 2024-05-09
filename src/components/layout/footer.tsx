@@ -61,24 +61,26 @@ export default function Footer() {
       );
       const data = await response.json();
 
-      const newArcs = data.data.map((flight: EnrichedFlightDetails, index) => {
-        const [startLat, startLng] = flight.depAirport.coordinates
-          .replace(/\s/g, "")
-          .split(",");
-        const [endLat, endLng] = flight.arrAirport.coordinates
-          .replace(/\s/g, "")
-          .split(",");
+      const newArcs = data.data.map(
+        (flight: EnrichedFlightDetails, index: number) => {
+          const [startLat, startLng] = flight.depAirport.coordinates
+            .replace(/\s/g, "")
+            .split(",");
+          const [endLat, endLng] = flight.arrAirport.coordinates
+            .replace(/\s/g, "")
+            .split(",");
 
-        return {
-          order: index,
-          startLat: parseFloat(startLat),
-          startLng: parseFloat(startLng),
-          endLat: parseFloat(endLat),
-          endLng: parseFloat(endLng),
-          arcAlt: 0.1,
-          color: colors[Math.floor(Math.random() * (colors.length - 1))],
-        };
-      });
+          return {
+            order: index,
+            startLat: parseFloat(startLat),
+            startLng: parseFloat(startLng),
+            endLat: parseFloat(endLat),
+            endLng: parseFloat(endLng),
+            arcAlt: 0.1,
+            color: colors[Math.floor(Math.random() * (colors.length - 1))],
+          };
+        }
+      );
 
       setArcs(newArcs);
       setLoading(false);
