@@ -95,7 +95,7 @@ export default function Footer() {
     <main className="w-screen px-6 mt-4">
       <div className="flex flex-col justify-center items-center">
         <div className="flex flex-col gap-y-2">
-          <h2 className="text-3xl font-bold tracking-tight">Here's a globe.</h2>
+          <h2 className="text-3xl font-bold tracking-tight">Here&apos;s a globe.</h2>
           <h3 className="text-muted-foreground">
             This globe shows the flight paths of some of the flights from
             yesterday at exactly this time.
