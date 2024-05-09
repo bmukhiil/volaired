@@ -68,6 +68,10 @@ async function getAmadeusToken(): Promise<string | null> {
 // It requires flight search parameters and a valid token.
 export async function searchFlights(searchParams: any) {
   const token = await getAmadeusToken();
+  console.log("Token:", token);
+
+  console.log(searchParams);
+
   try {
     console.log("Searching for flights...");
     const response = await fetch(
@@ -87,22 +91,22 @@ export async function searchFlights(searchParams: any) {
   }
 }
 
-export async function getAirlineCode(code: string) {
+export async function fetchAirport(airportCode: string) {
   const token = await getAmadeusToken();
+  console.log("Token:", token);
 
   try {
-    console.log("Searching for airline code...");
+    console.log("Fetching airport information...");
     const response = await fetch(
-      `https://test.api.amadeus.com/v1/reference-data/airlines?airlineCodes=${code}`,
+      `https://test.api.amadeus.com/v1/reference-data/locations/${departureAirportCode}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
         },
       },
     ).then((res) => res.json());
     return response;
   } catch (error) {
-    console.error("Error searching for airline code:", error);
+    console.error("Error fetching airport information:", error);
   }
 }
