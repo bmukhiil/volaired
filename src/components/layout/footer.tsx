@@ -95,7 +95,9 @@ export default function Footer() {
     <main className="w-screen px-6 mt-4">
       <div className="flex flex-col justify-center items-center">
         <div className="flex flex-col gap-y-2">
-          <h2 className="text-3xl font-bold tracking-tight">Here&apos;s a globe.</h2>
+          <h2 className="text-3xl font-bold tracking-tight">
+            Here&apos;s a globe.
+          </h2>
           <h3 className="text-muted-foreground">
             This globe shows the flight paths of some of the flights from
             yesterday at exactly this time.
@@ -114,11 +116,10 @@ export default function Footer() {
         </div>
       </div>
       <Separator className="my-4 -mx-6 w-screen" />
-      <div className="py-2 text-center flex gap-y-4 flex-col items-center font-medium text-muted-foreground text-3xl">
-        <div className="flex flex-col tracking-tight">
-          Fly simple,{" "}
-          <span className="text-foreground font-medium">fly smart</span>
-        </div>
+      <div className="py-2 text-center flex gap-y-4 flex-col items-center font-bold text-3xl">
+        <span className="flex tracking-tight">
+          Kickstart your next adventure.
+        </span>
         <Link href="#hero">
           <Button>Get notified</Button>
         </Link>
