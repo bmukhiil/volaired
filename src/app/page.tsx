@@ -38,28 +38,6 @@ import { cn } from "@/lib/utils";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-export const data = {
-  labels: ["<30 min", "30-60 min", "60-120 min", "Over 120 min/cancelled"],
-  datasets: [
-    {
-      label: "Flight Delays",
-      data: [13.336977, 42.023364, 34.671372, 9.968289],
-      backgroundColor: [
-        "rgba(255, 99, 132, 0.2)",
-        "rgba(54, 162, 235, 0.2)",
-        "rgba(75, 192, 192, 0.2)",
-        "rgba(153, 102, 255, 0.2)",
-      ],
-      borderColor: [
-        "rgba(255, 99, 132, 1)",
-        "rgba(54, 162, 235, 1)",
-        "rgba(75, 192, 192, 1)",
-        "rgba(153, 102, 255, 1)",
-      ],
-      borderWidth: 1,
-    },
-  ],
-};
 
 export default function Home() {
   const [email, setEmail] = useState("");
@@ -70,7 +48,29 @@ export default function Home() {
   const [tripJoined, setTripJoined] = useState(false);
   const [tripDeclined, setTripDeclined] = useState(false);
   const [tripJoinedTriggered, setTripJoinedTriggered] = useState(false);
-
+  
+  const data = {
+    labels: ["<30 min", "30-60 min", "60-120 min", "Over 120 min/cancelled"],
+    datasets: [
+      {
+        label: "Flight Delays",
+        data: [13.336977, 42.023364, 34.671372, 9.968289],
+        backgroundColor: [
+          "rgba(255, 99, 132, 0.2)",
+          "rgba(54, 162, 235, 0.2)",
+          "rgba(75, 192, 192, 0.2)",
+          "rgba(153, 102, 255, 0.2)",
+        ],
+        borderColor: [
+          "rgba(255, 99, 132, 1)",
+          "rgba(54, 162, 235, 1)",
+          "rgba(75, 192, 192, 1)",
+          "rgba(153, 102, 255, 1)",
+        ],
+        borderWidth: 1,
+      },
+    ],
+  };
   const today = new Date();
   const fiveDaysFromNow = new Date(today);
   fiveDaysFromNow.setDate(today.getDate() + 5);
