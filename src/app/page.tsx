@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { testEmail } from "@/lib/validate";
 import {
   HeroSection,
@@ -10,6 +10,8 @@ import {
   FlightPriceInfo,
   GroupTripSection,
 } from "@/components/pages/home";
+
+import { atom } from "jotai";
 
 export default function Home() {
   const [date, setDate] = React.useState<Date>(new Date());
@@ -21,6 +23,7 @@ export default function Home() {
   const [tripJoined, setTripJoined] = useState(false);
   const [tripDeclined, setTripDeclined] = useState(false);
   const [tripJoinedTriggered, setTripJoinedTriggered] = useState(false);
+  const [priceDataLoading, setPriceDataLoading] = useState(false);
 
   const handleInputChange = (e: string) => {
     setEmail(e);
@@ -56,6 +59,30 @@ export default function Home() {
     }
   };
 
+  const handlePriceData = async () => {
+    const epochDate = date.getTime();
+    setPriceDataLoading(true);
+    try {
+      const response = await fetch(`/api/v1/flights/prices?date=${epochDate}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (!response.ok) {
+        throw new Error(await response.text());
+      }
+    } catch (e: any) {
+      console.error("Price data error:", e.message);
+    } finally {
+      setPriceDataLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    handlePriceData();
+  }, []);
+
   return (
     <section className="px-6 overflow-x-hidden pt-12" id="hero">
       {isExploding && <ConfettiExplosionCanvas />}
@@ -78,7 +105,12 @@ export default function Home() {
         />
       </div>
       <div className="pb-28 flex flex-col gap-y-6">
-        <FlightPriceInfo date={date} setDate={setDate} />
+        <FlightPriceInfo
+          date={date}
+          setDate={setDate}
+          handleSubmit={handlePriceData}
+          loading={priceDataLoading}
+        />
       </div>
       <div className="pb-28 flex flex-col gap-y-6">
         <FlightDelayChart />

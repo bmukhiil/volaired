@@ -19,6 +19,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Pie } from "react-chartjs-2";
+import { Skeleton } from "../ui/skeleton";
 
 interface HeroSectionProps {
   loading: boolean;
@@ -49,6 +50,8 @@ interface GroupTripSectionProps {
 interface FlightPriceInfoProps {
   date: Date;
   setDate: (date: Date) => void;
+  loading: boolean;
+  handleSubmit: () => void;
 }
 
 const HeroSection = (props: HeroSectionProps) => {
@@ -373,7 +376,7 @@ const GroupTripSection = (props: GroupTripSectionProps) => {
 };
 
 const FlightPriceInfo = (props: FlightPriceInfoProps) => {
-  const { date, setDate } = props;
+  const { date, setDate, loading, handleSubmit } = props;
 
   return (
     <>
@@ -466,6 +469,29 @@ const FlightPriceInfo = (props: FlightPriceInfoProps) => {
               />
             </PopoverContent>
           </Popover>
+          <Button
+            onClick={handleSubmit}
+            disabled={loading}
+            className="w-full mt-1"
+          >
+            {loading ? (
+              <Loader2 className="w-4 h-4 animate-spin" />
+            ) : (
+              "Analyze flight prices"
+            )}
+          </Button>
+          <Separator className="my-4 flex shrink" />
+          <div className="py-4">
+            {loading ? (
+              <Skeleton className="w-full h-10" />
+            ) : (
+              <div>
+                <span className="w-full bg-rose-400" />
+                <span />
+                <span />
+              </div>
+            )}
+          </div>
         </CustomSecondaryBackgroundCard>
       </CustomDashedCard>
     </>

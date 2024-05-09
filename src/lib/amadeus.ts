@@ -110,3 +110,25 @@ export async function fetchAirport(airportCode: string) {
     console.error("Error fetching airport information:", error);
   }
 }
+
+export async function fetchPriceAnalysis(date: string) {
+  const token = await getAmadeusToken();
+  console.log("Token:", token);
+
+  const formattedDate = new Date(parseInt(date)).toISOString().split("T")[0];
+
+  try {
+    console.log("Fetching price analysis...");
+    const response = await fetch(
+      `https://test.api.amadeus.com/v1/analytics/itinerary-price-metrics?originIataCode=YVR&destinationIataCode=YYZ&departureDate=${formattedDate}&currencyCode=CAD&oneWay=true`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    ).then((res) => res.json());
+    return response;
+  } catch (error) {
+    console.error("Error fetching price analysis:", error);
+  }
+}
