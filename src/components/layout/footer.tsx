@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 import { Separator } from "../ui/separator";
 import { Loader2 } from "lucide-react";
 import { EnrichedFlightDetails } from "@/types";
+import { Button } from "../ui/button";
+import Link from "next/link";
 
 const World = dynamic(() => import("../ui/globe").then((m) => m.World), {
   ssr: false,
@@ -27,8 +29,8 @@ export default function Footer() {
 
   const globeConfig = {
     pointSize: 4,
-    globeColor: "#062056",
-    showAtmosphere: true,
+    globeColor: "#312E81",
+    showAtmosphere: false,
     atmosphereColor: "#FFFFFF",
     atmosphereAltitude: 0.1,
     emissive: "#062056",
@@ -39,7 +41,7 @@ export default function Footer() {
     directionalLeftLight: "#ffffff",
     directionalTopLight: "#ffffff",
     pointLight: "#ffffff",
-    arcTime: 1000,
+    arcTime: 2000,
     arcLength: 0.9,
     rings: 1,
     maxRings: 3,
@@ -47,17 +49,17 @@ export default function Footer() {
     autoRotate: true,
     autoRotateSpeed: 0.5,
   };
-  const colors = ["#06b6d4", "#3b82f6", "#6366f1"];
+  const colors = ["#818CF8", "#818CF8", "#818CF8"];
 
   useEffect(() => {
     async function fetchArcs() {
       const response = await fetch(
-        `/api/v1/flights/paths/yesterday?limit=800`,
+        `/api/v1/flights/paths/yesterday?limit=400`,
         {
           next: {
             revalidate: 43200,
           },
-        }
+        },
       );
       const data = await response.json();
 
@@ -79,7 +81,7 @@ export default function Footer() {
             arcAlt: 0.1,
             color: colors[Math.floor(Math.random() * (colors.length - 1))],
           };
-        }
+        },
       );
 
       setArcs(newArcs);
@@ -90,22 +92,44 @@ export default function Footer() {
   }, []);
 
   return (
-    <main className="w-screen px-6">
-      {loading ? (
-        <div className="flex items-center justify-center">
-          <Loader2 className="text-indigo-500 animate-spin w-8 h-8" />
+    <main className="w-screen px-6 mt-4">
+      <div className="flex flex-col justify-center items-center">
+        <div className="flex flex-col gap-y-2">
+          <h2 className="text-3xl font-bold tracking-tight">Here's a globe.</h2>
+          <h3 className="text-muted-foreground">
+            This globe shows the flight paths of some of the flights from
+            yesterday at exactly this time.
+          </h3>
         </div>
-      ) : (
-        <div className="flex items-center justify-center">
-          <World data={arcs} globeConfig={globeConfig} />
+        <div className="shadow-sm my-6 p-6 w-full h-42 rounded-lg border border-border border-dashed flex items-center justify-center bg-zinc-100">
+          {loading ? (
+            <div className="flex items-center justify-center">
+              <Loader2 className="text-indigo-500 animate-spin w-8 h-8" />
+            </div>
+          ) : (
+            <div className="flex items-center justify-center">
+              <World data={arcs} globeConfig={globeConfig} />
+            </div>
+          )}
         </div>
-      )}
+      </div>
+      <Separator className="my-4 -mx-6 w-screen" />
+      <div className="py-2 text-center flex gap-y-4 flex-col items-center font-medium text-muted-foreground text-3xl">
+        <div className="flex flex-col tracking-tight">
+          Fly simple,{" "}
+          <span className="text-foreground font-medium">fly smart</span>
+        </div>
+        <Link href="#hero">
+          <Button>Get notified</Button>
+        </Link>
+      </div>
       <Separator className="my-4 flex shrink" />
       <div>
         <span className="font-semibold tracking-tight text-2xl">Volaired</span>
       </div>
+      <div>Footer links</div>
       <Separator className="my-4 flex shrink" />
-      <div>
+      <div className="mb-4">
         <span className="text-muted-foreground text-xs">
           © Volaired. All rights reserved.
         </span>

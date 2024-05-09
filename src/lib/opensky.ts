@@ -14,7 +14,7 @@ import {
  * @returns {Promise<EnrichedFlightDetails[]>} - An array of flight details with enriched airport information.
  */
 export async function fetchPrevFlights(
-  limit: number
+  limit: number,
 ): Promise<EnrichedFlightDetails[]> {
   // yesterday at same time in epoch in seconds
   const yesterday = Math.floor(Date.now() / 1000) - 86400;
@@ -30,7 +30,7 @@ export async function fetchPrevFlights(
         "Content-Type": "application/json",
         Authorization: `Basic ${btoa(process.env.OPENSKY_USERNAME + ":" + process.env.OPENSKY_PASSWORD)}`,
       },
-    }
+    },
   ).then((res) => res.json());
 
   const airports: Record<string, StaticAirport> = Array.isArray(airportsData)
@@ -45,7 +45,7 @@ export async function fetchPrevFlights(
       flight.estDepartureAirport &&
       flight.estArrivalAirport &&
       airports[flight.estDepartureAirport] &&
-      airports[flight.estArrivalAirport]
+      airports[flight.estArrivalAirport],
   );
 
   // Applying the limit if specified
@@ -61,7 +61,7 @@ export async function fetchPrevFlights(
       arrAirport: airports[flight.estArrivalAirport],
       depTime: flight.firstSeen,
       arrTime: flight.lastSeen,
-    })
+    }),
   );
 
   return flightPathData;

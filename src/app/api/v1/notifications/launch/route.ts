@@ -36,12 +36,19 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
   const supabase = await createClerkSupabaseClient();
 
   // Attempt to upsert the email address into the 'waitlist' table
-  const { data, error } = await supabase
+  const { error } = await supabase
     .from("waitlist")
-    .upsert([{ email_address: email }], { onConflict: "email_address" });
+    .insert({ email_address: email });
 
-  // Handle any errors that occur during the upsert operation
+  // Handle any errors that occur during the insert operation
   if (error) {
+    console.log(error);
+    if (error.message.includes("duplicate key value")) {
+      return NextResponse.json(
+        { message: "User already subscribed" },
+        { status: 400 },
+      );
+    }
     return NextResponse.json({ message: error.message }, { status: 400 });
   }
 
