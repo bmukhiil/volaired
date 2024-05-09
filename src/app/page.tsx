@@ -235,7 +235,7 @@ export default function Home() {
           </motion.div>
         </div>
       </div>
-      <div className="py-16 flex flex-col gap-y-6">
+      <div className="py-28 flex flex-col gap-y-6">
         <div className="flex flex-col gap-y-2">
           <h2 className="text-3xl font-bold tracking-tight">
             Planning a trip with friends?
@@ -247,7 +247,7 @@ export default function Home() {
           </h3>
         </div>
         <div>
-          <Card className="border-dashed bg-zinc-100 shadow-sm">
+          <Card className="border-dashed bg-zinc-100 dark:bg-zinc-800 shadow">
             {/* <CardHeader>
               <CardTitle>Group trips, made easy.</CardTitle>
             </CardHeader> */}
@@ -425,7 +425,7 @@ export default function Home() {
           </Card>
         </div>
       </div>
-      <div className="pb-12 flex flex-col gap-y-6">
+      <div className="pb-28 flex flex-col gap-y-6">
         <div className="flex flex-col gap-y-2">
           <h2 className="text-3xl font-bold tracking-tight">
             Always stay in the loop.
@@ -435,7 +435,7 @@ export default function Home() {
           </h3>
         </div>
         <div>
-          <Card className="border-dashed bg-zinc-100 shadow-sm">
+          <Card className="border-dashed bg-zinc-100 dark:bg-zinc-800 shadow">
             {/* <CardHeader>
               <CardTitle>Group trips, made easy.</CardTitle>
             </CardHeader> */}

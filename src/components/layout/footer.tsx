@@ -7,6 +7,7 @@ import { Separator } from "../ui/separator";
 import { Loader2 } from "lucide-react";
 import { EnrichedFlightDetails } from "@/types";
 import { Button } from "../ui/button";
+import { ModeToggle } from "@/components/ui/mode-toggle";
 import Link from "next/link";
 
 const World = dynamic(() => import("../ui/globe").then((m) => m.World), {
@@ -103,7 +104,7 @@ export default function Footer() {
             yesterday at exactly this time.
           </h3>
         </div>
-        <div className="shadow-sm my-6 p-6 w-full h-42 rounded-lg border border-border border-dashed flex items-center justify-center bg-zinc-100">
+        <div className="shadow-sm my-6 p-6 w-full h-42 rounded-lg border border-border border-dashed flex items-center justify-center bg-zinc-100 dark:bg-zinc-800">
           {loading ? (
             <div className="flex items-center justify-center">
               <Loader2 className="text-indigo-500 animate-spin w-8 h-8" />
@@ -130,10 +131,11 @@ export default function Footer() {
       </div>
       <div>Footer links</div>
       <Separator className="my-4 flex shrink" />
-      <div className="mb-4">
+      <div className="mb-4 flex items-center justify-between">
         <span className="text-muted-foreground text-xs">
           © Volaired. All rights reserved.
         </span>
+        <ModeToggle />
       </div>
     </main>
   );
