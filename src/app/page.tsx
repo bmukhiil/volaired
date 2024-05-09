@@ -65,7 +65,7 @@ export default function Home() {
   const fiveDaysFromNow = new Date(today);
   fiveDaysFromNow.setDate(today.getDate() + 5);
 
-  function formatDate(date) {
+  function formatDate(date: Date) {
     return date.toLocaleDateString("en-US", {
       month: "long",
       day: "numeric",
@@ -355,7 +355,7 @@ export default function Home() {
                           "absolute right-[0.5px] top-[0.5px] transform translate-x-1/2 -translate-y-1/2",
                           {
                             hidden: tripJoinedTriggered,
-                          },
+                          }
                         )}
                       >
                         <div className="bg-indigo-400 w-2 h-2 rounded-full">
@@ -390,7 +390,7 @@ export default function Home() {
                           xmlns="http://www.w3.org/2000/svg"
                           viewBox="0 0 20 20"
                           fill="currentColor"
-                          class="w-5 h-5"
+                          className="w-5 h-5"
                         >
                           <path
                             fill-rule="evenodd"
@@ -525,7 +525,7 @@ export default function Home() {
                           "absolute right-[0.5px] top-[0.5px] transform translate-x-1/2 -translate-y-1/2",
                           {
                             hidden: tripJoinedTriggered,
-                          },
+                          }
                         )}
                       >
                         <div className="bg-indigo-400 w-2 h-2 rounded-full">
@@ -560,7 +560,7 @@ export default function Home() {
                           xmlns="http://www.w3.org/2000/svg"
                           viewBox="0 0 20 20"
                           fill="currentColor"
-                          class="w-5 h-5"
+                          className="w-5 h-5"
                         >
                           <path
                             fill-rule="evenodd"
