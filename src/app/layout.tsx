@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { Provider } from "jotai";
 import Navbar from "@/components/layout/navbar";
 import Footer from "@/components/layout/footer";
 import { ClerkProvider } from "@clerk/nextjs";
@@ -22,6 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
+      <Provider>
       <html lang="en" suppressHydrationWarning>
         <body className={inter.className}>
           <ThemeProvider
@@ -71,6 +73,7 @@ export default function RootLayout({
           </ThemeProvider>
         </body>
       </html>
+      </Provider>
     </ClerkProvider>
   );
 }
