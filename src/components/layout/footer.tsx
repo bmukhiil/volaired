@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import { Separator } from "../ui/separator";
 import { Loader2 } from "lucide-react";
+import { EnrichedFlightDetails } from "@/types";
 
 const World = dynamic(() => import("../ui/globe").then((m) => m.World), {
   ssr: false,
@@ -56,12 +57,11 @@ export default function Footer() {
           next: {
             revalidate: 43200,
           },
-        },
+        }
       );
       const data = await response.json();
-      console.log(data.data.length);
 
-      const newArcs = data.data.map((flight, index) => {
+      const newArcs = data.data.map((flight: EnrichedFlightDetails, index) => {
         const [startLat, startLng] = flight.depAirport.coordinates
           .replace(/\s/g, "")
           .split(",");
