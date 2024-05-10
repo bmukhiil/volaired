@@ -523,7 +523,7 @@ const FlightPriceInfo = (props: FlightPriceInfoProps) => {
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
                     fill="currentColor"
-                    class="mr-2 w-5 h-5"
+                    className="mr-2 w-5 h-5"
                   >
                     <path
                       fill-rule="evenodd"
@@ -568,7 +568,7 @@ const FlightPriceInfo = (props: FlightPriceInfoProps) => {
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 24 24"
                         fill="currentColor"
-                        class="w-5 h-5 text-indigo-400 dark:text-indigo-500"
+                        className="w-5 h-5 text-indigo-400 dark:text-indigo-500"
                       >
                         <path
                           fill-rule="evenodd"
