@@ -485,10 +485,10 @@ const FlightPriceInfo = (props: FlightPriceInfoProps) => {
             {loading ? (
               <Skeleton className="w-full h-10" />
             ) : (
-              <div>
-                <span className="w-full bg-rose-400" />
-                <span />
-                <span />
+              <div className="flex shadow-sm">
+                <span className="rounded-l-full flex-grow flex h-1 bg-emerald-400" />
+                <span className="flex-grow flex h-1 bg-orange-300" />
+                <span className="rounded-r-full flex-grow flex h-1 bg-rose-400" />
               </div>
             )}
           </div>
