@@ -119,11 +119,14 @@ export default function Footer() {
       </div>
       <Separator className="my-4 -mx-6 w-screen" />
       <div className="py-2 text-center flex gap-y-4 flex-col items-center font-bold text-3xl">
-        <span className="flex tracking-tight">
-          Kickstart your next adventure.
+        <span className="tracking-tight">
+          <span className="text-indigo-500">Kickstart</span> your next
+          adventure.
         </span>
         <Link href="#hero">
-          <Button>Get notified</Button>
+          <Button className="border border-indigo-400 shadow-inner">
+            Get notified
+          </Button>
         </Link>
       </div>
       <Separator className="my-4 flex shrink" />

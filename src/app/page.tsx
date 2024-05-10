@@ -24,6 +24,7 @@ export default function Home() {
   const [tripDeclined, setTripDeclined] = useState(false);
   const [tripJoinedTriggered, setTripJoinedTriggered] = useState(false);
   const [priceDataLoading, setPriceDataLoading] = useState(false);
+  const [priceData, setPriceData] = useState({});
 
   const handleInputChange = (e: string) => {
     setEmail(e);
@@ -68,10 +69,12 @@ export default function Home() {
         headers: {
           "Content-Type": "application/json",
         },
-      });
-      if (!response.ok) {
-        throw new Error(await response.text());
-      }
+      }).then((res) => res.json());
+      // if (!response.ok) {
+      //   throw new Error(await response.text());
+      // }
+      console.log(response.data.data[0]);
+      setPriceData(response.data.data[0]);
     } catch (e: any) {
       console.error("Price data error:", e.message);
     } finally {
@@ -84,7 +87,7 @@ export default function Home() {
   }, []);
 
   return (
-    <section className="px-6 overflow-x-hidden pt-12" id="hero">
+    <section className="px-6 overflow-x-hidden pt-14" id="hero">
       {isExploding && <ConfettiExplosionCanvas />}
       <HeroSection
         loading={loading}
@@ -110,6 +113,7 @@ export default function Home() {
           setDate={setDate}
           handleSubmit={handlePriceData}
           loading={priceDataLoading}
+          data={priceData}
         />
       </div>
       <div className="pb-28 flex flex-col gap-y-6">

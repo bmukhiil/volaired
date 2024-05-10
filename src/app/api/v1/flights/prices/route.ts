@@ -13,6 +13,7 @@ export async function GET(req: NextRequest) {
   }
 
   const priceData = await fetchPriceAnalysis(date);
+  console.log(priceData);
 
   return NextResponse.json({ data: priceData });
 }
