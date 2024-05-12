@@ -125,8 +125,8 @@ const EmailSignUpForm = (props: EmailSignUpFormProps) => {
         </div>
       </div>
       <motion.div>
-        <div className="group relative p-1 rounded-xl grid overflow-hidden h-auto shadow-[0_1000px_0_0_hsl(239_83.5%_66.7%)_inset] transition-colors duration-200">
-          <span className="backdrop absolute inset-[0.5px] bg-background rounded-xl transition-colors duration-200" />
+        <div className="group relative rounded-xl grid overflow-hidden h-auto transition-colors w-dull">
+          <span className="backdrop absolute inset-[0.5px] bg-background rounded-xl transition-colors duration-200 w-full" />
           <span className="z-10">
             <div
               className={`p-1 ${
@@ -333,7 +333,7 @@ const GroupTripSection = (props: GroupTripSectionProps) => {
                       {
                         "border-rose-500 text-rose-500 bg-background focus:border-rose-500 focus:text-rose-500 focus:bg-background":
                           tripDeclined,
-                      }
+                      },
                     )}
                   >
                     <svg
@@ -351,7 +351,7 @@ const GroupTripSection = (props: GroupTripSectionProps) => {
                       "absolute right-[0.5px] top-[0.5px] transform translate-x-1/2 -translate-y-1/2",
                       {
                         hidden: tripJoinedTriggered,
-                      }
+                      },
                     )}
                   >
                     <div className="bg-indigo-400 w-2 h-2 rounded-full">
@@ -423,7 +423,7 @@ const FlightPriceInfo = (props: FlightPriceInfoProps) => {
 
     // Ensure metrics are sorted if not already (typically by quartileRanking)
     const sortedMetrics = metrics.sort(
-      (a: any, b: any) => parseFloat(a.amount) - parseFloat(b.amount)
+      (a: any, b: any) => parseFloat(a.amount) - parseFloat(b.amount),
     );
     const Q1 = parseFloat(sortedMetrics[1].amount);
     const Q3 = parseFloat(sortedMetrics[3].amount);
@@ -516,7 +516,7 @@ const FlightPriceInfo = (props: FlightPriceInfoProps) => {
                   variant={"outline"}
                   className={cn(
                     "w-full text-foreground justify-start font-normal",
-                    !date && "text-muted-foreground"
+                    !date && "text-muted-foreground",
                   )}
                 >
                   <svg
@@ -679,7 +679,7 @@ const FlightDelayChart = () => {
             <h4 className="font-semibold text-base tracking-tight text-foreground">
               Volaired Assistant
             </h4>
-            <p className="text-xs">
+            <p className="text-xs text-muted-foreground">
               Your flight to Toronto is is likely to be delayed by 30-60
               minutes.
             </p>

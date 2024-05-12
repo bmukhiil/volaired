@@ -29,6 +29,39 @@ export default function Footer() {
   const [arcs, setArcs] = useState<Arc[]>([]);
   const [loading, setLoading] = useState(true);
 
+  const footer = [
+    {
+      name: "Company",
+      links: [
+        {
+          name: "Terms of Service",
+          href: "/terms",
+        },
+        {
+          name: "Privacy Policy",
+          href: "/privacy",
+        },
+      ],
+    },
+    {
+      name: "Resources",
+      links: [
+        {
+          name: "FAQ",
+          href: "/faq",
+        },
+        {
+          name: "Help",
+          href: "/help",
+        },
+        {
+          name: "Support",
+          href: "/support",
+        },
+      ],
+    },
+  ];
+
   const globeConfig = {
     pointSize: 4,
     globeColor: "#312E81",
@@ -133,7 +166,23 @@ export default function Footer() {
       <div>
         <span className="font-semibold tracking-tight text-2xl">Volaired</span>
       </div>
-      <div>Footer links</div>
+      <div className="mt-8 flex justify-between">
+        {footer.map((section) => (
+          <ul key={section.name} className="mt-8 flex flex-col gap-y-2">
+            <span className="font-medium tracking-tight">{section.name}</span>
+            <div className="mt-1 flex flex-col gap-y-2">
+              {section.links.map((link) => (
+                <li
+                  key={link.name}
+                  className="hover:text-foreground font-medium text-muted-foreground text-sm"
+                >
+                  <Link href={link.href}>{link.name}</Link>
+                </li>
+              ))}
+            </div>
+          </ul>
+        ))}
+      </div>
       <Separator className="my-4 flex shrink" />
       <div className="mb-4 flex items-center justify-between">
         <span className="text-muted-foreground text-xs">
