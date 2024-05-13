@@ -33,10 +33,10 @@ export default function Footer() {
     {
       name: "Company",
       links: [
-        {
-          name: "Terms of Service",
-          href: "/terms",
-        },
+        // {
+        //   name: "Terms of Service",
+        //   href: "/terms",
+        // },
         {
           name: "Privacy Policy",
           href: "/privacy",
@@ -63,10 +63,10 @@ export default function Footer() {
   ];
 
   const globeConfig = {
-    pointSize: 4,
-    globeColor: "#312E81",
+    pointSize: 1000,
+    globeColor: "#18181b",
     showAtmosphere: false,
-    atmosphereColor: "#FFFFFF",
+    atmosphereColor: "#FFFFDC",
     atmosphereAltitude: 0.1,
     emissive: "#062056",
     emissiveIntensity: 0.1,
@@ -76,7 +76,6 @@ export default function Footer() {
     directionalLeftLight: "#ffffff",
     directionalTopLight: "#ffffff",
     pointLight: "#ffffff",
-    arcTime: 2000,
     arcLength: 0.9,
     rings: 1,
     maxRings: 3,
@@ -84,7 +83,7 @@ export default function Footer() {
     autoRotate: true,
     autoRotateSpeed: 0.5,
   };
-  const colors = ["#818CF8", "#818CF8", "#818CF8"];
+  const colors = ["#d9dcfc", "#818CF8", "#81c8f8"];
 
   useEffect(() => {
     async function fetchArcs() {
@@ -168,13 +167,13 @@ export default function Footer() {
       </div>
       <div className="mt-8 flex justify-between">
         {footer.map((section) => (
-          <ul key={section.name} className="mt-8 flex flex-col gap-y-2">
+          <ul key={section.name} className="flex flex-col gap-y-2">
             <span className="font-medium tracking-tight">{section.name}</span>
-            <div className="mt-1 flex flex-col gap-y-2">
+            <div className="mt-2 flex flex-col gap-y-2">
               {section.links.map((link) => (
                 <li
                   key={link.name}
-                  className="hover:text-foreground font-medium text-muted-foreground text-sm"
+                  className="hover:text-foreground text-muted-foreground text-sm"
                 >
                   <Link href={link.href}>{link.name}</Link>
                 </li>

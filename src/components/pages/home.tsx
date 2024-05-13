@@ -408,12 +408,6 @@ const GroupTripSection = (props: GroupTripSectionProps) => {
 const FlightPriceInfo = (props: FlightPriceInfoProps) => {
   const { date, setDate, loading, handleSubmit, data } = props;
   const priceMetrics = data?.priceMetrics || [];
-  const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-  });
-
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.9]);
 
   const calculateWidths = (metrics: any) => {
     if (!metrics || metrics.length < 5) {
@@ -453,7 +447,7 @@ const FlightPriceInfo = (props: FlightPriceInfoProps) => {
 
   return (
     <>
-      <div className="flex flex-col gap-y-2" ref={containerRef}>
+      <div className="flex flex-col gap-y-2">
         <h2 className="text-3xl font-bold tracking-tight">
           Find the prime time to fly.
         </h2>
@@ -463,148 +457,142 @@ const FlightPriceInfo = (props: FlightPriceInfoProps) => {
         </h3>
       </div>
       <CustomDashedCard>
-        <motion.div style={{ scale }}>
-          <CustomSecondaryBackgroundCard>
-            <Label className="text-foreground">Flying from</Label>
-            <Button
-              variant="outline"
-              className="justify-start w-full font-normal items-center"
+        <CustomSecondaryBackgroundCard>
+          <Label className="text-foreground">Flying from</Label>
+          <Button
+            variant="outline"
+            className="justify-start w-full font-normal items-center"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              className="mr-2 w-5 h-5 text-foreground"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                className="mr-2 w-5 h-5 text-foreground"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="m9.69 18.933.003.001C9.89 19.02 10 19 10 19s.11.02.308-.066l.002-.001.006-.003.018-.008a5.741 5.741 0 0 0 .281-.14c.186-.096.446-.24.757-.433.62-.384 1.445-.966 2.274-1.765C15.302 14.988 17 12.493 17 9A7 7 0 1 0 3 9c0 3.492 1.698 5.988 3.355 7.584a13.731 13.731 0 0 0 2.273 1.765 11.842 11.842 0 0 0 .976.544l.062.029.018.008.006.003ZM10 11.25a2.25 2.25 0 1 0 0-4.5 2.25 2.25 0 0 0 0 4.5Z"
-                  clip-rule="evenodd"
-                />
-              </svg>
-              <span className={cn("text-foreground")}>
-                Vancouver, Canada (YVR)
-              </span>
-            </Button>
-            <Label className="text-foreground">Flying to</Label>
-            <Button
-              variant="outline"
-              className="justify-start w-full font-normal items-center"
+              <path
+                fill-rule="evenodd"
+                d="m9.69 18.933.003.001C9.89 19.02 10 19 10 19s.11.02.308-.066l.002-.001.006-.003.018-.008a5.741 5.741 0 0 0 .281-.14c.186-.096.446-.24.757-.433.62-.384 1.445-.966 2.274-1.765C15.302 14.988 17 12.493 17 9A7 7 0 1 0 3 9c0 3.492 1.698 5.988 3.355 7.584a13.731 13.731 0 0 0 2.273 1.765 11.842 11.842 0 0 0 .976.544l.062.029.018.008.006.003ZM10 11.25a2.25 2.25 0 1 0 0-4.5 2.25 2.25 0 0 0 0 4.5Z"
+                clip-rule="evenodd"
+              />
+            </svg>
+            <span className={cn("text-foreground")}>
+              Vancouver, Canada (YVR)
+            </span>
+          </Button>
+          <Label className="text-foreground">Flying to</Label>
+          <Button
+            variant="outline"
+            className="justify-start w-full font-normal items-center"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              className="mr-2 w-5 h-5 text-foreground"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                className="mr-2 w-5 h-5 text-foreground"
+              <path
+                fill-rule="evenodd"
+                d="m9.69 18.933.003.001C9.89 19.02 10 19 10 19s.11.02.308-.066l.002-.001.006-.003.018-.008a5.741 5.741 0 0 0 .281-.14c.186-.096.446-.24.757-.433.62-.384 1.445-.966 2.274-1.765C15.302 14.988 17 12.493 17 9A7 7 0 1 0 3 9c0 3.492 1.698 5.988 3.355 7.584a13.731 13.731 0 0 0 2.273 1.765 11.842 11.842 0 0 0 .976.544l.062.029.018.008.006.003ZM10 11.25a2.25 2.25 0 1 0 0-4.5 2.25 2.25 0 0 0 0 4.5Z"
+                clip-rule="evenodd"
+              />
+            </svg>
+            <span className={cn("text-foreground")}>Toronto, Canada (YYZ)</span>
+          </Button>
+          <Label className="text-foreground translate-y-1">
+            Departure Date
+          </Label>
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button
+                variant={"outline"}
+                className={cn(
+                  "w-full text-foreground justify-start font-normal",
+                  !date && "text-muted-foreground",
+                )}
               >
-                <path
-                  fill-rule="evenodd"
-                  d="m9.69 18.933.003.001C9.89 19.02 10 19 10 19s.11.02.308-.066l.002-.001.006-.003.018-.008a5.741 5.741 0 0 0 .281-.14c.186-.096.446-.24.757-.433.62-.384 1.445-.966 2.274-1.765C15.302 14.988 17 12.493 17 9A7 7 0 1 0 3 9c0 3.492 1.698 5.988 3.355 7.584a13.731 13.731 0 0 0 2.273 1.765 11.842 11.842 0 0 0 .976.544l.062.029.018.008.006.003ZM10 11.25a2.25 2.25 0 1 0 0-4.5 2.25 2.25 0 0 0 0 4.5Z"
-                  clip-rule="evenodd"
-                />
-              </svg>
-              <span className={cn("text-foreground")}>
-                Toronto, Canada (YYZ)
-              </span>
-            </Button>
-            <Label className="text-foreground translate-y-1">
-              Departure Date
-            </Label>
-            <Popover>
-              <PopoverTrigger asChild>
-                <Button
-                  variant={"outline"}
-                  className={cn(
-                    "w-full text-foreground justify-start font-normal",
-                    !date && "text-muted-foreground",
-                  )}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  className="mr-2 w-5 h-5"
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    className="mr-2 w-5 h-5"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M6.75 2.25A.75.75 0 0 1 7.5 3v1.5h9V3A.75.75 0 0 1 18 3v1.5h.75a3 3 0 0 1 3 3v11.25a3 3 0 0 1-3 3H5.25a3 3 0 0 1-3-3V7.5a3 3 0 0 1 3-3H6V3a.75.75 0 0 1 .75-.75Zm13.5 9a1.5 1.5 0 0 0-1.5-1.5H5.25a1.5 1.5 0 0 0-1.5 1.5v7.5a1.5 1.5 0 0 0 1.5 1.5h13.5a1.5 1.5 0 0 0 1.5-1.5v-7.5Z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-                  <span>
-                    {date ? format(date, "PPP") : <span>Pick a date</span>}
-                  </span>
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className="w-auto p-0">
-                <Calendar
-                  mode="single"
-                  selected={date}
-                  // onSelect={setDate}
-                  initialFocus
-                />
-              </PopoverContent>
-            </Popover>
-            <Button
-              onClick={handleSubmit}
-              disabled={loading}
-              className="shadow-inner border border-indigo-400 w-full mt-1"
-            >
-              {loading ? (
-                <Loader2 className="w-4 h-4 animate-spin" />
-              ) : (
-                "Analyze flight prices"
-              )}
-            </Button>
-            <Separator className="my-4 flex shrink" />
-            <div className="py-4">
-              {loading && !data ? (
-                <Skeleton className="w-full h-10" />
-              ) : (
-                <div className="flex flex-col gap-y-6">
-                  <div className="shadow-inner dark:bg-indigo-300 dark:border-indigo-500 bg-indigo-100 border-indigo-300 border rounded-lg p-2">
-                    <div className="flex items-center gap-x-2 text-sm font-medium tracking-tight">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                        className="w-5 h-5 text-indigo-400 dark:text-indigo-500"
-                      >
-                        <path
-                          fill-rule="evenodd"
-                          d="M9 4.5a.75.75 0 0 1 .721.544l.813 2.846a3.75 3.75 0 0 0 2.576 2.576l2.846.813a.75.75 0 0 1 0 1.442l-2.846.813a3.75 3.75 0 0 0-2.576 2.576l-.813 2.846a.75.75 0 0 1-1.442 0l-.813-2.846a3.75 3.75 0 0 0-2.576-2.576l-2.846-.813a.75.75 0 0 1 0-1.442l2.846-.813A3.75 3.75 0 0 0 7.466 7.89l.813-2.846A.75.75 0 0 1 9 4.5ZM18 1.5a.75.75 0 0 1 .728.568l.258 1.036c.236.94.97 1.674 1.91 1.91l1.036.258a.75.75 0 0 1 0 1.456l-1.036.258c-.94.236-1.674.97-1.91 1.91l-.258 1.036a.75.75 0 0 1-1.456 0l-.258-1.036a2.625 2.625 0 0 0-1.91-1.91l-1.036-.258a.75.75 0 0 1 0-1.456l1.036-.258a2.625 2.625 0 0 0 1.91-1.91l.258-1.036A.75.75 0 0 1 18 1.5ZM16.5 15a.75.75 0 0 1 .712.513l.394 1.183c.15.447.5.799.948.948l1.183.395a.75.75 0 0 1 0 1.422l-1.183.395c-.447.15-.799.5-.948.948l-.395 1.183a.75.75 0 0 1-1.422 0l-.395-1.183a1.5 1.5 0 0 0-.948-.948l-1.183-.395a.75.75 0 0 1 0-1.422l1.183-.395c.447-.15.799-.5.948-.948l.395-1.183A.75.75 0 0 1 16.5 15Z"
-                          clip-rule="evenodd"
-                        />
-                      </svg>
-                      <div className="text-black">
-                        Prices are currently{" "}
-                        <span className="text-rose-500 font-semibold">
-                          high
-                        </span>
-                      </div>
+                  <path
+                    fill-rule="evenodd"
+                    d="M6.75 2.25A.75.75 0 0 1 7.5 3v1.5h9V3A.75.75 0 0 1 18 3v1.5h.75a3 3 0 0 1 3 3v11.25a3 3 0 0 1-3 3H5.25a3 3 0 0 1-3-3V7.5a3 3 0 0 1 3-3H6V3a.75.75 0 0 1 .75-.75Zm13.5 9a1.5 1.5 0 0 0-1.5-1.5H5.25a1.5 1.5 0 0 0-1.5 1.5v7.5a1.5 1.5 0 0 0 1.5 1.5h13.5a1.5 1.5 0 0 0 1.5-1.5v-7.5Z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                <span>
+                  {date ? format(date, "PPP") : <span>Pick a date</span>}
+                </span>
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-auto p-0">
+              <Calendar
+                mode="single"
+                selected={date}
+                // onSelect={setDate}
+                initialFocus
+              />
+            </PopoverContent>
+          </Popover>
+          <Button
+            onClick={handleSubmit}
+            disabled={loading}
+            className="shadow-inner border border-indigo-400 w-full mt-1"
+          >
+            {loading ? (
+              <Loader2 className="w-4 h-4 animate-spin" />
+            ) : (
+              "Analyze flight prices"
+            )}
+          </Button>
+          <Separator className="my-4 flex shrink" />
+          <div className="py-4">
+            {loading && !data ? (
+              <Skeleton className="w-full h-10" />
+            ) : (
+              <div className="flex flex-col gap-y-6">
+                <div className="shadow-inner dark:bg-indigo-300 dark:border-indigo-500 bg-indigo-100 border-indigo-300 border rounded-lg p-2">
+                  <div className="flex items-center gap-x-2 text-sm font-medium tracking-tight">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      className="w-5 h-5 text-indigo-400 dark:text-indigo-500"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M9 4.5a.75.75 0 0 1 .721.544l.813 2.846a3.75 3.75 0 0 0 2.576 2.576l2.846.813a.75.75 0 0 1 0 1.442l-2.846.813a3.75 3.75 0 0 0-2.576 2.576l-.813 2.846a.75.75 0 0 1-1.442 0l-.813-2.846a3.75 3.75 0 0 0-2.576-2.576l-2.846-.813a.75.75 0 0 1 0-1.442l2.846-.813A3.75 3.75 0 0 0 7.466 7.89l.813-2.846A.75.75 0 0 1 9 4.5ZM18 1.5a.75.75 0 0 1 .728.568l.258 1.036c.236.94.97 1.674 1.91 1.91l1.036.258a.75.75 0 0 1 0 1.456l-1.036.258c-.94.236-1.674.97-1.91 1.91l-.258 1.036a.75.75 0 0 1-1.456 0l-.258-1.036a2.625 2.625 0 0 0-1.91-1.91l-1.036-.258a.75.75 0 0 1 0-1.456l1.036-.258a2.625 2.625 0 0 0 1.91-1.91l.258-1.036A.75.75 0 0 1 18 1.5ZM16.5 15a.75.75 0 0 1 .712.513l.394 1.183c.15.447.5.799.948.948l1.183.395a.75.75 0 0 1 0 1.422l-1.183.395c-.447.15-.799.5-.948.948l-.395 1.183a.75.75 0 0 1-1.422 0l-.395-1.183a1.5 1.5 0 0 0-.948-.948l-1.183-.395a.75.75 0 0 1 0-1.422l1.183-.395c.447-.15.799-.5.948-.948l.395-1.183A.75.75 0 0 1 16.5 15Z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                    <div className="text-black">
+                      Prices are currently{" "}
+                      <span className="text-rose-500 font-semibold">high</span>
                     </div>
                   </div>
-                  <div className="flex shadow-sm">
-                    {widths.map((width, index) => (
-                      <span
-                        key={index}
-                        className={cn("flex-grow flex h-1", {
-                          "rounded-l-full": index === 0,
-                          "rounded-r-full": index === widths.length - 1,
-                          "bg-emerald-400": index === 0,
-                          "bg-rose-400": index === widths.length - 1,
-                          "bg-orange-300":
-                            index !== 0 && index !== widths.length - 1,
-                        })}
-                        style={{ width: `${width}%` }}
-                      />
-                    ))}
-                  </div>
                 </div>
-              )}
-            </div>
-          </CustomSecondaryBackgroundCard>
-        </motion.div>
+                <div className="flex shadow-sm">
+                  {widths.map((width, index) => (
+                    <span
+                      key={index}
+                      className={cn("flex-grow flex h-1", {
+                        "rounded-l-full": index === 0,
+                        "rounded-r-full": index === widths.length - 1,
+                        "bg-emerald-400": index === 0,
+                        "bg-rose-400": index === widths.length - 1,
+                        "bg-orange-300":
+                          index !== 0 && index !== widths.length - 1,
+                      })}
+                      style={{ width: `${width}%` }}
+                    />
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        </CustomSecondaryBackgroundCard>
       </CustomDashedCard>
     </>
   );
