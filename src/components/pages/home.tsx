@@ -412,7 +412,7 @@ const FlightPriceInfo = (props: FlightPriceInfoProps) => {
   const calculateWidths = (metrics: any) => {
     if (!metrics || metrics.length < 5) {
       // Ensure there are exactly five metrics (min, Q1, median, Q3, max) to proceed
-      return [];
+      return { Q1: 0, Q3: 0, min: 0, max: 0, widths: [0, 0, 0] };
     }
 
     // Ensure metrics are sorted if not already (typically by quartileRanking)
@@ -420,14 +420,16 @@ const FlightPriceInfo = (props: FlightPriceInfoProps) => {
       (a: any, b: any) => parseFloat(a.amount) - parseFloat(b.amount),
     );
     const Q1 = parseFloat(sortedMetrics[1].amount);
-    const Q3 = parseFloat(sortedMetrics[3].amount);
+    const Q3 = parseFloat(sortedMetrics[2].amount);
+    const min = parseFloat(sortedMetrics[0].amount);
+    const max = parseFloat(sortedMetrics[4].amount);
     const IQR = Q3 - Q1;
 
     // Calculate bounds for whiskers
     const lowerBound = Q1 - 1.5 * IQR;
     const upperBound = Q3 + 1.5 * IQR;
 
-    const totalRange = upperBound - lowerBound;
+    const totalRange = max - min;
 
     if (totalRange === 0) {
       // Avoid division by zero
@@ -440,10 +442,12 @@ const FlightPriceInfo = (props: FlightPriceInfoProps) => {
       ((upperBound - Q3) / totalRange) * 100, // Red width
     ].map((w) => w.toFixed(2)); // Formatting widths
 
-    return widths;
+    return { Q1, Q3, min, max, widths };
   };
 
-  const widths = calculateWidths(priceMetrics);
+  const { Q1, Q3, min, max, widths } = calculateWidths(priceMetrics);
+  const Q1Q3Average = (Q1 + Q3) / 2;
+  const metrics = [min, Q1Q3Average, max].map((m) => m.toFixed(2));
 
   return (
     <>
@@ -531,7 +535,7 @@ const FlightPriceInfo = (props: FlightPriceInfoProps) => {
               <Calendar
                 mode="single"
                 selected={date}
-                // onSelect={setDate}
+                onSelect={setDate}
                 initialFocus
               />
             </PopoverContent>
@@ -573,21 +577,37 @@ const FlightPriceInfo = (props: FlightPriceInfoProps) => {
                     </div>
                   </div>
                 </div>
-                <div className="flex shadow-sm">
-                  {widths.map((width, index) => (
-                    <span
-                      key={index}
-                      className={cn("flex-grow flex h-1", {
-                        "rounded-l-full": index === 0,
-                        "rounded-r-full": index === widths.length - 1,
-                        "bg-emerald-400": index === 0,
-                        "bg-rose-400": index === widths.length - 1,
-                        "bg-orange-300":
-                          index !== 0 && index !== widths.length - 1,
-                      })}
-                      style={{ width: `${width}%` }}
-                    />
-                  ))}
+                <div className="relative">
+                  <div className="flex shadow-sm">
+                    {widths.map((width, index) => (
+                      <span
+                        key={index}
+                        className={cn("flex-grow flex h-1", {
+                          "rounded-l-full": index === 0,
+                          "rounded-r-full": index === widths.length - 1,
+                          "bg-emerald-400": index === 0,
+                          "bg-rose-400": index === widths.length - 1,
+                          "bg-orange-300":
+                            index !== 0 && index !== widths.length - 1,
+                        })}
+                        style={{ width: `${width}%` }}
+                      />
+                    ))}
+                  </div>
+                  <div className="flex justify-between">
+                    {metrics.map((metric, index) => (
+                      <span
+                        key={index}
+                        className={cn("tracking-tight text-xs font-medium", {
+                          "text-emerald-400": index === 0,
+                          "text-orange-300": index === 1,
+                          "text-rose-400": index === 2,
+                        })}
+                      >
+                        CA ${metric}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
             )}
@@ -639,39 +659,6 @@ const FlightDelayChart = () => {
             Probability of Your Flight Being Delayed
           </h4>
           <Pie data={data} />
-        </CustomSecondaryBackgroundCard>
-        <div className="flex justify-center">
-          <CustomSecondaryBackgroundCard className="text-sm text-muted-foreground flex gap-x-2 items-center absolute translate-y-1/3 p-4 bg-background">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-              className="w-4 h-4"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M10 2a6 6 0 0 0-6 6c0 1.887-.454 3.665-1.257 5.234a.75.75 0 0 0 .515 1.076 32.91 32.91 0 0 0 3.256.508 3.5 3.5 0 0 0 6.972 0 32.903 32.903 0 0 0 3.256-.508.75.75 0 0 0 .515-1.076A11.448 11.448 0 0 1 16 8a6 6 0 0 0-6-6ZM8.05 14.943a33.54 33.54 0 0 0 3.9 0 2 2 0 0 1-3.9 0Z"
-                clip-rule="evenodd"
-              />
-            </svg>
-            Text message sent
-          </CustomSecondaryBackgroundCard>
-          <span className="border-indigo-400 border-dashed border w-[0.1px] h-24" />
-        </div>
-        <CustomSecondaryBackgroundCard className="flex gap-x-2 items-center">
-          <Avatar className="w-10 h-10">
-            <AvatarImage src="" />
-            <AvatarFallback>VA</AvatarFallback>
-          </Avatar>
-          <div>
-            <h4 className="font-semibold text-base tracking-tight text-foreground">
-              Volaired Assistant
-            </h4>
-            <p className="text-xs text-muted-foreground">
-              Your flight to Toronto is is likely to be delayed by 30-60
-              minutes.
-            </p>
-          </div>
         </CustomSecondaryBackgroundCard>
       </CustomDashedCard>
     </>
