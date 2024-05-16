@@ -6,7 +6,6 @@ import { testEmail } from "@/lib/validate";
 import {
   HeroSection,
   ConfettiExplosionCanvas,
-  FlightDelayChart,
   FlightPriceInfo,
   GroupTripSection,
   MeetCopilot,
