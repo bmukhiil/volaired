@@ -53,7 +53,7 @@ interface GroupTripSectionProps {
 }
 
 interface FlightPriceInfoProps {
-  date: Date;
+  date: Date | undefined;
   setDate: (date: Date | undefined) => void;
   loading: boolean;
   handleSubmit: () => void;
