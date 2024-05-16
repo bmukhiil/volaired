@@ -26,12 +26,14 @@ async function fetchToken(): Promise<CachedToken> {
       },
     );
 
-    const tokenData = await response.json();
     if (!response.ok) {
+      const errorText = await response.text();
       throw new Error(
-        `Failed to fetch token: ${response.status} ${response.statusText}`,
+        `Failed to fetch token: ${response.status} ${response.statusText} - ${errorText}`,
       );
     }
+
+    const tokenData = await response.json();
 
     return {
       value: tokenData.access_token,
@@ -66,14 +68,13 @@ async function getAmadeusToken(): Promise<string | null> {
 
 // Function to search for flights using the Amadeus API.
 // It requires flight search parameters and a valid token.
-export async function searchFlights(searchParams: any) {
+async function searchFlights(searchParams: any) {
   const token = await getAmadeusToken();
-  console.log("Token:", token);
-
-  console.log(searchParams);
+  if (!token) {
+    throw new Error("Failed to obtain a valid token.");
+  }
 
   try {
-    console.log("Searching for flights...");
     const response = await fetch(
       "https://test.api.amadeus.com/v2/shopping/flight-offers",
       {
@@ -84,16 +85,25 @@ export async function searchFlights(searchParams: any) {
         },
         body: JSON.stringify(searchParams),
       },
-    ).then((res) => res.json());
-    return response;
+    );
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(
+        `Flight search failed: ${response.status} ${response.statusText} - ${errorText}`,
+      );
+    }
+    return await response.json();
   } catch (error) {
     console.error("Error searching for flights:", error);
+    throw error;
   }
 }
 
-export async function fetchAirport(airportCode: string) {
+async function fetchAirport(airportCode: string) {
   const token = await getAmadeusToken();
-  console.log("Token:", token);
+  if (!token) {
+    throw new Error("Failed to obtain a valid token.");
+  }
 
   try {
     console.log("Fetching airport information...");
@@ -104,16 +114,26 @@ export async function fetchAirport(airportCode: string) {
           Authorization: `Bearer ${token}`,
         },
       },
-    ).then((res) => res.json());
-    return response;
+    );
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(
+        `Failed to fetch airport information: ${response.status} ${response.statusText} - ${errorText}`,
+      );
+    }
+
+    return await response.json();
   } catch (error) {
     console.error("Error fetching airport information:", error);
+    throw error;
   }
 }
 
-export async function fetchPriceAnalysis(date: string) {
+async function fetchPriceAnalysis(date: string) {
   const token = await getAmadeusToken();
-  console.log("Token:", token);
+  if (!token) {
+    throw new Error("Failed to obtain a valid token.");
+  }
 
   const formattedDate = new Date(parseInt(date)).toISOString().split("T")[0];
 
@@ -126,9 +146,19 @@ export async function fetchPriceAnalysis(date: string) {
           Authorization: `Bearer ${token}`,
         },
       },
-    ).then((res) => res.json());
-    return response;
+    );
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(
+        `Price analysis fetch failed: ${response.status} ${response.statusText} - ${errorText}`,
+      );
+    }
+
+    return await response.json();
   } catch (error) {
     console.error("Error fetching price analysis:", error);
+    throw error;
   }
 }
+
+export { searchFlights, fetchAirport, fetchPriceAnalysis };
