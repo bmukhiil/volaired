@@ -61,7 +61,7 @@ export default function Home() {
   };
 
   const handlePriceData = async () => {
-    const epochDate = date.getTime();
+    const epochDate = date?.getTime();
     setPriceDataLoading(true);
     try {
       const response = await fetch(`/api/v1/flights/prices?date=${epochDate}`, {
