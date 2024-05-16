@@ -234,14 +234,6 @@ const ConfettiExplosionCanvas = () => {
 };
 
 const GroupTripSection = (props: GroupTripSectionProps) => {
-  const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-  });
-
-  const rotate = useTransform(scrollYProgress, [0, 1], [0, 10]);
-  const translateX = useTransform(scrollYProgress, [0, 1], ["0", "20%"]);
-
   const {
     tripJoined,
     setTripJoined,
@@ -265,7 +257,7 @@ const GroupTripSection = (props: GroupTripSectionProps) => {
 
   return (
     <div className="flex flex-col justify-center items-center lg:flex-row lg:gap-x-4">
-      <div className="flex flex-col lg:gap-y-16" ref={containerRef}>
+      <div className="flex flex-col lg:gap-y-16">
         <div className="flex flex-col gap-y-2">
           <h2 className="text-3xl lg:text-4xl font-bold tracking-tight">
             Planning a trip with friends?
