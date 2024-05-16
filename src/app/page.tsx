@@ -14,7 +14,7 @@ import {
 import { atom } from "jotai";
 
 export default function Home() {
-  const [date, setDate] = React.useState<Date>(new Date());
+  const [date, setDate] = React.useState<Date | undefined>(new Date());
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
