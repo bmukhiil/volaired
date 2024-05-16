@@ -19,13 +19,13 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="px-6 py-3 border-b border-dashed flex items-center justify-between">
+    <nav className="px-6 py-3 lg:px-40 lg:py-4 border-b border-dashed flex items-center justify-between">
       <Link href="/" className="font-semibold tracking-tight text-2xl">
         Volaired
       </Link>
-      <Link href="/support">
+      {/* <Link href="/support">
         <Button variant="secondary">Help & Support</Button>
-      </Link>
+      </Link> */}
     </nav>
   );
 }

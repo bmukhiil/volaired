@@ -38,8 +38,12 @@ export default function Footer() {
         //   href: "/terms",
         // },
         {
+          name: "Blog",
+          href: "#hero",
+        },
+        {
           name: "Privacy Policy",
-          href: "/privacy",
+          href: "#hero",
         },
       ],
     },
@@ -47,16 +51,8 @@ export default function Footer() {
       name: "Resources",
       links: [
         {
-          name: "FAQ",
-          href: "/faq",
-        },
-        {
-          name: "Help",
-          href: "/help",
-        },
-        {
-          name: "Support",
-          href: "/support",
+          name: "Help & Support",
+          href: "#hero",
         },
       ],
     },
@@ -126,7 +122,7 @@ export default function Footer() {
   }, []);
 
   return (
-    <main className="w-screen px-6 mt-4">
+    <main className="lg:px-40 lg:py-4 w-screen px-6 mt-4">
       <div className="flex flex-col justify-center items-center">
         <div className="flex flex-col gap-y-2">
           <h2 className="text-3xl font-bold tracking-tight">
@@ -137,7 +133,7 @@ export default function Footer() {
             yesterday at exactly this time.
           </h3>
         </div>
-        <CustomDashedCard className="my-6 w-full flex items-center justify-center">
+        <CustomDashedCard className="my-6 flex items-center justify-center">
           {loading ? (
             <div className="flex items-center justify-center">
               <Loader2 className="text-indigo-500 animate-spin w-8 h-8" />
@@ -165,7 +161,7 @@ export default function Footer() {
       <div>
         <span className="font-semibold tracking-tight text-2xl">Volaired</span>
       </div>
-      <div className="mt-8 flex justify-between">
+      <div className="mt-8 flex gap-x-20">
         {footer.map((section) => (
           <ul key={section.name} className="flex flex-col gap-y-2">
             <span className="font-medium tracking-tight">{section.name}</span>

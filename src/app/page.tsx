@@ -9,6 +9,7 @@ import {
   FlightDelayChart,
   FlightPriceInfo,
   GroupTripSection,
+  MeetCopilot,
 } from "@/components/pages/home";
 
 import { atom } from "jotai";
@@ -87,7 +88,10 @@ export default function Home() {
   }, []);
 
   return (
-    <section className="px-6 overflow-x-hidden pt-14" id="hero">
+    <section
+      className="px-6 overflow-x-hidden pt-14 md:pt-20 lg:-mx-6 lg:pt-32"
+      id="hero"
+    >
       {isExploding && <ConfettiExplosionCanvas />}
       <HeroSection
         loading={loading}
@@ -97,7 +101,7 @@ export default function Home() {
         onChange={handleInputChange}
         error={error}
       />
-      <div className="py-28 flex flex-col gap-y-6">
+      <div className="lg:px-40 py-28 md:py-24 lg:py-36 flex flex-col gap-y-6">
         <GroupTripSection
           tripDeclined={tripDeclined}
           tripJoined={tripJoined}
@@ -107,7 +111,7 @@ export default function Home() {
           tripJoinedTriggered={tripJoinedTriggered}
         />
       </div>
-      <div className="pb-28 flex flex-col gap-y-6">
+      <div className="lg:px-40 pb-28 md:pb-24 lg:pb-36 flex flex-col gap-y-6">
         <FlightPriceInfo
           date={date}
           setDate={setDate}
@@ -116,8 +120,8 @@ export default function Home() {
           data={priceData}
         />
       </div>
-      <div className="pb-28 flex flex-col gap-y-6">
-        <FlightDelayChart />
+      <div className="lg:px-40 pb-28 md:pb-24 lg:pb-36 flex flex-col gap-y-6">
+        <MeetCopilot />
       </div>
     </section>
   );
