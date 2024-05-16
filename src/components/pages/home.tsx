@@ -60,6 +60,18 @@ interface FlightPriceInfoProps {
   data: any;
 }
 
+interface PriceMetric {
+  amount: string;
+}
+
+interface MetricsResult {
+  Q1: number;
+  Q3: number;
+  min: number;
+  max: number;
+  widths: string[];
+}
+
 const HeroSection = (props: HeroSectionProps) => {
   return (
     <div className="md:px-12 lg:px-48">
@@ -437,7 +449,7 @@ const GroupTripSection = (props: GroupTripSectionProps) => {
                     {
                       "border-rose-500 text-rose-500 bg-background focus:border-rose-500 focus:text-rose-500 focus:bg-background":
                         tripDeclined,
-                    },
+                    }
                   )}
                 >
                   <svg
@@ -455,7 +467,7 @@ const GroupTripSection = (props: GroupTripSectionProps) => {
                     "absolute right-[0.5px] top-[0.5px] transform translate-x-1/2 -translate-y-1/2",
                     {
                       hidden: tripJoinedTriggered,
-                    },
+                    }
                   )}
                 >
                   <div className="bg-indigo-400 w-2 h-2 rounded-full">
@@ -570,17 +582,17 @@ const GroupTripSection = (props: GroupTripSectionProps) => {
 
 const FlightPriceInfo = (props: FlightPriceInfoProps) => {
   const { date, setDate, loading, handleSubmit, data } = props;
-  const priceMetrics = data?.priceMetrics || [];
+  const priceMetrics: PriceMetric[] = data?.priceMetrics || [];
 
-  const calculateWidths = (metrics: any) => {
+  const calculateWidths = (metrics: PriceMetric[]): MetricsResult => {
     if (!metrics || metrics.length < 5) {
       // Ensure there are exactly five metrics (min, Q1, median, Q3, max) to proceed
-      return { Q1: 0, Q3: 0, min: 0, max: 0, widths: [0, 0, 0] };
+      return { Q1: 0, Q3: 0, min: 0, max: 0, widths: ["0", "0", "0"] };
     }
 
     // Ensure metrics are sorted if not already (typically by quartileRanking)
     const sortedMetrics = metrics.sort(
-      (a: any, b: any) => parseFloat(a.amount) - parseFloat(b.amount),
+      (a: any, b: any) => parseFloat(a.amount) - parseFloat(b.amount)
     );
     const Q1 = parseFloat(sortedMetrics[1].amount);
     const Q3 = parseFloat(sortedMetrics[2].amount);
@@ -596,7 +608,7 @@ const FlightPriceInfo = (props: FlightPriceInfoProps) => {
 
     if (totalRange === 0) {
       // Avoid division by zero
-      return [];
+      return { Q1, Q3, min, max, widths: ["0", "0", "0"] };
     }
 
     const widths = [
@@ -669,7 +681,7 @@ const FlightPriceInfo = (props: FlightPriceInfoProps) => {
               variant={"outline"}
               className={cn(
                 "w-full text-foreground justify-start font-normal",
-                !date && "text-muted-foreground",
+                !date && "text-muted-foreground"
               )}
             >
               <svg
