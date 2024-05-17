@@ -12,7 +12,6 @@ import {
 } from "@/components/pages/home";
 
 import { atom } from "jotai";
-import { TracingBeam } from "@/components/ui/tracing-beam";
 
 export default function Home() {
   const [date, setDate] = React.useState<Date | undefined>(new Date());
