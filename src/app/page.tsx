@@ -84,7 +84,7 @@ export default function Home() {
 
   useEffect(() => {
     handlePriceData();
-  });
+  }, []);
 
   return (
     <section

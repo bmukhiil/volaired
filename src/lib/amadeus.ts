@@ -153,7 +153,7 @@ async function fetchPriceAnalysis(date: string) {
         `Price analysis fetch failed: ${response.status} ${response.statusText} - ${errorText}`,
       );
     }
-
+    console.log("Price analysis fetched successfully.");
     return await response.json();
   } catch (error) {
     console.error("Error fetching price analysis:", error);
