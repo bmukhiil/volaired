@@ -536,7 +536,7 @@ const GroupTripSection = (props: GroupTripSectionProps) => {
               </span>
             </div>
             <div>
-              <h2 className="text-lg font-medium text-center">
+              <h2 className="text-base font-medium text-center">
                 Splitting costs made easy.
               </h2>
               <p className="text-muted-foreground text-sm text-center">
@@ -566,7 +566,7 @@ const GroupTripSection = (props: GroupTripSectionProps) => {
               </span>
             </div>
             <div>
-              <h2 className="text-lg font-medium text-center">
+              <h2 className="text-base font-medium text-center">
                 Collaborate on the itinerary.
               </h2>
               <p className="text-muted-foreground text-sm text-center">
