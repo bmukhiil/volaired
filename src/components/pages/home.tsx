@@ -893,7 +893,7 @@ const MeetCopilot = () => {
               </h3>
               <p className="text-muted-foreground text-sm">
                 Copilot uses machine learning to predict the probability of your
-                flight being delayed, so you can stay in the know.
+                flight being delayed.
               </p>
             </div>
           </CustomDashedCard>
