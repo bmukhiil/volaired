@@ -449,7 +449,7 @@ const GroupTripSection = (props: GroupTripSectionProps) => {
                     {
                       "border-rose-500 text-rose-500 bg-background focus:border-rose-500 focus:text-rose-500 focus:bg-background":
                         tripDeclined,
-                    }
+                    },
                   )}
                 >
                   <svg
@@ -467,7 +467,7 @@ const GroupTripSection = (props: GroupTripSectionProps) => {
                     "absolute right-[0.5px] top-[0.5px] transform translate-x-1/2 -translate-y-1/2",
                     {
                       hidden: tripJoinedTriggered,
-                    }
+                    },
                   )}
                 >
                   <div className="bg-indigo-400 w-2 h-2 rounded-full">
@@ -592,7 +592,7 @@ const FlightPriceInfo = (props: FlightPriceInfoProps) => {
 
     // Ensure metrics are sorted if not already (typically by quartileRanking)
     const sortedMetrics = metrics.sort(
-      (a: any, b: any) => parseFloat(a.amount) - parseFloat(b.amount)
+      (a: any, b: any) => parseFloat(a.amount) - parseFloat(b.amount),
     );
     const Q1 = parseFloat(sortedMetrics[1].amount);
     const Q3 = parseFloat(sortedMetrics[2].amount);
@@ -681,7 +681,7 @@ const FlightPriceInfo = (props: FlightPriceInfoProps) => {
               variant={"outline"}
               className={cn(
                 "w-full text-foreground justify-start font-normal",
-                !date && "text-muted-foreground"
+                !date && "text-muted-foreground",
               )}
             >
               <svg
@@ -850,9 +850,9 @@ const MeetCopilot = () => {
             </div>
           </CustomDashedCard>
         </div>
-        <div className="lg:flex">
+        <div className="mt-8">
           <CustomDashedCard className="flex flex-col lg:justify-between lg:hidden">
-            <div className=" flex-col w-full bg-background rounded-lg  dark:bg-grid-zinc-500/[0.2] bg-grid-zinc-200/[0.2] relative flex items-center justify-center">
+            <div className=" flex-col w-full bg-background rounded-lg  dark:bg-grid-zinc-500/[0.2] bg-grid-zinc-400/[0.2] relative flex items-center justify-center">
               {/* Radial gradient for the container to give a faded look */}
               <div className="rounded-lg absolute pointer-events-none inset-0 flex items-center justify-center bg-secondary [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
               <div className="bg-primary my-8 rounded-md px-2 py-1 border border-indigo-500 drop-shadow-md shadow-indigo-400 ring-2 ring-indigo-400 ring-offset-1 ring-offset-transparent">
@@ -878,7 +878,7 @@ const MeetCopilot = () => {
             </div>
           </CustomDashedCard>
           <CustomDashedCard className="flex flex-col lg:justify-between">
-            <div className="flex-col w-full bg-background rounded-lg  dark:bg-grid-zinc-500/[0.2] bg-grid-zinc-200/[0.2] relative flex items-center justify-center">
+            <div className="flex-col w-full bg-background rounded-lg  dark:bg-grid-zinc-500/[0.2] bg-grid-zinc-400/[0.2] relative flex items-center justify-center">
               {/* Radial gradient for the container to give a faded look */}
               <div className="rounded-lg absolute pointer-events-none inset-0 flex items-center justify-center bg-secondary [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
               <div className="bg-transparent my-8 rounded-md p-2 border border-indigo-500 drop-shadow-md shadow-indigo-400 ring-1  ring-indigo-400 ring-offset-1 ring-offset-transparent">

@@ -122,7 +122,7 @@ export default function Footer() {
   }, []);
 
   return (
-    <main className="lg:px-40 lg:py-4 w-screen px-6 mt-4">
+    <main className="lg:px-40 lg:py-4 w-screen px-6">
       <div className="flex flex-col justify-center items-center">
         <div className="flex flex-col gap-y-2">
           <h2 className="text-3xl font-bold tracking-tight">
@@ -133,7 +133,7 @@ export default function Footer() {
             yesterday at exactly this time.
           </h3>
         </div>
-        <CustomDashedCard className="my-6 flex items-center justify-center">
+        <CustomDashedCard className="my-8 flex items-center justify-center">
           {loading ? (
             <div className="flex items-center justify-center">
               <Loader2 className="text-indigo-500 animate-spin w-8 h-8" />
@@ -146,7 +146,7 @@ export default function Footer() {
         </CustomDashedCard>
       </div>
       <Separator className="my-4 -mx-6 w-screen" />
-      <div className="py-2 text-center flex gap-y-4 flex-col items-center font-bold text-3xl">
+      <div className="py-14 text-center flex gap-y-10 flex-col items-center font-bold text-3xl">
         <span className="tracking-tight">
           <span className="text-indigo-500">Kickstart</span> your next
           adventure.
@@ -158,7 +158,7 @@ export default function Footer() {
         </Link>
       </div>
       <Separator className="my-4 flex shrink" />
-      <div>
+      <div className="mt-14">
         <span className="font-semibold tracking-tight text-2xl">Volaired</span>
       </div>
       <div className="mt-8 flex gap-x-20">
