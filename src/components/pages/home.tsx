@@ -449,7 +449,7 @@ const GroupTripSection = (props: GroupTripSectionProps) => {
                     {
                       "border-rose-500 text-rose-500 bg-background focus:border-rose-500 focus:text-rose-500 focus:bg-background":
                         tripDeclined,
-                    },
+                    }
                   )}
                 >
                   <svg
@@ -467,7 +467,7 @@ const GroupTripSection = (props: GroupTripSectionProps) => {
                     "absolute right-[0.5px] top-[0.5px] transform translate-x-1/2 -translate-y-1/2",
                     {
                       hidden: tripJoinedTriggered,
-                    },
+                    }
                   )}
                 >
                   <div className="bg-indigo-400 w-2 h-2 rounded-full">
@@ -592,7 +592,7 @@ const FlightPriceInfo = (props: FlightPriceInfoProps) => {
 
     // Ensure metrics are sorted if not already (typically by quartileRanking)
     const sortedMetrics = metrics.sort(
-      (a: any, b: any) => parseFloat(a.amount) - parseFloat(b.amount),
+      (a: any, b: any) => parseFloat(a.amount) - parseFloat(b.amount)
     );
     const Q1 = parseFloat(sortedMetrics[1].amount);
     const Q3 = parseFloat(sortedMetrics[2].amount);
@@ -635,7 +635,7 @@ const FlightPriceInfo = (props: FlightPriceInfoProps) => {
           optimal times to fly.
         </h3>
       </div>
-      <CustomDashedCard>
+      <CustomDashedCard className="lg:w-1/2">
         <Label className="text-foreground">Flying from</Label>
         <Button
           variant="outline"
@@ -681,7 +681,7 @@ const FlightPriceInfo = (props: FlightPriceInfoProps) => {
               variant={"outline"}
               className={cn(
                 "w-full text-foreground justify-start font-normal",
-                !date && "text-muted-foreground",
+                !date && "text-muted-foreground"
               )}
             >
               <svg
@@ -860,7 +860,7 @@ const MeetCopilot = () => {
                   Hey! How can I help?
                 </p>
               </div>
-              <div className="z-50 text-muted-foreground flex justify-between items-center h-10 w-full rounded-md border border-input bg-background pl-3 pr-1 py-2 text-sm ring-offset-background">
+              <div className="z-50 text-muted-foreground flex justify-between items-center h-10 w-full rounded-md border border-input bg-background pl-3 pr-[3px] py-2 text-sm ring-offset-background">
                 Things to do in Vancouver?
                 <Button
                   variant="outline"
