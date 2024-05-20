@@ -8,9 +8,13 @@ import {
 } from "framer-motion";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Loader2 } from "lucide-react";
+import { Loader2, Scroll } from "lucide-react";
 import ConfettiExplosion from "react-confetti-explosion";
+import { ScrollBar, ScrollArea } from "@/components/ui/scroll-area";
+
 import { cn } from "@/lib/utils";
+import { Switch } from "@/components/ui/switch";
+
 import { CustomDashedCard } from "../ui/custom-card";
 import Image from "next/image";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
@@ -280,68 +284,6 @@ const GroupTripSection = (props: GroupTripSectionProps) => {
             success.
           </h3>
         </div>
-        <div className="mt-4 hidden lg:flex">
-          <CustomDashedCard className="">
-            <div className="flex flex-col justify-center gap-y-4">
-              <div className="flex shrink justify-center">
-                <span className="bg-background rounded-lg p-2 shadow">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
-                    className="w-6 h-6 text-primary"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M2.25 18.75a60.07 60.07 0 0 1 15.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 0 1 3 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 0 0-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 0 1-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 0 0 3 15h-.75M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm3 0h.008v.008H18V10.5Zm-12 0h.008v.008H6V10.5Z"
-                    />
-                  </svg>
-                </span>
-              </div>
-              <div>
-                <h2 className="text-lg font-medium text-center">
-                  Splitting costs made easy.
-                </h2>
-                <p className="text-muted-foreground text-sm text-center">
-                  Split costs with friends and keep track of expenses.
-                </p>
-              </div>
-            </div>
-          </CustomDashedCard>
-          <CustomDashedCard>
-            <div className="flex flex-col justify-center gap-y-4">
-              <div className="flex justify-center">
-                <span className="bg-background rounded-lg p-2 shadow">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
-                    className="w-6 h-6 text-primary"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z"
-                    />
-                  </svg>
-                </span>
-              </div>
-              <div>
-                <h2 className="text-lg font-medium text-center">
-                  Collaborate on the itinerary.
-                </h2>
-                <p className="text-muted-foreground text-sm text-center">
-                  Plan activities and share your travel plans.
-                </p>
-              </div>
-            </div>
-          </CustomDashedCard>
-        </div>
       </div>
       <div className="lg:w-1/2 mt-6">
         <CustomDashedCard className="flex justify-center items-center">
@@ -381,7 +323,12 @@ const GroupTripSection = (props: GroupTripSectionProps) => {
                   <AvatarImage src="" />
                   <AvatarFallback>AL</AvatarFallback>
                 </Avatar>
-                <span className="font-medium text-xs tracking-tighter">+2</span>
+                <Avatar className="w-8 h-8">
+                  <AvatarImage src="" />
+                  <AvatarFallback className="font-medium text-xs tracking-tighter">
+                    +2
+                  </AvatarFallback>
+                </Avatar>
                 <Button
                   size="icon"
                   variant="ghost"
@@ -444,13 +391,10 @@ const GroupTripSection = (props: GroupTripSectionProps) => {
                     });
                   }}
                   variant="outline"
-                  className={cn(
-                    "shadow-inner w-full flex items-center gap-x-1",
-                    {
-                      "border-rose-500 text-rose-500 bg-background focus:border-rose-500 focus:text-rose-500 focus:bg-background":
-                        tripDeclined,
-                    },
-                  )}
+                  className={cn("w-full flex items-center gap-x-1", {
+                    "border-rose-500 text-rose-500 bg-background focus:border-rose-500 focus:text-rose-500 focus:bg-background":
+                      tripDeclined,
+                  })}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -515,68 +459,205 @@ const GroupTripSection = (props: GroupTripSectionProps) => {
             </div>
           </div>
         </CustomDashedCard>
-        <CustomDashedCard className="lg:hidden">
+      </div>
+    </div>
+  );
+};
+
+const FeaturesSection = () => {
+  const containerRef = useRef(null);
+
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+  });
+
+  const transformY1 = useTransform(scrollYProgress, [0, 1], [0, 50]);
+  const transformY2 = useTransform(scrollYProgress, [0, 1], [0, -50]);
+
+  return (
+    <>
+      <div
+        className="lg:flex lg:justify-between items-center"
+        ref={containerRef}
+      >
+        <div className="flex flex-col lg:w-1/2">
+          <div className="flex flex-col gap-y-2">
+            <h2 className="text-3xl font-bold tracking-tight">
+              Everything you need for your next trip.
+            </h2>
+            <h3 className="text-muted-foreground">
+              Ever feel like you&apos;re missing something when planning a trip?
+              We&apos;ve got you covered with all the features you need to make
+              your trip.
+            </h3>
+          </div>
+        </div>
+        <div className="gap-x-4 hidden lg:flex">
+          <motion.div
+            initial={{ translateY: 0 }}
+            style={{ translateY: transformY1 }}
+          >
+            <Image
+              alt="Features"
+              src="/collab_iphone.svg"
+              width={200}
+              height={200}
+              className="translate-y-24"
+            />
+          </motion.div>
+          <motion.div
+            initial={{ translateY: 0 }}
+            style={{ translateY: transformY2 }}
+          >
+            <Image
+              alt="Features"
+              src="/split_bills_iphone.svg"
+              className="w-[25dvh] h-auto drop-shadow-sm"
+              width={400}
+              height={400}
+            />
+          </motion.div>
+        </div>
+      </div>
+      <div className="flex flex-col lg:hidden">
+        <CustomDashedCard className="">
           <div className="flex flex-col justify-center gap-y-4">
+            {/* <div className="bg-background p-4 rounded-lg  flex flex-col gap-y-2">
+              <div className="flex items-center justify-between">
+                <h4 className="text-sm font-medium text-muted-foreground">
+                  Groups
+                </h4>
+                <Button variant="outline" size="icon">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    className="w-4 h-4 text-muted-foreground"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                    />
+                  </svg>
+                </Button>
+              </div>
+              <ScrollArea className="w-full">
+                <div className="flex gap-x-4">
+                  <div className="drop-shadow-sm w-[25dvh] bg-secondary p-5 rounded-xl flex flex-col gap-y-2">
+                    <h5 className="font-medium">🏡 Family</h5>
+                    <Separator />
+                    <div className="flex items-center gap-x-1">
+                      <Avatar className="w-8 h-8">
+                        <AvatarImage src="" />
+                        <AvatarFallback>HP</AvatarFallback>
+                      </Avatar>
+                      <Avatar className="w-8 h-8">
+                        <AvatarImage src="" />
+                        <AvatarFallback>MP</AvatarFallback>
+                      </Avatar>
+                      <Avatar className="w-8 h-8">
+                        <AvatarImage src="" />
+                        <AvatarFallback>AP</AvatarFallback>
+                      </Avatar>
+                      <Avatar className="w-8 h-8">
+                        <AvatarImage src="" />
+                        <AvatarFallback>SP</AvatarFallback>
+                      </Avatar>
+                    </div>
+                    <div>
+                      <Button className="w-full mt-2 border border-indigo-400 shadow-inner flex gap-x-1">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                          className="w-5 h-5"
+                        >
+                          <path d="M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z" />
+                        </svg>
+                        Add a member
+                      </Button>
+                    </div>
+                  </div>
+                  <div className="drop-shadow-sm w-[25dvh] bg-secondary p-5 rounded-xl flex flex-col gap-y-2">
+                    <h5 className="font-medium">👯 Friends</h5>
+                    <Separator />
+                    <div className="flex items-center gap-x-1">
+                      <Avatar className="w-8 h-8">
+                        <AvatarImage src="" />
+                        <AvatarFallback>AL</AvatarFallback>
+                      </Avatar>
+                      <Avatar className="w-8 h-8">
+                        <AvatarImage src="" />
+                        <AvatarFallback>HP</AvatarFallback>
+                      </Avatar>
+                      <Avatar className="w-8 h-8">
+                        <AvatarImage src="" />
+                        <AvatarFallback>MB</AvatarFallback>
+                      </Avatar>
+                      <Avatar className="w-8 h-8">
+                        <AvatarImage src="" />
+                        <AvatarFallback>SM</AvatarFallback>
+                      </Avatar>
+                    </div>
+                    <div>
+                      <Button className="mt-2 border border-indigo-400 shadow-inner flex gap-x-1">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                          className="w-5 h-5"
+                        >
+                          <path d="M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z" />
+                        </svg>
+                        Add a member
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+                <ScrollBar orientation="horizontal" />
+              </ScrollArea>
+            </div> */}
             <div className="flex justify-center">
-              <span className="bg-background rounded-lg p-2 shadow">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  className="w-6 h-6 text-primary"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M2.25 18.75a60.07 60.07 0 0 1 15.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 0 1 3 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 0 0-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 0 1-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 0 0 3 15h-.75M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm3 0h.008v.008H18V10.5Zm-12 0h.008v.008H6V10.5Z"
-                  />
-                </svg>
-              </span>
+              <Image
+                alt="Splitting bills iPhone"
+                src="/split_bills_iphone.svg"
+                className="w-[25dvh] h-auto drop-shadow-sm"
+                width={400}
+                height={400}
+              />
             </div>
-            <div>
-              <h2 className="text-base font-medium text-center">
-                Splitting costs made easy.
-              </h2>
-              <p className="text-muted-foreground text-sm text-center">
+            <div className="mt-2">
+              <h2 className="font-medium">Splitting costs made easy.</h2>
+              <p className="text-muted-foreground text-sm">
                 Split costs with friends and keep track of expenses.
               </p>
             </div>
           </div>
         </CustomDashedCard>
-        <CustomDashedCard className="lg:hidden">
+        <CustomDashedCard>
           <div className="flex flex-col justify-center gap-y-4">
             <div className="flex justify-center">
-              <span className="bg-background rounded-lg p-2 shadow">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  className="w-6 h-6 text-primary"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z"
-                  />
-                </svg>
-              </span>
+              <Image
+                alt=""
+                src="/collab_iphone.svg"
+                width={400}
+                height={400}
+                className="w-[25dvh] h-auto drop-shadow-sm"
+              />
             </div>
-            <div>
-              <h2 className="text-base font-medium text-center">
-                Collaborate on the itinerary.
-              </h2>
-              <p className="text-muted-foreground text-sm text-center">
+            <div className="mt-2">
+              <h2 className="font-medium">Collaborate on the itinerary.</h2>
+              <p className="text-muted-foreground text-sm">
                 Plan activities and share your travel plans.
               </p>
             </div>
           </div>
         </CustomDashedCard>
       </div>
-    </div>
+    </>
   );
 };
 
@@ -909,4 +990,5 @@ export {
   GroupTripSection,
   FlightPriceInfo,
   MeetCopilot,
+  FeaturesSection,
 };

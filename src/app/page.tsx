@@ -9,6 +9,7 @@ import {
   FlightPriceInfo,
   GroupTripSection,
   MeetCopilot,
+  FeaturesSection,
 } from "@/components/pages/home";
 
 import { atom } from "jotai";
@@ -110,14 +111,17 @@ export default function Home() {
           tripJoinedTriggered={tripJoinedTriggered}
         />
       </div>
+      <div className="lg:px-40 pb-28 md:pb-24 lg:pb-36 flex flex-col gap-y-6">
+        <FeaturesSection />
+      </div>
       <div className="lg:px-40 pb-28 md:pb-24 lg:pb-36 flex flex-col gap-y-6 lg:flex-row lg:items-center lg:gap-x-4">
-        <FlightPriceInfo
+        {/* <FlightPriceInfo
           date={date}
           setDate={setDate}
           handleSubmit={handlePriceData}
           loading={priceDataLoading}
           data={priceData}
-        />
+        /> */}
       </div>
       <div className="lg:px-40 pb-28 md:pb-24 lg:pb-36 flex flex-col gap-y-6">
         <MeetCopilot />
