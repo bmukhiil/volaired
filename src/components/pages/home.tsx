@@ -82,7 +82,7 @@ interface MetricsResult {
 
 const HeroSection = (props: HeroSectionProps) => {
   return (
-    <div className="md:px-12 lg:px-48">
+    <div className="flex flex-col w-[95dvh]">
       <h1 className="text-4xl lg:text-5xl lg:text-center font-bold tracking-tight">
         Unlock your next adventure.
       </h1>

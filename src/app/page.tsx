@@ -105,7 +105,7 @@ export default function Home() {
 
   return (
     <section
-      className="px-6 overflow-x-hidden pt-14 md:pt-20 lg:-mx-6 lg:pt-32"
+      className="px-6 overflow-x-hidden pt-14 md:pt-20 lg:-mx-6 lg:pt-40"
       id="hero"
     >
       <Script
@@ -114,14 +114,16 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       {isExploding && <ConfettiExplosionCanvas />}
-      <HeroSection
-        loading={loading}
-        success={success}
-        email={email}
-        onSubmit={handleSubmit}
-        onChange={handleInputChange}
-        error={error}
-      />
+      <div className="flex justify-center items-center">
+        <HeroSection
+          loading={loading}
+          success={success}
+          email={email}
+          onSubmit={handleSubmit}
+          onChange={handleInputChange}
+          error={error}
+        />
+      </div>
       <div className="py-28 md:py-24 lg:py-36 drop-shadow-sm"></div>
       <div className="lg:px-40 flex flex-col gap-y-6">
         <GroupTripSection
