@@ -9,6 +9,7 @@ import { Toaster } from "@/components/ui/sonner";
 import { Loader2 } from "lucide-react";
 import { ThemeProvider } from "@/components/theme-provider";
 import { cn } from "@/lib/utils";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -71,6 +72,7 @@ export default function RootLayout({
             />
             <Footer />
           </ThemeProvider>
+          <SpeedInsights />
           <Analytics />
         </body>
       </html>
