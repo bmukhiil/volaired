@@ -2,7 +2,6 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Script from "next/script";
 
-
 export const metadata = {
   title: "404 - Page Not Found - Volaired",
   description: "The page you are looking for does not exist on Volaired.",

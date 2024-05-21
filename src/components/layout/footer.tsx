@@ -99,7 +99,7 @@ export default function Footer() {
             next: {
               revalidate: 43200,
             },
-          }
+          },
         );
         clearTimeout(timeoutId);
         const data = await response.json();
@@ -121,7 +121,7 @@ export default function Footer() {
               arcAlt: 0.1,
               color: colors[Math.floor(Math.random() * (colors.length - 1))],
             };
-          }
+          },
         );
 
         setArcs(newArcs);

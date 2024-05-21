@@ -233,7 +233,7 @@ const EmailSignUpForm = (props: EmailSignUpFormProps) => {
                       <span>Success!</span>
                     </div>
                   ) : (
-                    "Get notified"
+                    "Sign up for beta"
                   )}
                 </Button>
               </div>
@@ -280,7 +280,7 @@ const GroupTripSection = (props: GroupTripSectionProps) => {
       <div className="flex flex-col lg:gap-y-16">
         <div className="flex flex-col gap-y-2">
           <span className="text-primary text-sm font-semibold">
-            Trip Planning
+            Collaborative Trip Planning
           </span>
           <h2 className="text-3xl lg:text-4xl font-bold tracking-tight">
             Planning a trip with friends?
@@ -293,7 +293,7 @@ const GroupTripSection = (props: GroupTripSectionProps) => {
         </div>
       </div>
       <div className="lg:w-1/2 mt-6 lg:mt-0">
-        <CustomDashedCard className="flex justify-center items-center">
+        <CustomDashedCard className="mx-4 my-2 flex justify-center items-center">
           <div>
             <div className="flex justify-between items-center">
               <h4 className="font-semibold text-xl tracking-tight text-foreground">
@@ -422,7 +422,7 @@ const GroupTripSection = (props: GroupTripSectionProps) => {
                     "absolute right-[0.5px] top-[0.5px] transform translate-x-1/2 -translate-y-1/2",
                     {
                       hidden: tripJoinedTriggered,
-                    }
+                    },
                   )}
                 >
                   <div className="bg-indigo-400 w-2 h-2 rounded-full">
@@ -494,7 +494,7 @@ const FeaturesSection = () => {
         <div className="flex flex-col lg:w-1/2">
           <div className="flex flex-col gap-y-2">
             <span className="text-primary text-sm font-semibold">
-              Comprehensive Trip Planning
+              Comprehensive Tools
             </span>
             <h2 className="text-3xl font-bold tracking-tight">
               Everything you need for your next trip.
@@ -502,7 +502,7 @@ const FeaturesSection = () => {
             <h3 className="text-muted-foreground">
               Ever feel like you&apos;re missing something when planning a trip?
               We&apos;ve got you covered with all the features you need to make
-              your trip.
+              your trip seamless and enjoyable.
             </h3>
           </div>
         </div>
@@ -541,8 +541,8 @@ const FeaturesSection = () => {
           </motion.div>
         </div>
       </div>
-      <div className="flex flex-col lg:hidden">
-        <CustomDashedCard className="">
+      <div className="flex flex-col lg:hidden gap-y-4">
+        <CustomDashedCard className="mx-4 mt-2">
           <div className="flex flex-col justify-center gap-y-4">
             {/* <div className="bg-background p-4 rounded-lg  flex flex-col gap-y-2">
               <div className="flex items-center justify-between">
@@ -662,7 +662,7 @@ const FeaturesSection = () => {
             </div>
           </div>
         </CustomDashedCard>
-        <CustomDashedCard>
+        <CustomDashedCard className="mx-4">
           <div className="flex flex-col justify-center gap-y-4">
             <div className="flex justify-center">
               <Image
@@ -701,7 +701,7 @@ const FlightPriceInfo = (props: FlightPriceInfoProps) => {
 
     // Ensure metrics are sorted if not already (typically by quartileRanking)
     const sortedMetrics = metrics.sort(
-      (a: any, b: any) => parseFloat(a.amount) - parseFloat(b.amount)
+      (a: any, b: any) => parseFloat(a.amount) - parseFloat(b.amount),
     );
     const Q1 = parseFloat(sortedMetrics[1].amount);
     const Q3 = parseFloat(sortedMetrics[2].amount);
@@ -790,7 +790,7 @@ const FlightPriceInfo = (props: FlightPriceInfoProps) => {
               variant={"outline"}
               className={cn(
                 "w-full text-foreground justify-start font-normal",
-                !date && "text-muted-foreground"
+                !date && "text-muted-foreground",
               )}
             >
               <svg
@@ -923,7 +923,7 @@ const MeetCopilot = () => {
 
   return (
     <>
-      <div className="lg:flex">
+      <div className="lg:flex lg:gap-x-8">
         <div className="flex flex-col lg:justify-between">
           <div className="flex flex-col gap-y-2">
             <span className="text-primary text-sm font-semibold">
@@ -962,8 +962,8 @@ const MeetCopilot = () => {
             </div>
           </CustomDashedCard>
         </div>
-        <div className="mt-8 lg:mt-0">
-          <CustomDashedCard className="flex flex-col lg:justify-between lg:hidden">
+        <div className="mt-8 lg:mt-0 flex flex-col gap-y-4">
+          <CustomDashedCard className="flex flex-col lg:hidden">
             <div className=" flex-col w-full bg-background rounded-lg  dark:bg-grid-zinc-500/[0.2] bg-grid-zinc-400/[0.2] relative flex items-center justify-center">
               {/* Radial gradient for the container to give a faded look */}
               <div className="rounded-lg absolute pointer-events-none inset-0 flex items-center justify-center bg-secondary [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
