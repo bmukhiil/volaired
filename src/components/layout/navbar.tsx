@@ -27,13 +27,13 @@ export default function Navbar() {
         <Link href="/" className="font-semibold tracking-tight text-2xl" title="Volaired homepage">
           Volaired
         </Link>
-        <div className="flex space-x-4">
+        {/* <div className="flex space-x-4">
           {links.map((link) => (
             <Link key={link.href} href={link.href} title={link.title}>
               {link.name}
             </Link>
           ))}
-        </div>
+        </div> */}
       </nav>
     </header>
   );
