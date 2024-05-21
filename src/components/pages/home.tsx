@@ -315,24 +315,28 @@ const GroupTripSection = (props: GroupTripSectionProps) => {
               </motion.div>
               <div className="flex items-center gap-x-1 ml-2">
                 <Avatar className="w-8 h-8">
-                  <AvatarImage src="https://github.com/shadcn.png" />
+                  <AvatarImage
+                    alt="Profile Picture"
+                    src="https://github.com/shadcn.png"
+                  />
                   <AvatarFallback>CN</AvatarFallback>
                 </Avatar>
                 <Avatar className="w-8 h-8">
-                  <AvatarImage src="" />
+                  <AvatarImage alt="Profile Picture" src="" />
                   <AvatarFallback>CN</AvatarFallback>
                 </Avatar>
                 <Avatar className="w-8 h-8">
-                  <AvatarImage src="" />
+                  <AvatarImage alt="Profile Picture" src="" />
                   <AvatarFallback>AL</AvatarFallback>
                 </Avatar>
                 <Avatar className="w-8 h-8">
-                  <AvatarImage src="" />
+                  <AvatarImage alt="Profile Picture" src="" />
                   <AvatarFallback className="font-medium text-xs tracking-tighter">
                     +2
                   </AvatarFallback>
                 </Avatar>
                 <Button
+                  aria-label="Add a member"
                   size="icon"
                   variant="ghost"
                   className="border-border border border-dashed w-8 h-8 flex justify-center items-center rounded-full"
@@ -414,7 +418,7 @@ const GroupTripSection = (props: GroupTripSectionProps) => {
                     "absolute right-[0.5px] top-[0.5px] transform translate-x-1/2 -translate-y-1/2",
                     {
                       hidden: tripJoinedTriggered,
-                    },
+                    }
                   )}
                 >
                   <div className="bg-indigo-400 w-2 h-2 rounded-full">
@@ -713,7 +717,7 @@ const FlightPriceInfo = (props: FlightPriceInfoProps) => {
 
     // Ensure metrics are sorted if not already (typically by quartileRanking)
     const sortedMetrics = metrics.sort(
-      (a: any, b: any) => parseFloat(a.amount) - parseFloat(b.amount),
+      (a: any, b: any) => parseFloat(a.amount) - parseFloat(b.amount)
     );
     const Q1 = parseFloat(sortedMetrics[1].amount);
     const Q3 = parseFloat(sortedMetrics[2].amount);
@@ -802,7 +806,7 @@ const FlightPriceInfo = (props: FlightPriceInfoProps) => {
               variant={"outline"}
               className={cn(
                 "w-full text-foreground justify-start font-normal",
-                !date && "text-muted-foreground",
+                !date && "text-muted-foreground"
               )}
             >
               <svg

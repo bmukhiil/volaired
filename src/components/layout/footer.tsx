@@ -41,12 +41,12 @@ export default function Footer() {
         {
           name: "Blog",
           href: "#hero",
-          title: "Read our Blog"
+          title: "Read our Blog",
         },
         {
           name: "Privacy Policy",
           href: "#hero",
-          title: "Read our Privacy Policy"
+          title: "Read our Privacy Policy",
         },
       ],
     },
@@ -56,7 +56,7 @@ export default function Footer() {
         {
           name: "Help & Support",
           href: "#hero",
-          title: "Get Help & Support"
+          title: "Get Help & Support",
         },
       ],
     },
@@ -93,7 +93,7 @@ export default function Footer() {
           next: {
             revalidate: 43200,
           },
-        },
+        }
       );
       const data = await response.json();
 
@@ -115,7 +115,7 @@ export default function Footer() {
             arcAlt: 0.1,
             color: colors[Math.floor(Math.random() * (colors.length - 1))],
           };
-        },
+        }
       );
 
       setArcs(newArcs);
@@ -167,19 +167,21 @@ export default function Footer() {
       </div>
       <div className="mt-8 flex gap-x-20">
         {footer.map((section) => (
-          <ul key={section.name} className="flex flex-col gap-y-2">
+          <div key={section.name} className="flex flex-col gap-y-2">
             <span className="font-medium tracking-tight">{section.name}</span>
-            <div className="mt-2 flex flex-col gap-y-2">
+            <ul className="mt-2 flex flex-col gap-y-2">
               {section.links.map((link) => (
                 <li
                   key={link.name}
                   className="hover:text-foreground text-muted-foreground text-sm"
                 >
-                  <Link href={link.href} title={link.title}>{link.name}</Link>
+                  <Link href={link.href} title={link.title}>
+                    {link.name}
+                  </Link>
                 </li>
               ))}
-            </div>
-          </ul>
+            </ul>
+          </div>
         ))}
       </div>
       <Separator className="my-4 flex shrink" />
