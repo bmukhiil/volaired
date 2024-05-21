@@ -414,7 +414,7 @@ const GroupTripSection = (props: GroupTripSectionProps) => {
                     "absolute right-[0.5px] top-[0.5px] transform translate-x-1/2 -translate-y-1/2",
                     {
                       hidden: tripJoinedTriggered,
-                    },
+                    }
                   )}
                 >
                   <div className="bg-indigo-400 w-2 h-2 rounded-full">
@@ -509,6 +509,7 @@ const FeaturesSection = () => {
               width={200}
               height={200}
               className="translate-y-24 dark:hidden"
+              quality={100}
             />
             <Image
               alt="Features"
@@ -516,6 +517,7 @@ const FeaturesSection = () => {
               width={200}
               height={200}
               className="translate-y-24 hidden dark:block"
+              quality={100}
             />
           </motion.div>
           <motion.div
@@ -528,6 +530,7 @@ const FeaturesSection = () => {
               className="w-[25dvh] h-auto drop-shadow-sm dark:hidden"
               width={400}
               height={400}
+              quality={100}
             />
             <Image
               alt="Features"
@@ -535,6 +538,7 @@ const FeaturesSection = () => {
               className="w-[25dvh] h-auto drop-shadow-sm hidden dark:block"
               width={400}
               height={400}
+              quality={100}
             />
           </motion.div>
         </div>
@@ -647,6 +651,7 @@ const FeaturesSection = () => {
                 className="w-[25dvh] h-auto drop-shadow-sm dark:hidden"
                 width={400}
                 height={400}
+                quality={100}
               />
               <Image
                 alt="Splitting bills iPhone"
@@ -654,6 +659,7 @@ const FeaturesSection = () => {
                 className="w-[25dvh] h-auto drop-shadow-sm hidden dark:flex"
                 width={400}
                 height={400}
+                quality={100}
               />
             </div>
             <div className="mt-2">
@@ -707,7 +713,7 @@ const FlightPriceInfo = (props: FlightPriceInfoProps) => {
 
     // Ensure metrics are sorted if not already (typically by quartileRanking)
     const sortedMetrics = metrics.sort(
-      (a: any, b: any) => parseFloat(a.amount) - parseFloat(b.amount),
+      (a: any, b: any) => parseFloat(a.amount) - parseFloat(b.amount)
     );
     const Q1 = parseFloat(sortedMetrics[1].amount);
     const Q3 = parseFloat(sortedMetrics[2].amount);
@@ -796,7 +802,7 @@ const FlightPriceInfo = (props: FlightPriceInfoProps) => {
               variant={"outline"}
               className={cn(
                 "w-full text-foreground justify-start font-normal",
-                !date && "text-muted-foreground",
+                !date && "text-muted-foreground"
               )}
             >
               <svg
