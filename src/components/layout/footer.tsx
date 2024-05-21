@@ -28,6 +28,7 @@ interface Arc {
 export default function Footer() {
   const [arcs, setArcs] = useState<Arc[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   const footer = [
     {
@@ -87,39 +88,53 @@ export default function Footer() {
 
   useEffect(() => {
     async function fetchArcs() {
-      const response = await fetch(
-        `/api/v1/flights/paths/yesterday?limit=400`,
-        {
-          next: {
-            revalidate: 43200,
-          },
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 15000);
+
+      try {
+        const response = await fetch(
+          `/api/v1/flights/paths/yesterday?limit=10`,
+          {
+            signal: controller.signal,
+            next: {
+              revalidate: 43200,
+            },
+          }
+        );
+        clearTimeout(timeoutId);
+        const data = await response.json();
+        const newArcs = data.data.map(
+          (flight: EnrichedFlightDetails, index: number) => {
+            const [startLat, startLng] = flight.depAirport.coordinates
+              .replace(/\s/g, "")
+              .split(",");
+            const [endLat, endLng] = flight.arrAirport.coordinates
+              .replace(/\s/g, "")
+              .split(",");
+
+            return {
+              order: index,
+              startLat: parseFloat(startLat),
+              startLng: parseFloat(startLng),
+              endLat: parseFloat(endLat),
+              endLng: parseFloat(endLng),
+              arcAlt: 0.1,
+              color: colors[Math.floor(Math.random() * (colors.length - 1))],
+            };
+          }
+        );
+
+        setArcs(newArcs);
+        setLoading(false);
+      } catch (e: any) {
+        setLoading(false);
+        setError(true);
+        if (e.name === "AbortError") {
+          console.error("Request timed out");
+        } else {
+          console.error("Error fetching arcs:", e.message);
         }
-      );
-      const data = await response.json();
-
-      const newArcs = data.data.map(
-        (flight: EnrichedFlightDetails, index: number) => {
-          const [startLat, startLng] = flight.depAirport.coordinates
-            .replace(/\s/g, "")
-            .split(",");
-          const [endLat, endLng] = flight.arrAirport.coordinates
-            .replace(/\s/g, "")
-            .split(",");
-
-          return {
-            order: index,
-            startLat: parseFloat(startLat),
-            startLng: parseFloat(startLng),
-            endLat: parseFloat(endLat),
-            endLng: parseFloat(endLng),
-            arcAlt: 0.1,
-            color: colors[Math.floor(Math.random() * (colors.length - 1))],
-          };
-        }
-      );
-
-      setArcs(newArcs);
-      setLoading(false);
+      }
     }
 
     fetchArcs();
@@ -139,12 +154,35 @@ export default function Footer() {
         </div>
         <CustomDashedCard className="my-8 flex items-center justify-center">
           {loading ? (
-            <div className="flex items-center justify-center">
-              <Loader2 className="text-indigo-500 animate-spin w-8 h-8" />
+            <div className="flex items-center justify-center flex-col">
+              {/* <Loader2 className="text-indigo-500 animate-spin w-8 h-8" /> */}
+              <motion.div
+                className="bg-primary w-24 h-24"
+                animate={{
+                  scale: [0.9, 1.1, 1.1, 0.9, 0.9],
+                  rotate: [0, 0, 180, 180, 0],
+                  borderRadius: ["0%", "0%", "50%", "50%", "0%"],
+                }}
+                transition={{
+                  duration: 1.8,
+                  ease: "easeInOut",
+                  times: [0, 0.2, 0.5, 0.8, 1],
+                  repeat: Infinity,
+                  repeatDelay: 1.2,
+                }}
+              />
+              <span className="mt-4 font-medium tracking-tight">
+                Loading...
+              </span>
             </div>
           ) : (
-            <div className="flex items-center justify-center">
+            <div className="flex flex-col gap-y-2 items-center justify-center">
               <World data={arcs} globeConfig={globeConfig} />
+              {error && (
+                <span className="text-rose-500 font-medium">
+                  Error fetching flight paths
+                </span>
+              )}
             </div>
           )}
         </CustomDashedCard>

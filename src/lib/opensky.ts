@@ -14,7 +14,7 @@ import {
  * @returns {Promise<EnrichedFlightDetails[]>} - An array of flight details with enriched airport information.
  */
 export async function fetchPrevFlights(
-  limit: number,
+  limit: number
 ): Promise<EnrichedFlightDetails[]> {
   // yesterday at same time in epoch in seconds
   const yesterday = Math.floor(Date.now() / 1000) - 86400;
@@ -22,6 +22,7 @@ export async function fetchPrevFlights(
   // yesterday at same time but 2 hour later in epoch in seconds
   const yesterday2HoursLater = yesterday + 7200;
 
+  console.log("requesting");
   const response = await fetch(
     `https://opensky-network.org/api/flights/all?begin=${yesterday}&end=${yesterday2HoursLater}`,
     {
@@ -30,8 +31,9 @@ export async function fetchPrevFlights(
         "Content-Type": "application/json",
         Authorization: `Basic ${btoa(process.env.OPENSKY_USERNAME + ":" + process.env.OPENSKY_PASSWORD)}`,
       },
-    },
+    }
   ).then((res) => res.json());
+  console.log(response);
 
   const airports: Record<string, StaticAirport> = Array.isArray(airportsData)
     ? airportsData.reduce((acc, airport) => {
@@ -45,7 +47,7 @@ export async function fetchPrevFlights(
       flight.estDepartureAirport &&
       flight.estArrivalAirport &&
       airports[flight.estDepartureAirport] &&
-      airports[flight.estArrivalAirport],
+      airports[flight.estArrivalAirport]
   );
 
   // Applying the limit if specified
@@ -53,6 +55,7 @@ export async function fetchPrevFlights(
     filteredResponse = filteredResponse.slice(0, limit);
   }
 
+  console.log(filteredResponse);
   // Mapping flights to detailed structured data
   const flightPathData: EnrichedFlightDetails[] = filteredResponse.map(
     (flight: OpenSkyAPIFlight) => ({
@@ -61,8 +64,10 @@ export async function fetchPrevFlights(
       arrAirport: airports[flight.estArrivalAirport],
       depTime: flight.firstSeen,
       arrTime: flight.lastSeen,
-    }),
+    })
   );
+
+  console.log(flightPathData);
 
   return flightPathData;
 }

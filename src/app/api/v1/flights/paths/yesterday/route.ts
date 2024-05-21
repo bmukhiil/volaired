@@ -18,7 +18,7 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
   if (!limit || isNaN(parseInt(limit, 10))) {
     return NextResponse.json(
       { message: "Missing or invalid 'limit' parameter" },
-      { status: 400 },
+      { status: 400 }
     );
   }
 

@@ -8,12 +8,11 @@ export async function GET(req: NextRequest) {
   if (!date) {
     return NextResponse.json(
       { error: "Missing date parameter" },
-      { status: 400 },
+      { status: 400 }
     );
   }
 
   const priceData = await fetchPriceAnalysis(date);
-  console.log(priceData);
 
   return NextResponse.json({ data: priceData });
 }
