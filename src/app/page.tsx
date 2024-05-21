@@ -114,13 +114,6 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       {isExploding && <ConfettiExplosionCanvas />}
-      <header>
-        <h1>Volaired - Optimize Your Flights and Plan Group Trips</h1>
-        <p>
-          Optimize your flights for cost and layovers with ease. Plan group
-          trips and split bills seamlessly with Volaired.
-        </p>
-      </header>
       <HeroSection
         loading={loading}
         success={success}
