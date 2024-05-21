@@ -13,6 +13,7 @@ import {
 } from "@/components/pages/home";
 
 import { atom } from "jotai";
+import { Separator } from "@/components/ui/separator";
 
 export default function Home() {
   const [date, setDate] = React.useState<Date | undefined>(new Date());
@@ -101,7 +102,8 @@ export default function Home() {
         onChange={handleInputChange}
         error={error}
       />
-      <div className="lg:px-40 py-28 md:py-24 lg:py-36 flex flex-col gap-y-6">
+      <div className="py-28 md:py-24 lg:py-36 drop-shadow-sm"></div>
+      <div className="lg:px-40 flex flex-col gap-y-6">
         <GroupTripSection
           tripDeclined={tripDeclined}
           tripJoined={tripJoined}
@@ -111,18 +113,18 @@ export default function Home() {
           tripJoinedTriggered={tripJoinedTriggered}
         />
       </div>
-      <div className="lg:px-40 pb-28 md:pb-24 lg:pb-36 flex flex-col gap-y-6">
+      <div className="lg:px-40 py-28 md:py-24 lg:py-36 flex flex-col gap-y-6">
         <FeaturesSection />
       </div>
-      <div className="lg:px-40 pb-28 md:pb-24 lg:pb-36 flex flex-col gap-y-6 lg:flex-row lg:items-center lg:gap-x-4">
-        {/* <FlightPriceInfo
+      {/* <div className="lg:px-40 pb-28 md:pb-24 lg:pb-36 flex flex-col gap-y-6 lg:flex-row lg:items-center lg:gap-x-4"> */}
+      {/* <FlightPriceInfo
           date={date}
           setDate={setDate}
           handleSubmit={handlePriceData}
           loading={priceDataLoading}
           data={priceData}
         /> */}
-      </div>
+      {/* </div> */}
       <div className="lg:px-40 pb-28 md:pb-24 lg:pb-36 flex flex-col gap-y-6">
         <MeetCopilot />
       </div>

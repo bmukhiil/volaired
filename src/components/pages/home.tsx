@@ -272,9 +272,12 @@ const GroupTripSection = (props: GroupTripSectionProps) => {
     });
 
   return (
-    <div className="flex flex-col justify-center items-center lg:flex-row lg:gap-x-4">
+    <div className="flex flex-col justify-center lg:flex-row lg:gap-x-4">
       <div className="flex flex-col lg:gap-y-16">
         <div className="flex flex-col gap-y-2">
+          <span className="text-primary text-sm font-semibold">
+            Trip Planning
+          </span>
           <h2 className="text-3xl lg:text-4xl font-bold tracking-tight">
             Planning a trip with friends?
           </h2>
@@ -285,7 +288,7 @@ const GroupTripSection = (props: GroupTripSectionProps) => {
           </h3>
         </div>
       </div>
-      <div className="lg:w-1/2 mt-6">
+      <div className="lg:w-1/2 mt-6 lg:mt-0">
         <CustomDashedCard className="flex justify-center items-center">
           <div>
             <div className="flex justify-between items-center">
@@ -482,6 +485,9 @@ const FeaturesSection = () => {
       >
         <div className="flex flex-col lg:w-1/2">
           <div className="flex flex-col gap-y-2">
+            <span className="text-primary text-sm font-semibold">
+              Comprehensive Trip Planning
+            </span>
             <h2 className="text-3xl font-bold tracking-tight">
               Everything you need for your next trip.
             </h2>
@@ -502,7 +508,14 @@ const FeaturesSection = () => {
               src="/collab_iphone.svg"
               width={200}
               height={200}
-              className="translate-y-24"
+              className="translate-y-24 dark:hidden"
+            />
+            <Image
+              alt="Features"
+              src="/collab_iphone_dark.svg"
+              width={200}
+              height={200}
+              className="translate-y-24 hidden dark:block"
             />
           </motion.div>
           <motion.div
@@ -512,7 +525,14 @@ const FeaturesSection = () => {
             <Image
               alt="Features"
               src="/split_bills_iphone.svg"
-              className="w-[25dvh] h-auto drop-shadow-sm"
+              className="w-[25dvh] h-auto drop-shadow-sm dark:hidden"
+              width={400}
+              height={400}
+            />
+            <Image
+              alt="Features"
+              src="/split_bills_iphone_dark.svg"
+              className="w-[25dvh] h-auto drop-shadow-sm hidden dark:block"
               width={400}
               height={400}
             />
@@ -624,7 +644,14 @@ const FeaturesSection = () => {
               <Image
                 alt="Splitting bills iPhone"
                 src="/split_bills_iphone.svg"
-                className="w-[25dvh] h-auto drop-shadow-sm"
+                className="w-[25dvh] h-auto drop-shadow-sm dark:hidden"
+                width={400}
+                height={400}
+              />
+              <Image
+                alt="Splitting bills iPhone"
+                src="/split_bills_iphone_dark.svg"
+                className="w-[25dvh] h-auto drop-shadow-sm hidden dark:flex"
                 width={400}
                 height={400}
               />
@@ -645,7 +672,14 @@ const FeaturesSection = () => {
                 src="/collab_iphone.svg"
                 width={400}
                 height={400}
-                className="w-[25dvh] h-auto drop-shadow-sm"
+                className="w-[25dvh] h-auto drop-shadow-sm dark:hidden"
+              />
+              <Image
+                alt=""
+                src="/collab_iphone_dark.svg"
+                width={400}
+                height={400}
+                className="w-[25dvh] h-auto drop-shadow-sm hidden dark:flex"
               />
             </div>
             <div className="mt-2">
@@ -898,6 +932,9 @@ const MeetCopilot = () => {
       <div className="lg:flex">
         <div className="flex flex-col lg:justify-between">
           <div className="flex flex-col gap-y-2">
+            <span className="text-primary text-sm font-semibold">
+              Your AI Assistant
+            </span>
             <h2 className="text-3xl font-bold tracking-tight">Meet Copilot.</h2>
             <p className="text-muted-foreground">
               Your personal travel assistant that helps you plan, book, and
@@ -931,7 +968,7 @@ const MeetCopilot = () => {
             </div>
           </CustomDashedCard>
         </div>
-        <div className="mt-8">
+        <div className="mt-8 lg:mt-0">
           <CustomDashedCard className="flex flex-col lg:justify-between lg:hidden">
             <div className=" flex-col w-full bg-background rounded-lg  dark:bg-grid-zinc-500/[0.2] bg-grid-zinc-400/[0.2] relative flex items-center justify-center">
               {/* Radial gradient for the container to give a faded look */}
