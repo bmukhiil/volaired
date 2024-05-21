@@ -11,6 +11,10 @@ import { Button } from "@/components/ui/button";
 import { Loader2, Scroll } from "lucide-react";
 import ConfettiExplosion from "react-confetti-explosion";
 import { ScrollBar, ScrollArea } from "@/components/ui/scroll-area";
+import collab_iphone_light from "../../../public/collab_iphone_light.webp";
+import collab_iphone_dark from "../../../public/collab_iphone_dark.webp";
+import split_bills_iphone_light from "../../../public/split_bills_iphone_light.webp";
+import split_bills_iphone_dark from "../../../public/split_bills_iphone_dark.webp";
 
 import { cn } from "@/lib/utils";
 import { Switch } from "@/components/ui/switch";
@@ -509,19 +513,13 @@ const FeaturesSection = () => {
           >
             <Image
               alt="Trip Collaboration iPhone"
-              src="/collab_iphone_light.webp"
-              width={200}
-              height={200}
-              className="translate-y-24 dark:hidden"
-              quality={100}
+              src={collab_iphone_light}
+              className="w-[25dvh] translate-y-24 dark:hidden"
             />
             <Image
               alt="Trip Collaboration iPhone"
-              src="/collab_iphone_dark.webp"
-              width={200}
-              height={200}
-              className="translate-y-24 hidden dark:block"
-              quality={100}
+              src={collab_iphone_dark}
+              className="w-[25dvh] translate-y-24 hidden dark:block"
             />
           </motion.div>
           <motion.div
@@ -530,19 +528,15 @@ const FeaturesSection = () => {
           >
             <Image
               alt="Splitting bills iPhone"
-              src="/split_bills_iphone_light.webp"
+              src={split_bills_iphone_light}
               className="w-[25dvh] h-auto drop-shadow-sm dark:hidden"
               width={400}
-              height={400}
-              quality={100}
             />
             <Image
               alt="Splitting bills iPhone"
-              src="/split_bills_iphone_dark.webp"
+              src={split_bills_iphone_dark}
               className="w-[25dvh] h-auto drop-shadow-sm hidden dark:block"
               width={400}
-              height={400}
-              quality={100}
             />
           </motion.div>
         </div>
@@ -651,19 +645,13 @@ const FeaturesSection = () => {
             <div className="flex justify-center">
               <Image
                 alt="Splitting bills iPhone"
-                src="/split_bills_iphone_light.webp"
+                src={split_bills_iphone_light}
                 className="w-[25dvh] h-auto drop-shadow-sm dark:hidden"
-                width={400}
-                height={400}
-                quality={100}
               />
               <Image
                 alt="Splitting bills iPhone"
-                src="/split_bills_iphone_dark.webp"
+                src={split_bills_iphone_dark}
                 className="w-[25dvh] h-auto drop-shadow-sm hidden dark:flex"
-                width={400}
-                height={400}
-                quality={100}
               />
             </div>
             <div className="mt-2">
@@ -679,16 +667,12 @@ const FeaturesSection = () => {
             <div className="flex justify-center">
               <Image
                 alt="Trip Collaboration iPhone"
-                src="/collab_iphone_light.webp"
-                width={400}
-                height={400}
+                src={collab_iphone_light}
                 className="w-[25dvh] h-auto drop-shadow-sm dark:hidden"
               />
               <Image
                 alt="Trip Collaboration iPhone"
-                src="/collab_iphone_dark.webp"
-                width={400}
-                height={400}
+                src={collab_iphone_dark}
                 className="w-[25dvh] h-auto drop-shadow-sm hidden dark:flex"
               />
             </div>
