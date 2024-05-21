@@ -133,7 +133,7 @@ export default function Home() {
           tripJoinedTriggered={tripJoinedTriggered}
         />
       </div>
-      <div className="lg:px-40 py-28 md:py-24 lg:py-36 flex flex-col gap-y-6">
+      <div className="lg:px-40 py-28 md:py-24 lg:pt-36 lg:pb-56 flex flex-col gap-y-6">
         <FeaturesSection />
       </div>
       {/* <div className="lg:px-40 pb-28 md:pb-24 lg:pb-36 flex flex-col gap-y-6 lg:flex-row lg:items-center lg:gap-x-4"> */}
