@@ -3,6 +3,15 @@
 import { Loader2 } from "lucide-react";
 import { motion } from "framer-motion";
 
+export const metadata = {
+  title: "Loading - Volaired",
+  description: "Please wait while we load your content on Volaired.",
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
+
 export default function Loading() {
   return (
     <div className="w-screen h-[95vh] flex flex-col gap-y-6 justify-center items-center overflow-hidden z-50">

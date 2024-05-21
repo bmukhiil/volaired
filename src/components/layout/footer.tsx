@@ -36,14 +36,17 @@ export default function Footer() {
         // {
         //   name: "Terms of Service",
         //   href: "/terms",
+        //   title: "Read our Terms of Service"
         // },
         {
           name: "Blog",
           href: "#hero",
+          title: "Read our Blog"
         },
         {
           name: "Privacy Policy",
           href: "#hero",
+          title: "Read our Privacy Policy"
         },
       ],
     },
@@ -53,6 +56,7 @@ export default function Footer() {
         {
           name: "Help & Support",
           href: "#hero",
+          title: "Get Help & Support"
         },
       ],
     },
@@ -171,7 +175,7 @@ export default function Footer() {
                   key={link.name}
                   className="hover:text-foreground text-muted-foreground text-sm"
                 >
-                  <Link href={link.href}>{link.name}</Link>
+                  <Link href={link.href} title={link.title}>{link.name}</Link>
                 </li>
               ))}
             </div>

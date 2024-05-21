@@ -414,7 +414,7 @@ const GroupTripSection = (props: GroupTripSectionProps) => {
                     "absolute right-[0.5px] top-[0.5px] transform translate-x-1/2 -translate-y-1/2",
                     {
                       hidden: tripJoinedTriggered,
-                    }
+                    },
                   )}
                 >
                   <div className="bg-indigo-400 w-2 h-2 rounded-full">
@@ -504,7 +504,7 @@ const FeaturesSection = () => {
             style={{ translateY: transformY1 }}
           >
             <Image
-              alt="Features"
+              alt="Trip Collaboration iPhone"
               src="/collab_iphone_light.webp"
               width={200}
               height={200}
@@ -512,7 +512,7 @@ const FeaturesSection = () => {
               quality={100}
             />
             <Image
-              alt="Features"
+              alt="Trip Collaboration iPhone"
               src="/collab_iphone_dark.webp"
               width={200}
               height={200}
@@ -525,7 +525,7 @@ const FeaturesSection = () => {
             style={{ translateY: transformY2 }}
           >
             <Image
-              alt="Features"
+              alt="Splitting bills iPhone"
               src="/split_bills_iphone_light.webp"
               className="w-[25dvh] h-auto drop-shadow-sm dark:hidden"
               width={400}
@@ -533,7 +533,7 @@ const FeaturesSection = () => {
               quality={100}
             />
             <Image
-              alt="Features"
+              alt="Splitting bills iPhone"
               src="/split_bills_iphone_dark.webp"
               className="w-[25dvh] h-auto drop-shadow-sm hidden dark:block"
               width={400}
@@ -674,14 +674,14 @@ const FeaturesSection = () => {
           <div className="flex flex-col justify-center gap-y-4">
             <div className="flex justify-center">
               <Image
-                alt=""
+                alt="Trip Collaboration iPhone"
                 src="/collab_iphone_light.webp"
                 width={400}
                 height={400}
                 className="w-[25dvh] h-auto drop-shadow-sm dark:hidden"
               />
               <Image
-                alt=""
+                alt="Trip Collaboration iPhone"
                 src="/collab_iphone_dark.webp"
                 width={400}
                 height={400}
@@ -713,7 +713,7 @@ const FlightPriceInfo = (props: FlightPriceInfoProps) => {
 
     // Ensure metrics are sorted if not already (typically by quartileRanking)
     const sortedMetrics = metrics.sort(
-      (a: any, b: any) => parseFloat(a.amount) - parseFloat(b.amount)
+      (a: any, b: any) => parseFloat(a.amount) - parseFloat(b.amount),
     );
     const Q1 = parseFloat(sortedMetrics[1].amount);
     const Q3 = parseFloat(sortedMetrics[2].amount);
@@ -802,7 +802,7 @@ const FlightPriceInfo = (props: FlightPriceInfoProps) => {
               variant={"outline"}
               className={cn(
                 "w-full text-foreground justify-start font-normal",
-                !date && "text-muted-foreground"
+                !date && "text-muted-foreground",
               )}
             >
               <svg

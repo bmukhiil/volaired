@@ -11,9 +11,24 @@ import {
   MeetCopilot,
   FeaturesSection,
 } from "@/components/pages/home";
+import Script from "next/script";
 
-import { atom } from "jotai";
-import { Separator } from "@/components/ui/separator";
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  url: "https://volaired.com",
+  name: "Volaired",
+  description:
+    "Optimize your flights for cost and layovers with ease. Plan group trips and split bills seamlessly with Volaired.",
+  // "publisher": {
+  //   "@type": "Organization",
+  //   "name": "Volaired",
+  //   "logo": {
+  //     "@type": "ImageObject",
+  //     "url": "https://volaired.com/images/logo.png",
+  //   },
+  // },
+};
 
 export default function Home() {
   const [date, setDate] = React.useState<Date | undefined>(new Date());
@@ -93,7 +108,18 @@ export default function Home() {
       className="px-6 overflow-x-hidden pt-14 md:pt-20 lg:-mx-6 lg:pt-32"
       id="hero"
     >
+      <Script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {isExploding && <ConfettiExplosionCanvas />}
+      <header>
+        <h1>Volaired - Optimize Your Flights and Plan Group Trips</h1>
+        <p>
+          Optimize your flights for cost and layovers with ease. Plan group
+          trips and split bills seamlessly with Volaired.
+        </p>
+      </header>
       <HeroSection
         loading={loading}
         success={success}
