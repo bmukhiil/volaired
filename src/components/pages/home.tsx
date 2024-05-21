@@ -505,7 +505,7 @@ const FeaturesSection = () => {
           >
             <Image
               alt="Features"
-              src="/collab_iphone.svg"
+              src="/collab_iphone_light.webp"
               width={200}
               height={200}
               className="translate-y-24 dark:hidden"
@@ -513,7 +513,7 @@ const FeaturesSection = () => {
             />
             <Image
               alt="Features"
-              src="/collab_iphone_dark.svg"
+              src="/collab_iphone_dark.webp"
               width={200}
               height={200}
               className="translate-y-24 hidden dark:block"
@@ -526,7 +526,7 @@ const FeaturesSection = () => {
           >
             <Image
               alt="Features"
-              src="/split_bills_iphone.svg"
+              src="/split_bills_iphone_light.webp"
               className="w-[25dvh] h-auto drop-shadow-sm dark:hidden"
               width={400}
               height={400}
@@ -534,7 +534,7 @@ const FeaturesSection = () => {
             />
             <Image
               alt="Features"
-              src="/split_bills_iphone_dark.svg"
+              src="/split_bills_iphone_dark.webp"
               className="w-[25dvh] h-auto drop-shadow-sm hidden dark:block"
               width={400}
               height={400}
@@ -647,7 +647,7 @@ const FeaturesSection = () => {
             <div className="flex justify-center">
               <Image
                 alt="Splitting bills iPhone"
-                src="/split_bills_iphone.svg"
+                src="/split_bills_iphone_light.webp"
                 className="w-[25dvh] h-auto drop-shadow-sm dark:hidden"
                 width={400}
                 height={400}
@@ -655,7 +655,7 @@ const FeaturesSection = () => {
               />
               <Image
                 alt="Splitting bills iPhone"
-                src="/split_bills_iphone_dark.svg"
+                src="/split_bills_iphone_dark.webp"
                 className="w-[25dvh] h-auto drop-shadow-sm hidden dark:flex"
                 width={400}
                 height={400}
@@ -675,14 +675,14 @@ const FeaturesSection = () => {
             <div className="flex justify-center">
               <Image
                 alt=""
-                src="/collab_iphone.svg"
+                src="/collab_iphone_light.webp"
                 width={400}
                 height={400}
                 className="w-[25dvh] h-auto drop-shadow-sm dark:hidden"
               />
               <Image
                 alt=""
-                src="/collab_iphone_dark.svg"
+                src="/collab_iphone_dark.webp"
                 width={400}
                 height={400}
                 className="w-[25dvh] h-auto drop-shadow-sm hidden dark:flex"
