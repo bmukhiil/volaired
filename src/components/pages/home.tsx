@@ -82,7 +82,7 @@ interface MetricsResult {
 
 const HeroSection = (props: HeroSectionProps) => {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col w-[99dvh]">
       <h1 className="text-4xl lg:text-6xl lg:text-center font-bold tracking-tight">
         Unlock your next adventure.
       </h1>
@@ -983,7 +983,7 @@ const MeetCopilot = () => {
             </div>
           </CustomDashedCard>
         </div>
-        <div className="mt-8 lg:mt-0 flex flex-col gap-y-4">
+        <div className="mx-4 mt-8 lg:mt-0 flex flex-col gap-y-4">
           <CustomDashedCard className="flex flex-col lg:hidden">
             <div className=" flex-col w-full bg-background rounded-lg  dark:bg-grid-zinc-500/[0.2] bg-grid-zinc-400/[0.2] relative flex items-center justify-center">
               {/* Radial gradient for the container to give a faded look */}
