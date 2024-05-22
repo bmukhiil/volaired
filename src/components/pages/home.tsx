@@ -541,7 +541,7 @@ const GroupTripSection = (props: GroupTripSectionProps) => {
                     "absolute right-[0.5px] top-[0.5px] transform translate-x-1/2 -translate-y-1/2",
                     {
                       hidden: tripJoinedTriggered,
-                    },
+                    }
                   )}
                 >
                   <div className="bg-indigo-400 w-2 h-2 rounded-full">
@@ -722,7 +722,7 @@ const FlightPriceInfo = (props: FlightPriceInfoProps) => {
 
     // Ensure metrics are sorted if not already (typically by quartileRanking)
     const sortedMetrics = metrics.sort(
-      (a: any, b: any) => parseFloat(a.amount) - parseFloat(b.amount),
+      (a: any, b: any) => parseFloat(a.amount) - parseFloat(b.amount)
     );
     const Q1 = parseFloat(sortedMetrics[1].amount);
     const Q3 = parseFloat(sortedMetrics[2].amount);
@@ -811,7 +811,7 @@ const FlightPriceInfo = (props: FlightPriceInfoProps) => {
               variant={"outline"}
               className={cn(
                 "w-full text-foreground justify-start font-normal",
-                !date && "text-muted-foreground",
+                !date && "text-muted-foreground"
               )}
             >
               <svg
@@ -950,7 +950,9 @@ const MeetCopilot = () => {
             <span className="text-primary text-sm font-semibold">
               Your AI Assistant
             </span>
-            <h2 className="text-3xl font-bold tracking-tight">Meet Copilot.</h2>
+            <h2 className="text-3xl lg:text-4xl font-bold tracking-tight">
+              Meet Copilot.
+            </h2>
             <p className="text-muted-foreground">
               Your personal travel assistant that helps you plan, book, and
               manage your trips.
