@@ -23,7 +23,7 @@ export default function Navbar() {
 
   return (
     <header>
-      <nav className="px-6 py-3 lg:px-40 lg:py-4 border-b border-dashed flex items-center justify-between">
+      <nav className=" px-6 py-3 lg:px-40 lg:py-4 border-b border-dashed flex items-center justify-between bg-secondary">
         <Link
           href="/"
           className="font-semibold tracking-tight text-2xl"

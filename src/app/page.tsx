@@ -12,6 +12,7 @@ import {
   FeaturesSection,
 } from "@/components/pages/home";
 import Script from "next/script";
+import { Separator } from "@/components/ui/separator";
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -105,7 +106,8 @@ export default function Home() {
 
   return (
     <section
-      className="px-6 overflow-x-hidden pt-14 md:pt-20 lg:-mx-6 lg:pt-40"
+      // className="px-6 overflow-x-hidden pt-14 md:pt-20 lg:-mx-6 lg:pt-40"
+      className="px-6 overflow-x-hidden"
       id="hero"
     >
       <Script
@@ -114,7 +116,7 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       {isExploding && <ConfettiExplosionCanvas />}
-      <div className="flex justify-center items-center">
+      <div className="lg:rounded-b-[6dvh] rounded-b-[4dvh] shadow-sm flex justify-center items-center bg-secondary h-full -mx-6 px-6 py-20 md:pt-20 lg:py-40">
         <HeroSection
           loading={loading}
           success={success}
@@ -124,8 +126,8 @@ export default function Home() {
           error={error}
         />
       </div>
-      <div className="py-28 md:py-24 lg:py-36 drop-shadow-sm"></div>
-      <div className="lg:px-40 flex flex-col gap-y-6">
+      {/* <Separator className="w-screen -mx-6" /> */}
+      <div className="lg:-mx-6 lg:px-40 flex flex-col gap-y-6 py-20 md:py-24 lg:py-36">
         <GroupTripSection
           tripDeclined={tripDeclined}
           tripJoined={tripJoined}
@@ -135,9 +137,11 @@ export default function Home() {
           tripJoinedTriggered={tripJoinedTriggered}
         />
       </div>
-      <div className="lg:px-40 py-28 md:py-24 lg:pt-36 lg:pb-56 flex flex-col gap-y-6">
+      {/* <Separator /> */}
+      <div className="bg-secondary shadow-sm lg:rounded-[6dvh] rounded-[4dvh] px-6 -mx-6 lg:px-40 py-20 md:py-24 lg:pt-36 lg:pb-56 flex flex-col gap-y-6">
         <FeaturesSection />
       </div>
+      {/* <Separator /> */}
       {/* <div className="lg:px-40 pb-28 md:pb-24 lg:pb-36 flex flex-col gap-y-6 lg:flex-row lg:items-center lg:gap-x-4"> */}
       {/* <FlightPriceInfo
           date={date}
@@ -147,7 +151,7 @@ export default function Home() {
           data={priceData}
         /> */}
       {/* </div> */}
-      <div className="lg:px-40 pb-28 md:pb-24 lg:pb-36 flex flex-col gap-y-6">
+      <div className="shadow-sm lg:-mx-6 lg:px-40 py-20 md:pb-24 lg:pb-36 flex flex-col gap-y-6">
         <MeetCopilot />
       </div>
     </section>

@@ -82,8 +82,8 @@ interface MetricsResult {
 
 const HeroSection = (props: HeroSectionProps) => {
   return (
-    <div className="flex flex-col w-[95dvh]">
-      <h1 className="text-4xl lg:text-5xl lg:text-center font-bold tracking-tight">
+    <div className="flex flex-col">
+      <h1 className="text-4xl lg:text-6xl lg:text-center font-bold tracking-tight">
         Unlock your next adventure.
       </h1>
       <p className="text-lg lg:text-center text-muted-foreground mt-4 lg:mt-5 lg:px-24">
@@ -276,8 +276,8 @@ const GroupTripSection = (props: GroupTripSectionProps) => {
     });
 
   return (
-    <div className="flex flex-col justify-center lg:flex-row lg:gap-x-4">
-      <div className="flex flex-col lg:gap-y-16">
+    <div className="flex flex-col lg:flex-row justify-between">
+      <div className="flex flex-col lg:gap-y-16 lg:w-1/2">
         <div className="flex flex-col gap-y-2">
           <span className="text-primary text-sm font-semibold">
             Collaborative Trip Planning
@@ -291,9 +291,128 @@ const GroupTripSection = (props: GroupTripSectionProps) => {
             success.
           </h3>
         </div>
+        <div className="shrink drop-shadow-sm lg:flex hidden">
+          <CustomDashedCard className="bg-background p-4 rounded-lg flex flex-col gap-y-6">
+            <div className="flex items-center justify-between">
+              <h4 className="text-sm font-medium text-muted-foreground">
+                Groups
+              </h4>
+              <div>
+                <Button variant="outline" size="icon" className="lg:hidden">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    className="w-4 h-4 text-muted-foreground"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                    />
+                  </svg>
+                </Button>
+                <Button variant="outline" className="hidden lg:flex gap-x-2">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    className="w-4 h-4 text-muted-foreground"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                    />
+                  </svg>
+                  <span>Create new group</span>
+                </Button>
+              </div>
+            </div>
+            <ScrollArea className="w-full">
+              <div className="flex gap-x-4">
+                <div className="drop-shadow-sm w-[25dvh] bg-secondary p-5 rounded-xl flex flex-col gap-y-2">
+                  <h5 className="font-medium">🏡 Family</h5>
+                  <Separator />
+                  <div className="flex items-center gap-x-1">
+                    <Avatar className="w-8 h-8">
+                      <AvatarImage src="" />
+                      <AvatarFallback>HP</AvatarFallback>
+                    </Avatar>
+                    <Avatar className="w-8 h-8">
+                      <AvatarImage src="" />
+                      <AvatarFallback>MP</AvatarFallback>
+                    </Avatar>
+                    <Avatar className="w-8 h-8">
+                      <AvatarImage src="" />
+                      <AvatarFallback>AP</AvatarFallback>
+                    </Avatar>
+                    <Avatar className="w-8 h-8">
+                      <AvatarImage src="" />
+                      <AvatarFallback>SP</AvatarFallback>
+                    </Avatar>
+                  </div>
+                  <div>
+                    <Button className="w-full mt-2 border border-indigo-400 shadow-inner flex gap-x-1">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                        className="w-5 h-5"
+                      >
+                        <path d="M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z" />
+                      </svg>
+                      Add a member
+                    </Button>
+                  </div>
+                </div>
+                <div className="drop-shadow-sm w-[25dvh] bg-secondary p-5 rounded-xl flex flex-col gap-y-2">
+                  <h5 className="font-medium">👯 Friends</h5>
+                  <Separator />
+                  <div className="flex items-center gap-x-1">
+                    <Avatar className="w-8 h-8">
+                      <AvatarImage src="" />
+                      <AvatarFallback>AL</AvatarFallback>
+                    </Avatar>
+                    <Avatar className="w-8 h-8">
+                      <AvatarImage src="" />
+                      <AvatarFallback>HP</AvatarFallback>
+                    </Avatar>
+                    <Avatar className="w-8 h-8">
+                      <AvatarImage src="" />
+                      <AvatarFallback>MB</AvatarFallback>
+                    </Avatar>
+                    <Avatar className="w-8 h-8">
+                      <AvatarImage src="" />
+                      <AvatarFallback>SM</AvatarFallback>
+                    </Avatar>
+                  </div>
+                  <div>
+                    <Button className="mt-2 border border-indigo-400 shadow-inner flex gap-x-1">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                        className="w-5 h-5"
+                      >
+                        <path d="M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z" />
+                      </svg>
+                      Add a member
+                    </Button>
+                  </div>
+                </div>
+              </div>
+              <ScrollBar orientation="horizontal" />
+            </ScrollArea>
+          </CustomDashedCard>
+        </div>
       </div>
-      <div className="lg:w-1/2 mt-6 lg:mt-0">
-        <CustomDashedCard className="mx-4 my-2 flex justify-center items-center">
+      <div className="flex lg:w-[45dvh] mt-6 lg:mt-0">
+        <CustomDashedCard className="mx-4 lg:ml-4 lg:mr-0 my-2 flex justify-center items-center">
           <div>
             <div className="flex justify-between items-center">
               <h4 className="font-semibold text-xl tracking-tight text-foreground">
@@ -496,7 +615,7 @@ const FeaturesSection = () => {
             <span className="text-primary text-sm font-semibold">
               Comprehensive Tools
             </span>
-            <h2 className="text-3xl font-bold tracking-tight">
+            <h2 className="text-3xl lg:text-4xl font-bold tracking-tight">
               Everything you need for your next trip.
             </h2>
             <h3 className="text-muted-foreground">
@@ -544,104 +663,6 @@ const FeaturesSection = () => {
       <div className="flex flex-col lg:hidden gap-y-4">
         <CustomDashedCard className="mx-4 mt-2">
           <div className="flex flex-col justify-center gap-y-4">
-            {/* <div className="bg-background p-4 rounded-lg  flex flex-col gap-y-2">
-              <div className="flex items-center justify-between">
-                <h4 className="text-sm font-medium text-muted-foreground">
-                  Groups
-                </h4>
-                <Button variant="outline" size="icon">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
-                    className="w-4 h-4 text-muted-foreground"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-                    />
-                  </svg>
-                </Button>
-              </div>
-              <ScrollArea className="w-full">
-                <div className="flex gap-x-4">
-                  <div className="drop-shadow-sm w-[25dvh] bg-secondary p-5 rounded-xl flex flex-col gap-y-2">
-                    <h5 className="font-medium">🏡 Family</h5>
-                    <Separator />
-                    <div className="flex items-center gap-x-1">
-                      <Avatar className="w-8 h-8">
-                        <AvatarImage src="" />
-                        <AvatarFallback>HP</AvatarFallback>
-                      </Avatar>
-                      <Avatar className="w-8 h-8">
-                        <AvatarImage src="" />
-                        <AvatarFallback>MP</AvatarFallback>
-                      </Avatar>
-                      <Avatar className="w-8 h-8">
-                        <AvatarImage src="" />
-                        <AvatarFallback>AP</AvatarFallback>
-                      </Avatar>
-                      <Avatar className="w-8 h-8">
-                        <AvatarImage src="" />
-                        <AvatarFallback>SP</AvatarFallback>
-                      </Avatar>
-                    </div>
-                    <div>
-                      <Button className="w-full mt-2 border border-indigo-400 shadow-inner flex gap-x-1">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 20 20"
-                          fill="currentColor"
-                          className="w-5 h-5"
-                        >
-                          <path d="M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z" />
-                        </svg>
-                        Add a member
-                      </Button>
-                    </div>
-                  </div>
-                  <div className="drop-shadow-sm w-[25dvh] bg-secondary p-5 rounded-xl flex flex-col gap-y-2">
-                    <h5 className="font-medium">👯 Friends</h5>
-                    <Separator />
-                    <div className="flex items-center gap-x-1">
-                      <Avatar className="w-8 h-8">
-                        <AvatarImage src="" />
-                        <AvatarFallback>AL</AvatarFallback>
-                      </Avatar>
-                      <Avatar className="w-8 h-8">
-                        <AvatarImage src="" />
-                        <AvatarFallback>HP</AvatarFallback>
-                      </Avatar>
-                      <Avatar className="w-8 h-8">
-                        <AvatarImage src="" />
-                        <AvatarFallback>MB</AvatarFallback>
-                      </Avatar>
-                      <Avatar className="w-8 h-8">
-                        <AvatarImage src="" />
-                        <AvatarFallback>SM</AvatarFallback>
-                      </Avatar>
-                    </div>
-                    <div>
-                      <Button className="mt-2 border border-indigo-400 shadow-inner flex gap-x-1">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 20 20"
-                          fill="currentColor"
-                          className="w-5 h-5"
-                        >
-                          <path d="M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z" />
-                        </svg>
-                        Add a member
-                      </Button>
-                    </div>
-                  </div>
-                </div>
-                <ScrollBar orientation="horizontal" />
-              </ScrollArea>
-            </div> */}
             <div className="flex justify-center">
               <Image
                 alt="Splitting bills iPhone"
