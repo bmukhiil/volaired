@@ -554,7 +554,7 @@ const GroupTripSection = (props: GroupTripSectionProps) => {
                       "absolute right-[0.5px] top-[0.5px] transform translate-x-1/2 -translate-y-1/2",
                       {
                         hidden: tripJoinedTriggered,
-                      },
+                      }
                     )}
                   >
                     <div className="bg-indigo-400 w-2 h-2 rounded-full">
@@ -746,7 +746,7 @@ const FlightPriceInfo = (props: FlightPriceInfoProps) => {
 
     // Ensure metrics are sorted if not already (typically by quartileRanking)
     const sortedMetrics = metrics.sort(
-      (a: any, b: any) => parseFloat(a.amount) - parseFloat(b.amount),
+      (a: any, b: any) => parseFloat(a.amount) - parseFloat(b.amount)
     );
     const Q1 = parseFloat(sortedMetrics[1].amount);
     const Q3 = parseFloat(sortedMetrics[2].amount);
@@ -835,7 +835,7 @@ const FlightPriceInfo = (props: FlightPriceInfoProps) => {
               variant={"outline"}
               className={cn(
                 "w-full text-foreground justify-start font-normal",
-                !date && "text-muted-foreground",
+                !date && "text-muted-foreground"
               )}
             >
               <svg
@@ -984,7 +984,11 @@ const MeetCopilot = () => {
           </div>
           <CustomDashedCard className="lg:flex-col hidden lg:flex shrink w-[45dvh]">
             <div className="flex items-center">
-              <Image src={copilot_chat} className="h-auto w-[40dvh]" />
+              <Image
+                alt="Demo of copilot chat"
+                src={copilot_chat}
+                className="h-auto w-[40dvh]"
+              />
             </div>
             <div className="mt-6">
               <h3 className="font-semibold">Chat with Copilot</h3>
@@ -1000,7 +1004,11 @@ const MeetCopilot = () => {
             whileInView={{ opacity: 1, y: "0%" }}
           >
             <CustomDashedCard className="flex flex-col lg:hidden">
-              <Image src={copilot_chat} className="h-auto w-[40dvh]" />
+              <Image
+                alt="Demo of copilot chat"
+                src={copilot_chat}
+                className="h-auto w-[40dvh]"
+              />
               <div className="mt-6">
                 <h3 className="font-semibold">Chat with Copilot</h3>
                 <p className="text-muted-foreground text-sm">
