@@ -17,7 +17,7 @@ export default function Loading() {
     <div className="w-screen h-[95vh] flex flex-col gap-y-6 justify-center items-center overflow-hidden z-50">
       {/* <Loader2 className="text-indigo-500 animate-spin w-8 h-8" /> */}
       <motion.div
-        className="bg-primary w-32 h-32"
+        className="bg-primary w-28 h-28"
         animate={{
           scale: [0.9, 1.1, 1.1, 0.9, 0.9],
           rotate: [0, 0, 180, 180, 0],

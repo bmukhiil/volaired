@@ -15,6 +15,7 @@ import collab_iphone_light from "../../../public/collab_iphone_light.webp";
 import collab_iphone_dark from "../../../public/collab_iphone_dark.webp";
 import split_bills_iphone_light from "../../../public/split_bills_iphone_light.webp";
 import split_bills_iphone_dark from "../../../public/split_bills_iphone_dark.webp";
+import copilot_chat from "../../../public/copilot_chat.webp";
 
 import { cn } from "@/lib/utils";
 import { Switch } from "@/components/ui/switch";
@@ -82,15 +83,23 @@ interface MetricsResult {
 
 const HeroSection = (props: HeroSectionProps) => {
   return (
-    <div className="flex flex-col w-[99dvh]">
-      <h1 className="text-4xl lg:text-6xl lg:text-center font-bold tracking-tight">
-        Unlock your next adventure.
-      </h1>
-      <p className="text-lg lg:text-center text-muted-foreground mt-4 lg:mt-5 lg:px-24">
-        Effortlessly book flights, manage itineraries, and split costs—all in
-        one place. Let&apos;s make your travel stress-free and filled with fun.
-      </p>
-      <EmailSignUpForm {...props} />
+    <div className="flex flex-col w-[99dvh] gap-y-3">
+      <div className="flex lg:justify-center">
+        <span className="shadow border border-indigo-500 bg-indigo-300 text-sm tracking-tight font-medium px-3 py-1 rounded-full">
+          Announcing early access
+        </span>
+      </div>
+      <div>
+        <h1 className="text-4xl lg:text-6xl lg:text-center font-bold tracking-tight">
+          Unlock your next adventure.
+        </h1>
+        <p className="text-lg lg:text-center text-muted-foreground mt-4 lg:mt-5 lg:px-24">
+          Effortlessly book flights, manage itineraries, and split costs—all in
+          one place. Let&apos;s make your travel stress-free and filled with
+          fun.
+        </p>
+        <EmailSignUpForm {...props} />
+      </div>
     </div>
   );
 };
@@ -100,7 +109,7 @@ const EmailSignUpForm = (props: EmailSignUpFormProps) => {
 
   return (
     <div className="flex flex-col mt-8 lg:mt-4 gap-y-2 lg:items-center">
-      <div className="flex flex-col gap-y-1 lg:gap-y-0 lg:w-[50dvh]">
+      <div className="flex flex-col gap-y-1 lg:gap-y-0 lg:w-[65dvh]">
         <div className="flex items-center gap-x-2">
           <Input
             disabled={loading || success}
@@ -154,7 +163,7 @@ const EmailSignUpForm = (props: EmailSignUpFormProps) => {
                           <span>Success!</span>
                         </div>
                       ) : (
-                        "Get notified"
+                        "Sign up for early access"
                       )}
                     </Button>
                   </div>
@@ -233,7 +242,7 @@ const EmailSignUpForm = (props: EmailSignUpFormProps) => {
                       <span>Success!</span>
                     </div>
                   ) : (
-                    "Sign up for beta"
+                    "Sign up for early access"
                   )}
                 </Button>
               </div>
@@ -412,183 +421,188 @@ const GroupTripSection = (props: GroupTripSectionProps) => {
         </div>
       </div>
       <div className="flex lg:w-[45dvh] mt-6 lg:mt-0">
-        <CustomDashedCard className="mx-4 lg:ml-4 lg:mr-0 my-2 flex justify-center items-center">
-          <div>
-            <div className="flex justify-between items-center">
-              <h4 className="font-semibold text-xl tracking-tight text-foreground">
-                Trip to Vancouver
-              </h4>
-              <div className="shadow-inner px-2 py-1 flex text-xs rounded-2xl bg-emerald-700/90 font-medium text-emerald-300 border border-emerald-800 items-center gap-x-1">
-                <span className="w-2 h-2 rounded-full bg-emerald-300 border border-emerald-800" />
-                active
-              </div>
-            </div>
-            <p className="text-muted-foreground text-sm font-medium">
-              {formatDate(today)} - {formatDate(fiveDaysFromNow)}
-            </p>
-            <div className="my-6 flex flex-col gap-y-2">
-              <motion.div whileTap={{ scale: 0.95 }}>
-                <Image
-                  alt="Vancouver"
-                  className="rounded-lg shadow"
-                  src="/vancouver.jpg"
-                  width={400}
-                  height={200}
-                />
-              </motion.div>
-              <div className="flex items-center gap-x-1 ml-2">
-                <Avatar className="w-8 h-8">
-                  <AvatarImage
-                    alt="Profile Picture"
-                    src="https://github.com/shadcn.png"
-                  />
-                  <AvatarFallback>CN</AvatarFallback>
-                </Avatar>
-                <Avatar className="w-8 h-8">
-                  <AvatarImage alt="Profile Picture" src="" />
-                  <AvatarFallback>CN</AvatarFallback>
-                </Avatar>
-                <Avatar className="w-8 h-8">
-                  <AvatarImage alt="Profile Picture" src="" />
-                  <AvatarFallback>AL</AvatarFallback>
-                </Avatar>
-                <Avatar className="w-8 h-8">
-                  <AvatarImage alt="Profile Picture" src="" />
-                  <AvatarFallback className="font-medium text-xs tracking-tighter">
-                    +2
-                  </AvatarFallback>
-                </Avatar>
-                <Button
-                  aria-label="Add a member"
-                  size="icon"
-                  variant="ghost"
-                  className="border-border border border-dashed w-8 h-8 flex justify-center items-center rounded-full"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    className="w-4 h-4"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M12 3.75a.75.75 0 0 1 .75.75v6.75h6.75a.75.75 0 0 1 0 1.5h-6.75v6.75a.75.75 0 0 1-1.5 0v-6.75H4.5a.75.75 0 0 1 0-1.5h6.75V4.5a.75.75 0 0 1 .75-.75Z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-                </Button>
-              </div>
-            </div>
-            <Separator className="flex shrink" />
-            <div className="my-4 text-foreground flex flex-col">
-              <span className="text-2xl font-semibold tracking-tight">
-                CA $315
-              </span>
-              <span className="text-sm font-medium">CA $1,575 total</span>
-              <span className="text-xs text-muted-foreground">
-                includes taxes & fees
-              </span>
-            </div>
-            <Separator className="flex shrink my-2" />
-            <div className="mt-4 flex flex-col items-center gap-y-2">
-              <h4 className="text-foreground font-medium tracking-tight text-base text-center">
-                Andrew invited you to join this trip.
-              </h4>
-              <div className="flex items-center w-full gap-x-2 relative mt-2">
-                <Button
-                  disabled={tripJoined}
-                  onClick={() => {
-                    if (tripDeclined) {
-                      setTripDeclined(false);
-                      return;
-                    }
-                    setTripDeclined(true);
-                    toast.warning("Declined Trip Invitation", {
-                      duration: 3000,
-                      important: true,
-                      description: "You declined Andrew's trip to Vancouver.",
-                      closeButton: true,
-                      dismissible: true,
-                      cancel: {
-                        label: "Undo",
-                        onClick: () => setTripDeclined(false),
-                      },
-                      cancelButtonStyle: {
-                        color: "#ffffff",
-                        background: "hsl(240 4% 16%)",
-                        border: "border-secondary",
-                      },
-                    });
-                  }}
-                  variant="outline"
-                  className={cn("w-full flex items-center gap-x-1", {
-                    "border-rose-500 text-rose-500 bg-background focus:border-rose-500 focus:text-rose-500 focus:bg-background":
-                      tripDeclined,
-                  })}
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    className="w-5 h-5"
-                  >
-                    <path d="M6.28 5.22a.75.75 0 0 0-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 1 0 1.06 1.06L10 11.06l3.72 3.72a.75.75 0 1 0 1.06-1.06L11.06 10l3.72-3.72a.75.75 0 0 0-1.06-1.06L10 8.94 6.28 5.22Z" />
-                  </svg>
-                  {tripDeclined ? "Declined" : "Decline"}
-                </Button>
-                <div
-                  className={cn(
-                    "absolute right-[0.5px] top-[0.5px] transform translate-x-1/2 -translate-y-1/2",
-                    {
-                      hidden: tripJoinedTriggered,
-                    }
-                  )}
-                >
-                  <div className="bg-indigo-400 w-2 h-2 rounded-full">
-                    <div className="bg-indigo-400 w-2 h-2 rounded-full animate-ping"></div>
-                  </div>
+        <motion.div
+          initial={{ opacity: 0, x: "20%" }}
+          whileInView={{ opacity: 1, x: "0%" }}
+        >
+          <CustomDashedCard className="mx-4 lg:ml-4 lg:mr-0 my-2 flex justify-center items-center">
+            <div>
+              <div className="flex justify-between items-center">
+                <h4 className="font-semibold text-xl tracking-tight text-foreground">
+                  Trip to Vancouver
+                </h4>
+                <div className="shadow-inner px-2 py-1 flex text-xs rounded-2xl bg-emerald-700/90 font-medium text-emerald-300 border border-emerald-800 items-center gap-x-1">
+                  <span className="w-2 h-2 rounded-full bg-emerald-300 border border-emerald-800" />
+                  active
                 </div>
-                <Button
-                  disabled={tripDeclined}
-                  className="border-indigo-400 border shadow-inner w-full flex items-center gap-x-1"
-                  onClick={() => {
-                    setTripJoinedTriggered(true);
-                    if (tripJoined) {
-                      setTripJoined(false);
-                      return;
-                    }
-                    setTripJoined(true);
-                    toast.success("Accepted Trip Invitation", {
-                      duration: 3000,
-                      important: true,
-                      description: "You joined Andrew's trip to Vancouver.",
-                      closeButton: true,
-                      dismissible: true,
-                      cancel: {
-                        label: "Undo",
-                        onClick: () => setTripJoined(false),
-                      },
-                    });
-                  }}
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    className="w-5 h-5"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z"
-                      clip-rule="evenodd"
+              </div>
+              <p className="text-muted-foreground text-sm font-medium">
+                {formatDate(today)} - {formatDate(fiveDaysFromNow)}
+              </p>
+              <div className="my-6 flex flex-col gap-y-2">
+                <motion.div whileTap={{ scale: 0.95 }}>
+                  <Image
+                    alt="Vancouver"
+                    className="rounded-lg shadow"
+                    src="/vancouver.jpg"
+                    width={400}
+                    height={200}
+                  />
+                </motion.div>
+                <div className="flex items-center gap-x-1 ml-2">
+                  <Avatar className="w-8 h-8">
+                    <AvatarImage
+                      alt="Profile Picture"
+                      src="https://github.com/shadcn.png"
                     />
-                  </svg>
-                  {tripJoined ? "Joined" : "Join"}
-                </Button>
+                    <AvatarFallback>CN</AvatarFallback>
+                  </Avatar>
+                  <Avatar className="w-8 h-8">
+                    <AvatarImage alt="Profile Picture" src="" />
+                    <AvatarFallback>CN</AvatarFallback>
+                  </Avatar>
+                  <Avatar className="w-8 h-8">
+                    <AvatarImage alt="Profile Picture" src="" />
+                    <AvatarFallback>AL</AvatarFallback>
+                  </Avatar>
+                  <Avatar className="w-8 h-8">
+                    <AvatarImage alt="Profile Picture" src="" />
+                    <AvatarFallback className="font-medium text-xs tracking-tighter">
+                      +2
+                    </AvatarFallback>
+                  </Avatar>
+                  <Button
+                    aria-label="Add a member"
+                    size="icon"
+                    variant="ghost"
+                    className="border-border border border-dashed w-8 h-8 flex justify-center items-center rounded-full"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      className="w-4 h-4"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M12 3.75a.75.75 0 0 1 .75.75v6.75h6.75a.75.75 0 0 1 0 1.5h-6.75v6.75a.75.75 0 0 1-1.5 0v-6.75H4.5a.75.75 0 0 1 0-1.5h6.75V4.5a.75.75 0 0 1 .75-.75Z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                  </Button>
+                </div>
+              </div>
+              <Separator className="flex shrink" />
+              <div className="my-4 text-foreground flex flex-col">
+                <span className="text-2xl font-semibold tracking-tight">
+                  CA $315
+                </span>
+                <span className="text-sm font-medium">CA $1,575 total</span>
+                <span className="text-xs text-muted-foreground">
+                  includes taxes & fees
+                </span>
+              </div>
+              <Separator className="flex shrink my-2" />
+              <div className="mt-4 flex flex-col items-center gap-y-2">
+                <h4 className="text-foreground font-medium tracking-tight text-base text-center">
+                  Andrew invited you to join this trip.
+                </h4>
+                <div className="flex items-center w-full gap-x-2 relative mt-2">
+                  <Button
+                    disabled={tripJoined}
+                    onClick={() => {
+                      if (tripDeclined) {
+                        setTripDeclined(false);
+                        return;
+                      }
+                      setTripDeclined(true);
+                      toast.warning("Declined Trip Invitation", {
+                        duration: 3000,
+                        important: true,
+                        description: "You declined Andrew's trip to Vancouver.",
+                        closeButton: true,
+                        dismissible: true,
+                        cancel: {
+                          label: "Undo",
+                          onClick: () => setTripDeclined(false),
+                        },
+                        cancelButtonStyle: {
+                          color: "#ffffff",
+                          background: "hsl(240 4% 16%)",
+                          border: "border-secondary",
+                        },
+                      });
+                    }}
+                    variant="outline"
+                    className={cn("w-full flex items-center gap-x-1", {
+                      "border-rose-500 text-rose-500 bg-background focus:border-rose-500 focus:text-rose-500 focus:bg-background":
+                        tripDeclined,
+                    })}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      className="w-5 h-5"
+                    >
+                      <path d="M6.28 5.22a.75.75 0 0 0-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 1 0 1.06 1.06L10 11.06l3.72 3.72a.75.75 0 1 0 1.06-1.06L11.06 10l3.72-3.72a.75.75 0 0 0-1.06-1.06L10 8.94 6.28 5.22Z" />
+                    </svg>
+                    {tripDeclined ? "Declined" : "Decline"}
+                  </Button>
+                  <div
+                    className={cn(
+                      "absolute right-[0.5px] top-[0.5px] transform translate-x-1/2 -translate-y-1/2",
+                      {
+                        hidden: tripJoinedTriggered,
+                      },
+                    )}
+                  >
+                    <div className="bg-indigo-400 w-2 h-2 rounded-full">
+                      <div className="bg-indigo-400 w-2 h-2 rounded-full animate-ping"></div>
+                    </div>
+                  </div>
+                  <Button
+                    disabled={tripDeclined}
+                    className="border-indigo-400 border shadow-inner w-full flex items-center gap-x-1"
+                    onClick={() => {
+                      setTripJoinedTriggered(true);
+                      if (tripJoined) {
+                        setTripJoined(false);
+                        return;
+                      }
+                      setTripJoined(true);
+                      toast.success("Accepted Trip Invitation", {
+                        duration: 3000,
+                        important: true,
+                        description: "You joined Andrew's trip to Vancouver.",
+                        closeButton: true,
+                        dismissible: true,
+                        cancel: {
+                          label: "Undo",
+                          onClick: () => setTripJoined(false),
+                        },
+                      });
+                    }}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      className="w-5 h-5"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                    {tripJoined ? "Joined" : "Join"}
+                  </Button>
+                </div>
               </div>
             </div>
-          </div>
-        </CustomDashedCard>
+          </CustomDashedCard>
+        </motion.div>
       </div>
     </div>
   );
@@ -661,50 +675,60 @@ const FeaturesSection = () => {
         </div>
       </div>
       <div className="flex flex-col lg:hidden gap-y-4">
-        <CustomDashedCard className="mx-4 mt-2">
-          <div className="flex flex-col justify-center gap-y-4">
-            <div className="flex justify-center">
-              <Image
-                alt="Splitting bills iPhone"
-                src={split_bills_iphone_light}
-                className="w-[25dvh] h-auto drop-shadow-sm dark:hidden"
-              />
-              <Image
-                alt="Splitting bills iPhone"
-                src={split_bills_iphone_dark}
-                className="w-[25dvh] h-auto drop-shadow-sm hidden dark:flex"
-              />
+        <motion.div
+          initial={{ opacity: 0, y: "20%" }}
+          whileInView={{ opacity: 1, y: "0%" }}
+        >
+          <CustomDashedCard className="mx-4 mt-2">
+            <div className="flex flex-col justify-center gap-y-4">
+              <div className="flex justify-center">
+                <Image
+                  alt="Splitting bills iPhone"
+                  src={split_bills_iphone_light}
+                  className="w-[25dvh] h-auto drop-shadow-sm dark:hidden"
+                />
+                <Image
+                  alt="Splitting bills iPhone"
+                  src={split_bills_iphone_dark}
+                  className="w-[25dvh] h-auto drop-shadow-sm hidden dark:flex"
+                />
+              </div>
+              <div className="mt-2">
+                <h2 className="font-medium">Splitting costs made easy.</h2>
+                <p className="text-muted-foreground text-sm">
+                  Split costs with friends and keep track of expenses.
+                </p>
+              </div>
             </div>
-            <div className="mt-2">
-              <h2 className="font-medium">Splitting costs made easy.</h2>
-              <p className="text-muted-foreground text-sm">
-                Split costs with friends and keep track of expenses.
-              </p>
+          </CustomDashedCard>
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: "20%" }}
+          whileInView={{ opacity: 1, y: "0%" }}
+        >
+          <CustomDashedCard className="mx-4">
+            <div className="flex flex-col justify-center gap-y-4">
+              <div className="flex justify-center">
+                <Image
+                  alt="Trip Collaboration iPhone"
+                  src={collab_iphone_light}
+                  className="w-[25dvh] h-auto drop-shadow-sm dark:hidden"
+                />
+                <Image
+                  alt="Trip Collaboration iPhone"
+                  src={collab_iphone_dark}
+                  className="w-[25dvh] h-auto drop-shadow-sm hidden dark:flex"
+                />
+              </div>
+              <div className="mt-2">
+                <h2 className="font-medium">Collaborate on the itinerary.</h2>
+                <p className="text-muted-foreground text-sm">
+                  Plan activities and share your travel plans.
+                </p>
+              </div>
             </div>
-          </div>
-        </CustomDashedCard>
-        <CustomDashedCard className="mx-4">
-          <div className="flex flex-col justify-center gap-y-4">
-            <div className="flex justify-center">
-              <Image
-                alt="Trip Collaboration iPhone"
-                src={collab_iphone_light}
-                className="w-[25dvh] h-auto drop-shadow-sm dark:hidden"
-              />
-              <Image
-                alt="Trip Collaboration iPhone"
-                src={collab_iphone_dark}
-                className="w-[25dvh] h-auto drop-shadow-sm hidden dark:flex"
-              />
-            </div>
-            <div className="mt-2">
-              <h2 className="font-medium">Collaborate on the itinerary.</h2>
-              <p className="text-muted-foreground text-sm">
-                Plan activities and share your travel plans.
-              </p>
-            </div>
-          </div>
-        </CustomDashedCard>
+          </CustomDashedCard>
+        </motion.div>
       </div>
     </>
   );
@@ -722,7 +746,7 @@ const FlightPriceInfo = (props: FlightPriceInfoProps) => {
 
     // Ensure metrics are sorted if not already (typically by quartileRanking)
     const sortedMetrics = metrics.sort(
-      (a: any, b: any) => parseFloat(a.amount) - parseFloat(b.amount)
+      (a: any, b: any) => parseFloat(a.amount) - parseFloat(b.amount),
     );
     const Q1 = parseFloat(sortedMetrics[1].amount);
     const Q3 = parseFloat(sortedMetrics[2].amount);
@@ -811,7 +835,7 @@ const FlightPriceInfo = (props: FlightPriceInfoProps) => {
               variant={"outline"}
               className={cn(
                 "w-full text-foreground justify-start font-normal",
-                !date && "text-muted-foreground"
+                !date && "text-muted-foreground",
               )}
             >
               <svg
@@ -958,24 +982,9 @@ const MeetCopilot = () => {
               manage your trips.
             </p>
           </div>
-          <CustomDashedCard className="flex-col hidden lg:flex">
-            <div className=" flex-col w-full bg-background rounded-lg  dark:bg-grid-zinc-500/[0.2] bg-grid-zinc-200/[0.2] relative flex items-center justify-center">
-              {/* Radial gradient for the container to give a faded look */}
-              <div className="rounded-lg absolute pointer-events-none inset-0 flex items-center justify-center bg-secondary [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
-              <div className="bg-primary my-8 rounded-md px-2 py-1 border border-indigo-500 drop-shadow-md shadow-indigo-400 ring-2 ring-indigo-400 ring-offset-1 ring-offset-transparent">
-                <p className="text-sm relative z-20 font-medium text-white">
-                  Hey! How can I help?
-                </p>
-              </div>
-              <div className="z-50 text-muted-foreground flex justify-between items-center h-10 w-full rounded-md border border-input bg-background pl-3 pr-1 py-2 text-sm ring-offset-background">
-                Things to do in Vancouver?
-                <Button
-                  variant="outline"
-                  className="border-primary bg-secondary text-primary font-normal h-8 drop-shadow-sm"
-                >
-                  Ask
-                </Button>
-              </div>
+          <CustomDashedCard className="lg:flex-col hidden lg:flex shrink w-[45dvh]">
+            <div className="flex items-center">
+              <Image src={copilot_chat} className="h-auto w-[40dvh]" />
             </div>
             <div className="mt-6">
               <h3 className="font-semibold">Chat with Copilot</h3>
@@ -986,52 +995,45 @@ const MeetCopilot = () => {
           </CustomDashedCard>
         </div>
         <div className="mx-4 mt-8 lg:mt-0 flex flex-col gap-y-4">
-          <CustomDashedCard className="flex flex-col lg:hidden">
-            <div className=" flex-col w-full bg-background rounded-lg  dark:bg-grid-zinc-500/[0.2] bg-grid-zinc-400/[0.2] relative flex items-center justify-center">
-              {/* Radial gradient for the container to give a faded look */}
-              <div className="rounded-lg absolute pointer-events-none inset-0 flex items-center justify-center bg-secondary [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
-              <div className="bg-primary my-8 rounded-md px-2 py-1 border border-indigo-500 drop-shadow-md shadow-indigo-400 ring-2 ring-indigo-400 ring-offset-1 ring-offset-transparent">
-                <p className="text-sm relative z-20 font-medium text-white">
-                  Hey! How can I help?
+          <motion.div
+            initial={{ opacity: 0, y: "20%" }}
+            whileInView={{ opacity: 1, y: "0%" }}
+          >
+            <CustomDashedCard className="flex flex-col lg:hidden">
+              <Image src={copilot_chat} className="h-auto w-[40dvh]" />
+              <div className="mt-6">
+                <h3 className="font-semibold">Chat with Copilot</h3>
+                <p className="text-muted-foreground text-sm">
+                  Just ask Copilot anything about your trip.
                 </p>
               </div>
-              <div className="z-50 text-muted-foreground flex justify-between items-center h-10 w-full rounded-md border border-input bg-background pl-3 pr-[3px] py-2 text-sm ring-offset-background">
-                Things to do in Vancouver?
-                <Button
-                  variant="outline"
-                  className="border-primary bg-secondary text-primary font-normal h-8 drop-shadow-sm"
-                >
-                  Ask
-                </Button>
-              </div>
-            </div>
-            <div className="mt-6">
-              <h3 className="font-semibold">Chat with Copilot</h3>
-              <p className="text-muted-foreground text-sm">
-                Just ask Copilot anything about your trip.
-              </p>
-            </div>
-          </CustomDashedCard>
-          <CustomDashedCard className="flex flex-col lg:justify-between">
-            <div className="flex-col w-full bg-background rounded-lg  dark:bg-grid-zinc-500/[0.2] bg-grid-zinc-400/[0.2] relative flex items-center justify-center">
-              {/* Radial gradient for the container to give a faded look */}
-              <div className="rounded-lg absolute pointer-events-none inset-0 flex items-center justify-center bg-secondary [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
-              <div className="bg-transparent my-8 rounded-md p-2 border border-indigo-500 drop-shadow-md shadow-indigo-400 ring-1  ring-indigo-400 ring-offset-1 ring-offset-transparent">
-                <div className="flex w-[25dvh] h-[25dvh]">
-                  <Pie data={data} />
+            </CustomDashedCard>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: "20%" }}
+            whileInView={{ opacity: 1, y: "0%" }}
+          >
+            <CustomDashedCard className="flex flex-col lg:justify-between">
+              <div className="flex-col w-full bg-background rounded-lg  dark:bg-grid-zinc-500/[0.2] bg-grid-zinc-400/[0.2] relative flex items-center justify-center">
+                {/* Radial gradient for the container to give a faded look */}
+                <div className="rounded-lg absolute pointer-events-none inset-0 flex items-center justify-center bg-secondary [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
+                <div className="bg-transparent my-8 rounded-md p-2 border border-indigo-500 drop-shadow-md shadow-indigo-400 ring-1  ring-indigo-400 ring-offset-1 ring-offset-transparent">
+                  <div className="flex w-[25dvh] h-[25dvh]">
+                    <Pie data={data} />
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="mt-6">
-              <h3 className="font-semibold">
-                Probability of Your Flight Being Delayed
-              </h3>
-              <p className="text-muted-foreground text-sm">
-                Copilot uses machine learning to predict the probability of your
-                flight being delayed.
-              </p>
-            </div>
-          </CustomDashedCard>
+              <div className="mt-6">
+                <h3 className="font-semibold">
+                  Probability of Your Flight Being Delayed
+                </h3>
+                <p className="text-muted-foreground text-sm">
+                  Copilot uses machine learning to predict the probability of
+                  your flight being delayed.
+                </p>
+              </div>
+            </CustomDashedCard>
+          </motion.div>
         </div>
       </div>
     </>

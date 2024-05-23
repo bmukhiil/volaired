@@ -22,8 +22,8 @@ export default function Navbar() {
   ];
 
   return (
-    <header>
-      <nav className=" px-6 py-3 lg:px-40 lg:py-4 border-b border-dashed flex items-center justify-between bg-secondary">
+    <header className="w-screen fixed top-0 z-50 shadow-sm">
+      <nav className="px-6 py-3 lg:px-40 lg:py-4 border-b border-dashed flex items-center justify-between bg-secondary">
         <Link
           href="/"
           className="font-semibold tracking-tight text-2xl"
@@ -38,6 +38,11 @@ export default function Navbar() {
             </Link>
           ))}
         </div> */}
+        <Link href="#hero">
+          <Button className="bg-background text-foreground hover:bg-background/60">
+            Sign up for early access
+          </Button>
+        </Link>
       </nav>
     </header>
   );

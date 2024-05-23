@@ -125,9 +125,9 @@ export default function Footer() {
         );
 
         setArcs(newArcs);
-        setLoading(false);
+        // setLoading(false);
       } catch (e: any) {
-        setLoading(false);
+        // setLoading(false);
         setError(true);
         if (e.name === "AbortError") {
           console.error("Request timed out");
@@ -171,9 +171,47 @@ export default function Footer() {
                   repeatDelay: 1.2,
                 }}
               />
-              <span className="mt-4 font-medium tracking-tight">
+              <div className="text-muted-foreground mt-4 font-medium tracking-tight flex items-center gap-x-2">
                 Loading...
-              </span>
+                {/* <div className="flex">
+                  <motion.div
+                    className="bg-primary w-1 h-1 rounded-full"
+                    animate={{
+                      translateY: [0, -4, 0],
+                    }}
+                    transition={{
+                      duration: 1,
+                      // times: [0, 0.2, 0.6, 1],
+                      repeat: Infinity,
+                      repeatDelay: 1,
+                    }}
+                  />
+                  <motion.div
+                    className="bg-primary w-1 h-1 rounded-full"
+                    animate={{
+                      translateY: [-4, 0, -4],
+                    }}
+                    transition={{
+                      duration: 1,
+                      // times: [0, 0.2, 0.4, 0.6],
+                      repeat: Infinity,
+                      repeatDelay: 1,
+                    }}
+                  />
+                  <motion.div
+                    className="bg-primary w-1 h-1 rounded-full"
+                    animate={{
+                      translateY: [0, -4, 0],
+                    }}
+                    transition={{
+                      duration: 1,
+                      // times: [0, 0.2, 0.6, 1],
+                      repeat: Infinity,
+                      repeatDelay: 1,
+                    }}
+                  />
+                </div> */}
+              </div>
             </div>
           ) : (
             <div className="flex flex-col gap-y-2 items-center justify-center">
@@ -188,14 +226,21 @@ export default function Footer() {
         </CustomDashedCard>
       </div>
       <Separator className="my-4 -mx-6 w-screen" />
-      <div className="py-14 text-center flex gap-y-10 flex-col items-center font-bold text-3xl">
-        <span className="tracking-tight">
-          <span className="text-indigo-500">Kickstart</span> your next
-          adventure.
-        </span>
+      <div className="py-14 text-center flex gap-y-6 flex-col">
+        <div className="flex flex-col gap-y-4 items-center">
+          <span className="text-3xl tracking-tight font-bold">
+            <span className="text-indigo-500">Explore</span> the Volaired
+            Advantage
+          </span>
+          <p className="text-muted-foreground lg:w-[80dvh]">
+            Volaired simplifies your travel experience with intelligent flight
+            recommendations, seamless group coordination, and personalized
+            itineraries.
+          </p>
+        </div>
         <Link href="#hero">
           <Button className="border border-indigo-400 shadow-inner">
-            Get notified
+            Sign up for early access
           </Button>
         </Link>
       </div>
