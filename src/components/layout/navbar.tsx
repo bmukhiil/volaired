@@ -22,7 +22,7 @@ export default function Navbar() {
   ];
 
   return (
-    <header className="w-screen fixed top-0 z-50 shadow-sm">
+    <header className="w-screen sticky inset-0 shadow-sm z-50">
       <nav className="px-6 py-3 lg:px-40 lg:py-4 border-b border-dashed flex items-center justify-between bg-secondary">
         <Link
           href="/"

@@ -85,7 +85,7 @@ const HeroSection = (props: HeroSectionProps) => {
   return (
     <div className="flex flex-col w-[99dvh] gap-y-3">
       <div className="flex lg:justify-center">
-        <span className="shadow border border-indigo-500 bg-indigo-300 text-sm tracking-tight font-medium px-3 py-1 rounded-full">
+        <span className="shadow border border-indigo-500 bg-indigo-300 dark:bg-indigo-400 text-sm tracking-tight font-medium px-3 py-1 rounded-full">
           Announcing early access
         </span>
       </div>
@@ -300,7 +300,7 @@ const GroupTripSection = (props: GroupTripSectionProps) => {
             success.
           </h3>
         </div>
-        <div className="shrink drop-shadow-sm lg:flex hidden">
+        {/* <div className="shrink drop-shadow-sm lg:flex hidden">
           <CustomDashedCard className="bg-background p-4 rounded-lg flex flex-col gap-y-6">
             <div className="flex items-center justify-between">
               <h4 className="text-sm font-medium text-muted-foreground">
@@ -418,7 +418,7 @@ const GroupTripSection = (props: GroupTripSectionProps) => {
               <ScrollBar orientation="horizontal" />
             </ScrollArea>
           </CustomDashedCard>
-        </div>
+        </div> */}
       </div>
       <div className="flex lg:w-[45dvh] mt-6 lg:mt-0">
         <motion.div
@@ -982,7 +982,7 @@ const MeetCopilot = () => {
               manage your trips.
             </p>
           </div>
-          <CustomDashedCard className="lg:flex-col hidden lg:flex shrink w-[45dvh]">
+          {/* <CustomDashedCard className="lg:flex-col hidden lg:flex lg:w-[45dvh]">
             <div className="flex items-center">
               <Image
                 alt="Demo of copilot chat"
@@ -996,7 +996,7 @@ const MeetCopilot = () => {
                 Just ask Copilot anything about your trip.
               </p>
             </div>
-          </CustomDashedCard>
+          </CustomDashedCard> */}
         </div>
         <div className="mx-4 mt-8 lg:mt-0 flex flex-col gap-y-4">
           <motion.div
@@ -1017,13 +1017,12 @@ const MeetCopilot = () => {
               </div>
             </CustomDashedCard>
           </motion.div>
-          <motion.div
+          {/* <motion.div
             initial={{ opacity: 0, y: "20%" }}
             whileInView={{ opacity: 1, y: "0%" }}
           >
-            <CustomDashedCard className="flex flex-col lg:justify-between">
+            <CustomDashedCard className="h-full flex flex-col lg:justify-between">
               <div className="flex-col w-full bg-background rounded-lg  dark:bg-grid-zinc-500/[0.2] bg-grid-zinc-400/[0.2] relative flex items-center justify-center">
-                {/* Radial gradient for the container to give a faded look */}
                 <div className="rounded-lg absolute pointer-events-none inset-0 flex items-center justify-center bg-secondary [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
                 <div className="bg-transparent my-8 rounded-md p-2 border border-indigo-500 drop-shadow-md shadow-indigo-400 ring-1  ring-indigo-400 ring-offset-1 ring-offset-transparent">
                   <div className="flex w-[25dvh] h-[25dvh]">
@@ -1041,7 +1040,7 @@ const MeetCopilot = () => {
                 </p>
               </div>
             </CustomDashedCard>
-          </motion.div>
+          </motion.div> */}
         </div>
       </div>
     </>
