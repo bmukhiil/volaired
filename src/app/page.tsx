@@ -138,9 +138,9 @@ export default function Home() {
         />
       </div>
       {/* <Separator /> */}
-      {/* <div className="bg-secondary shadow-sm lg:rounded-[5dvh] rounded-[3dvh] px-6 -mx-6 lg:px-40 py-20 md:py-24 lg:pt-36 lg:pb-56 flex flex-col gap-y-6">
+      <div className="bg-secondary shadow-sm lg:rounded-[5dvh] rounded-[3dvh] px-6 -mx-6 lg:px-40 py-20 md:py-24 lg:pt-36 lg:pb-56 flex flex-col gap-y-6">
         <FeaturesSection />
-      </div> */}
+      </div>
       {/* <Separator /> */}
       {/* <div className="lg:px-40 pb-28 md:pb-24 lg:pb-36 flex flex-col gap-y-6 lg:flex-row lg:items-center lg:gap-x-4"> */}
       {/* <FlightPriceInfo

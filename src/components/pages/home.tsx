@@ -300,7 +300,7 @@ const GroupTripSection = (props: GroupTripSectionProps) => {
             success.
           </h3>
         </div>
-        {/* <div className="shrink drop-shadow-sm lg:flex hidden">
+        <div className="shrink drop-shadow-sm lg:flex hidden">
           <CustomDashedCard className="bg-background p-4 rounded-lg flex flex-col gap-y-6">
             <div className="flex items-center justify-between">
               <h4 className="text-sm font-medium text-muted-foreground">
@@ -418,7 +418,7 @@ const GroupTripSection = (props: GroupTripSectionProps) => {
               <ScrollBar orientation="horizontal" />
             </ScrollArea>
           </CustomDashedCard>
-        </div> */}
+        </div>
       </div>
       <div className="flex lg:w-[45dvh] mt-6 lg:mt-0">
         <motion.div
@@ -969,7 +969,7 @@ const MeetCopilot = () => {
   return (
     <>
       <div className="lg:flex lg:gap-x-8">
-        <div className="flex flex-col lg:justify-between">
+        <div className="flex flex-col lg:gap-y-10">
           <div className="flex flex-col gap-y-2">
             <span className="text-primary text-sm font-semibold">
               Your AI Assistant
@@ -982,7 +982,7 @@ const MeetCopilot = () => {
               manage your trips.
             </p>
           </div>
-          {/* <CustomDashedCard className="lg:flex-col hidden lg:flex lg:w-[45dvh]">
+          <CustomDashedCard className="lg:flex-col hidden lg:flex w-[45dvh]">
             <div className="flex items-center">
               <Image
                 alt="Demo of copilot chat"
@@ -996,7 +996,7 @@ const MeetCopilot = () => {
                 Just ask Copilot anything about your trip.
               </p>
             </div>
-          </CustomDashedCard> */}
+          </CustomDashedCard>
         </div>
         <div className="mx-4 mt-8 lg:mt-0 flex flex-col gap-y-4">
           <motion.div
