@@ -1,2 +1,5 @@
 use this command to build dependencies on ur machine the first time
 pip install -r requirements.txt
+services to access amadeus api and format data
+api should call any service functions, this file should not be cluttered
+these methods route to "routes.py" where everything is accessed
