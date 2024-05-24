@@ -1,0 +1,2 @@
+use this command to build dependencies on ur machine the first time
+pip install -r requirements.txt
