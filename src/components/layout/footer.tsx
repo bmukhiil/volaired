@@ -141,7 +141,7 @@ export default function Footer() {
   }, []);
 
   return (
-    <main className="lg:px-40 lg:py-4 w-screen px-6">
+    <main className="lg:px-40 lg:py-4 w-screen px-6 pt-20">
       <div className="flex flex-col justify-center items-center">
         <div className="flex flex-col gap-y-2">
           <h2 className="text-3xl font-bold tracking-tight">

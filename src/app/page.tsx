@@ -13,6 +13,9 @@ import {
 } from "@/components/pages/home";
 import Script from "next/script";
 import { Separator } from "@/components/ui/separator";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -32,102 +35,81 @@ const jsonLd = {
 };
 
 export default function Home() {
-  const [date, setDate] = React.useState<Date | undefined>(new Date());
-  const [email, setEmail] = useState("");
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [isExploding, setIsExploding] = useState(false);
-  const [tripJoined, setTripJoined] = useState(false);
-  const [tripDeclined, setTripDeclined] = useState(false);
-  const [tripJoinedTriggered, setTripJoinedTriggered] = useState(false);
-  const [priceDataLoading, setPriceDataLoading] = useState(false);
-  const [priceData, setPriceData] = useState({});
-
-  const handleInputChange = (e: string) => {
-    setEmail(e);
-    setError("");
-  };
-
-  const handleSubmit = async () => {
-    setError("");
-    setIsExploding(false);
-    setLoading(true);
-    try {
-      if (!testEmail(email)) {
-        setError("Invalid email address");
-        return;
-      }
-      const response = await fetch("/api/v1/notifications/launch", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email: email }),
-      });
-      if (!response.ok) {
-        throw new Error(await response.text());
-      }
-      setSuccess(true);
-      setIsExploding(true);
-    } catch (e: any) {
-      setError(e.message);
-      console.error("Signup error:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handlePriceData = async () => {
-    const epochDate = date?.getTime();
-    setPriceDataLoading(true);
-    try {
-      const response = await fetch(`/api/v1/flights/prices?date=${epochDate}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }).then((res) => res.json());
-      // if (!response.ok) {
-      //   throw new Error(await response.text());
-      // }
-      console.log(response.data.data[0]);
-      setPriceData(response.data.data[0]);
-    } catch (e: any) {
-      console.error("Price data error:", e.message);
-    } finally {
-      setPriceDataLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    handlePriceData();
-  }, []);
-
   return (
-    <section
-      // className="px-6 overflow-x-hidden pt-14 md:pt-20 lg:-mx-6 lg:pt-40"
-      className="px-6 overflow-x-hidden"
-      id="hero"
-    >
+    <section className="px-6 overflow-x-hidden" id="hero">
       <Script
         id="json-ld-schema"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      {isExploding && <ConfettiExplosionCanvas />}
-      <div className="lg:rounded-b-[5dvh] rounded-b-[3dvh] shadow-sm flex justify-center items-center bg-secondary h-full -mx-6 px-6 py-20 md:pt-20 lg:pt-20 lg:pb-40">
-        <HeroSection
-          loading={loading}
-          success={success}
-          email={email}
-          onSubmit={handleSubmit}
-          onChange={handleInputChange}
-          error={error}
-        />
+      <div className="h-full -mx-6">
+        <div className="flex justify-between py-6 bg-secondary shadow-sm">
+          <Input
+            placeholder="Search"
+            className="max-w-48 focus-visible:ring-0 focus-visible:ring-offset-0"
+          />
+          <ul className="flex items-center gap-x-10">
+            <li>Flights</li>
+            <li>Hotels</li>
+            <li>Car Rentals</li>
+          </ul>
+        </div>
+        <div className="flex justify-center">
+          <div className="mt-6 p-4 rounded-lg bg-secondary flex items-end gap-x-4">
+            <div>
+              <Label htmlFor="from">From</Label>
+              <Input placeholder="" />
+            </div>
+            <Button className="bg-foreground rounded-xl" size="icon">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                class="size-5"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M13.2 2.24a.75.75 0 0 0 .04 1.06l2.1 1.95H6.75a.75.75 0 0 0 0 1.5h8.59l-2.1 1.95a.75.75 0 1 0 1.02 1.1l3.5-3.25a.75.75 0 0 0 0-1.1l-3.5-3.25a.75.75 0 0 0-1.06.04Zm-6.4 8a.75.75 0 0 0-1.06-.04l-3.5 3.25a.75.75 0 0 0 0 1.1l3.5 3.25a.75.75 0 1 0 1.02-1.1l-2.1-1.95h8.59a.75.75 0 0 0 0-1.5H4.66l2.1-1.95a.75.75 0 0 0 .04-1.06Z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </Button>
+            <div>
+              <Label htmlFor="to">To</Label>
+              <Input placeholder="" />
+            </div>
+            <div className=" h-full">
+              <Separator orientation="vertical" />
+            </div>
+            <div>
+              <Label htmlFor="depart">Departure Date</Label>
+              <Input placeholder="" />
+            </div>
+            <div>
+              <Label htmlFor="return">Travelers</Label>
+              <Input placeholder="" />
+            </div>
+            <div>
+              <Button className="w-full flex gap-x-2">
+                Search
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  class="size-5"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M2 10a.75.75 0 0 1 .75-.75h12.59l-2.1-1.95a.75.75 0 1 1 1.02-1.1l3.5 3.25a.75.75 0 0 1 0 1.1l-3.5 3.25a.75.75 0 1 1-1.02-1.1l2.1-1.95H2.75A.75.75 0 0 1 2 10Z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </Button>
+            </div>
+          </div>
+        </div>
       </div>
-      {/* <Separator className="w-screen -mx-6" /> */}
-      <div className="lg:-mx-6 lg:px-40 flex flex-col gap-y-6 py-20 md:py-24 lg:py-36">
+      {/* <div className="lg:-mx-6 lg:px-40 flex flex-col gap-y-6 py-20 md:py-24 lg:py-36">
         <GroupTripSection
           tripDeclined={tripDeclined}
           tripJoined={tripJoined}
@@ -137,23 +119,12 @@ export default function Home() {
           tripJoinedTriggered={tripJoinedTriggered}
         />
       </div>
-      {/* <Separator /> */}
       <div className="bg-secondary shadow-sm lg:rounded-[5dvh] rounded-[3dvh] px-6 -mx-6 lg:px-40 py-20 md:py-24 lg:pt-36 lg:pb-56 flex flex-col gap-y-6">
         <FeaturesSection />
       </div>
-      {/* <Separator /> */}
-      {/* <div className="lg:px-40 pb-28 md:pb-24 lg:pb-36 flex flex-col gap-y-6 lg:flex-row lg:items-center lg:gap-x-4"> */}
-      {/* <FlightPriceInfo
-          date={date}
-          setDate={setDate}
-          handleSubmit={handlePriceData}
-          loading={priceDataLoading}
-          data={priceData}
-        /> */}
-      {/* </div> */}
       <div className="shadow-sm lg:-mx-6 lg:px-40 py-20 md:pb-24 lg:pb-36 flex flex-col gap-y-6">
         <MeetCopilot />
-      </div>
+      </div> */}
     </section>
   );
 }
