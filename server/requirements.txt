@@ -1,0 +1,5 @@
+Flask
+flask-restx
+amadeus
+Flask-Cors
+
