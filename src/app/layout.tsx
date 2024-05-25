@@ -84,13 +84,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
-      <body className={cn("overflow-x-hidden", inter.className)}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
+      <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <body className={cn("overflow-x-hidden", inter.className)}>
           <Navbar />
           {children}
           <Toaster
@@ -129,10 +124,10 @@ export default function RootLayout({
             }}
           />
           <Footer />
-        </ThemeProvider>
-        <SpeedInsights />
-        <Analytics />
-      </body>
+          <SpeedInsights />
+          <Analytics />
+        </body>
+      </ThemeProvider>
     </html>
   );
 }

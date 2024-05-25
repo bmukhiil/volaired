@@ -64,85 +64,86 @@ export default function Navbar() {
 
   return (
     <header className="w-screen sticky inset-0 shadow-sm z-50">
-      <nav className="bg-secondary border-b border-dashed grid grid-col-10 gap-4 place-items-center px-6 py-4">
+      <nav className="bg-secondary border-b border-dashed px-6 lg:px-28 py-4 flex items-center justify-between">
         <Link
           href="/"
-          className="font-semibold tracking-tight text-2xl col-start-1"
+          className="font-semibold tracking-tight text-2xl text-foreground"
           title="Volaired homepage"
         >
           volaired
         </Link>
-        <Link
-          href="/trips"
-          className="text-muted-foreground font-medium col-start-5"
-        >
-          Trips
-        </Link>
-        <Link href="/" className="text-muted-foreground font-medium">
-          Booking
-        </Link>
-        <Link href="/deals" className="text-muted-foreground font-medium">
-          Deals & Offers
-        </Link>
-        <Link
-          href="/partnerships"
-          className="text-muted-foreground font-medium"
-        >
-          Partnerships
-        </Link>
-        <Button className="col-end-10 bg-background text-foreground hover:bg-background/60 hidden lg:flex gap-x-2">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-            class="size-5"
+        <div>
+          <div className="hidden lg:flex items-center gap-x-20">
+            <Link href="/trips" className="text-muted-foreground font-medium">
+              Trips
+            </Link>
+            <Link href="/" className="text-muted-foreground font-medium">
+              Booking
+            </Link>
+            <Link href="/deals" className="text-muted-foreground font-medium">
+              Deals & Offers
+            </Link>
+            <Link
+              href="/partnerships"
+              className="text-muted-foreground font-medium"
+            >
+              Partnerships
+            </Link>
+            <Button className="bg-background text-foreground hover:bg-background/60 hidden lg:flex gap-x-2">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                class="size-5"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0Zm-5.5-2.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0ZM10 12a5.99 5.99 0 0 0-4.793 2.39A6.483 6.483 0 0 0 10 16.5a6.483 6.483 0 0 0 4.793-2.11A5.99 5.99 0 0 0 10 12Z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+              Sign in
+            </Button>
+          </div>
+          <Button
+            size="icon"
+            onClick={handleMenuClick}
+            className="lg:hidden bg-background hover:bg-background/60 flex items-center gap-x-2"
           >
-            <path
-              fill-rule="evenodd"
-              d="M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0Zm-5.5-2.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0ZM10 12a5.99 5.99 0 0 0-4.793 2.39A6.483 6.483 0 0 0 10 16.5a6.483 6.483 0 0 0 4.793-2.11A5.99 5.99 0 0 0 10 12Z"
-              clip-rule="evenodd"
-            />
-          </svg>
-          Sign in
-        </Button>
-        <Button
-          size="icon"
-          onClick={handleMenuClick}
-          className="lg:hidden col-end-10 bg-background text-foreground hover:bg-background/60 flex items-center gap-x-2"
-        >
-          {
-            <AnimatePresence>
-              {menuOpen ? (
-                <motion.svg
-                  initial={{ rotate: 0 }}
-                  animate={{ rotate: 180 }}
-                  exit={{ rotate: 0 }}
-                  transition={{ duration: 0.4 }}
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  class="size-5"
-                >
-                  <path d="M6.28 5.22a.75.75 0 0 0-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 1 0 1.06 1.06L10 11.06l3.72 3.72a.75.75 0 1 0 1.06-1.06L11.06 10l3.72-3.72a.75.75 0 0 0-1.06-1.06L10 8.94 6.28 5.22Z" />
-                </motion.svg>
-              ) : (
-                <motion.svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  class="size-5"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M2 4.75A.75.75 0 0 1 2.75 4h14.5a.75.75 0 0 1 0 1.5H2.75A.75.75 0 0 1 2 4.75ZM2 10a.75.75 0 0 1 .75-.75h14.5a.75.75 0 0 1 0 1.5H2.75A.75.75 0 0 1 2 10Zm0 5.25a.75.75 0 0 1 .75-.75h14.5a.75.75 0 0 1 0 1.5H2.75a.75.75 0 0 1-.75-.75Z"
-                    clip-rule="evenodd"
-                  />
-                </motion.svg>
-              )}
-            </AnimatePresence>
-          }
-          {/* Sign in */}
-        </Button>
+            {
+              <AnimatePresence>
+                {menuOpen ? (
+                  <motion.svg
+                    initial={{ rotate: 0 }}
+                    animate={{ rotate: 180 }}
+                    exit={{ rotate: 0 }}
+                    transition={{ duration: 0.4 }}
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    class="size-5 text-foreground duration-0"
+                  >
+                    <path d="M6.28 5.22a.75.75 0 0 0-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 1 0 1.06 1.06L10 11.06l3.72 3.72a.75.75 0 1 0 1.06-1.06L11.06 10l3.72-3.72a.75.75 0 0 0-1.06-1.06L10 8.94 6.28 5.22Z" />
+                  </motion.svg>
+                ) : (
+                  <motion.svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    class="size-5 text-foreground duration-0"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M2 4.75A.75.75 0 0 1 2.75 4h14.5a.75.75 0 0 1 0 1.5H2.75A.75.75 0 0 1 2 4.75ZM2 10a.75.75 0 0 1 .75-.75h14.5a.75.75 0 0 1 0 1.5H2.75A.75.75 0 0 1 2 10Zm0 5.25a.75.75 0 0 1 .75-.75h14.5a.75.75 0 0 1 0 1.5H2.75a.75.75 0 0 1-.75-.75Z"
+                      clip-rule="evenodd"
+                    />
+                  </motion.svg>
+                )}
+              </AnimatePresence>
+            }
+            {/* Sign in */}
+          </Button>
+        </div>
       </nav>
       <AnimatePresence>
         {menuOpen && (

@@ -228,11 +228,11 @@ export default function Footer() {
       <Separator className="my-4 -mx-6 w-screen" />
       <div className="py-14 text-center flex gap-y-6 flex-col">
         <div className="flex flex-col gap-y-4 items-center">
-          <span className="text-3xl tracking-tight font-bold">
+          <span className="text-3xl tracking-tight font-bold text-foreground duration-0">
             <span className="text-indigo-500">Explore</span> the Volaired
             Advantage
           </span>
-          <p className="text-muted-foreground lg:w-[80dvh]">
+          <p className="text-muted-foreground duration-0 lg:w-[80dvh]">
             Volaired simplifies your travel experience with intelligent flight
             recommendations, seamless group coordination, and personalized
             itineraries.
@@ -246,17 +246,21 @@ export default function Footer() {
       </div>
       <Separator className="my-4 flex shrink" />
       <div className="mt-14">
-        <span className="font-semibold tracking-tight text-2xl">Volaired</span>
+        <span className="font-semibold tracking-tight text-2xl text-foreground duration-0">
+          Volaired
+        </span>
       </div>
       <div className="mt-8 flex gap-x-20">
         {footer.map((section) => (
           <div key={section.name} className="flex flex-col gap-y-2">
-            <span className="font-medium tracking-tight">{section.name}</span>
+            <span className="font-medium tracking-tight text-foreground duration-0">
+              {section.name}
+            </span>
             <ul className="mt-2 flex flex-col gap-y-2">
               {section.links.map((link) => (
                 <li
                   key={link.name}
-                  className="hover:text-foreground text-muted-foreground text-sm"
+                  className="duration-0 hover:text-foreground text-muted-foreground text-sm"
                 >
                   <Link href={link.href} title={link.title}>
                     {link.name}
@@ -269,7 +273,7 @@ export default function Footer() {
       </div>
       <Separator className="my-4 flex shrink" />
       <div className="mb-4 flex items-center justify-between">
-        <span className="text-muted-foreground text-xs">
+        <span className="duration-0 text-muted-foreground text-xs">
           © Volaired. All rights reserved.
         </span>
         <ModeToggle />
