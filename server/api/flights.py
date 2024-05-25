@@ -1,4 +1,4 @@
-from flask_restful import Resource
+from flask_restx import Resource
 
 class FlightsSearch(Resource):
 	def post(self):

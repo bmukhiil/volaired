@@ -1,5 +1,5 @@
 from flask import Flask, render_template
-from flask_restful import Api, Resource
+from flask_restx import Api, Resource
 from api.flights import FlightsSearch, FlightsAddToPlan
 from api.hotels import HotelsSearch, HotelsAddToPlan
 from flask_cors import CORS, cross_origin
