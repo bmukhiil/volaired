@@ -10,7 +10,7 @@ const CustomDashedCard = ({
   <div
     className={cn(
       "shadow-sm border-dashed border rounded-lg p-4 bg-secondary",
-      className
+      className,
     )}
   >
     {children}

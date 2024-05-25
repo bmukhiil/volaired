@@ -116,7 +116,7 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       {isExploding && <ConfettiExplosionCanvas />}
-      <div className="lg:rounded-b-[5dvh] rounded-b-[3dvh] shadow-sm flex justify-center items-center bg-secondary h-full -mx-6 px-6 pt-32 pb-20 md:pt-20 lg:py-40">
+      <div className="lg:rounded-b-[5dvh] rounded-b-[3dvh] shadow-sm flex justify-center items-center bg-secondary h-full -mx-6 px-6 py-20 md:pt-20 lg:pt-20 lg:pb-40">
         <HeroSection
           loading={loading}
           success={success}

@@ -16,6 +16,8 @@ import collab_iphone_dark from "../../../public/collab_iphone_dark.webp";
 import split_bills_iphone_light from "../../../public/split_bills_iphone_light.webp";
 import split_bills_iphone_dark from "../../../public/split_bills_iphone_dark.webp";
 import copilot_chat from "../../../public/copilot_chat.webp";
+import flight_search_demo_light from "../../../public/flight_search_demo_light.webp";
+import flight_search_demo_dark from "../../../public/flight_search_demo_dark.webp";
 
 import { cn } from "@/lib/utils";
 import { Switch } from "@/components/ui/switch";
@@ -83,22 +85,48 @@ interface MetricsResult {
 
 const HeroSection = (props: HeroSectionProps) => {
   return (
-    <div className="flex flex-col w-[99dvh] gap-y-3">
-      <div className="flex lg:justify-center">
-        <span className="shadow border border-indigo-500 bg-indigo-300 dark:bg-indigo-400 text-sm tracking-tight font-medium px-3 py-1 rounded-full">
-          Announcing early access
-        </span>
-      </div>
-      <div>
-        <h1 className="text-4xl lg:text-6xl lg:text-center font-bold tracking-tight">
-          Unlock your next adventure.
-        </h1>
-        <p className="text-lg lg:text-center text-muted-foreground mt-4 lg:mt-5 lg:px-24">
-          Effortlessly book flights, manage itineraries, and split costs—all in
-          one place. Let&apos;s make your travel stress-free and filled with
-          fun.
-        </p>
-        <EmailSignUpForm {...props} />
+    <div className="lg:relative lg:translate-x-[17dvh]">
+      <div className="flex lg:flex-row flex-col gap-y-16 lg:items-center lg:gap-x-28">
+        <div className="lg:-translate-y-6 flex flex-col gap-y-3 lg:w-[90dvh]">
+          <div className="flex">
+            <span className="shadow border border-indigo-500 bg-indigo-300 dark:bg-indigo-400 text-sm tracking-tight font-medium px-3 py-1 rounded-full">
+              Announcing early access
+            </span>
+          </div>
+          <div>
+            <h1 className="text-4xl lg:text-5xl font-bold tracking-tight">
+              Unlock your next adventure.
+            </h1>
+            <p className="text-lg text-muted-foreground mt-4 lg:mt-5">
+              Effortlessly book flights, manage itineraries, and split costs—all
+              in one place. Let&apos;s make your travel stress-free and filled
+              with fun.
+            </p>
+            <EmailSignUpForm {...props} />
+          </div>
+        </div>
+        <motion.div
+          initial={{ opacity: 0, translateX: "50%" }}
+          animate={{ opacity: 1, translateX: "0%" }}
+          className="dark:hidden"
+        >
+          <Image
+            src={flight_search_demo_light}
+            alt="Flight Search Demo"
+            className="w-[150dvh] shadow-sm lg:shadow-2xl"
+          />
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, translateX: "50%" }}
+          animate={{ opacity: 1, translateX: "0%" }}
+          className="hidden dark:block"
+        >
+          <Image
+            src={flight_search_demo_dark}
+            alt="Flight Search Demo"
+            className="w-[150dvh] shadow-sm lg:shadow-2xl"
+          />
+        </motion.div>
       </div>
     </div>
   );
@@ -108,7 +136,7 @@ const EmailSignUpForm = (props: EmailSignUpFormProps) => {
   const { loading, success, error, onSubmit, onChange } = props;
 
   return (
-    <div className="flex flex-col mt-8 lg:mt-4 gap-y-2 lg:items-center">
+    <div className="flex flex-col mt-8 lg:mt-4 gap-y-2">
       <div className="flex flex-col gap-y-1 lg:gap-y-0 lg:w-[65dvh]">
         <div className="flex items-center gap-x-2">
           <Input
@@ -554,7 +582,7 @@ const GroupTripSection = (props: GroupTripSectionProps) => {
                       "absolute right-[0.5px] top-[0.5px] transform translate-x-1/2 -translate-y-1/2",
                       {
                         hidden: tripJoinedTriggered,
-                      }
+                      },
                     )}
                   >
                     <div className="bg-indigo-400 w-2 h-2 rounded-full">
@@ -746,7 +774,7 @@ const FlightPriceInfo = (props: FlightPriceInfoProps) => {
 
     // Ensure metrics are sorted if not already (typically by quartileRanking)
     const sortedMetrics = metrics.sort(
-      (a: any, b: any) => parseFloat(a.amount) - parseFloat(b.amount)
+      (a: any, b: any) => parseFloat(a.amount) - parseFloat(b.amount),
     );
     const Q1 = parseFloat(sortedMetrics[1].amount);
     const Q3 = parseFloat(sortedMetrics[2].amount);
@@ -835,7 +863,7 @@ const FlightPriceInfo = (props: FlightPriceInfoProps) => {
               variant={"outline"}
               className={cn(
                 "w-full text-foreground justify-start font-normal",
-                !date && "text-muted-foreground"
+                !date && "text-muted-foreground",
               )}
             >
               <svg
