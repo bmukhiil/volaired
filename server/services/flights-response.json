@@ -1,0 +1,678 @@
+[
+    {
+        "id": "1",
+        "instantTicketingRequired": false,
+        "itineraries": [
+            {
+                "duration": "PT12H40M",
+                "segments": [
+                    {
+                        "aircraft": {
+                            "code": "359"
+                        },
+                        "arrival": {
+                            "at": "2024-07-26T06:20:00",
+                            "iataCode": "FCO",
+                            "terminal": "3"
+                        },
+                        "blacklistedInEU": false,
+                        "carrierCode": "AZ",
+                        "departure": {
+                            "at": "2024-07-25T16:05:00",
+                            "iataCode": "JFK",
+                            "terminal": "1"
+                        },
+                        "duration": "PT8H15M",
+                        "id": "1",
+                        "number": "609",
+                        "numberOfStops": 0,
+                        "operating": {
+                            "carrierCode": "AZ"
+                        }
+                    },
+                    {
+                        "aircraft": {
+                            "code": "320"
+                        },
+                        "arrival": {
+                            "at": "2024-07-26T10:45:00",
+                            "iataCode": "MAD",
+                            "terminal": "2"
+                        },
+                        "blacklistedInEU": false,
+                        "carrierCode": "AZ",
+                        "departure": {
+                            "at": "2024-07-26T08:10:00",
+                            "iataCode": "FCO",
+                            "terminal": "1"
+                        },
+                        "duration": "PT2H35M",
+                        "id": "2",
+                        "number": "58",
+                        "numberOfStops": 0,
+                        "operating": {
+                            "carrierCode": "AZ"
+                        }
+                    }
+                ]
+            },
+            {
+                "duration": "PT25H55M",
+                "segments": [
+                    {
+                        "aircraft": {
+                            "code": "320"
+                        },
+                        "arrival": {
+                            "at": "2024-07-29T20:25:00",
+                            "iataCode": "FCO",
+                            "terminal": "1"
+                        },
+                        "blacklistedInEU": false,
+                        "carrierCode": "AZ",
+                        "departure": {
+                            "at": "2024-07-29T18:00:00",
+                            "iataCode": "MAD",
+                            "terminal": "2"
+                        },
+                        "duration": "PT2H25M",
+                        "id": "5",
+                        "number": "63",
+                        "numberOfStops": 0,
+                        "operating": {
+                            "carrierCode": "AZ"
+                        }
+                    },
+                    {
+                        "aircraft": {
+                            "code": "339"
+                        },
+                        "arrival": {
+                            "at": "2024-07-30T13:55:00",
+                            "iataCode": "JFK",
+                            "terminal": "1"
+                        },
+                        "blacklistedInEU": false,
+                        "carrierCode": "AZ",
+                        "departure": {
+                            "at": "2024-07-30T10:15:00",
+                            "iataCode": "FCO",
+                            "terminal": "1"
+                        },
+                        "duration": "PT9H40M",
+                        "id": "6",
+                        "number": "608",
+                        "numberOfStops": 0,
+                        "operating": {
+                            "carrierCode": "AZ"
+                        }
+                    }
+                ]
+            }
+        ],
+        "lastTicketingDate": "2024-05-30",
+        "lastTicketingDateTime": "2024-05-30",
+        "nonHomogeneous": false,
+        "numberOfBookableSeats": 9,
+        "oneWay": false,
+        "price": {
+            "base": "842.00",
+            "currency": "USD",
+            "fees": [
+                {
+                    "amount": "0.00",
+                    "type": "SUPPLIER"
+                },
+                {
+                    "amount": "0.00",
+                    "type": "TICKETING"
+                }
+            ],
+            "grandTotal": "2113.60",
+            "total": "2113.60"
+        },
+        "pricingOptions": {
+            "fareType": [
+                "PUBLISHED"
+            ],
+            "includedCheckedBagsOnly": true
+        },
+        "source": "GDS",
+        "travelerPricings": [
+            {
+                "fareDetailsBySegment": [
+                    {
+                        "amenities": [
+                            {
+                                "amenityProvider": {
+                                    "name": "BrandedFare"
+                                },
+                                "amenityType": "PRE_RESERVED_SEAT",
+                                "description": "ADVANCE SEAT RESERVATION",
+                                "isChargeable": false
+                            },
+                            {
+                                "amenityProvider": {
+                                    "name": "BrandedFare"
+                                },
+                                "amenityType": "MEAL",
+                                "description": "MEAL AND WINE",
+                                "isChargeable": false
+                            },
+                            {
+                                "amenityProvider": {
+                                    "name": "BrandedFare"
+                                },
+                                "amenityType": "TRAVEL_SERVICES",
+                                "description": "PRIORITY CHECK IN",
+                                "isChargeable": false
+                            },
+                            {
+                                "amenityProvider": {
+                                    "name": "BrandedFare"
+                                },
+                                "amenityType": "TRAVEL_SERVICES",
+                                "description": "FAST TRACK",
+                                "isChargeable": false
+                            },
+                            {
+                                "amenityProvider": {
+                                    "name": "BrandedFare"
+                                },
+                                "amenityType": "BRANDED_FARES",
+                                "description": "MILEAGE ACCRUAL",
+                                "isChargeable": false
+                            }
+                        ],
+                        "brandedFare": "BIZCLASSIC",
+                        "brandedFareLabel": "BUSINESS CLASSIC",
+                        "cabin": "BUSINESS",
+                        "class": "I",
+                        "fareBasis": "INLN00D1",
+                        "includedCheckedBags": {
+                            "quantity": 2
+                        },
+                        "segmentId": "1"
+                    },
+                    {
+                        "amenities": [
+                            {
+                                "amenityProvider": {
+                                    "name": "BrandedFare"
+                                },
+                                "amenityType": "PRE_RESERVED_SEAT",
+                                "description": "ADVANCE SEAT RESERVATION",
+                                "isChargeable": false
+                            },
+                            {
+                                "amenityProvider": {
+                                    "name": "BrandedFare"
+                                },
+                                "amenityType": "MEAL",
+                                "description": "MEAL AND WINE",
+                                "isChargeable": false
+                            },
+                            {
+                                "amenityProvider": {
+                                    "name": "BrandedFare"
+                                },
+                                "amenityType": "TRAVEL_SERVICES",
+                                "description": "PRIORITY CHECK IN",
+                                "isChargeable": false
+                            },
+                            {
+                                "amenityProvider": {
+                                    "name": "BrandedFare"
+                                },
+                                "amenityType": "TRAVEL_SERVICES",
+                                "description": "FAST TRACK",
+                                "isChargeable": false
+                            },
+                            {
+                                "amenityProvider": {
+                                    "name": "BrandedFare"
+                                },
+                                "amenityType": "BRANDED_FARES",
+                                "description": "MILEAGE ACCRUAL",
+                                "isChargeable": false
+                            }
+                        ],
+                        "brandedFare": "BIZCLASSIC",
+                        "brandedFareLabel": "BUSINESS CLASSIC",
+                        "cabin": "BUSINESS",
+                        "class": "I",
+                        "fareBasis": "INLN00D1",
+                        "includedCheckedBags": {
+                            "quantity": 2
+                        },
+                        "segmentId": "2"
+                    },
+                    {
+                        "amenities": [
+                            {
+                                "amenityProvider": {
+                                    "name": "BrandedFare"
+                                },
+                                "amenityType": "PRE_RESERVED_SEAT",
+                                "description": "ADVANCE SEAT RESERVATION",
+                                "isChargeable": true
+                            },
+                            {
+                                "amenityProvider": {
+                                    "name": "BrandedFare"
+                                },
+                                "amenityType": "MEAL",
+                                "description": "MEAL AND WINE",
+                                "isChargeable": false
+                            },
+                            {
+                                "amenityProvider": {
+                                    "name": "BrandedFare"
+                                },
+                                "amenityType": "BRANDED_FARES",
+                                "description": "MILEAGE ACCRUAL",
+                                "isChargeable": false
+                            }
+                        ],
+                        "brandedFare": "ECOCLASSIC",
+                        "brandedFareLabel": "ECONOMY CLASSIC",
+                        "cabin": "ECONOMY",
+                        "class": "O",
+                        "fareBasis": "OH4S46M2",
+                        "includedCheckedBags": {
+                            "quantity": 1
+                        },
+                        "segmentId": "5"
+                    },
+                    {
+                        "amenities": [
+                            {
+                                "amenityProvider": {
+                                    "name": "BrandedFare"
+                                },
+                                "amenityType": "PRE_RESERVED_SEAT",
+                                "description": "ADVANCE SEAT RESERVATION",
+                                "isChargeable": true
+                            },
+                            {
+                                "amenityProvider": {
+                                    "name": "BrandedFare"
+                                },
+                                "amenityType": "MEAL",
+                                "description": "MEAL AND WINE",
+                                "isChargeable": false
+                            },
+                            {
+                                "amenityProvider": {
+                                    "name": "BrandedFare"
+                                },
+                                "amenityType": "BRANDED_FARES",
+                                "description": "MILEAGE ACCRUAL",
+                                "isChargeable": false
+                            }
+                        ],
+                        "brandedFare": "ECOCLASSIC",
+                        "brandedFareLabel": "ECONOMY CLASSIC",
+                        "cabin": "ECONOMY",
+                        "class": "O",
+                        "fareBasis": "OH4S46M2",
+                        "includedCheckedBags": {
+                            "quantity": 1
+                        },
+                        "segmentId": "6"
+                    }
+                ],
+                "fareOption": "STANDARD",
+                "price": {
+                    "base": "842.00",
+                    "currency": "USD",
+                    "total": "2113.60"
+                },
+                "travelerId": "1",
+                "travelerType": "ADULT"
+            }
+        ],
+        "type": "flight-offer",
+        "validatingAirlineCodes": [
+            "AZ"
+        ]
+    },
+    {
+        "id": "2",
+        "instantTicketingRequired": false,
+        "itineraries": [
+            {
+                "duration": "PT13H40M",
+                "segments": [
+                    {
+                        "aircraft": {
+                            "code": "339"
+                        },
+                        "arrival": {
+                            "at": "2024-07-26T12:05:00",
+                            "iataCode": "FCO",
+                            "terminal": "3"
+                        },
+                        "blacklistedInEU": false,
+                        "carrierCode": "AZ",
+                        "departure": {
+                            "at": "2024-07-25T21:30:00",
+                            "iataCode": "JFK",
+                            "terminal": "1"
+                        },
+                        "duration": "PT8H35M",
+                        "id": "3",
+                        "number": "611",
+                        "numberOfStops": 0,
+                        "operating": {
+                            "carrierCode": "AZ"
+                        }
+                    },
+                    {
+                        "aircraft": {
+                            "code": "320"
+                        },
+                        "arrival": {
+                            "at": "2024-07-26T17:10:00",
+                            "iataCode": "MAD",
+                            "terminal": "2"
+                        },
+                        "blacklistedInEU": false,
+                        "carrierCode": "AZ",
+                        "departure": {
+                            "at": "2024-07-26T14:35:00",
+                            "iataCode": "FCO",
+                            "terminal": "1"
+                        },
+                        "duration": "PT2H35M",
+                        "id": "4",
+                        "number": "60",
+                        "numberOfStops": 0,
+                        "operating": {
+                            "carrierCode": "AZ"
+                        }
+                    }
+                ]
+            },
+            {
+                "duration": "PT25H55M",
+                "segments": [
+                    {
+                        "aircraft": {
+                            "code": "320"
+                        },
+                        "arrival": {
+                            "at": "2024-07-29T20:25:00",
+                            "iataCode": "FCO",
+                            "terminal": "1"
+                        },
+                        "blacklistedInEU": false,
+                        "carrierCode": "AZ",
+                        "departure": {
+                            "at": "2024-07-29T18:00:00",
+                            "iataCode": "MAD",
+                            "terminal": "2"
+                        },
+                        "duration": "PT2H25M",
+                        "id": "5",
+                        "number": "63",
+                        "numberOfStops": 0,
+                        "operating": {
+                            "carrierCode": "AZ"
+                        }
+                    },
+                    {
+                        "aircraft": {
+                            "code": "339"
+                        },
+                        "arrival": {
+                            "at": "2024-07-30T13:55:00",
+                            "iataCode": "JFK",
+                            "terminal": "1"
+                        },
+                        "blacklistedInEU": false,
+                        "carrierCode": "AZ",
+                        "departure": {
+                            "at": "2024-07-30T10:15:00",
+                            "iataCode": "FCO",
+                            "terminal": "1"
+                        },
+                        "duration": "PT9H40M",
+                        "id": "6",
+                        "number": "608",
+                        "numberOfStops": 0,
+                        "operating": {
+                            "carrierCode": "AZ"
+                        }
+                    }
+                ]
+            }
+        ],
+        "lastTicketingDate": "2024-05-30",
+        "lastTicketingDateTime": "2024-05-30",
+        "nonHomogeneous": false,
+        "numberOfBookableSeats": 9,
+        "oneWay": false,
+        "price": {
+            "base": "842.00",
+            "currency": "USD",
+            "fees": [
+                {
+                    "amount": "0.00",
+                    "type": "SUPPLIER"
+                },
+                {
+                    "amount": "0.00",
+                    "type": "TICKETING"
+                }
+            ],
+            "grandTotal": "2113.60",
+            "total": "2113.60"
+        },
+        "pricingOptions": {
+            "fareType": [
+                "PUBLISHED"
+            ],
+            "includedCheckedBagsOnly": true
+        },
+        "source": "GDS",
+        "travelerPricings": [
+            {
+                "fareDetailsBySegment": [
+                    {
+                        "amenities": [
+                            {
+                                "amenityProvider": {
+                                    "name": "BrandedFare"
+                                },
+                                "amenityType": "PRE_RESERVED_SEAT",
+                                "description": "ADVANCE SEAT RESERVATION",
+                                "isChargeable": false
+                            },
+                            {
+                                "amenityProvider": {
+                                    "name": "BrandedFare"
+                                },
+                                "amenityType": "MEAL",
+                                "description": "MEAL AND WINE",
+                                "isChargeable": false
+                            },
+                            {
+                                "amenityProvider": {
+                                    "name": "BrandedFare"
+                                },
+                                "amenityType": "TRAVEL_SERVICES",
+                                "description": "PRIORITY CHECK IN",
+                                "isChargeable": false
+                            },
+                            {
+                                "amenityProvider": {
+                                    "name": "BrandedFare"
+                                },
+                                "amenityType": "TRAVEL_SERVICES",
+                                "description": "FAST TRACK",
+                                "isChargeable": false
+                            },
+                            {
+                                "amenityProvider": {
+                                    "name": "BrandedFare"
+                                },
+                                "amenityType": "BRANDED_FARES",
+                                "description": "MILEAGE ACCRUAL",
+                                "isChargeable": false
+                            }
+                        ],
+                        "brandedFare": "BIZCLASSIC",
+                        "brandedFareLabel": "BUSINESS CLASSIC",
+                        "cabin": "BUSINESS",
+                        "class": "I",
+                        "fareBasis": "INLN00D1",
+                        "includedCheckedBags": {
+                            "quantity": 2
+                        },
+                        "segmentId": "3"
+                    },
+                    {
+                        "amenities": [
+                            {
+                                "amenityProvider": {
+                                    "name": "BrandedFare"
+                                },
+                                "amenityType": "PRE_RESERVED_SEAT",
+                                "description": "ADVANCE SEAT RESERVATION",
+                                "isChargeable": false
+                            },
+                            {
+                                "amenityProvider": {
+                                    "name": "BrandedFare"
+                                },
+                                "amenityType": "MEAL",
+                                "description": "MEAL AND WINE",
+                                "isChargeable": false
+                            },
+                            {
+                                "amenityProvider": {
+                                    "name": "BrandedFare"
+                                },
+                                "amenityType": "TRAVEL_SERVICES",
+                                "description": "PRIORITY CHECK IN",
+                                "isChargeable": false
+                            },
+                            {
+                                "amenityProvider": {
+                                    "name": "BrandedFare"
+                                },
+                                "amenityType": "TRAVEL_SERVICES",
+                                "description": "FAST TRACK",
+                                "isChargeable": false
+                            },
+                            {
+                                "amenityProvider": {
+                                    "name": "BrandedFare"
+                                },
+                                "amenityType": "BRANDED_FARES",
+                                "description": "MILEAGE ACCRUAL",
+                                "isChargeable": false
+                            }
+                        ],
+                        "brandedFare": "BIZCLASSIC",
+                        "brandedFareLabel": "BUSINESS CLASSIC",
+                        "cabin": "BUSINESS",
+                        "class": "I",
+                        "fareBasis": "INLN00D1",
+                        "includedCheckedBags": {
+                            "quantity": 2
+                        },
+                        "segmentId": "4"
+                    },
+                    {
+                        "amenities": [
+                            {
+                                "amenityProvider": {
+                                    "name": "BrandedFare"
+                                },
+                                "amenityType": "PRE_RESERVED_SEAT",
+                                "description": "ADVANCE SEAT RESERVATION",
+                                "isChargeable": true
+                            },
+                            {
+                                "amenityProvider": {
+                                    "name": "BrandedFare"
+                                },
+                                "amenityType": "MEAL",
+                                "description": "MEAL AND WINE",
+                                "isChargeable": false
+                            },
+                            {
+                                "amenityProvider": {
+                                    "name": "BrandedFare"
+                                },
+                                "amenityType": "BRANDED_FARES",
+                                "description": "MILEAGE ACCRUAL",
+                                "isChargeable": false
+                            }
+                        ],
+                        "brandedFare": "ECOCLASSIC",
+                        "brandedFareLabel": "ECONOMY CLASSIC",
+                        "cabin": "ECONOMY",
+                        "class": "O",
+                        "fareBasis": "OH4S46M2",
+                        "includedCheckedBags": {
+                            "quantity": 1
+                        },
+                        "segmentId": "5"
+                    },
+                    {
+                        "amenities": [
+                            {
+                                "amenityProvider": {
+                                    "name": "BrandedFare"
+                                },
+                                "amenityType": "PRE_RESERVED_SEAT",
+                                "description": "ADVANCE SEAT RESERVATION",
+                                "isChargeable": true
+                            },
+                            {
+                                "amenityProvider": {
+                                    "name": "BrandedFare"
+                                },
+                                "amenityType": "MEAL",
+                                "description": "MEAL AND WINE",
+                                "isChargeable": false
+                            },
+                            {
+                                "amenityProvider": {
+                                    "name": "BrandedFare"
+                                },
+                                "amenityType": "BRANDED_FARES",
+                                "description": "MILEAGE ACCRUAL",
+                                "isChargeable": false
+                            }
+                        ],
+                        "brandedFare": "ECOCLASSIC",
+                        "brandedFareLabel": "ECONOMY CLASSIC",
+                        "cabin": "ECONOMY",
+                        "class": "O",
+                        "fareBasis": "OH4S46M2",
+                        "includedCheckedBags": {
+                            "quantity": 1
+                        },
+                        "segmentId": "6"
+                    }
+                ],
+                "fareOption": "STANDARD",
+                "price": {
+                    "base": "842.00",
+                    "currency": "USD",
+                    "total": "2113.60"
+                },
+                "travelerId": "1",
+                "travelerType": "ADULT"
+            }
+        ],
+        "type": "flight-offer",
+        "validatingAirlineCodes": [
+            "AZ"
+        ]
+    }
+]
