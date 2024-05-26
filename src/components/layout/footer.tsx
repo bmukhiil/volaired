@@ -63,85 +63,85 @@ export default function Footer() {
     },
   ];
 
-  const globeConfig = {
-    pointSize: 1000,
-    globeColor: "#18181b",
-    showAtmosphere: false,
-    atmosphereColor: "#FFFFDC",
-    atmosphereAltitude: 0.1,
-    emissive: "#062056",
-    emissiveIntensity: 0.1,
-    shininess: 0.9,
-    polygonColor: "rgba(255,255,255,0.7)",
-    ambientLight: "#38bdf8",
-    directionalLeftLight: "#ffffff",
-    directionalTopLight: "#ffffff",
-    pointLight: "#ffffff",
-    arcLength: 0.9,
-    rings: 1,
-    maxRings: 3,
-    initialPosition: { lat: 22.3193, lng: 114.1694 },
-    autoRotate: true,
-    autoRotateSpeed: 0.5,
-  };
-  const colors = ["#d9dcfc", "#818CF8", "#81c8f8"];
+  // const globeConfig = {
+  //   pointSize: 1000,
+  //   globeColor: "#18181b",
+  //   showAtmosphere: false,
+  //   atmosphereColor: "#FFFFDC",
+  //   atmosphereAltitude: 0.1,
+  //   emissive: "#062056",
+  //   emissiveIntensity: 0.1,
+  //   shininess: 0.9,
+  //   polygonColor: "rgba(255,255,255,0.7)",
+  //   ambientLight: "#38bdf8",
+  //   directionalLeftLight: "#ffffff",
+  //   directionalTopLight: "#ffffff",
+  //   pointLight: "#ffffff",
+  //   arcLength: 0.9,
+  //   rings: 1,
+  //   maxRings: 3,
+  //   initialPosition: { lat: 22.3193, lng: 114.1694 },
+  //   autoRotate: true,
+  //   autoRotateSpeed: 0.5,
+  // };
+  // const colors = ["#d9dcfc", "#818CF8", "#81c8f8"];
 
-  useEffect(() => {
-    async function fetchArcs() {
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 15000);
+  // useEffect(() => {
+  //   async function fetchArcs() {
+  //     const controller = new AbortController();
+  //     const timeoutId = setTimeout(() => controller.abort(), 15000);
 
-      try {
-        const response = await fetch(
-          `/api/v1/flights/paths/yesterday?limit=10`,
-          {
-            signal: controller.signal,
-            next: {
-              revalidate: 43200,
-            },
-          },
-        );
-        clearTimeout(timeoutId);
-        const data = await response.json();
-        const newArcs = data.data.map(
-          (flight: EnrichedFlightDetails, index: number) => {
-            const [startLat, startLng] = flight.depAirport.coordinates
-              .replace(/\s/g, "")
-              .split(",");
-            const [endLat, endLng] = flight.arrAirport.coordinates
-              .replace(/\s/g, "")
-              .split(",");
+  //     try {
+  //       const response = await fetch(
+  //         `/api/v1/flights/paths/yesterday?limit=10`,
+  //         {
+  //           signal: controller.signal,
+  //           next: {
+  //             revalidate: 43200,
+  //           },
+  //         }
+  //       );
+  //       clearTimeout(timeoutId);
+  //       const data = await response.json();
+  //       const newArcs = data.data.map(
+  //         (flight: EnrichedFlightDetails, index: number) => {
+  //           const [startLat, startLng] = flight.depAirport.coordinates
+  //             .replace(/\s/g, "")
+  //             .split(",");
+  //           const [endLat, endLng] = flight.arrAirport.coordinates
+  //             .replace(/\s/g, "")
+  //             .split(",");
 
-            return {
-              order: index,
-              startLat: parseFloat(startLat),
-              startLng: parseFloat(startLng),
-              endLat: parseFloat(endLat),
-              endLng: parseFloat(endLng),
-              arcAlt: 0.1,
-              color: colors[Math.floor(Math.random() * (colors.length - 1))],
-            };
-          },
-        );
+  //           return {
+  //             order: index,
+  //             startLat: parseFloat(startLat),
+  //             startLng: parseFloat(startLng),
+  //             endLat: parseFloat(endLat),
+  //             endLng: parseFloat(endLng),
+  //             arcAlt: 0.1,
+  //             color: colors[Math.floor(Math.random() * (colors.length - 1))],
+  //           };
+  //         }
+  //       );
 
-        setArcs(newArcs);
-        // setLoading(false);
-      } catch (e: any) {
-        // setLoading(false);
-        setError(true);
-        if (e.name === "AbortError") {
-          console.error("Request timed out");
-        } else {
-          console.error("Error fetching arcs:", e.message);
-        }
-      }
-    }
+  //       setArcs(newArcs);
+  //       // setLoading(false);
+  //     } catch (e: any) {
+  //       // setLoading(false);
+  //       setError(true);
+  //       if (e.name === "AbortError") {
+  //         console.error("Request timed out");
+  //       } else {
+  //         console.error("Error fetching arcs:", e.message);
+  //       }
+  //     }
+  //   }
 
-    fetchArcs();
-  }, []);
+  //   fetchArcs();
+  // }, []);
 
   return (
-    <main className="lg:px-40 lg:py-4 w-screen px-6 pt-20">
+    <main className="lg:px-40 lg:py-4 px-6 pt-20 rounded-t-2xl bg-rose-400/20">
       <div className="flex flex-col justify-center items-center">
         <div className="flex flex-col gap-y-2">
           <h2 className="text-3xl font-bold tracking-tight">

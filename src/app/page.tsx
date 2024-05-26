@@ -43,6 +43,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -61,7 +62,7 @@ const jsonLd = {
   // },
 };
 
-const adultCountAtom = atom(0);
+const adultCountAtom = atom(2);
 const childCountAtom = atom(0);
 const infantCountAtom = atom(0);
 
@@ -73,6 +74,8 @@ export default function Home() {
   const [adultCount, setAdultCount] = useAtom(adultCountAtom);
   const [childCount, setChildCount] = useAtom(childCountAtom);
   const [infantCount, setInfantCount] = useAtom(infantCountAtom);
+
+  const [tripCreateSuggestion, setTripCreateSuggestion] = useState(true);
 
   const activityMenu = [
     {
@@ -250,273 +253,406 @@ export default function Home() {
             </DropdownMenu>
           </div>
         </div>
-        <div className="mx-6 mt-6 flex lg:justify-center bg-secondary rounded-lg">
-          <div className="lg:hidden flex flex-col gap-y-2 p-5 w-full">
-            <AirportSelect
-              type="departure"
-              airport={searchParams.departure}
-              onAirportChange={(airport) =>
-                handleAirportChange(airport, "departure")
-              }
-            />
-            <div className="flex justify-center">
-              <Button className="bg-foreground rounded-xl" size="icon">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  class="size-5 rotate-90"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M13.2 2.24a.75.75 0 0 0 .04 1.06l2.1 1.95H6.75a.75.75 0 0 0 0 1.5h8.59l-2.1 1.95a.75.75 0 1 0 1.02 1.1l3.5-3.25a.75.75 0 0 0 0-1.1l-3.5-3.25a.75.75 0 0 0-1.06.04Zm-6.4 8a.75.75 0 0 0-1.06-.04l-3.5 3.25a.75.75 0 0 0 0 1.1l3.5 3.25a.75.75 0 1 0 1.02-1.1l-2.1-1.95h8.59a.75.75 0 0 0 0-1.5H4.66l2.1-1.95a.75.75 0 0 0 .04-1.06Z"
-                    clip-rule="evenodd"
-                  />
-                </svg>
-              </Button>
-            </div>
-            <AirportSelect
-              type="destination"
-              airport={searchParams.destination}
-              onAirportChange={(airport) =>
-                handleAirportChange(airport, "destination")
-              }
-            />
-            <DatePickerWithRange onDateChange={updateDateRange} />
-            <div className="flex flex-col gap-y-1">
-              <Label htmlFor="travelers">Travelers</Label>
-              <Drawer>
-                <DrawerTrigger>
-                  <Input placeholder="" />
-                </DrawerTrigger>
-                <DrawerContent className="bg-secondary">
-                  <DrawerHeader>
-                    <DrawerTitle>How many people are travelling?</DrawerTitle>
-                    <DrawerDescription className="">
-                      This will help us find the best deals for your group.
-                      <div className="mt-6 flex flex-col items-start w-full gap-y-4">
-                        <div className="font-medium text-lg text-foreground flex items-center justify-between w-full px-16">
-                          Adults
-                          <div className="flex items-center justify-between gap-x-4">
-                            <Button
-                              onClick={() => handleDecrementCount("adult", 1)}
-                              disabled={adultCount === 0}
-                              size="icon"
-                              className="bg-background size-8 flex justify-center items-center rounded-lg"
-                            >
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 20 20"
-                                fill="currentColor"
-                                class="size-5 text-foreground"
-                              >
-                                <path
-                                  fill-rule="evenodd"
-                                  d="M4 10a.75.75 0 0 1 .75-.75h10.5a.75.75 0 0 1 0 1.5H4.75A.75.75 0 0 1 4 10Z"
-                                  clip-rule="evenodd"
-                                />
-                              </svg>
-                            </Button>
-                            <span className="w-5 text-foreground text-xl font-semibold">
-                              {adultCount}
-                            </span>
-                            <Button
-                              onClick={() => handleIncrementCount("adult", 1)}
-                              size="icon"
-                              className="bg-background size-8 flex justify-center items-center rounded-lg"
-                            >
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 20 20"
-                                fill="currentColor"
-                                class="size-5 text-foreground"
-                              >
-                                <path d="M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z" />
-                              </svg>
-                            </Button>
-                          </div>
-                        </div>
-                        <div className="font-medium text-lg text-foreground flex items-center justify-between w-full px-16">
-                          Children
-                          <div className="flex items-center gap-x-4">
-                            <Button
-                              onClick={() => handleDecrementCount("child", 1)}
-                              disabled={childCount === 0}
-                              size="icon"
-                              className="bg-background size-8 flex justify-center items-center rounded-lg"
-                            >
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 20 20"
-                                fill="currentColor"
-                                class="size-5 text-foreground"
-                              >
-                                <path
-                                  fill-rule="evenodd"
-                                  d="M4 10a.75.75 0 0 1 .75-.75h10.5a.75.75 0 0 1 0 1.5H4.75A.75.75 0 0 1 4 10Z"
-                                  clip-rule="evenodd"
-                                />
-                              </svg>
-                            </Button>
-                            <span className="w-5 text-foreground text-xl font-semibold">
-                              {childCount}
-                            </span>
-                            <Button
-                              onClick={() => handleIncrementCount("child", 1)}
-                              size="icon"
-                              className="bg-background size-8 flex justify-center items-center rounded-lg"
-                            >
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 20 20"
-                                fill="currentColor"
-                                class="size-5 text-foreground"
-                              >
-                                <path d="M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z" />
-                              </svg>
-                            </Button>
-                          </div>
-                        </div>
-                        <div className="font-medium text-lg text-foreground flex items-center justify-between w-full px-16">
-                          Infants
-                          <div className="flex items-center gap-x-4">
-                            <Button
-                              onClick={() => handleDecrementCount("infant", 1)}
-                              disabled={infantCount === 0}
-                              size="icon"
-                              className="bg-background size-8 flex justify-center items-center rounded-lg"
-                            >
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 20 20"
-                                fill="currentColor"
-                                class="size-5 text-foreground"
-                              >
-                                <path
-                                  fill-rule="evenodd"
-                                  d="M4 10a.75.75 0 0 1 .75-.75h10.5a.75.75 0 0 1 0 1.5H4.75A.75.75 0 0 1 4 10Z"
-                                  clip-rule="evenodd"
-                                />
-                              </svg>
-                            </Button>
-                            <span className="w-5 text-foreground text-xl font-semibold">
-                              {infantCount}
-                            </span>
-                            <Button
-                              onClick={() => handleIncrementCount("infant", 1)}
-                              size="icon"
-                              className="bg-background size-8 flex justify-center items-center rounded-lg"
-                            >
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 20 20"
-                                fill="currentColor"
-                                class="size-5 text-foreground"
-                              >
-                                <path d="M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z" />
-                              </svg>
-                            </Button>
-                          </div>
-                        </div>
-                      </div>
-                    </DrawerDescription>
-                  </DrawerHeader>
-                  <DrawerFooter>
-                    <Button onClick={handleCountReset}>Reset</Button>
-                    <DrawerClose>
-                      <Button className="w-full" variant="outline">
-                        Close
-                      </Button>
-                    </DrawerClose>
-                  </DrawerFooter>
-                </DrawerContent>
-              </Drawer>
-            </div>
-            <Button
-              disabled={loading}
-              onClick={handleSearch}
-              className="flex justify-center"
-            >
-              <AnimatePresence mode="wait">
-                {loading ? (
-                  <motion.div key="fetch" className="flex items-center gap-x-2">
-                    <motion.div
-                      className="bg-background w-4 h-4"
-                      animate={{
-                        scale: [0.9, 1.1, 1.1, 0.9, 0.9],
-                        rotate: [0, 0, 180, 180, 0],
-                        borderRadius: ["0%", "0%", "50%", "50%", "0%"],
-                      }}
-                      transition={{
-                        duration: 1.8,
-                        ease: "easeInOut",
-                        times: [0, 0.2, 0.5, 0.8, 1],
-                        repeat: Infinity,
-                        repeatDelay: 1.2,
-                      }}
-                    />
-                    Fetching flights...
-                  </motion.div>
-                ) : (
-                  <motion.div
-                    key="search"
-                    className="flex items-center gap-x-2"
-                  >
-                    Search
+        <div className="mx-6 mt-6">
+          {/* {/* <div className="flex lg:justify-center bg-secondary rounded-lg" */}
+          <AnimatePresence>
+            {position === "flights" && (
+              <motion.div
+                initial={{ opacity: 0, x: "120%" }}
+                animate={{ opacity: 1, x: "0%" }}
+                exit={{ opacity: 1, x: "120%" }}
+                className="bg-secondary lg:hidden flex flex-col gap-y-2 p-5 w-full"
+              >
+                <AirportSelect
+                  type="departure"
+                  airport={searchParams.departure}
+                  onAirportChange={(airport) =>
+                    handleAirportChange(airport, "departure")
+                  }
+                />
+                <div className="flex justify-center">
+                  <Button className="bg-foreground rounded-xl" size="icon">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 20 20"
                       fill="currentColor"
-                      class="size-5"
+                      class="size-5 rotate-90"
                     >
                       <path
                         fill-rule="evenodd"
-                        d="M2 10a.75.75 0 0 1 .75-.75h12.59l-2.1-1.95a.75.75 0 1 1 1.02-1.1l3.5 3.25a.75.75 0 0 1 0 1.1l-3.5 3.25a.75.75 0 1 1-1.02-1.1l2.1-1.95H2.75A.75.75 0 0 1 2 10Z"
+                        d="M13.2 2.24a.75.75 0 0 0 .04 1.06l2.1 1.95H6.75a.75.75 0 0 0 0 1.5h8.59l-2.1 1.95a.75.75 0 1 0 1.02 1.1l3.5-3.25a.75.75 0 0 0 0-1.1l-3.5-3.25a.75.75 0 0 0-1.06.04Zm-6.4 8a.75.75 0 0 0-1.06-.04l-3.5 3.25a.75.75 0 0 0 0 1.1l3.5 3.25a.75.75 0 1 0 1.02-1.1l-2.1-1.95h8.59a.75.75 0 0 0 0-1.5H4.66l2.1-1.95a.75.75 0 0 0 .04-1.06Z"
                         clip-rule="evenodd"
                       />
                     </svg>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </Button>
-          </div>
-          <div className="hidden lg:flex p-4 items-end gap-x-4">
-            <div>
-              <Label htmlFor="from">From</Label>
-              <Input placeholder="" />
-            </div>
-            <Button className="bg-foreground rounded-xl" size="icon">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                class="size-5"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M13.2 2.24a.75.75 0 0 0 .04 1.06l2.1 1.95H6.75a.75.75 0 0 0 0 1.5h8.59l-2.1 1.95a.75.75 0 1 0 1.02 1.1l3.5-3.25a.75.75 0 0 0 0-1.1l-3.5-3.25a.75.75 0 0 0-1.06.04Zm-6.4 8a.75.75 0 0 0-1.06-.04l-3.5 3.25a.75.75 0 0 0 0 1.1l3.5 3.25a.75.75 0 1 0 1.02-1.1l-2.1-1.95h8.59a.75.75 0 0 0 0-1.5H4.66l2.1-1.95a.75.75 0 0 0 .04-1.06Z"
-                  clip-rule="evenodd"
+                  </Button>
+                </div>
+                <AirportSelect
+                  type="destination"
+                  airport={searchParams.destination}
+                  onAirportChange={(airport) =>
+                    handleAirportChange(airport, "destination")
+                  }
                 />
-              </svg>
-            </Button>
-            <div>
-              <Label htmlFor="to">To</Label>
-              <Input placeholder="" />
-            </div>
-            <div className=" h-full">
-              <Separator orientation="vertical" />
-            </div>
-            <div>
-              <Label htmlFor="depart">Departure Date</Label>
-              <Input placeholder="" />
-            </div>
-            <div>
-              <Label htmlFor="return">Travelers</Label>
-              <Input placeholder="" />
-            </div>
-            <div>
-              <Button onClick={handleSearch} className="w-full flex gap-x-2">
-                Search
+                <DatePickerWithRange onDateChange={updateDateRange} />
+                <div className="flex flex-col gap-y-1">
+                  <Label htmlFor="travelers">Travelers</Label>
+                  <Drawer>
+                    <DrawerTrigger>
+                      <div
+                        className={cn(
+                          "flex gap-x-2 h-10 w-full rounded-md border border-input bg-background px-4 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                        )}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                          class="size-5"
+                        >
+                          <path d="M10 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM6 8a2 2 0 1 1-4 0 2 2 0 0 1 4 0ZM1.49 15.326a.78.78 0 0 1-.358-.442 3 3 0 0 1 4.308-3.516 6.484 6.484 0 0 0-1.905 3.959c-.023.222-.014.442.025.654a4.97 4.97 0 0 1-2.07-.655ZM16.44 15.98a4.97 4.97 0 0 0 2.07-.654.78.78 0 0 0 .357-.442 3 3 0 0 0-4.308-3.517 6.484 6.484 0 0 1 1.907 3.96 2.32 2.32 0 0 1-.026.654ZM18 8a2 2 0 1 1-4 0 2 2 0 0 1 4 0ZM5.304 16.19a.844.844 0 0 1-.277-.71 5 5 0 0 1 9.947 0 .843.843 0 0 1-.277.71A6.975 6.975 0 0 1 10 18a6.974 6.974 0 0 1-4.696-1.81Z" />
+                        </svg>
+                        <span
+                          className={cn("text-muted-foreground", {
+                            "text-foreground":
+                              adultCount + childCount + infantCount > 0,
+                          })}
+                        >
+                          {adultCount + childCount + infantCount > 0 ? (
+                            <>
+                              {adultCount + childCount + infantCount === 1 ? (
+                                <>1 Traveler</>
+                              ) : (
+                                <>
+                                  {adultCount + childCount + infantCount}{" "}
+                                  Travelers
+                                </>
+                              )}
+                            </>
+                          ) : (
+                            <>Select number of travellers</>
+                          )}
+                        </span>
+                      </div>
+                    </DrawerTrigger>
+                    <DrawerContent className="bg-secondary">
+                      <DrawerHeader>
+                        <DrawerTitle>
+                          How many people are travelling?
+                        </DrawerTitle>
+                        <DrawerDescription className="">
+                          This will help us find the best deals for your group.
+                          <div className="mt-6 flex flex-col items-start w-full gap-y-4 px-12">
+                            <div className="font-medium text-lg text-foreground flex items-center justify-between w-full ">
+                              <div className="flex flex-col items-start">
+                                Adults
+                                <span className="font-medium text-sm text-muted-foreground">
+                                  (12+ years)
+                                </span>
+                              </div>
+                              <div className="flex items-center justify-between gap-x-4">
+                                <Button
+                                  onClick={() =>
+                                    handleDecrementCount("adult", 1)
+                                  }
+                                  disabled={adultCount === 0}
+                                  size="icon"
+                                  className="focus:bg-background/80 bg-background size-8 flex justify-center items-center rounded-lg"
+                                >
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 20 20"
+                                    fill="currentColor"
+                                    class="size-5 text-foreground"
+                                  >
+                                    <path
+                                      fill-rule="evenodd"
+                                      d="M4 10a.75.75 0 0 1 .75-.75h10.5a.75.75 0 0 1 0 1.5H4.75A.75.75 0 0 1 4 10Z"
+                                      clip-rule="evenodd"
+                                    />
+                                  </svg>
+                                </Button>
+                                <span className="w-5 text-foreground text-xl font-semibold">
+                                  {adultCount}
+                                </span>
+                                <Button
+                                  onClick={() =>
+                                    handleIncrementCount("adult", 1)
+                                  }
+                                  size="icon"
+                                  className="focus:bg-background/80 bg-background size-8 flex justify-center items-center rounded-lg"
+                                >
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 20 20"
+                                    fill="currentColor"
+                                    class="size-5 text-foreground"
+                                  >
+                                    <path d="M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z" />
+                                  </svg>
+                                </Button>
+                              </div>
+                            </div>
+                            <div className="font-medium text-lg text-foreground flex items-center justify-between w-full ">
+                              <div className="flex flex-col items-start">
+                                Children
+                                <span className="font-medium text-sm text-muted-foreground">
+                                  (2-11 years)
+                                </span>
+                              </div>
+                              <div className="flex items-center gap-x-4">
+                                <Button
+                                  onClick={() =>
+                                    handleDecrementCount("child", 1)
+                                  }
+                                  disabled={childCount === 0}
+                                  size="icon"
+                                  className="bg-background focus:bg-background/80 size-8 flex justify-center items-center rounded-lg"
+                                >
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 20 20"
+                                    fill="currentColor"
+                                    class="size-5 text-foreground"
+                                  >
+                                    <path
+                                      fill-rule="evenodd"
+                                      d="M4 10a.75.75 0 0 1 .75-.75h10.5a.75.75 0 0 1 0 1.5H4.75A.75.75 0 0 1 4 10Z"
+                                      clip-rule="evenodd"
+                                    />
+                                  </svg>
+                                </Button>
+                                <span className="w-5 text-foreground text-xl font-semibold">
+                                  {childCount}
+                                </span>
+                                <Button
+                                  onClick={() =>
+                                    handleIncrementCount("child", 1)
+                                  }
+                                  size="icon"
+                                  className="bg-background focus:bg-background/80 size-8 flex justify-center items-center rounded-lg"
+                                >
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 20 20"
+                                    fill="currentColor"
+                                    class="size-5 text-foreground"
+                                  >
+                                    <path d="M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z" />
+                                  </svg>
+                                </Button>
+                              </div>
+                            </div>
+                            <div className="font-medium text-lg text-foreground flex items-center justify-between w-full ">
+                              <div className="flex flex-col items-start">
+                                Infants
+                                <span className="font-medium text-sm text-muted-foreground">
+                                  (Under 2 years)
+                                </span>
+                              </div>
+                              <div className="flex items-center gap-x-4">
+                                <Button
+                                  onClick={() =>
+                                    handleDecrementCount("infant", 1)
+                                  }
+                                  disabled={infantCount === 0}
+                                  size="icon"
+                                  className="bg-background focus:bg-background/80 size-8 flex justify-center items-center rounded-lg"
+                                >
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 20 20"
+                                    fill="currentColor"
+                                    class="size-5 text-foreground"
+                                  >
+                                    <path
+                                      fill-rule="evenodd"
+                                      d="M4 10a.75.75 0 0 1 .75-.75h10.5a.75.75 0 0 1 0 1.5H4.75A.75.75 0 0 1 4 10Z"
+                                      clip-rule="evenodd"
+                                    />
+                                  </svg>
+                                </Button>
+                                <span className="w-5 text-foreground text-xl font-semibold">
+                                  {infantCount}
+                                </span>
+                                <Button
+                                  onClick={() =>
+                                    handleIncrementCount("infant", 1)
+                                  }
+                                  size="icon"
+                                  className="focus:bg-background/80 bg-background size-8 flex justify-center items-center rounded-lg"
+                                >
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 20 20"
+                                    fill="currentColor"
+                                    class="size-5 text-foreground"
+                                  >
+                                    <path d="M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z" />
+                                  </svg>
+                                </Button>
+                              </div>
+                            </div>
+                          </div>
+                        </DrawerDescription>
+                      </DrawerHeader>
+                      <DrawerFooter>
+                        <Button onClick={handleCountReset}>Reset</Button>
+                        <DrawerClose>
+                          <Button className="w-full" variant="outline">
+                            Close
+                          </Button>
+                        </DrawerClose>
+                      </DrawerFooter>
+                    </DrawerContent>
+                  </Drawer>
+                </div>
+                <Button
+                  disabled={loading}
+                  onClick={handleSearch}
+                  className="flex justify-center"
+                >
+                  <AnimatePresence mode="wait">
+                    {loading ? (
+                      <motion.div
+                        key="fetch"
+                        className="flex items-center gap-x-2"
+                      >
+                        <motion.div
+                          className="bg-background w-4 h-4"
+                          animate={{
+                            scale: [0.9, 1.1, 1.1, 0.9, 0.9],
+                            rotate: [0, 0, 180, 180, 0],
+                            borderRadius: ["0%", "0%", "50%", "50%", "0%"],
+                          }}
+                          transition={{
+                            duration: 1.8,
+                            ease: "easeInOut",
+                            times: [0, 0.2, 0.5, 0.8, 1],
+                            repeat: Infinity,
+                            repeatDelay: 1.2,
+                          }}
+                        />
+                        Fetching flights...
+                      </motion.div>
+                    ) : (
+                      <motion.div
+                        key="search"
+                        className="flex items-center gap-x-2"
+                      >
+                        Search
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                          class="size-5"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            d="M2 10a.75.75 0 0 1 .75-.75h12.59l-2.1-1.95a.75.75 0 1 1 1.02-1.1l3.5 3.25a.75.75 0 0 1 0 1.1l-3.5 3.25a.75.75 0 1 1-1.02-1.1l2.1-1.95H2.75A.75.75 0 0 1 2 10Z"
+                            clip-rule="evenodd"
+                          />
+                        </svg>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </Button>
+                <AnimatePresence>
+                  {adultCount + childCount + infantCount > 1 &&
+                    tripCreateSuggestion && (
+                      <motion.div
+                        className="bg-gradient-to-br from-fuchsia-400 to-indigo-500 p-[3px] mt-4 rounded-xl flex justify-center items-center shadow-sm"
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        <div className="bg-background rounded-lg w-full h-full flex items-center justify-center">
+                          <div className="w-full bg-gradient-to-br from-fuchsia-400/25 to-indigo-500/25 rounded-lg flex justify-center items-center">
+                            <div className="shadow-inner flex gap-x-2 items-start w-full p-3 rounded-lg backdrop-blur-md bg-transparent">
+                              <svg
+                                fill="url(#grad1)"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                class="size-6"
+                              >
+                                <defs>
+                                  <linearGradient
+                                    id="grad1"
+                                    x1="0%"
+                                    y1="0%"
+                                    x2="100%"
+                                    y2="0%"
+                                  >
+                                    <stop
+                                      offset="0%"
+                                      style={{
+                                        stopColor: "#e879f9",
+                                        stopOpacity: 1,
+                                      }}
+                                    />
+                                    <stop
+                                      offset="100%"
+                                      style={{
+                                        stopColor: "#818cf8",
+                                        stopOpacity: 1,
+                                      }}
+                                    />
+                                  </linearGradient>
+                                </defs>
+                                <path
+                                  fill-rule="evenodd"
+                                  d="M9 4.5a.75.75 0 0 1 .721.544l.813 2.846a3.75 3.75 0 0 0 2.576 2.576l2.846.813a.75.75 0 0 1 0 1.442l-2.846.813a3.75 3.75 0 0 0-2.576 2.576l-.813 2.846a.75.75 0 0 1-1.442 0l-.813-2.846a3.75 3.75 0 0 0-2.576-2.576l-2.846-.813a.75.75 0 0 1 0-1.442l2.846-.813A3.75 3.75 0 0 0 7.466 7.89l.813-2.846A.75.75 0 0 1 9 4.5ZM18 1.5a.75.75 0 0 1 .728.568l.258 1.036c.236.94.97 1.674 1.91 1.91l1.036.258a.75.75 0 0 1 0 1.456l-1.036.258c-.94.236-1.674.97-1.91 1.91l-.258 1.036a.75.75 0 0 1-1.456 0l-.258-1.036a2.625 2.625 0 0 0-1.91-1.91l-1.036-.258a.75.75 0 0 1 0-1.456l1.036-.258a2.625 2.625 0 0 0 1.91-1.91l.258-1.036A.75.75 0 0 1 18 1.5ZM16.5 15a.75.75 0 0 1 .712.513l.394 1.183c.15.447.5.799.948.948l1.183.395a.75.75 0 0 1 0 1.422l-1.183.395c-.447.15-.799.5-.948.948l-.395 1.183a.75.75 0 0 1-1.422 0l-.395-1.183a1.5 1.5 0 0 0-.948-.948l-1.183-.395a.75.75 0 0 1 0-1.422l1.183-.395c.447-.15.799-.5.948-.948l.395-1.183A.75.75 0 0 1 16.5 15Z"
+                                  clip-rule="evenodd"
+                                />
+                              </svg>
+                              <div className="flex flex-col gap-x-2">
+                                <span className="font-semibold">
+                                  Create a trip plan?
+                                </span>
+                                <p className="text-foreground/60 text-sm">
+                                  We&apos;ve noticed you have more than one
+                                  traveller.
+                                </p>
+                                <div className="mt-4 flex gap-x-2 justify-between items-center">
+                                  <Button
+                                    onClick={() =>
+                                      setTripCreateSuggestion(false)
+                                    }
+                                    className="focus-visible:bg-background/60 active:bg-background/60 hover:bg-background/60 flex grow bg-background text-foreground"
+                                  >
+                                    Close
+                                  </Button>
+                                  <Link href="/trips/create">
+                                    <Button className="flex items-center gap-x-2">
+                                      <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 20 20"
+                                        fill="currentColor"
+                                        class="size-5"
+                                      >
+                                        <path d="M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z" />
+                                      </svg>
+                                      Create
+                                    </Button>
+                                  </Link>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </motion.div>
+                    )}
+                </AnimatePresence>
+              </motion.div>
+            )}
+          </AnimatePresence>
+          <div className="lg:flex justify-center hidden">
+            <div className="hidden bg-secondary lg:flex p-4 items-end gap-x-4">
+              <div>
+                <Label htmlFor="from">From</Label>
+                <Input placeholder="" />
+              </div>
+              <Button className="bg-foreground rounded-xl" size="icon">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 20 20"
@@ -525,11 +661,43 @@ export default function Home() {
                 >
                   <path
                     fill-rule="evenodd"
-                    d="M2 10a.75.75 0 0 1 .75-.75h12.59l-2.1-1.95a.75.75 0 1 1 1.02-1.1l3.5 3.25a.75.75 0 0 1 0 1.1l-3.5 3.25a.75.75 0 1 1-1.02-1.1l2.1-1.95H2.75A.75.75 0 0 1 2 10Z"
+                    d="M13.2 2.24a.75.75 0 0 0 .04 1.06l2.1 1.95H6.75a.75.75 0 0 0 0 1.5h8.59l-2.1 1.95a.75.75 0 1 0 1.02 1.1l3.5-3.25a.75.75 0 0 0 0-1.1l-3.5-3.25a.75.75 0 0 0-1.06.04Zm-6.4 8a.75.75 0 0 0-1.06-.04l-3.5 3.25a.75.75 0 0 0 0 1.1l3.5 3.25a.75.75 0 1 0 1.02-1.1l-2.1-1.95h8.59a.75.75 0 0 0 0-1.5H4.66l2.1-1.95a.75.75 0 0 0 .04-1.06Z"
                     clip-rule="evenodd"
                   />
                 </svg>
               </Button>
+              <div>
+                <Label htmlFor="to">To</Label>
+                <Input placeholder="" />
+              </div>
+              <div className=" h-full">
+                <Separator orientation="vertical" />
+              </div>
+              <div>
+                <Label htmlFor="depart">Departure Date</Label>
+                <Input placeholder="" />
+              </div>
+              <div>
+                <Label htmlFor="return">Travelers</Label>
+                <Input placeholder="" />
+              </div>
+              <div>
+                <Button onClick={handleSearch} className="w-full flex gap-x-2">
+                  Search
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    class="size-5"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M2 10a.75.75 0 0 1 .75-.75h12.59l-2.1-1.95a.75.75 0 1 1 1.02-1.1l3.5 3.25a.75.75 0 0 1 0 1.1l-3.5 3.25a.75.75 0 1 1-1.02-1.1l2.1-1.95H2.75A.75.75 0 0 1 2 10Z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                </Button>
+              </div>
             </div>
           </div>
         </div>

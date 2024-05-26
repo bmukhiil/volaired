@@ -62,7 +62,7 @@ export function DatePickerWithRange({ onDateChange, className }) {
                 format(date.from, "LLL dd, y")
               )
             ) : (
-              <span>Pick a date</span>
+              <span className={cn("text-muted-foreground")}>Pick a date</span>
             )}
           </Button>
         </PopoverTrigger>

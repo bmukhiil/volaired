@@ -32,7 +32,7 @@ import InfiniteHits from "./algolia/infinite-hits";
 
 const searchClient = algoliasearch(
   process.env.NEXT_PUBLIC_ALGOLIA_APPLICATION_ID,
-  process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY,
+  process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY
 );
 
 interface Airport {
@@ -52,6 +52,9 @@ export function AirportSelect({
 }) {
   return (
     <InstantSearch
+      // future={
+      //   preserveSharedStateOnUnmount: true,
+      // }
       searchClient={searchClient}
       indexName="dev_volaired"
       //   insights
@@ -83,7 +86,7 @@ export function AirportSelect({
               <span
                 className={cn(
                   "truncate flex-none overflow-hidden text-muted-foreground",
-                  airport && "text-foreground",
+                  airport && "text-foreground"
                 )}
               >
                 {airport ? (
