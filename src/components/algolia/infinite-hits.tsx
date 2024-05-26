@@ -5,7 +5,7 @@ import { useInfiniteHits, Highlight, Snippet } from "react-instantsearch";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
 
-export default function InfiniteHits({ onAirportChange }) {
+export default function InfiniteHits({ onChange }) {
   const { hits, isLastPage, showMore } = useInfiniteHits();
   const sentinelRef = useRef(null);
 
@@ -42,7 +42,7 @@ export default function InfiniteHits({ onAirportChange }) {
                 className="flex flex-col justify-start items-start w-full h-full text-wrap text-left"
                 variant="ghost"
                 onClick={() =>
-                  onAirportChange({
+                  onChange({
                     iata_code: hit.iata_code,
                     name: hit.name,
                     city: hit.city,

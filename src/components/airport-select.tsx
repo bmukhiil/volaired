@@ -1,5 +1,6 @@
 "use client";
 
+import { useAtom } from "jotai";
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Label } from "@/components/ui/label";
@@ -29,10 +30,11 @@ import {
   useInstantSearch,
 } from "react-instantsearch";
 import InfiniteHits from "./algolia/infinite-hits";
+import { departureAirportAtom, destinationAirportAtom } from "@/lib/atoms";
 
 const searchClient = algoliasearch(
   process.env.NEXT_PUBLIC_ALGOLIA_APPLICATION_ID,
-  process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY
+  process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY,
 );
 
 interface Airport {
@@ -43,13 +45,11 @@ interface Airport {
 }
 
 // implement search url w/ react instant search
-export function AirportSelect({
-  type,
-  airport,
-  onAirportChange,
-}: {
-  type: "departure" | "destination";
-}) {
+export function AirportSelect({ type }: { type: "departure" | "destination" }) {
+  const [airport, setAirport] = useAtom(
+    type === "departure" ? departureAirportAtom : destinationAirportAtom,
+  );
+
   return (
     <InstantSearch
       // future={
@@ -86,7 +86,7 @@ export function AirportSelect({
               <span
                 className={cn(
                   "truncate flex-none overflow-hidden text-muted-foreground",
-                  airport && "text-foreground"
+                  airport && "text-foreground",
                 )}
               >
                 {airport ? (
@@ -105,7 +105,7 @@ export function AirportSelect({
               <DrawerDescription className="h-96 pb-4">
                 <CustomSearchBox />
                 <EmptyQueryBoundary>
-                  <InfiniteHits onAirportChange={onAirportChange} />
+                  <InfiniteHits onChange={setAirport} />
                 </EmptyQueryBoundary>
               </DrawerDescription>
             </DrawerHeader>
