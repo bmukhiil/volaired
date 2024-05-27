@@ -4,7 +4,7 @@ import { ChangeEvent, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { signup } from "@/lib/supabase/actions";
+import { signin } from "@/lib/supabase/actions";
 import { testEmail } from "@/lib/validate";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
@@ -37,7 +37,7 @@ export default function SignUpPage() {
     }
   };
 
-  const handleSignup = () => {
+  const handleSignin = () => {
     if (!testEmail(email) || email.length === 0) {
       setEmailError(true);
     }
@@ -48,18 +48,18 @@ export default function SignUpPage() {
       return;
     }
 
-    signup({ email, password });
+    signin({ email, password });
   };
 
   return (
     <div className="flex flex-col px-6">
-      <div className="bg-secondary py-20 flex flex-col gap-y-6">
+      <div className="bg-secondary flex flex-col gap-y-6">
         <div className="flex flex-col gap-y-2">
           <h1 className="text-2xl font-bold tracking-tight">
-            Create your account
+            Welcome back traveler
           </h1>
           <p className="text-sm text-muted-foreground">
-            Enter the fields below to get flying
+            Sign in to your account
           </p>
         </div>
         <div className="flex flex-col gap-y-2">
@@ -72,7 +72,7 @@ export default function SignUpPage() {
         </div>
         <div className="flex items-center gap-x-2">
           <Separator className="flex shrink" />
-          <span className="text-sm">or</span>
+          <span className="text-sm font-medium">or</span>
           <Separator className="flex shrink" />
         </div>
         <div className="flex flex-col gap-y-4">
@@ -152,18 +152,18 @@ export default function SignUpPage() {
           </div>
         </div>
         <div>
-          <Button className="w-full" onClick={handleSignup}>
-            Sign Up
+          <Button className="w-full" onClick={handleSignin}>
+            Sign In
           </Button>
         </div>
         <div className="text-center">
           <p className="text-muted-foreground text-sm font-medium">
-            Already have an account?{" "}
+            Don't have an account?{" "}
             <Link
               href="/sign-in"
               className="text-foreground underline underline-offset-1"
             >
-              Sign in
+              Sign up
             </Link>
           </p>
         </div>

@@ -53,7 +53,7 @@ export default function SignUpPage() {
 
   return (
     <div className="flex flex-col px-6">
-      <div className="bg-secondary py-20 flex flex-col gap-y-6">
+      <div className="bg-secondary flex flex-col gap-y-6">
         <div className="flex flex-col gap-y-2">
           <h1 className="text-2xl font-bold tracking-tight">
             Create your account
@@ -72,7 +72,7 @@ export default function SignUpPage() {
         </div>
         <div className="flex items-center gap-x-2">
           <Separator className="flex shrink" />
-          <span className="text-sm">or</span>
+          <span className="text-sm font-medium">or</span>
           <Separator className="flex shrink" />
         </div>
         <div className="flex flex-col gap-y-4">
@@ -112,14 +112,14 @@ export default function SignUpPage() {
             <div className="flex flex-col gap-y-2">
               <div className="flex justify-between">
                 <Label htmlFor="password">Password</Label>
-                <Label>
+                {/* <Label>
                   <Link
                     href="/forgot-password"
                     className="underline text-foreground/60"
                   >
                     Forgot password?
                   </Link>
-                </Label>
+                </Label> */}
               </div>
               <Input
                 onChange={(e) => handlePasswordChange(e)}
