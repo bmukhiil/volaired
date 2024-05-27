@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
+import { EmailOtpType } from "@supabase/supabase-js";
 
 export async function signin({
   email,
@@ -22,7 +23,8 @@ export async function signin({
   const { error } = await supabase.auth.signInWithPassword(data);
 
   if (error) {
-    redirect("/auth/auth-error-code");
+    throw new Error(error.message);
+    // redirect("/auth/auth-error-code");
   }
 
   revalidatePath("/", "layout");
@@ -47,7 +49,35 @@ export async function signup({
   const { error } = await supabase.auth.signUp(data);
 
   if (error) {
-    redirect("/auth/auth-error-code");
+    throw new Error(error.message);
+    // redirect("/auth/auth-error-code");
+  }
+
+  // revalidatePath("/", "layout");
+  // redirect("/");
+}
+
+export async function checkOtp({
+  email,
+  token,
+}: {
+  email: string;
+  token: string;
+}) {
+  const supabase = createClient();
+  console.log(email, token);
+
+  const data = {
+    email,
+    token,
+    type: "email" as EmailOtpType,
+  };
+
+  const { error } = await supabase.auth.verifyOtp(data);
+  console.log(error);
+
+  if (error) {
+    throw new Error(error.message);
   }
 
   revalidatePath("/", "layout");

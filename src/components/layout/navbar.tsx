@@ -67,7 +67,7 @@ export default function Navbar() {
       <nav className="bg-secondary border-b border-dashed px-6 lg:px-28 py-4 flex items-center justify-between">
         <Link
           href="/"
-          className="font-semibold tracking-tight text-2xl text-foreground"
+          className="font-bold tracking-tight text-2xl text-foreground"
           title="Volaired homepage"
         >
           volaired

@@ -8,54 +8,65 @@ import { signin } from "@/lib/supabase/actions";
 import { testEmail } from "@/lib/validate";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import GoogleGLogo from "../../../../public/google_g_logo.svg";
 import { AnimatePresence, motion } from "framer-motion";
 import { Separator } from "@/components/ui/separator";
+import Image from "next/image";
 
 export default function SignUpPage() {
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loginError, setLoginError] = useState(false);
 
   const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setEmailError(false);
     setEmail(e.target.value);
 
-    if (!testEmail(e.target.value) || e.target.value.length === 0) {
-      setEmailError(true);
-    } else {
-      setEmailError(false);
-    }
+    // if (!testEmail(e.target.value) || e.target.value.length === 0) {
+    //   setEmailError(true);
+    // } else {
+    //   setEmailError(false);
+    // }
   };
 
   const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setPasswordError(false);
     setPassword(e.target.value);
 
-    if (e.target.value.length < 8) {
-      setPasswordError(true);
-    } else {
-      setPasswordError(false);
-    }
+    // if (e.target.value.length < 8) {
+    //   setPasswordError(true);
+    // } else {
+    //   setPasswordError(false);
+    // }
   };
 
-  const handleSignin = () => {
+  const handleSignin = async () => {
     if (!testEmail(email) || email.length === 0) {
       setEmailError(true);
     }
-    if (password.length < 8) {
+    if (password.length === 0) {
       setPasswordError(true);
       return;
     } else if (emailError || passwordError) {
       return;
     }
 
-    signin({ email, password });
+    try {
+      await signin({ email, password });
+    } catch (error) {
+      setEmailError(true);
+      setPasswordError(true);
+      setLoginError(true);
+    }
   };
 
   return (
-    <div className="flex flex-col px-6">
+    <div className="flex flex-col px-6 lg:px-28">
       <div className="bg-secondary flex flex-col gap-y-6">
         <div className="flex flex-col gap-y-2">
-          <h1 className="text-2xl font-bold tracking-tight">
+          <h1 className="text-2xl font-semibold tracking-tight">
             Welcome back traveler
           </h1>
           <p className="text-sm text-muted-foreground">
@@ -63,8 +74,12 @@ export default function SignUpPage() {
           </p>
         </div>
         <div className="flex flex-col gap-y-2">
-          <Button className="w-full" variant="outline">
+          <Button
+            className="w-full flex items-center gap-x-3"
+            variant="outline"
+          >
             Continue with Google
+            <Image src={GoogleGLogo} alt="Google G Logo" className="w-4 h-4" />
           </Button>
           {/* <Button className="w-full" variant="outline">
             Continue with Google
@@ -101,7 +116,7 @@ export default function SignUpPage() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
                   transition={{ duration: 0.1 }}
-                  className="text-rose-500 text-sm font-medium"
+                  className="text-rose-500 lg:text-xs text-sm font-medium"
                 >
                   Email address is invalid
                 </motion.p>
@@ -110,12 +125,12 @@ export default function SignUpPage() {
           </div>
           <div className="flex flex-col gap-y-1">
             <div className="flex flex-col gap-y-2">
-              <div className="flex justify-between">
+              <div className="flex justify-between items-center">
                 <Label htmlFor="password">Password</Label>
                 <Label>
                   <Link
                     href="/forgot-password"
-                    className="underline text-foreground/60"
+                    className="underline text-sm text-foreground/60"
                   >
                     Forgot password?
                   </Link>
@@ -143,7 +158,7 @@ export default function SignUpPage() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
                   transition={{ duration: 0.1 }}
-                  className="text-rose-500 text-sm font-medium"
+                  className="text-rose-500 lg:text-xs text-sm font-medium"
                 >
                   Password is invalid
                 </motion.p>
@@ -160,13 +175,32 @@ export default function SignUpPage() {
           <p className="text-muted-foreground text-sm font-medium">
             Don't have an account?{" "}
             <Link
-              href="/sign-in"
+              href="/sign-up"
               className="text-foreground underline underline-offset-1"
             >
               Sign up
             </Link>
           </p>
         </div>
+        {/* <AnimatePresence>
+          {loginError && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.1 }}
+              className="flex-col border border-rose-500 rounded-md shadow-sm hidden lg:flex p-4 bg-rose-300 text-sm font-medium"
+            >
+              <p className="text-rose-600 text-xs">
+                We couldn't find an account with that email address and
+                password.
+              </p>
+            </motion.div>
+          )}
+        </AnimatePresence> */}
+        {/* <div className="border border-rose-500 rounded-md shadow-sm hidden lg:flex px-2 py-1 bg-rose-300">
+          Password must be at least 8 characters
+        </div> */}
       </div>
     </div>
   );
