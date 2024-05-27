@@ -63,7 +63,7 @@ export default function Navbar() {
   };
 
   return (
-    <header className="w-screen sticky inset-0 shadow-sm z-50">
+    <header className="w-screen sticky inset-0 z-50">
       <nav className="bg-secondary border-b border-dashed px-6 lg:px-28 py-4 flex items-center justify-between">
         <Link
           href="/"
