@@ -6,15 +6,15 @@ const infantCountAtom = atom(0);
 
 const departureAirportAtom = atom({
   iataCode: "YVR",
-  name: "",
-  city: "",
-  country: "",
+  name: "Vancouver INTL",
+  city: "Vancouver",
+  country: "Canada",
 });
 const destinationAirportAtom = atom({
   iataCode: "YYZ",
-  name: "",
-  city: "",
-  country: "",
+  name: "Toronto Pearson",
+  city: "Toronto",
+  country: "Canada",
 });
 
 const flightOffersAtom = atom([]);
