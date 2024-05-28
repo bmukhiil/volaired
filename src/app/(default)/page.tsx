@@ -503,7 +503,7 @@ export default function Home() {
                   </Drawer>
                 </div>
                 <Link
-                  href={`/flight-search?origin=${departureAirport.iataCode}&destination=${destinationAirport.iataCode}&startDate=${dateRange.from}&endDate=${dateRange.to}`}
+                  href={`/flight-search?origin=${departureAirport.iataCode}&destination=${destinationAirport.iataCode}&startDate=${dateRange.from}&endDate=${dateRange.to}&filters=`}
                 >
                   <Button
                     disabled={loading}
