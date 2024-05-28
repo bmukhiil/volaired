@@ -1,6 +1,6 @@
 "use client";
 
-import { useAtom } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Label } from "@/components/ui/label";
@@ -17,7 +17,7 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-
+import { useState } from "react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import algoliasearch from "algoliasearch";
 import {
@@ -46,9 +46,14 @@ interface Airport {
 
 // implement search url w/ react instant search
 export function AirportSelect({ type }: { type: "departure" | "destination" }) {
-  const [airport, setAirport] = useAtom(
+  const [open, setOpen] = useState(false);
+  const airport = useAtomValue(
     type === "departure" ? departureAirportAtom : destinationAirportAtom,
   );
+
+  React.useEffect(() => {
+    console.log(airport);
+  }, [airport]);
 
   return (
     <InstantSearch
@@ -64,7 +69,7 @@ export function AirportSelect({ type }: { type: "departure" | "destination" }) {
         <Label htmlFor="airport-select">
           {type === "departure" ? "Flying from" : "Flying to"}
         </Label>
-        <Drawer>
+        <Drawer open={open} onOpenChange={setOpen}>
           <DrawerTrigger>
             <Button
               id="airport-select"
@@ -86,12 +91,12 @@ export function AirportSelect({ type }: { type: "departure" | "destination" }) {
               <span
                 className={cn(
                   "truncate flex-none overflow-hidden text-muted-foreground",
-                  airport && "text-foreground",
+                  airport.iataCode && "text-foreground",
                 )}
               >
-                {airport ? (
+                {airport.iataCode ? (
                   <>
-                    {airport.city}, {airport.country} ({airport.iata_code})
+                    {airport.city}, {airport.country} ({airport.iataCode})
                   </>
                 ) : (
                   "Select an airport"
@@ -105,7 +110,7 @@ export function AirportSelect({ type }: { type: "departure" | "destination" }) {
               <DrawerDescription className="h-96 pb-4">
                 <CustomSearchBox />
                 <EmptyQueryBoundary>
-                  <InfiniteHits onChange={setAirport} />
+                  <InfiniteHits setOpen={setOpen} type={type} />
                 </EmptyQueryBoundary>
               </DrawerDescription>
             </DrawerHeader>

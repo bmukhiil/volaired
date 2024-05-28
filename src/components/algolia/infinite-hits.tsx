@@ -4,10 +4,22 @@ import React, { useRef, useEffect } from "react";
 import { useInfiniteHits, Highlight, Snippet } from "react-instantsearch";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
+import { useAtom } from "jotai";
+import { departureAirportAtom, destinationAirportAtom } from "@/lib/atoms";
+import { set } from "date-fns";
 
-export default function InfiniteHits({ onChange }) {
+export default function InfiniteHits({
+  setOpen,
+  type,
+}: {
+  type: "departure" | "destination";
+}) {
   const { hits, isLastPage, showMore } = useInfiniteHits();
   const sentinelRef = useRef(null);
+
+  const [airport, setAirport] = useAtom(
+    type === "departure" ? departureAirportAtom : destinationAirportAtom,
+  );
 
   useEffect(() => {
     if (sentinelRef.current !== null) {
@@ -27,6 +39,16 @@ export default function InfiniteHits({ onChange }) {
     }
   }, [isLastPage, showMore]);
 
+  const handleLocSelect = (hit) => {
+    setAirport({
+      iataCode: hit.iata_code,
+      name: hit.name,
+      city: hit.city,
+      country: hit.country,
+    });
+    setOpen(false);
+  };
+
   return (
     <ScrollArea className="ais-InfiniteHits overflow-y-auto h-full z-50">
       <ul className="ais-InfiniteHits-list mt-2 flex flex-col gap-y-1">
@@ -41,14 +63,7 @@ export default function InfiniteHits({ onChange }) {
               <Button
                 className="flex flex-col justify-start items-start w-full h-full text-wrap text-left"
                 variant="ghost"
-                onClick={() =>
-                  onChange({
-                    iata_code: hit.iata_code,
-                    name: hit.name,
-                    city: hit.city,
-                    country: hit.country,
-                  })
-                }
+                onClick={() => handleLocSelect(hit)}
               >
                 <h2 className="font-medium text-base text-foreground tracking-tight">
                   {hit.name} ({hit.iata_code})

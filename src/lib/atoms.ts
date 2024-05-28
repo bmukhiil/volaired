@@ -4,8 +4,21 @@ const adultCountAtom = atom(2);
 const childCountAtom = atom(0);
 const infantCountAtom = atom(0);
 
-const departureAirportAtom = atom(null);
-const destinationAirportAtom = atom(null);
+const departureAirportAtom = atom({
+  iataCode: "YVR",
+  name: "",
+  city: "",
+  country: "",
+});
+const destinationAirportAtom = atom({
+  iataCode: "YYZ",
+  name: "",
+  city: "",
+  country: "",
+});
+
+const flightOffersAtom = atom([]);
+const flightOfferFiltersAtom = atom([]);
 
 export {
   adultCountAtom,
@@ -13,4 +26,6 @@ export {
   infantCountAtom,
   departureAirportAtom,
   destinationAirportAtom,
+  flightOffersAtom,
+  flightOfferFiltersAtom,
 };

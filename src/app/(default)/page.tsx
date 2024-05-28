@@ -34,7 +34,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { atom, useAtom } from "jotai";
+import { atom, useAtom, useAtomValue } from "jotai";
 
 import Script from "next/script";
 import { Separator } from "@/components/ui/separator";
@@ -43,7 +43,14 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { adultCountAtom, childCountAtom, infantCountAtom } from "@/lib/atoms";
+import {
+  adultCountAtom,
+  childCountAtom,
+  departureAirportAtom,
+  destinationAirportAtom,
+  flightOffersAtom,
+  infantCountAtom,
+} from "@/lib/atoms";
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -75,7 +82,12 @@ export default function Home() {
   const [childCount, setChildCount] = useAtom(childCountAtom);
   const [infantCount, setInfantCount] = useAtom(infantCountAtom);
 
+  const [dateRange, setDateRange] = useAtom(dateRangeAtom);
+  const [flightOffers, setFlightOffers] = useAtom(flightOffersAtom);
+
   const [tripCreateSuggestion, setTripCreateSuggestion] = useState(true);
+  const departureAirport = useAtomValue(departureAirportAtom);
+  const destinationAirport = useAtomValue(destinationAirportAtom);
 
   const activityMenu = [
     {
@@ -133,46 +145,30 @@ export default function Home() {
     setInfantCount(0);
   };
 
-  const handleAirportChange = (airport, type) => {
-    setSearchParams((prevParams) => ({
-      ...prevParams,
-      [type === "departure" ? "departure" : "destination"]: airport,
-    }));
-  };
-
   const updateDateRange = (dateRange) => {
     const { from, to } = dateRange;
-    const formattedDateRange = {
-      from: format(from, "yyyy-MM-dd"),
-      to: format(to, "yyyy-MM-dd"),
-    };
-    setSearchParams((prevParams) => ({
-      ...prevParams,
-      dateRange: formattedDateRange,
-    }));
-  };
 
-  const parseDuration = (duration) => {
-    const regex = /PT(\d+H)?(\d+M)?/;
-    const matches = duration.match(regex);
-    const hours = matches[1] ? parseInt(matches[1], 10) : 0;
-    const minutes = matches[2] ? parseInt(matches[2], 10) : 0;
-    return `${hours}h ${minutes}m`;
+    const formattedDateRange = {
+      from: Math.floor(from.getTime() / 1000), // Convert 'from' date to epoch time
+      to: Math.floor(to.getTime() / 1000), // Convert 'to' date to epoch time
+    };
+
+    setDateRange(formattedDateRange);
   };
 
   const handleSearch = async () => {
     setLoading(true);
-    try {
-      const response = fetch("/api/flights", {
-        method: "POST",
-        body: JSON.stringify({}),
-      }).then((res) => res.json());
-      console.log("Response: ", response);
-    } catch (error) {
-      console.error("Error fetching flights: ", error);
-    } finally {
-      setLoading(false);
-    }
+    // try {
+    //   const response = fetch("/api/flights", {
+    //     method: "POST",
+    //     body: JSON.stringify({}),
+    //   }).then((res) => res.json());
+    //   console.log("Response: ", response);
+    // } catch (error) {
+    //   console.error("Error fetching flights: ", error);
+    // } finally {
+    //   setLoading(false);
+    // }
   };
 
   return (
@@ -506,56 +502,60 @@ export default function Home() {
                     </DrawerContent>
                   </Drawer>
                 </div>
-                <Button
-                  disabled={loading}
-                  onClick={handleSearch}
-                  className="flex justify-center"
+                <Link
+                  href={`/flight-search?origin=${departureAirport.iataCode}&destination=${destinationAirport.iataCode}&startDate=${dateRange.from}&endDate=${dateRange.to}`}
                 >
-                  <AnimatePresence mode="wait">
-                    {loading ? (
-                      <motion.div
-                        key="fetch"
-                        className="flex items-center gap-x-2"
-                      >
+                  <Button
+                    disabled={loading}
+                    onClick={handleSearch}
+                    className="flex justify-center w-full"
+                  >
+                    <AnimatePresence mode="wait">
+                      {loading ? (
                         <motion.div
-                          className="bg-background w-4 h-4"
-                          animate={{
-                            scale: [0.9, 1.1, 1.1, 0.9, 0.9],
-                            rotate: [0, 0, 180, 180, 0],
-                            borderRadius: ["0%", "0%", "50%", "50%", "0%"],
-                          }}
-                          transition={{
-                            duration: 1.8,
-                            ease: "easeInOut",
-                            times: [0, 0.2, 0.5, 0.8, 1],
-                            repeat: Infinity,
-                            repeatDelay: 1.2,
-                          }}
-                        />
-                        Fetching flights...
-                      </motion.div>
-                    ) : (
-                      <motion.div
-                        key="search"
-                        className="flex items-center gap-x-2"
-                      >
-                        Search
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 20 20"
-                          fill="currentColor"
-                          class="size-5"
+                          key="fetch"
+                          className="flex items-center gap-x-2"
                         >
-                          <path
-                            fill-rule="evenodd"
-                            d="M2 10a.75.75 0 0 1 .75-.75h12.59l-2.1-1.95a.75.75 0 1 1 1.02-1.1l3.5 3.25a.75.75 0 0 1 0 1.1l-3.5 3.25a.75.75 0 1 1-1.02-1.1l2.1-1.95H2.75A.75.75 0 0 1 2 10Z"
-                            clip-rule="evenodd"
+                          <motion.div
+                            className="bg-background w-4 h-4"
+                            animate={{
+                              scale: [0.9, 1.1, 1.1, 0.9, 0.9],
+                              rotate: [0, 0, 180, 180, 0],
+                              borderRadius: ["0%", "0%", "50%", "50%", "0%"],
+                            }}
+                            transition={{
+                              duration: 1.8,
+                              ease: "easeInOut",
+                              times: [0, 0.2, 0.5, 0.8, 1],
+                              repeat: Infinity,
+                              repeatDelay: 1.2,
+                            }}
                           />
-                        </svg>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </Button>
+                          Fetching flights...
+                        </motion.div>
+                      ) : (
+                        <motion.div
+                          key="search"
+                          className="flex items-center gap-x-2"
+                        >
+                          Search
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                            class="size-5"
+                          >
+                            <path
+                              fill-rule="evenodd"
+                              d="M2 10a.75.75 0 0 1 .75-.75h12.59l-2.1-1.95a.75.75 0 1 1 1.02-1.1l3.5 3.25a.75.75 0 0 1 0 1.1l-3.5 3.25a.75.75 0 1 1-1.02-1.1l2.1-1.95H2.75A.75.75 0 0 1 2 10Z"
+                              clip-rule="evenodd"
+                            />
+                          </svg>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </Button>
+                </Link>
                 <AnimatePresence>
                   {adultCount + childCount + infantCount > 1 &&
                     tripCreateSuggestion && (
@@ -1080,22 +1080,6 @@ export default function Home() {
           </div>
         </div>
       </motion.div>
-      {/* <div className="lg:-mx-6 lg:px-40 flex flex-col gap-y-6 py-20 md:py-24 lg:py-36">
-        <GroupTripSection
-          tripDeclined={tripDeclined}
-          tripJoined={tripJoined}
-          setTripDeclined={setTripDeclined}
-          setTripJoined={setTripJoined}
-          setTripJoinedTriggered={setTripJoinedTriggered}
-          tripJoinedTriggered={tripJoinedTriggered}
-        />
-      </div>
-      <div className="bg-secondary shadow-sm lg:rounded-[5dvh] rounded-[3dvh] px-6 -mx-6 lg:px-40 py-20 md:py-24 lg:pt-36 lg:pb-56 flex flex-col gap-y-6">
-        <FeaturesSection />
-      </div>
-      <div className="shadow-sm lg:-mx-6 lg:px-40 py-20 md:pb-24 lg:pb-36 flex flex-col gap-y-6">
-        <MeetCopilot />
-      </div> */}
     </section>
   );
 }
