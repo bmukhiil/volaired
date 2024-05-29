@@ -10,8 +10,9 @@ export default function DefaultLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
-      <body className="overflow-y-hidden">
-        {children}
+      <body className="">
+        <Navbar />
+        <div className="p-6">{children}</div>
         <Toaster
           icons={{
             warning: (

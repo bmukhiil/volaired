@@ -259,7 +259,7 @@ export default function Navbar() {
               </Link>
               <div className="flex items-center gap-x-3">
                 <Separator className="flex shrink" />
-                <span className="font-medium text-muted-foreground">OR</span>
+                <span className="font-medium text-foreground">or</span>
                 <Separator className="flex shrink" />
               </div>
               <Link href="/sign-up">
