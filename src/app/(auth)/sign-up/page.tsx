@@ -64,13 +64,13 @@ export default function SignUpPage() {
     }
 
     try {
-      // await signup({ email, password });
+      await signup({ email, password });
       setOtpSent(true);
     } catch (error) {
       setSignUpError(true);
       setEmailError(true);
       setPasswordError(true);
-      setLoginError(true);
+      // setLoginError(true);
     }
   };
 
@@ -197,7 +197,7 @@ export default function SignUpPage() {
                         {
                           "ring-rose-400 ring-1 focus-visible:border-border":
                             emailError,
-                        },
+                        }
                       )}
                     />
                   </div>
@@ -239,7 +239,7 @@ export default function SignUpPage() {
                         {
                           "ring-rose-400 ring-1 focus-visible:border-border":
                             passwordError,
-                        },
+                        }
                       )}
                     />
                   </div>

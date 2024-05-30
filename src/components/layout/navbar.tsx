@@ -6,6 +6,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Separator } from "../ui/separator";
+import { createClient } from "@/lib/supabase/client";
 
 const itemVariants: Variants = {
   open: {
@@ -23,6 +24,7 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [bookingOpen, setBookingOpen] = useState(false);
   const [companyOpen, setCompanyOpen] = useState(false);
+  const client = createClient();
 
   const links = [
     {
@@ -68,9 +70,9 @@ export default function Navbar() {
         <Link
           href="/"
           className="font-bold tracking-tight text-2xl text-foreground"
-          title="Volaired homepage"
+          title="radiair homepage"
         >
-          volaired
+          radiair
         </Link>
         <div>
           <div className="hidden lg:flex items-center gap-x-20">
@@ -185,7 +187,7 @@ export default function Navbar() {
                 "flex gap-x-3 items-center text-muted-foreground font-medium transition",
                 {
                   "text-foreground": bookingOpen,
-                },
+                }
               )}
               variants={itemVariants}
               onClick={() => handleDropdownClick("booking")}
@@ -228,7 +230,7 @@ export default function Navbar() {
                 "flex items-center gap-x-3 text-muted-foreground font-medium",
                 {
                   "text-foreground": companyOpen,
-                },
+                }
               )}
               onClick={() => handleDropdownClick("company")}
               variants={itemVariants}
