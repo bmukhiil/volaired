@@ -14,7 +14,14 @@ export async function signin({
 }) {
   const supabase = createClient();
 
-  // in practice, you should validate your inputs
+  if (!email || !password) {
+    throw new Error("Email and password are required");
+  }
+
+  if (password.length < 8) {
+    throw new Error("Password must be at least 8 characters");
+  }
+
   const data = {
     email,
     password,
@@ -40,7 +47,14 @@ export async function signup({
 }) {
   const supabase = createClient();
 
-  // in practice, you should validate your inputs
+  if (!email || !password) {
+    throw new Error("Email and password are required.");
+  }
+
+  if (password.length < 8) {
+    throw new Error("Password must be at least 8 characters long.");
+  }
+
   const data = {
     email,
     password,
@@ -52,6 +66,24 @@ export async function signup({
     throw new Error(error.message);
     // redirect("/auth/auth-error-code");
   }
+
+  // send to backend
+  const data = {
+    email,
+    created_at,
+    updated_at,
+    last_sign_in_at,
+    ip_address,
+    user_agent,
+    first_name,
+    last_name,
+    phone_number,
+    birth_date,
+    is_active,
+    is_verified,
+    profile_picture_url,
+    preferences,
+  };
 
   // revalidatePath("/", "layout");
   // redirect("/");
