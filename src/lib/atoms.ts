@@ -20,6 +20,8 @@ const destinationAirportAtom = atom({
 const flightOffersAtom = atom([]);
 const flightOfferFiltersAtom = atom([]);
 
+const userDataAtom = atom(null);
+
 export {
   adultCountAtom,
   childCountAtom,
@@ -28,4 +30,5 @@ export {
   destinationAirportAtom,
   flightOffersAtom,
   flightOfferFiltersAtom,
+  userDataAtom,
 };

@@ -189,7 +189,7 @@ export default function Navbar() {
                 "flex gap-x-3 items-center text-muted-foreground font-medium transition",
                 {
                   "text-foreground": bookingOpen,
-                }
+                },
               )}
               variants={itemVariants}
               onClick={() => handleDropdownClick("booking")}
@@ -232,7 +232,7 @@ export default function Navbar() {
                 "flex items-center gap-x-3 text-muted-foreground font-medium",
                 {
                   "text-foreground": companyOpen,
-                }
+                },
               )}
               onClick={() => handleDropdownClick("company")}
               variants={itemVariants}
