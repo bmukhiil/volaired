@@ -148,8 +148,13 @@ export default function SignUpPage() {
                         "focus-visible:bg-secondary/60 focus-visible:ring-0 focus-visible:ring-offset-0 transition",
                         {
                           "ring-rose-400 ring-1 focus-visible:border-border":
+<<<<<<< HEAD
+                            emailError,
+                        },
+=======
                             firstNameError,
                         }
+>>>>>>> development
                       )}
                     />
                   </div>
@@ -180,8 +185,13 @@ export default function SignUpPage() {
                         "focus-visible:bg-secondary/60 focus-visible:ring-0 focus-visible:ring-offset-0 transition",
                         {
                           "ring-rose-400 ring-1 focus-visible:border-border":
+<<<<<<< HEAD
+                            passwordError,
+                        },
+=======
                             lastNameError,
                         }
+>>>>>>> development
                       )}
                     />
                   </div>

@@ -91,7 +91,8 @@ export default function Navbar() {
             >
               Partnerships
             </Link>
-            <Button className="bg-background text-foreground hover:bg-background/60 hidden lg:flex gap-x-2">
+            <Link href = "/sign-in">
+              <Button className="bg-background text-foreground hover:bg-background/60 hidden lg:flex gap-x-2">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 20 20"
@@ -106,6 +107,7 @@ export default function Navbar() {
               </svg>
               Sign in
             </Button>
+            </Link>
           </div>
           <Button
             size="icon"
