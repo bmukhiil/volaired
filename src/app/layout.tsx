@@ -11,6 +11,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { cn } from "@/lib/utils";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Providers } from "@/components/providers";
+import { CookiesProvider } from "next-client-cookies/server";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -84,16 +85,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
-      <Providers>
-        {/* <ThemeProvider attribute="class" defaultTheme="system" enableSystem> */}
-        <body className={cn("overflow-x-hidden", inter.className)}>
-          {children}
-          <SpeedInsights />
-          <Analytics />
-        </body>
-        {/* </ThemeProvider> */}
-      </Providers>
-    </html>
+    <CookiesProvider>
+      <html lang="en" className="scroll-smooth" suppressHydrationWarning>
+        <Providers>
+          {/* <ThemeProvider attribute="class" defaultTheme="system" enableSystem> */}
+          <body className={cn("overflow-x-hidden", inter.className)}>
+            {children}
+            <SpeedInsights />
+            <Analytics />
+          </body>
+          {/* </ThemeProvider> */}
+        </Providers>
+      </html>
+    </CookiesProvider>
   );
 }

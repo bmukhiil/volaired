@@ -11,7 +11,8 @@ import {
 } from "@/components/ui/input-otp";
 import { createClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
+import { useCookies } from "next-client-cookies";
 
 export default function VerifyPage() {
   const [otp, setOtp] = useState("");
@@ -20,12 +21,34 @@ export default function VerifyPage() {
   const [countdown, setCountdown] = useState(30);
   const [canResend, setCanResend] = useState(false);
   const [email, setEmail] = useState("");
+  const cookies = useCookies();
 
   useEffect(() => {
-    const storedEmail = window.sessionStorage.getItem("userEmail");
-    if (storedEmail) {
-      setEmail(storedEmail);
+    async function checkEmailVerified() {
+      const user_email = cookies.get("user_email");
+      console.log("user_email", user_email);
+      if (user_email) {
+        setEmail(user_email);
+      }
+      // const storedEmail = window.sessionStorage.getItem("userEmail");
+      // const supabase = createClient();
+      // const { data, error } = await supabase
+      //   .from("user_profiles")
+      //   .select("email_verified")
+      //   .eq("email", storedEmail)
+      //   .single();
+      // console.log("data", data);
+      // console.log(!storedEmail);
+      // if (data?.email_verified || !storedEmail) {
+      //   console.log("ran");
+      //   // router.push("/");
+      //   redirect("/");
+      // } else if (storedEmail) {
+      //   setEmail(storedEmail);
+      // }
     }
+
+    checkEmailVerified();
   }, []);
 
   useEffect(() => {

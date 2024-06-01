@@ -46,15 +46,15 @@ export default function SignUpPage() {
     if (!testEmail(email) || email.length === 0) {
       setEmailError(true);
     }
-    if (password.length === 0) {
-      setPasswordError(true);
-      return;
-    } else if (emailError || passwordError) {
-      return;
-    }
+    // if (password.length === 0) {
+    //   setPasswordError(true);
+    //   return;
+    // } else if (emailError || passwordError) {
+    //   return;
+    // }
 
     try {
-      await signin({ email, password });
+      await signin({ email });
     } catch (error) {
       setEmailError(true);
       setPasswordError(true);
@@ -123,7 +123,7 @@ export default function SignUpPage() {
               )}
             </AnimatePresence>
           </div>
-          <div className="flex flex-col gap-y-1">
+          {/* <div className="flex flex-col gap-y-1">
             <div className="flex flex-col gap-y-2">
               <div className="flex justify-between items-center">
                 <Label htmlFor="password">Password</Label>
@@ -164,7 +164,7 @@ export default function SignUpPage() {
                 </motion.p>
               )}
             </AnimatePresence>
-          </div>
+          </div> */}
         </div>
         <div>
           <Button className="w-full" onClick={handleSignin}>

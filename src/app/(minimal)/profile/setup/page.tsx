@@ -95,7 +95,7 @@ export default function ProfileSetup() {
                       {
                         "ring-rose-400 ring-1 focus-visible:border-border":
                           firstNameError,
-                      }
+                      },
                     )}
                   />
                 </div>
@@ -126,7 +126,7 @@ export default function ProfileSetup() {
                       {
                         "ring-rose-400 ring-1 focus-visible:border-border":
                           lastNameError,
-                      }
+                      },
                     )}
                   />
                 </div>

@@ -4,7 +4,7 @@ import { ChangeEvent, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { checkOtp, signup } from "@/lib/supabase/actions";
+import { checkOtp, signin } from "@/lib/supabase/actions";
 import { testEmail } from "@/lib/validate";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
@@ -21,18 +21,12 @@ import {
 
 export default function SignUpPage() {
   const [emailError, setEmailError] = useState(false);
-  const [passwordError, setPasswordError] = useState(false);
-  const [firstNameError, setFirstNameError] = useState(false);
-  const [lastNameError, setLastNameError] = useState(false);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [signUpError, setSignUpError] = useState(false);
-
-  const [otpSent, setOtpSent] = useState(false);
-  const [otpError, setOtpError] = useState(false);
-  const [otp, setOtp] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
     setEmailError(false);
@@ -45,54 +39,20 @@ export default function SignUpPage() {
     // }
   };
 
-  const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setPasswordError(false);
-    setPassword(e.target.value);
-
-    // if (e.target.value.length < 8) {
-    //   setPasswordError(true);
-    // } else {
-    //   setPasswordError(false);
-    // }
-  };
-
   const handleSignup = async () => {
-    if (firstName.length === 0) {
-      setFirstNameError(true);
-    }
-    if (lastName.length === 0) {
-      setLastNameError(true);
-    }
+    setLoading(true);
     if (!testEmail(email) || email.length === 0) {
       setEmailError(true);
     }
-    if (password.length < 8) {
-      setPasswordError(true);
-      return;
-    } else if (emailError || passwordError) {
-      return;
-    }
 
     try {
-      sessionStorage.setItem("userEmail", email);
-      await signup({ email, password });
-      setOtpSent(true);
+      // sessionStorage.setItem("userEmail", email);
+      await signin({ email });
+      setLoading(false);
     } catch (error) {
       setSignUpError(true);
       setEmailError(true);
-      setPasswordError(true);
-      // setLoginError(true);
     }
-  };
-
-  const handleFirstNameChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setFirstNameError(false);
-    setFirstName(e.target.value);
-  };
-
-  const handleLastNameChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setLastNameError(false);
-    setLastName(e.target.value);
   };
 
   return (
@@ -214,7 +174,7 @@ export default function SignUpPage() {
                       {
                         "ring-rose-400 ring-1 focus-visible:border-border":
                           emailError,
-                      }
+                      },
                     )}
                   />
                 </div>
@@ -232,7 +192,7 @@ export default function SignUpPage() {
                   )}
                 </AnimatePresence>
               </div>
-              <div className="flex flex-col gap-y-1">
+              {/* <div className="flex flex-col gap-y-1">
                 <div className="flex flex-col gap-y-2">
                   <Label htmlFor="password">Password</Label>
                   <Input
@@ -263,11 +223,34 @@ export default function SignUpPage() {
                     </motion.p>
                   )}
                 </AnimatePresence>
-              </div>
+              </div> */}
             </div>
             <div>
-              <Button className="w-full" onClick={handleSignup}>
-                Sign Up
+              <Button
+                disabled={loading}
+                className="w-full"
+                onClick={handleSignup}
+              >
+                {loading ? (
+                  <motion.div
+                    key="loading"
+                    className="bg-background w-6 h-6"
+                    animate={{
+                      scale: [0.9, 1.1, 1.1, 0.9, 0.9],
+                      rotate: [0, 0, 180, 180, 0],
+                      borderRadius: ["0%", "0%", "50%", "50%", "0%"],
+                    }}
+                    transition={{
+                      duration: 1.8,
+                      ease: "easeInOut",
+                      times: [0, 0.2, 0.5, 0.8, 1],
+                      repeat: Infinity,
+                      repeatDelay: 1.2,
+                    }}
+                  />
+                ) : (
+                  "Sign up"
+                )}
               </Button>
             </div>
             <div className="text-center">

@@ -4,85 +4,64 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { EmailOtpType } from "@supabase/supabase-js";
+import { NextResponse } from "next/server";
+import { cookies } from "next/headers";
 
-export async function signin({
-  email,
-  password,
-}: {
-  email: string;
-  password: string;
-}) {
+export async function signin({ email }: { email: string }) {
   const supabase = createClient();
 
-  if (!email || !password) {
-    throw new Error("Email and password are required");
+  if (!email) {
+    throw new Error("Email is required");
   }
 
-  if (password.length < 8) {
-    throw new Error("Password must be at least 8 characters");
-  }
-
-  const data = {
-    email,
-    password,
-  };
-
-  const { error } = await supabase.auth.signInWithPassword(data);
+  const { data, error } = await supabase.auth.signInWithOtp({
+    email: email,
+    // options: {
+    //   // set this to false if you do not want the user to be automatically signed up
+    //   shouldCreateUser: true,
+    // },
+  });
 
   if (error) {
     throw new Error(error.message);
     // redirect("/auth/auth-error-code");
   }
 
-  if (typeof window !== "undefined") {
-    sessionStorage.setItem("userEmail", email);
-  } else {
-    // server-side
-    // setCookie("userEmail", email);
-  }
+  cookies().set("user_email", email, {
+    // secure: true,
+    // httpOnly: true,
+    // sameSite: "lax",
+    // expire in 5 seconds
+    expires: new Date(Date.now() + 3000),
+  });
 
-  revalidatePath("/", "layout");
-  redirect("/");
-}
-
-export async function signup({
-  email,
-  password,
-}: {
-  email: string;
-  password: string;
-}) {
-  const supabase = createClient();
-
-  if (!email || !password) {
-    throw new Error("Email and password are required.");
-  }
-
-  if (password.length < 8) {
-    throw new Error("Password must be at least 8 characters long.");
-  }
-
-  const data = {
-    email,
-    password,
-    options: {
-      // additional info
-      // data: {
-      //   first_name: "John",
-      //   last_name: "Doe",
-      // },
-    },
-  };
-
-  const { error } = await supabase.auth.signUp(data);
-
-  if (error) {
-    throw new Error(error.message);
-  }
-
-  revalidatePath(`/auth/verify`, "page");
+  revalidatePath("/auth/verify", "page");
   redirect("/auth/verify");
 }
+
+// export async function signup({ email }: { email: string }) {
+//   const supabase = createClient();
+
+//   if (!email) {
+//     throw new Error("Email is required.");
+//   }
+
+//   const { data, error } = await supabase.auth.signUp({ email });
+//   console.log(data);
+
+//   if (error) {
+//     throw new Error(error.message);
+//   }
+
+//   const { data: data2, error: error2 } = await supabase
+//     .from("user_profiles")
+//     .insert({ user_id: data.user?.id, email: email, email_verified: false });
+
+//   await supabase.auth.refreshSession();
+
+//   revalidatePath(`/auth/verify`, "page");
+//   redirect("/auth/verify");
+// }
 
 export async function checkOtp({
   email,
@@ -101,18 +80,21 @@ export async function checkOtp({
 
   console.log(data);
 
-  const { error } = await supabase.auth.verifyOtp(data);
-
-  if (error) {
-    throw new Error(error.message);
-  }
-  const { error: error2 } = await supabase.from("user_profiles").insert({
-    email,
-  });
+  const { error: error2 } = await supabase.from("user_profiles").upsert(
+    [
+      {
+        email,
+        email_verified: true,
+      },
+    ],
+    { onConflict: "email" },
+  );
 
   if (error2) {
     throw new Error(error2.message);
   }
+
+  // cookies().delete("user_email");
 
   revalidatePath("/profile/setup", "layout");
   redirect("/profile/setup");
@@ -155,6 +137,15 @@ export async function createUserProfile({
   if (error) {
     throw new Error(error.message);
   }
+
+  revalidatePath("/", "layout");
+  redirect("/");
+}
+
+export async function signOut() {
+  const supabase = createClient();
+
+  const { error } = await supabase.auth.signOut();
 
   revalidatePath("/", "layout");
   redirect("/");

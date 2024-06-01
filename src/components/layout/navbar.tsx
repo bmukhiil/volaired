@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { motion, AnimatePresence, Variants } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Separator } from "../ui/separator";
@@ -24,7 +24,20 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [bookingOpen, setBookingOpen] = useState(false);
   const [companyOpen, setCompanyOpen] = useState(false);
-  const client = createClient();
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    async function checkUser() {
+      const supabase = createClient();
+      const { data } = await supabase.auth.getUser();
+
+      if (data) {
+        setUser(data.user);
+        console.log(data.user);
+      }
+    }
+    checkUser();
+  }, []);
 
   const links = [
     {
@@ -63,6 +76,8 @@ export default function Navbar() {
       setBookingOpen(false);
     }
   };
+
+  const handleSignOut = async () => {};
 
   return (
     <header className="w-screen sticky inset-0 z-50">
@@ -256,19 +271,70 @@ export default function Navbar() {
               className="flex flex-col gap-y-2 mt-4"
               variants={itemVariants}
             >
-              <Link href="/sign-in">
-                <Button className="w-full">Sign in</Button>
-              </Link>
-              <div className="flex items-center gap-x-3">
-                <Separator className="flex shrink" />
-                <span className="font-medium text-foreground">or</span>
-                <Separator className="flex shrink" />
-              </div>
-              <Link href="/sign-up">
-                <Button className="w-full bg-background text-foreground hover:bg-background/60">
-                  Sign up
-                </Button>
-              </Link>
+              {user ? (
+                <>
+                  <Link href="/profile/settings" className="w-full">
+                    <Button className="flex item-center gap-x-2 w-full">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                        class="size-5"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0Zm-5.5-2.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0ZM10 12a5.99 5.99 0 0 0-4.793 2.39A6.483 6.483 0 0 0 10 16.5a6.483 6.483 0 0 0 4.793-2.11A5.99 5.99 0 0 0 10 12Z"
+                          clip-rule="evenodd"
+                        />
+                      </svg>
+                      Settings
+                    </Button>
+                  </Link>
+                  {/* <div className="flex items-center gap-x-3">
+                    <Separator className="flex shrink" />
+                    <span className="font-medium text-foreground">or</span>
+                    <Separator className="flex shrink" />
+                  </div> */}
+                  <Link href="/sign-out" className="w-full">
+                    <Button className="flex items-center gap-x-2 w-full bg-background text-foreground hover:bg-background/60">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                        class="size-5"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M17 4.25A2.25 2.25 0 0 0 14.75 2h-5.5A2.25 2.25 0 0 0 7 4.25v2a.75.75 0 0 0 1.5 0v-2a.75.75 0 0 1 .75-.75h5.5a.75.75 0 0 1 .75.75v11.5a.75.75 0 0 1-.75.75h-5.5a.75.75 0 0 1-.75-.75v-2a.75.75 0 0 0-1.5 0v2A2.25 2.25 0 0 0 9.25 18h5.5A2.25 2.25 0 0 0 17 15.75V4.25Z"
+                          clip-rule="evenodd"
+                        />
+                        <path
+                          fill-rule="evenodd"
+                          d="M14 10a.75.75 0 0 0-.75-.75H3.704l1.048-.943a.75.75 0 1 0-1.004-1.114l-2.5 2.25a.75.75 0 0 0 0 1.114l2.5 2.25a.75.75 0 1 0 1.004-1.114l-1.048-.943h9.546A.75.75 0 0 0 14 10Z"
+                          clip-rule="evenodd"
+                        />
+                      </svg>
+                      Sign out
+                    </Button>
+                  </Link>
+                </>
+              ) : (
+                <>
+                  <Link href="/sign-in">
+                    <Button className="w-full">Sign in</Button>
+                  </Link>
+                  <div className="flex items-center gap-x-3">
+                    <Separator className="flex shrink" />
+                    <span className="font-medium text-foreground">or</span>
+                    <Separator className="flex shrink" />
+                  </div>
+                  <Link href="/sign-up">
+                    <Button className="w-full bg-background text-foreground hover:bg-background/60">
+                      Sign up
+                    </Button>
+                  </Link>
+                </>
+              )}
             </motion.div>
           </motion.ul>
         )}

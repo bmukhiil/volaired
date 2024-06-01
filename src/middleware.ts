@@ -6,7 +6,7 @@ const protectedRoutes = [
   "/settings",
   "/sign-out",
   "/profile/setup",
-  "/auth/verify",
+  // "/auth/verify",
 ];
 
 export async function middleware(request: NextRequest) {
