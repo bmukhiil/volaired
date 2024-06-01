@@ -197,7 +197,7 @@ export default function SignUpPage() {
                         {
                           "ring-rose-400 ring-1 focus-visible:border-border":
                             emailError,
-                        }
+                        },
                       )}
                     />
                   </div>
@@ -239,7 +239,7 @@ export default function SignUpPage() {
                         {
                           "ring-rose-400 ring-1 focus-visible:border-border":
                             passwordError,
-                        }
+                        },
                       )}
                     />
                   </div>

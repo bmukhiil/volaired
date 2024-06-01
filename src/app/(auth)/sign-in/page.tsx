@@ -4,7 +4,7 @@ import { ChangeEvent, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { signin } from "@/lib/supabase/actions";
+import { signin, signinGoogle } from "@/lib/supabase/actions";
 import { testEmail } from "@/lib/validate";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
@@ -75,6 +75,7 @@ export default function SignUpPage() {
         </div>
         <div className="flex flex-col gap-y-2">
           <Button
+            onClick={() => signinGoogle()}
             className="w-full flex items-center gap-x-3"
             variant="outline"
           >
