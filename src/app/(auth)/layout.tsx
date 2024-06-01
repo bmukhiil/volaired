@@ -15,7 +15,7 @@ export default function AuthLayout({ children }) {
           </Link>
         </nav>
       </header>
-      <div className="h-full mt-28 lg:mt-0 flex flex-col justify-between items-stretch overflow-y-hidden">
+      <div className="h-full mt-20 lg:mt-0 flex flex-col justify-between items-stretch overflow-y-hidden">
         <div className="flex w-full h-full">
           <div className="justify-between flex flex-col lg:mt-28 lg:w-3/4 w-full">
             {children}

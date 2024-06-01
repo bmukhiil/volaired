@@ -58,35 +58,26 @@ export async function signup({
   const data = {
     email,
     password,
+    options: {
+      // additional info
+      // data: {
+      //   first_name: "John",
+      //   last_name: "Doe",
+      // },
+    },
   };
 
   const { error } = await supabase.auth.signUp(data);
 
   if (error) {
     throw new Error(error.message);
-    // redirect("/auth/auth-error-code");
+  } else {
+    // const { error } = await supabase.from("user_profiles").insert({
+    //   email,
+    // });
+    revalidatePath("/auth/verify", "page");
+    redirect("/auth/verify");
   }
-
-  // send to backend
-  const data = {
-    email,
-    created_at,
-    updated_at,
-    last_sign_in_at,
-    ip_address,
-    user_agent,
-    first_name,
-    last_name,
-    phone_number,
-    birth_date,
-    is_active,
-    is_verified,
-    profile_picture_url,
-    preferences,
-  };
-
-  // revalidatePath("/", "layout");
-  // redirect("/");
 }
 
 export async function checkOtp({

@@ -22,6 +22,10 @@ import {
 export default function SignUpPage() {
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
+  const [firstNameError, setFirstNameError] = useState(false);
+  const [lastNameError, setLastNameError] = useState(false);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [signUpError, setSignUpError] = useState(false);
@@ -53,6 +57,12 @@ export default function SignUpPage() {
   };
 
   const handleSignup = async () => {
+    if (firstName.length === 0) {
+      setFirstNameError(true);
+    }
+    if (lastName.length === 0) {
+      setLastNameError(true);
+    }
     if (!testEmail(email) || email.length === 0) {
       setEmailError(true);
     }
@@ -74,135 +84,77 @@ export default function SignUpPage() {
     }
   };
 
-  const handleOtp = async (otp: string) => {
-    setOtp(otp);
-
-    if (otp.length === 6) {
-      try {
-        await checkOtp({
-          email,
-          token: otp,
-        });
-      } catch (error) {
-        setOtpError(true);
-      }
-    }
+  const handleFirstNameChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setFirstNameError(false);
+    setFirstName(e.target.value);
   };
 
-  const handleOtpBack = () => {
-    setEmail("");
-    setPassword("");
-    setOtpSent(false);
-    setOtpError(false);
+  const handleLastNameChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setLastNameError(false);
+    setLastName(e.target.value);
   };
 
   return (
     <div className="flex flex-col px-6 lg:px-28">
       <div className="bg-secondary">
         <AnimatePresence mode="wait">
-          {otpSent ? (
-            <motion.div
-              key="otp"
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: 50 }}
-              className="flex flex-col gap-y-4 justify-center"
-            >
-              <div className="flex flex-col gap-y-2">
-                <h1 className="text-2xl font-semibold tracking-tight">
-                  One last step
-                </h1>
-                <p className="text-sm text-muted-foreground">
-                  We just need to verify your email address
-                </p>
-              </div>
-              <div className="mt-8">
-                <InputOTP
-                  maxLength={6}
-                  value={otp}
-                  onChange={(otp) => handleOtp(otp)}
-                >
-                  <InputOTPGroup>
-                    <InputOTPSlot index={0} />
-                    <InputOTPSlot index={1} />
-                    <InputOTPSlot index={2} />
-                  </InputOTPGroup>
-                  <InputOTPSeparator />
-                  <InputOTPGroup>
-                    <InputOTPSlot index={3} />
-                    <InputOTPSlot index={4} />
-                    <InputOTPSlot index={5} />
-                  </InputOTPGroup>
-                </InputOTP>
-              </div>
-              <p className="text-sm lg:text-xs">
-                Not your email?{" "}
-                <span
-                  onClick={() => handleOtpBack(false)}
-                  className="underline cursor-pointer"
-                >
-                  Go back
-                </span>
+          <motion.div
+            key="signup"
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -50 }}
+            className="flex flex-col gap-y-6"
+          >
+            <div className="flex flex-col gap-y-2">
+              <h1 className="text-2xl font-semibold tracking-tight">
+                Create your account
+              </h1>
+              <p className="text-sm text-muted-foreground">
+                Enter the fields below to get flying
               </p>
-            </motion.div>
-          ) : (
-            <motion.div
-              key="signup"
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -50 }}
-              className="flex flex-col gap-y-6"
-            >
-              <div className="flex flex-col gap-y-2">
-                <h1 className="text-2xl font-semibold tracking-tight">
-                  Create your account
-                </h1>
-                <p className="text-sm text-muted-foreground">
-                  Enter the fields below to get flying
-                </p>
-              </div>
-              <div className="flex flex-col gap-y-2">
-                <Button
-                  className="w-full flex items-center gap-x-3"
-                  variant="outline"
-                >
-                  Continue with Google
-                  <Image
-                    src={GoogleGLogo}
-                    alt="Google G Logo"
-                    className="w-4 h-4"
-                  />
-                </Button>
-                {/* <Button className="w-full" variant="outline">
+            </div>
+            <div className="flex flex-col gap-y-2">
+              <Button
+                className="w-full flex items-center gap-x-3"
+                variant="outline"
+              >
+                Continue with Google
+                <Image
+                  src={GoogleGLogo}
+                  alt="Google G Logo"
+                  className="w-4 h-4"
+                />
+              </Button>
+              {/* <Button className="w-full" variant="outline">
             Continue with Google
           </Button> */}
-              </div>
-              <div className="flex items-center gap-x-2">
-                <Separator className="flex shrink" />
-                <span className="text-sm font-medium">or</span>
-                <Separator className="flex shrink" />
-              </div>
-              <div className="flex flex-col gap-y-4">
-                <div className="flex flex-col gap-y-1">
+            </div>
+            <div className="flex items-center gap-x-2">
+              <Separator className="flex shrink" />
+              <span className="text-sm font-medium">or</span>
+              <Separator className="flex shrink" />
+            </div>
+            <div className="flex flex-col gap-y-4">
+              {/* <div className="flex flex-col gap-y-1">
                   <div className="flex flex-col gap-y-2">
-                    <Label htmlFor="email">Email</Label>
+                    <Label htmlFor="first-name">First Name</Label>
                     <Input
-                      onChange={(e) => handleEmailChange(e)}
-                      value={email}
-                      type="email"
+                      onChange={(e) => handleFirstNameChange(e)}
+                      value={firstName}
+                      type="first-name"
                       required
-                      placeholder="me@example.com"
+                      placeholder="Enter first name"
                       className={cn(
                         "focus-visible:bg-secondary/60 focus-visible:ring-0 focus-visible:ring-offset-0 transition",
                         {
                           "ring-rose-400 ring-1 focus-visible:border-border":
-                            emailError,
-                        },
+                            firstNameError,
+                        }
                       )}
                     />
                   </div>
                   <AnimatePresence>
-                    {emailError && (
+                    {firstNameError && (
                       <motion.p
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -210,41 +162,31 @@ export default function SignUpPage() {
                         transition={{ duration: 0.1 }}
                         className="text-rose-500 lg:text-xs text-sm font-medium"
                       >
-                        Email address is invalid
+                        First name is required
                       </motion.p>
                     )}
                   </AnimatePresence>
                 </div>
                 <div className="flex flex-col gap-y-1">
                   <div className="flex flex-col gap-y-2">
-                    <div className="flex justify-between">
-                      <Label htmlFor="password">Password</Label>
-                      {/* <Label>
-                  <Link
-                    href="/forgot-password"
-                    className="underline text-foreground/60"
-                  >
-                    Forgot password?
-                  </Link>
-                </Label> */}
-                    </div>
+                    <Label htmlFor="first-name">First Name</Label>
                     <Input
-                      onChange={(e) => handlePasswordChange(e)}
-                      value={password}
-                      type="password"
+                      onChange={(e) => handleLastNameChange(e)}
+                      value={lastName}
+                      type="last-name"
                       required
-                      placeholder="Enter password"
+                      placeholder="Enter last name"
                       className={cn(
                         "focus-visible:bg-secondary/60 focus-visible:ring-0 focus-visible:ring-offset-0 transition",
                         {
                           "ring-rose-400 ring-1 focus-visible:border-border":
-                            passwordError,
-                        },
+                            lastNameError,
+                        }
                       )}
                     />
                   </div>
                   <AnimatePresence>
-                    {passwordError && (
+                    {lastNameError && (
                       <motion.p
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -252,30 +194,93 @@ export default function SignUpPage() {
                         transition={{ duration: 0.1 }}
                         className="text-rose-500 lg:text-xs text-sm font-medium"
                       >
-                        Password must be at least 8 characters
+                        Last name is required
                       </motion.p>
                     )}
                   </AnimatePresence>
+                </div> */}
+              <div className="flex flex-col gap-y-1">
+                <div className="flex flex-col gap-y-2">
+                  <Label htmlFor="email">Email</Label>
+                  <Input
+                    onChange={(e) => handleEmailChange(e)}
+                    value={email}
+                    type="email"
+                    required
+                    placeholder="me@example.com"
+                    className={cn(
+                      "focus-visible:bg-secondary/60 focus-visible:ring-0 focus-visible:ring-offset-0 transition",
+                      {
+                        "ring-rose-400 ring-1 focus-visible:border-border":
+                          emailError,
+                      }
+                    )}
+                  />
                 </div>
+                <AnimatePresence>
+                  {emailError && (
+                    <motion.p
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      transition={{ duration: 0.1 }}
+                      className="text-rose-500 lg:text-xs text-sm font-medium"
+                    >
+                      Email address is invalid
+                    </motion.p>
+                  )}
+                </AnimatePresence>
               </div>
-              <div>
-                <Button className="w-full" onClick={handleSignup}>
-                  Sign Up
-                </Button>
+              <div className="flex flex-col gap-y-1">
+                <div className="flex flex-col gap-y-2">
+                  <Label htmlFor="password">Password</Label>
+                  <Input
+                    onChange={(e) => handlePasswordChange(e)}
+                    value={password}
+                    type="password"
+                    required
+                    placeholder="Enter password"
+                    className={cn(
+                      "focus-visible:bg-secondary/60 focus-visible:ring-0 focus-visible:ring-offset-0 transition",
+                      {
+                        "ring-rose-400 ring-1 focus-visible:border-border":
+                          passwordError,
+                      }
+                    )}
+                  />
+                </div>
+                <AnimatePresence>
+                  {passwordError && (
+                    <motion.p
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      transition={{ duration: 0.1 }}
+                      className="text-rose-500 lg:text-xs text-sm font-medium"
+                    >
+                      Password must be at least 8 characters
+                    </motion.p>
+                  )}
+                </AnimatePresence>
               </div>
-              <div className="text-center">
-                <p className="text-muted-foreground text-sm font-medium">
-                  Already have an account?{" "}
-                  <Link
-                    href="/sign-in"
-                    className="text-foreground underline underline-offset-1"
-                  >
-                    Sign in
-                  </Link>
-                </p>
-              </div>
-            </motion.div>
-          )}
+            </div>
+            <div>
+              <Button className="w-full" onClick={handleSignup}>
+                Sign Up
+              </Button>
+            </div>
+            <div className="text-center">
+              <p className="text-muted-foreground text-sm font-medium">
+                Already have an account?{" "}
+                <Link
+                  href="/sign-in"
+                  className="text-foreground underline underline-offset-1"
+                >
+                  Sign in
+                </Link>
+              </p>
+            </div>
+          </motion.div>
         </AnimatePresence>
       </div>
     </div>
