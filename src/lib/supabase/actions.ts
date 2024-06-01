@@ -34,6 +34,13 @@ export async function signin({
     // redirect("/auth/auth-error-code");
   }
 
+  if (typeof window !== "undefined") {
+    sessionStorage.setItem("userEmail", email);
+  } else {
+    // server-side
+    // setCookie("userEmail", email);
+  }
+
   revalidatePath("/", "layout");
   redirect("/");
 }
@@ -71,13 +78,10 @@ export async function signup({
 
   if (error) {
     throw new Error(error.message);
-  } else {
-    // const { error } = await supabase.from("user_profiles").insert({
-    //   email,
-    // });
-    revalidatePath("/auth/verify", "page");
-    redirect("/auth/verify");
   }
+
+  revalidatePath(`/auth/verify`, "page");
+  redirect("/auth/verify");
 }
 
 export async function checkOtp({
@@ -88,7 +92,6 @@ export async function checkOtp({
   token: string;
 }) {
   const supabase = createClient();
-  console.log(email, token);
 
   const data = {
     email,
@@ -96,8 +99,58 @@ export async function checkOtp({
     type: "email" as EmailOtpType,
   };
 
+  console.log(data);
+
   const { error } = await supabase.auth.verifyOtp(data);
-  console.log(error);
+
+  if (error) {
+    throw new Error(error.message);
+  }
+  const { error: error2 } = await supabase.from("user_profiles").insert({
+    email,
+  });
+
+  if (error2) {
+    throw new Error(error2.message);
+  }
+
+  revalidatePath("/profile/setup", "layout");
+  redirect("/profile/setup");
+}
+
+// not working
+export async function resendOtp({ email }: { email: string }) {
+  const supabase = createClient();
+
+  const { error } = await supabase.auth.resend({
+    type: "signup",
+    email,
+  });
+  console.log("resendOtp error", error);
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  revalidatePath(`/auth/verify`, "page");
+  redirect("/auth/verify");
+}
+
+export async function createUserProfile({
+  firstName,
+  lastName,
+  date,
+}: {
+  firstName: string;
+  lastName: string;
+  date: Date;
+}) {
+  const supabase = createClient();
+
+  const { error } = await supabase.from("user_profiles").insert({
+    first_name: firstName,
+    last_name: lastName,
+    date_of_birth: date,
+  });
 
   if (error) {
     throw new Error(error.message);

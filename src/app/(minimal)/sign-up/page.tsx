@@ -74,6 +74,7 @@ export default function SignUpPage() {
     }
 
     try {
+      sessionStorage.setItem("userEmail", email);
       await signup({ email, password });
       setOtpSent(true);
     } catch (error) {
