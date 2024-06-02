@@ -18,8 +18,8 @@ import {
 export function DatePickerWithRange({ onDateChange, className }) {
   // const today = new Date();
   const [date, setDate] = React.useState<DateRange | undefined>({
-    from: null,
-    to: null,
+    from: undefined,
+    to: undefined,
   });
 
   const handleDataSelect = (newDate: DateRange) => {
@@ -28,23 +28,20 @@ export function DatePickerWithRange({ onDateChange, className }) {
   };
 
   return (
-    <div className={cn("grid gap-y-1", className)}>
-      <Label htmlFor="date">Date</Label>
+    <div className={cn("flex flex-col gap-y-1", className)}>
+      {/* <Label htmlFor="date">Date</Label> */}
       <Popover>
         <PopoverTrigger asChild>
           <Button
             id="date"
             variant={"outline"}
-            className={cn(
-              "justify-start font-normal",
-              !date && "text-muted-foreground",
-            )}
+            className={`justify-start font-normal ${!date?.from ? "text-muted-foreground" : "text-foreground"}`}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
               fill="currentColor"
-              className="mr-2 w-5 h-5"
+              className="mr-2 w-5 h-5 text-foreground"
             >
               <path
                 fill-rule="evenodd"
@@ -54,19 +51,19 @@ export function DatePickerWithRange({ onDateChange, className }) {
             </svg>
             {date?.from ? (
               date.to ? (
-                <>
-                  {format(date.from, "LLL dd, y")} -{" "}
-                  {format(date.to, "LLL dd, y")}
-                </>
+                `${format(date.from, "LLL dd, y")} - ${format(date.to, "LLL dd, y")}`
               ) : (
                 format(date.from, "LLL dd, y")
               )
             ) : (
-              <span className={cn("text-muted-foreground")}>Pick a date</span>
+              <span className="text-muted-foreground">Pick a date</span>
             )}
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="" align="center">
+        <PopoverContent
+          className="flex justify-center items-center"
+          align="center"
+        >
           <Calendar
             initialFocus
             mode="range"

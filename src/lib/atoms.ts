@@ -17,6 +17,11 @@ const destinationAirportAtom = atom({
   country: "Canada",
 });
 
+const dateRangeAtom = atom({
+  from: new Date(),
+  to: new Date(),
+});
+
 const flightOffersAtom = atom([]);
 const flightOfferFiltersAtom = atom([]);
 
@@ -31,4 +36,5 @@ export {
   flightOffersAtom,
   flightOfferFiltersAtom,
   userDataAtom,
+  dateRangeAtom,
 };

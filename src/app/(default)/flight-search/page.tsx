@@ -54,7 +54,7 @@ export default function FlightsPage() {
       setLoading(true);
       try {
         const response = await fetch(
-          `/api/flights?origin=${origin}&destination=${destination}&startDate=${startDate}&endDate=${endDate}&filters=${filters}`
+          `/api/flights?origin=${origin}&destination=${destination}&startDate=${startDate}&endDate=${endDate}&filters=${filters}`,
         ).then((res) => res.json());
         setFlights(response);
       } catch (error) {

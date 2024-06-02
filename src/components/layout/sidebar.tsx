@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -22,7 +22,10 @@ export function Sidebar() {
       {SHEET_SIDES.map((side) => (
         <Sheet key={side}>
           <SheetTrigger asChild>
-            <Button variant="outline" className="shadow-lg bg-white text-gray-800 hover:bg-gray-100">
+            <Button
+              variant="outline"
+              className="shadow-lg bg-white text-gray-800 hover:bg-gray-100"
+            >
               Groups →
             </Button>
           </SheetTrigger>
@@ -42,7 +45,9 @@ export function Sidebar() {
             </div>
             <SheetFooter className="flex justify-start mt-4">
               <SheetClose asChild>
-                <Button type="submit" className="w-[250px]">+ Create Group</Button>
+                <Button type="submit" className="w-[250px]">
+                  + Create Group
+                </Button>
               </SheetClose>
             </SheetFooter>
           </SheetContent>
@@ -51,4 +56,3 @@ export function Sidebar() {
     </div>
   );
 }
-

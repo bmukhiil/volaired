@@ -21,6 +21,7 @@ import {
   NavigationMenuTrigger,
   NavigationMenuViewport,
 } from "@/components/ui/navigation-menu";
+import CreateTripButton from "./navbar/CreateTripButton";
 
 const itemVariants: Variants = {
   open: {
@@ -281,7 +282,7 @@ export default function Navbar() {
                 "flex gap-x-3 items-center text-muted-foreground font-medium transition",
                 {
                   "text-foreground": tripOpen,
-                }
+                },
               )}
               variants={itemVariants}
               onClick={() => handleDropdownClick("booking")}
@@ -306,23 +307,7 @@ export default function Navbar() {
             <AnimatePresence>
               {tripOpen && (
                 <motion.ul className="ml-2 flex flex-col gap-y-2">
-                  <motion.li className="text-sm font-medium text-muted-foreground flex items-center gap-x-2">
-                    <div className="bg-background p-1 rounded-lg">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                        class="size-5 text-foreground"
-                      >
-                        <path
-                          fill-rule="evenodd"
-                          d="M2.5 3A1.5 1.5 0 0 0 1 4.5v4A1.5 1.5 0 0 0 2.5 10h6A1.5 1.5 0 0 0 10 8.5v-4A1.5 1.5 0 0 0 8.5 3h-6Zm11 2A1.5 1.5 0 0 0 12 6.5v7a1.5 1.5 0 0 0 1.5 1.5h4a1.5 1.5 0 0 0 1.5-1.5v-7A1.5 1.5 0 0 0 17.5 5h-4Zm-10 7A1.5 1.5 0 0 0 2 13.5v2A1.5 1.5 0 0 0 3.5 17h6a1.5 1.5 0 0 0 1.5-1.5v-2A1.5 1.5 0 0 0 9.5 12h-6Z"
-                          clip-rule="evenodd"
-                        />
-                      </svg>
-                    </div>
-                    Create a trip
-                  </motion.li>
+                  <CreateTripButton />
                   <motion.li className="text-sm font-medium text-muted-foreground flex items-center gap-x-2">
                     <div className="bg-background p-1 rounded-lg">
                       <svg
@@ -358,7 +343,7 @@ export default function Navbar() {
                 "flex items-center gap-x-3 text-muted-foreground font-medium",
                 {
                   "text-foreground": companyOpen,
-                }
+                },
               )}
               onClick={() => handleDropdownClick("company")}
               variants={itemVariants}
@@ -500,7 +485,7 @@ const ListItem = React.forwardRef<
           ref={ref}
           className={cn(
             "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
-            className
+            className,
           )}
           {...props}
         >
