@@ -60,9 +60,15 @@ export async function updateSession(
 
   const authPaths = ["/sign-in", "/sign-up"];
 
-  const { data, error } = await supabase.auth.getUser();
+  const { data, error } = await supabase
+    .from("user_profiles")
+    .select("email_verified, has_completed_profile_setup, user_id")
+    .eq("user_id", (await supabase.auth.getUser()).data?.user?.id)
+    .single();
 
-  let user = data?.user ?? null;
+  let user = data
+    ? { ...data, ...(await supabase.auth.getUser()).data?.user }
+    : null;
 
   const user_email = request.cookies.get("user_email");
   if (!user_email && request.nextUrl.pathname.startsWith("/auth/verify")) {
@@ -71,18 +77,11 @@ export async function updateSession(
 
   console.log(user);
 
-  if (user) {
-    const { data: data2, error: error2 } = await supabase
-      .from("user_profiles")
-      .select("email_verified")
-      .eq("user_id", user.id)
-      .single();
-    if (
-      data2?.email_verified === true &&
-      request.nextUrl.pathname.startsWith("/auth/verify")
-    ) {
-      return NextResponse.redirect(new URL("/", request.nextUrl));
-    }
+  if (
+    user?.email_verified === true &&
+    request.nextUrl.pathname.startsWith("/auth/verify")
+  ) {
+    return NextResponse.redirect(new URL("/", request.nextUrl));
   }
 
   if (
@@ -93,13 +92,7 @@ export async function updateSession(
   }
 
   if (user && request.nextUrl.pathname === "/profile/setup") {
-    const { data, error } = await supabase
-      .from("user_profiles")
-      .select("has_completed_profile_setup")
-      .eq("user_id", user.id)
-      .single();
-
-    if (data?.has_completed_profile_setup) {
+    if (user.has_completed_profile_setup) {
       return NextResponse.redirect(new URL("/", request.nextUrl));
     }
   }

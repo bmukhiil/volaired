@@ -22,6 +22,14 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { createUserProfile } from "@/lib/supabase/actions";
 import { redirect } from "next/navigation";
 
 export default function ProfileSetup() {
@@ -31,6 +39,7 @@ export default function ProfileSetup() {
   const [lastNameError, setLastNameError] = useState(false);
   const [loading, setLoading] = useState(false);
   const [date, setDate] = useState<Date>();
+  const [birthYear, setBirthYear] = useState<number>();
 
   const handleFirstNameChange = (e) => {
     setFirstNameError(false);
@@ -60,13 +69,11 @@ export default function ProfileSetup() {
       await createUserProfile({
         firstName,
         lastName,
-        date,
       });
+      setLoading(false);
     } catch (error) {
       setFirstNameError(true);
       setLastNameError(true);
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -144,19 +151,42 @@ export default function ProfileSetup() {
                   )}
                 </AnimatePresence>
               </div>
-              <div className="flex flex-col gap-y-1">
+              {/* <div className="flex flex-col gap-y-1">
                 <div className="flex flex-col gap-y-2">
                   <Label htmlFor="birth-date">Date of Birth</Label>
-                  something
                 </div>
-              </div>
-              <Button disabled={loading} onClick={handleSubmit}>
-                Finish setup
+              </div> */}
+              <Button
+                disabled={loading}
+                className="w-full"
+                onClick={handleSubmit}
+              >
+                {loading ? (
+                  <motion.div
+                    key="loading"
+                    className="bg-background w-6 h-6"
+                    animate={{
+                      scale: [0.9, 1.1, 1.1, 0.9, 0.9],
+                      rotate: [0, 0, 180, 180, 0],
+                      borderRadius: ["0%", "0%", "50%", "50%", "0%"],
+                    }}
+                    transition={{
+                      duration: 1.8,
+                      ease: "easeInOut",
+                      times: [0, 0.2, 0.5, 0.8, 1],
+                      repeat: Infinity,
+                      repeatDelay: 1.2,
+                    }}
+                  />
+                ) : (
+                  "Finish setup"
+                )}
               </Button>
             </div>
           </div>
         </div>
       </div>
+      <div></div>
     </div>
   );
 }

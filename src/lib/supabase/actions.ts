@@ -80,6 +80,12 @@ export async function checkOtp({
 
   console.log(data);
 
+  const { error: error } = await supabase.auth.verifyOtp(data);
+
+  if (error) {
+    throw new Error(error.message);
+  }
+
   const { error: error2 } = await supabase.from("user_profiles").upsert(
     [
       {
@@ -120,22 +126,31 @@ export async function resendOtp({ email }: { email: string }) {
 export async function createUserProfile({
   firstName,
   lastName,
-  date,
 }: {
   firstName: string;
   lastName: string;
-  date: Date;
 }) {
   const supabase = createClient();
+  // check if firstname and last name valid
 
-  const { error } = await supabase.from("user_profiles").insert({
-    first_name: firstName,
-    last_name: lastName,
-    date_of_birth: date,
-  });
+  const { data, error: error1 } = await supabase.auth.getUser();
 
-  if (error) {
-    throw new Error(error.message);
+  if (error1) {
+    throw new Error(error1.message);
+  }
+
+  const user_id = data.user?.id;
+
+  const { error: error2 } = await supabase
+    .from("user_profiles")
+    .update({
+      first_name: firstName.toLowerCase(),
+      last_name: lastName.toLowerCase(),
+    })
+    .eq("user_id", user_id);
+
+  if (error2) {
+    throw new Error(error2.message);
   }
 
   revalidatePath("/", "layout");
