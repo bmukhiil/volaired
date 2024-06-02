@@ -2,6 +2,7 @@ from flask import Flask, render_template, request
 from flask_restx import Api, Resource
 from flask_cors import CORS, cross_origin
 from lib.amadeus import amadeus_instance
+from lib.supabase import supabase_instance
 
 app = Flask(__name__)
 api = Api(app)
@@ -36,6 +37,32 @@ class HotelsSearch(Resource):
 class HotelsAddToPlan(Resource):
    def get(self):
       return {"message": "Adding hotel to plan..."}
+   
+@api.route("/trips/add")
+class TripsAdd(Resource):
+   def post(self):
+      request_data = request.json
+      item = {
+         "creator_email": request_data["creatorEmail"],
+         "trip_name": request_data["name"],
+         
+      }
+      
+      response = supabase_instance.insert_data("trips",item)
+      return response
+   
+@api.route("/itineraries/add")
+class ItenerariesAdd(Resource):
+   def post(self):
+      request_data = request.json
+      item = {
+         "itinerary_name": request_data["name"],
+         "description": request_data["description"],
+         "trip_id": request_data["tripId"]
+      }
+      
+      response = supabase_instance.insert_data("itineraries",item)
+      return response
 
 # run the app
 if __name__ == "__main__":
