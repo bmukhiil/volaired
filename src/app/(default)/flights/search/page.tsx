@@ -30,11 +30,14 @@ import {
   DropdownMenuRadioGroup,
 } from "@/components/ui/dropdown-menu";
 import { Label } from "@/components/ui/label";
+import { flightOffersAtom } from "@/lib/atoms";
+import { useAtom } from "jotai";
 
 export default function FlightsPage() {
   const [position, setPosition] = useState("Price");
   const [loading, setLoading] = useState(true);
-  const [flights, setFlights] = useState([]);
+  const [flights, setFlights] = useAtom(flightOffersAtom);
+
   const [sortLow, setSortLow] = useState(true);
 
   const searchParams = useSearchParams();
@@ -44,9 +47,50 @@ export default function FlightsPage() {
   const startDate = searchParams.get("startDate");
   const endDate = searchParams.get("endDate");
   const filters = searchParams.get("filters");
+  const currency = searchParams.get("currency");
 
   const departureAirport = useAtomValue(departureAirportAtom);
   const destinationAirport = useAtomValue(destinationAirportAtom);
+
+  // do a check if query params are null
+
+  function convertEpochToDate(epoch: number) {
+    const date = new Date(epoch * 1000); // Multiply by 1000 to convert seconds to milliseconds
+    const options = {
+      weekday: "short",
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    };
+    return date.toLocaleDateString("en-US", options);
+  }
+
+  function formatDate(date: string) {
+    const formattedDate = new Date(date);
+    const options = {
+      weekday: "short",
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    };
+    const day = formattedDate.toLocaleDateString("en-US", options);
+
+    // Format the time part
+    const time = formattedDate.toLocaleTimeString("en-US", {
+      hour12: false,
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+
+    return { day, time };
+  }
+
+  const formatDuration = (duration: string) => {
+    const time = duration.split("T")[1];
+    const hours = time.split("H")[0];
+    const minutes = time.split("H")[1].split("M")[0];
+    return `${hours}h ${minutes}m`;
+  };
 
   useEffect(() => {
     // fetch flights
@@ -54,17 +98,138 @@ export default function FlightsPage() {
       setLoading(true);
       try {
         const response = await fetch(
-          `/api/flights?origin=${origin}&destination=${destination}&startDate=${startDate}&endDate=${endDate}&filters=${filters}`
+          `http://127.0.0.1:8000/flights/search?origin=${origin}&destination=${destination}&startDate=${startDate}&endDate=${endDate}&filters=${filters}&currency=USD`,
         ).then((res) => res.json());
         setFlights(response);
+        // setFlights([
+        //   {
+        //     id: 1,
+        //     outboundTotalDuration: "PT2H30M",
+        //     inboundTotalDuration: "PT5H6M",
+        //     flightPath: [
+        //       {
+        //         departureAirport: "YVR",
+        //         departureTime: "2024-06-06T08:00:00",
+        //         arrivalAirport: "YYZ",
+        //         arrivalTime: "2024-06-06T13:30:00",
+        //         airlines: "AC",
+        //         duration: "PT2H30M",
+        //       },
+        //       {
+        //         departureAirport: "YYZ",
+        //         departureTime: "2024-06-13T07:15:00",
+        //         arrivalAirport: "YVR",
+        //         arrivalTime: "2024-06-13T09:21:00",
+        //         airlines: "AC",
+        //         duration: "PT5H6M",
+        //       },
+        //     ],
+        //     price: 3105.8,
+        //   },
+        //   {
+        //     id: 2,
+        //     outboundTotalDuration: "PT2H30M",
+        //     inboundTotalDuration: "PT5H6M",
+        //     flightPath: [
+        //       {
+        //         departureAirport: "YVR",
+        //         departureTime: "2024-06-06T08:00:00",
+        //         arrivalAirport: "YYZ",
+        //         arrivalTime: "2024-06-06T13:30:00",
+        //         airlines: "AC",
+        //         duration: "PT2H30M",
+        //       },
+        //       {
+        //         departureAirport: "YYZ",
+        //         departureTime: "2024-06-13T07:45:00",
+        //         arrivalAirport: "YVR",
+        //         arrivalTime: "2024-06-13T09:51:00",
+        //         airlines: "AC",
+        //         duration: "PT5H6M",
+        //       },
+        //     ],
+        //     price: 3105.8,
+        //   },
+        //   {
+        //     id: 3,
+        //     outboundTotalDuration: "PT2H30M",
+        //     inboundTotalDuration: "PT5H6M",
+        //     flightPath: [
+        //       {
+        //         departureAirport: "YVR",
+        //         departureTime: "2024-06-06T08:00:00",
+        //         arrivalAirport: "YYZ",
+        //         arrivalTime: "2024-06-06T13:30:00",
+        //         airlines: "AC",
+        //         duration: "PT2H30M",
+        //       },
+        //       {
+        //         departureAirport: "YYZ",
+        //         departureTime: "2024-06-13T10:15:00",
+        //         arrivalAirport: "YVR",
+        //         arrivalTime: "2024-06-13T12:21:00",
+        //         airlines: "AC",
+        //         duration: "PT5H6M",
+        //       },
+        //     ],
+        //     price: 3105.8,
+        //   },
+        //   {
+        //     id: 4,
+        //     outboundTotalDuration: "PT2H30M",
+        //     inboundTotalDuration: "PT5H6M",
+        //     flightPath: [
+        //       {
+        //         departureAirport: "YVR",
+        //         departureTime: "2024-06-06T08:00:00",
+        //         arrivalAirport: "YYZ",
+        //         arrivalTime: "2024-06-06T13:30:00",
+        //         airlines: "AC",
+        //         duration: "PT2H30M",
+        //       },
+        //       {
+        //         departureAirport: "YYZ",
+        //         departureTime: "2024-06-13T12:00:00",
+        //         arrivalAirport: "YVR",
+        //         arrivalTime: "2024-06-13T14:06:00",
+        //         airlines: "AC",
+        //         duration: "PT5H6M",
+        //       },
+        //     ],
+        //     price: 3105.8,
+        //   },
+        // ]);
       } catch (error) {
         console.error(error);
-      } finally {
-        setLoading(false);
       }
+      setLoading(false);
     }
     fetchFlights();
   }, []);
+
+  // if (loading) {
+  //   return (
+  //     <div className="w-screen h-[95vh] flex flex-col gap-y-6 justify-center items-center overflow-hidden z-50">
+  //       {/* <Loader2 className="text-indigo-500 animate-spin w-8 h-8" /> */}
+  //       <motion.div
+  //         className="bg-primary w-28 h-28"
+  //         animate={{
+  //           scale: [0.9, 1.1, 1.1, 0.9, 0.9],
+  //           rotate: [0, 0, 180, 180, 0],
+  //           borderRadius: ["0%", "0%", "50%", "50%", "0%"],
+  //         }}
+  //         transition={{
+  //           duration: 1.8,
+  //           ease: "easeInOut",
+  //           times: [0, 0.2, 0.5, 0.8, 1],
+  //           repeat: Infinity,
+  //           repeatDelay: 1.2,
+  //         }}
+  //       />
+  //       <span className="font-medium tracking-tight text-xl">Loading...</span>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="bg-background flex flex-col gap-y-3">
@@ -314,106 +479,164 @@ export default function FlightsPage() {
               </div>
             </div>
           </div>
-          <div>
-            <div className="w-full p-4 shadow-sm rounded-lg border border-dashed flex flex-col gap-y-2  bg-secondary">
-              <span className="text-sm font-medium">Tue June 11, 2024</span>
-              <div className="w-full flex h-full">
-                <div className="flex flex-col grow gap-y-1">
-                  <Skeleton className="w-[10dvh] h-4" />
-                  <Skeleton className="w-[8dvh] h-4" />
-                  <div className="flex items-center gap-x-2 mt-2">
-                    <Skeleton className="w-6 h-6 rounded-full" />
-                    <Skeleton className="w-[6dvh] h-4" />
+          {loading
+            ? Array.from({ length: 3 }).map((_, index) => (
+                <div key={index}>
+                  <div className="w-full p-4 shadow-sm rounded-lg border border-dashed flex flex-col gap-y-2  bg-secondary">
+                    <span className="text-sm font-medium">
+                      <Skeleton className="h-4 w-28" />
+                    </span>
+                    <div className="w-full flex h-full">
+                      <div className="flex flex-col grow gap-y-1">
+                        <Skeleton className="w-[10dvh] h-4" />
+                        <Skeleton className="w-[8dvh] h-4" />
+                        <div className="flex items-center gap-x-2 mt-2">
+                          <Skeleton className="w-6 h-6 rounded-full" />
+                          <Skeleton className="w-[6dvh] h-4" />
+                        </div>
+                      </div>
+                      <div className="flex flex-col items-center gap-y-1">
+                        <Skeleton className="w-24 h-4" />
+                        <Skeleton className="w-12 h-4" />
+                      </div>
+                      <div className="flex flex-col grow gap-y-1 items-end">
+                        <Skeleton className="w-[10dvh] h-4" />
+                        <Skeleton className="w-[8dvh] h-4" />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="w-full p-4 shadow-sm rounded-lg border border-dashed border-t-0 flex flex-col gap-y-2  bg-secondary">
+                    <span className="text-sm font-medium">
+                      {" "}
+                      <Skeleton className="h-4 w-28" />
+                    </span>
+                    <div className="w-full flex h-full">
+                      <div className="flex flex-col grow gap-y-1">
+                        <Skeleton className="w-[10dvh] h-4" />
+                        <Skeleton className="w-[8dvh] h-4" />
+                        <div className="flex items-center gap-x-2 mt-2">
+                          <Skeleton className="w-6 h-6 rounded-full" />
+                          <Skeleton className="w-[6dvh] h-4" />
+                        </div>
+                      </div>
+                      <div className="flex flex-col items-center gap-y-1">
+                        <Skeleton className="w-24 h-4" />
+                        <Skeleton className="w-12 h-4" />
+                      </div>
+                      <div className="flex flex-col grow gap-y-1 items-end">
+                        <Skeleton className="w-[10dvh] h-4" />
+                        <Skeleton className="w-[8dvh] h-4" />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="p-4 bg-secondary border border-dashed border-t-0 rounded-lg w-full flex flex-col gap-y-2 shadow-sm">
+                    <span className="text-xl flex justify-center text-center font-medium">
+                      {/* {currency} $3105.8 */}
+                      <Skeleton className="w-32 h-8" />
+                    </span>
+                    <Button className="w-full">Select</Button>
                   </div>
                 </div>
-                <div className="flex flex-col items-center gap-y-1">
-                  <Skeleton className="w-24 h-4" />
-                  <Skeleton className="w-12 h-4" />
-                </div>
-                <div className="flex flex-col grow gap-y-1 items-end">
-                  <Skeleton className="w-[10dvh] h-4" />
-                  <Skeleton className="w-[8dvh] h-4" />
-                </div>
-              </div>
-            </div>
-            <div className="w-full p-4 shadow-sm rounded-lg border border-dashed border-t-0 flex flex-col gap-y-2  bg-secondary">
-              <span className="text-sm font-medium">Fri June 14, 2024</span>
-              <div className="w-full flex h-full">
-                <div className="flex flex-col grow gap-y-1">
-                  <Skeleton className="w-[10dvh] h-4" />
-                  <Skeleton className="w-[8dvh] h-4" />
-                  <div className="flex items-center gap-x-2 mt-2">
-                    <Skeleton className="w-6 h-6 rounded-full" />
-                    <Skeleton className="w-[6dvh] h-4" />
+              ))
+            : flights.map((roundtrip, index) => {
+                // assuming the first and last flight are the outbound and inbound flights ( 2 flights total itinirary)
+                const { day: originDepartureDate, time: originDepartureTime } =
+                  formatDate(roundtrip.flightPath[0].departureTime);
+                const { day: originArrivalDate, time: originArrivalTime } =
+                  formatDate(roundtrip.flightPath[0].arrivalTime);
+
+                const {
+                  day: destinationDepartureDate,
+                  time: destinationDepartureTime,
+                } = formatDate(roundtrip.flightPath[1].departureTime);
+                const {
+                  day: destinationArrivalDate,
+                  time: destinationArrivalTime,
+                } = formatDate(roundtrip.flightPath[1].arrivalTime);
+
+                const numStops = roundtrip.flightPath.length - 2;
+                const inboundTotalDuration = formatDuration(
+                  roundtrip.inboundTotalDuration,
+                );
+                const outboundTotalDuration = formatDuration(
+                  roundtrip.outboundTotalDuration,
+                );
+
+                return (
+                  <div key={index}>
+                    <div className="w-full p-4 shadow-sm rounded-lg border border-dashed flex flex-col gap-y-2  bg-secondary">
+                      <span className="text-sm font-medium">
+                        {originDepartureDate}
+                      </span>
+                      <div className="w-full flex justify-between h-full items-center">
+                        <div className="flex flex-col">
+                          <span className="font-medium text-lg">
+                            {originDepartureTime}
+                          </span>
+                          <span className="font-medium text-muted-foreground text-sm">
+                            {roundtrip.flightPath[0].departureAirport}
+                          </span>
+                        </div>
+                        <div className="flex flex-col items-center">
+                          <span className="font-medium text-muted-foreground text-sm">
+                            {outboundTotalDuration}
+                          </span>
+                          <span className="font-medium text-sm bg-background px-2 py-1 rounded-2xl">
+                            {numStops} stops
+                          </span>
+                        </div>
+                        <div className="flex flex-col items-end">
+                          <span className="font-medium text-lg">
+                            {originArrivalTime}
+                          </span>
+                          <span className="font-medium text-muted-foreground text-sm">
+                            {roundtrip.flightPath[0].arrivalAirport}
+                          </span>
+                        </div>
+                      </div>
+                      <div>airline info</div>
+                    </div>
+                    <div className="w-full p-4 shadow-sm rounded-lg border border-dashed border-t-0 flex flex-col gap-y-2  bg-secondary">
+                      <span className="text-sm font-medium">
+                        {destinationDepartureDate}
+                      </span>
+                      <div className="w-full flex justify-between h-full items-center">
+                        <div className="flex flex-col">
+                          <span className="font-medium text-lg">
+                            {destinationDepartureTime}
+                          </span>
+                          <span className="font-medium text-muted-foreground text-sm">
+                            {roundtrip.flightPath[0].departureAirport}
+                          </span>
+                        </div>
+                        <div className="flex flex-col items-center">
+                          <span className="font-medium text-muted-foreground text-sm">
+                            {inboundTotalDuration}
+                          </span>
+                          <span className="font-medium text-sm bg-background px-2 py-1 rounded-2xl">
+                            {numStops} stops
+                          </span>
+                        </div>
+                        <div className="flex flex-col items-end">
+                          <span className="font-medium text-lg">
+                            {destinationArrivalTime}
+                          </span>
+                          <span className="font-medium text-muted-foreground text-sm">
+                            {roundtrip.flightPath[0].arrivalAirport}
+                          </span>
+                        </div>
+                      </div>
+                      <div>airline info</div>
+                    </div>
+                    <div className="p-4 bg-secondary border border-dashed border-t-0 rounded-lg w-full flex flex-col gap-y-2 shadow-sm">
+                      <span className="text-xl text-center font-medium">
+                        {currency} ${roundtrip.price}
+                      </span>
+                      <Button className="w-full">Select</Button>
+                    </div>
                   </div>
-                </div>
-                <div className="flex flex-col items-center gap-y-1">
-                  <Skeleton className="w-24 h-4" />
-                  <Skeleton className="w-12 h-4" />
-                </div>
-                <div className="flex flex-col grow gap-y-1 items-end">
-                  <Skeleton className="w-[10dvh] h-4" />
-                  <Skeleton className="w-[8dvh] h-4" />
-                </div>
-              </div>
-            </div>
-            <div className="p-4 bg-secondary border border-dashed border-t-0 rounded-lg w-full flex flex-col gap-y-2 shadow-sm">
-              <span className="text-xl text-center font-medium">
-                CA $1,234.56
-              </span>
-              <Button className="w-full">Select</Button>
-            </div>
-          </div>
-          <div>
-            <div className="w-full p-4 shadow-sm rounded-lg border border-dashed flex flex-col gap-y-2 bg-secondary">
-              <span className="text-sm font-medium">Tue June 11, 2024</span>
-              <div className="w-full flex h-full">
-                <div className="flex flex-col grow gap-y-1">
-                  <Skeleton className="w-[10dvh] h-4" />
-                  <Skeleton className="w-[8dvh] h-4" />
-                  <div className="flex items-center gap-x-2 mt-2">
-                    <Skeleton className="w-6 h-6 rounded-full" />
-                    <Skeleton className="w-[6dvh] h-4" />
-                  </div>
-                </div>
-                <div className="flex flex-col items-center gap-y-1">
-                  <Skeleton className="w-24 h-4" />
-                  <Skeleton className="w-12 h-4" />
-                </div>
-                <div className="flex flex-col grow gap-y-1 items-end">
-                  <Skeleton className="w-[10dvh] h-4" />
-                  <Skeleton className="w-[8dvh] h-4" />
-                </div>
-              </div>
-            </div>
-            <div className="w-full p-4 shadow-sm rounded-lg border border-dashed border-t-0 flex flex-col gap-y-2  bg-secondary">
-              <span className="text-sm font-medium">Fri June 14, 2024</span>
-              <div className="w-full flex h-full">
-                <div className="flex flex-col grow gap-y-1">
-                  <Skeleton className="w-[10dvh] h-4" />
-                  <Skeleton className="w-[8dvh] h-4" />
-                  <div className="flex items-center gap-x-2 mt-2">
-                    <Skeleton className="w-6 h-6 rounded-full" />
-                    <Skeleton className="w-[6dvh] h-4" />
-                  </div>
-                </div>
-                <div className="flex flex-col items-center gap-y-1">
-                  <Skeleton className="w-24 h-4" />
-                  <Skeleton className="w-12 h-4" />
-                </div>
-                <div className="flex flex-col grow gap-y-1 items-end">
-                  <Skeleton className="w-[10dvh] h-4" />
-                  <Skeleton className="w-[8dvh] h-4" />
-                </div>
-              </div>
-            </div>
-            <div className="p-4 bg-secondary border border-dashed border-t-0 rounded-lg w-full flex flex-col gap-y-2 shadow-sm">
-              <span className="text-xl text-center font-medium">
-                {/* CA $1,234.56 */}
-              </span>
-              <Button className="w-full">Select</Button>
-            </div>
-          </div>
+                );
+              })}
         </div>
       </div>
     </div>
