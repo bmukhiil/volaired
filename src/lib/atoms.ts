@@ -5,16 +5,16 @@ const childCountAtom = atom(0);
 const infantCountAtom = atom(0);
 
 const departureAirportAtom = atom({
-  iataCode: "YVR",
-  name: "Vancouver INTL",
-  city: "Vancouver",
-  country: "Canada",
+  iataCode: "",
+  name: "",
+  city: "",
+  country: "",
 });
 const destinationAirportAtom = atom({
-  iataCode: "YYZ",
-  name: "Toronto Pearson",
-  city: "Toronto",
-  country: "Canada",
+  iataCode: "",
+  name: "",
+  city: "",
+  country: "",
 });
 
 const dateRangeAtom = atom({
@@ -22,7 +22,22 @@ const dateRangeAtom = atom({
   to: new Date(),
 });
 
-const flightOffersAtom = atom([]);
+interface FlightOffer {
+  id: number;
+  outboundTotalDuration: string;
+  inboundTotalDuration: string;
+  flightPath: {
+    departureAirport: string;
+    departureTime: string;
+    arrivalAirport: string;
+    arrivalTime: string;
+    airlines: string;
+    duration: string;
+  }[];
+  price: number;
+}
+
+const flightOffersAtom = atom<FlightOffer[]>([]);
 const flightOfferFiltersAtom = atom([]);
 
 const userDataAtom = atom(null);

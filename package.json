@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "dev:server": "cd server && python3 app.py",
+    "dev:full": "concurrently \"npm run dev\" \"npm run dev:server\""
   },
   "dependencies": {
     "@hookform/resolvers": "^3.4.2",
@@ -32,6 +34,7 @@
     "algoliasearch": "^4.23.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "concurrently": "^8.2.2",
     "date-fns": "^3.6.0",
     "embla-carousel-react": "^8.0.4",
     "framer-motion": "^11.2.3",
