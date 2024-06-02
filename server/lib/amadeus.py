@@ -16,7 +16,7 @@ class AmadeusSingleton:
         SECRET = 'z4Zdp26tfwFrwBmA'
         self.amadeus = Client(client_id=ID, client_secret=SECRET)
 
-    def search(self, request):
+    def search_flights(self, request):
         departureDate = request["departureDate"]
         returnDate = request["returnDate"]
         # travelers = request["travelers"]
@@ -121,5 +121,7 @@ class AmadeusSingleton:
         return jsonify(formatted_data)
     
 
+    def search_hotels(self, request):
+        return 0
 
 amadeus_instance = AmadeusSingleton()

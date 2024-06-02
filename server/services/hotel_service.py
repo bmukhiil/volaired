@@ -6,9 +6,15 @@ amadeus = Client(
     client_secret='z4Zdp26tfwFrwBmA'
 )
 
+hotel_id_data = None
+
 try:
-    response = amadeus.get('/v1/booking/hotel-bookings',
+    response = amadeus.reference_data.locations.hotels.by_city.get(
+        cityCode='NYC'  # City code for Paris
     )
-    print(response.data)  # This will print the response data
+    print(response.data)  # Print the raw JSON response
+    # Now you can process the response data as needed
 except ResponseError as error:
     print(error)
+
+    

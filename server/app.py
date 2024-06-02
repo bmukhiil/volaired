@@ -15,7 +15,7 @@ class FlightsSearch(Resource):
 	def post(self):
    # Logic to search for flights based on criteria
 		request_data = request.json
-		r_data = amadeus_instance.search(request_data)
+		r_data = amadeus_instance.search_flights(request_data)
 		print(r_data)
 
 		return r_data
