@@ -54,7 +54,7 @@ export default function FlightsPage() {
       setLoading(true);
       try {
         const response = await fetch(
-          `/api/flights?origin=${origin}&destination=${destination}&startDate=${startDate}&endDate=${endDate}&filters=${filters}`,
+          `/api/flights?origin=${origin}&destination=${destination}&startDate=${startDate}&endDate=${endDate}&filters=${filters}`
         ).then((res) => res.json());
         setFlights(response);
       } catch (error) {
@@ -65,38 +65,6 @@ export default function FlightsPage() {
     }
     fetchFlights();
   }, []);
-
-  // if (loading) {
-  //   return (
-  //     <AnimatePresence>
-  //       <motion.div
-  //         initial={{ opacity: 0 }}
-  //         animate={{ opacity: 1 }}
-  //         exit={{ opacity: 0 }}
-  //         className="w-screen h-[95vh] flex flex-col gap-y-6 justify-center items-center overflow-hidden z-50"
-  //       >
-  //         {/* <Loader2 className="text-indigo-500 animate-spin w-8 h-8" /> */}
-  //         <h1 className="text-4xl font-bold tracking-tight">volaired</h1>
-  //         <motion.div
-  //           className="bg-primary w-28 h-28"
-  //           animate={{
-  //             scale: [0.9, 1.1, 1.1, 0.9, 0.9],
-  //             rotate: [0, 0, 180, 180, 0],
-  //             borderRadius: ["0%", "0%", "50%", "50%", "0%"],
-  //           }}
-  //           transition={{
-  //             duration: 1.8,
-  //             ease: "easeInOut",
-  //             times: [0, 0.2, 0.5, 0.8, 1],
-  //             repeat: Infinity,
-  //             repeatDelay: 1.2,
-  //           }}
-  //         />
-  //         <span className="font-medium text-lg">Fetching your flights...</span>
-  //       </motion.div>
-  //     </AnimatePresence>
-  //   );
-  // }
 
   return (
     <div className="bg-background flex flex-col gap-y-3">
