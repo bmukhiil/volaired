@@ -205,6 +205,7 @@ export default function Navbar() {
               </svg>
               Sign in
             </Button>
+            </Link>
           </div>
           <Button
             size="icon"
@@ -244,7 +245,6 @@ export default function Navbar() {
             }
             {/* Sign in */}
           </Button>
-        </div>
       </nav>
       <AnimatePresence>
         {menuOpen && (
