@@ -86,13 +86,6 @@ export async function updateSession(
   }
 
   if (
-    !user &&
-    protectedRoutes.some((path) => request.nextUrl.pathname.startsWith(path))
-  ) {
-    return NextResponse.redirect(new URL("/sign-in", request.nextUrl));
-  }
-
-  if (
     user &&
     authPaths.some((path) => request.nextUrl.pathname.startsWith(path))
   ) {
@@ -109,6 +102,13 @@ export async function updateSession(
     if (data?.has_completed_profile_setup) {
       return NextResponse.redirect(new URL("/", request.nextUrl));
     }
+  }
+
+  if (
+    !user &&
+    protectedRoutes.some((path) => request.nextUrl.pathname.startsWith(path))
+  ) {
+    return NextResponse.redirect(new URL("/sign-in", request.nextUrl));
   }
 
   return response;
