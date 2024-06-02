@@ -42,13 +42,12 @@ export default function Navbar() {
 
   useEffect(() => {
     async function checkUser() {
-      const supabase = createClient();
-      const { data } = await supabase.auth.getUser();
-
-      if (data) {
-        setUser(data.user);
-        console.log(data.user);
-      }
+      // const supabase = createClient();
+      // const { data } = await supabase.auth.getUser();
+      // if (data) {
+      //   setUser(data.user);
+      //   console.log(data.user);
+      // }
     }
     checkUser();
   }, []);
@@ -190,21 +189,22 @@ export default function Navbar() {
                 </NavigationMenuItem>
               </NavigationMenuList>
             </NavigationMenu>
-            <Button className="bg-background text-foreground hover:bg-background/60 hidden lg:flex gap-x-2">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                class="size-5"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0Zm-5.5-2.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0ZM10 12a5.99 5.99 0 0 0-4.793 2.39A6.483 6.483 0 0 0 10 16.5a6.483 6.483 0 0 0 4.793-2.11A5.99 5.99 0 0 0 10 12Z"
-                  clip-rule="evenodd"
-                />
-              </svg>
-              Sign in
-            </Button>
+            <Link href="/sign-in">
+              <Button className="bg-background text-foreground hover:bg-background/60 hidden lg:flex gap-x-2">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  class="size-5"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0Zm-5.5-2.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0ZM10 12a5.99 5.99 0 0 0-4.793 2.39A6.483 6.483 0 0 0 10 16.5a6.483 6.483 0 0 0 4.793-2.11A5.99 5.99 0 0 0 10 12Z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                Sign in
+              </Button>
             </Link>
           </div>
           <Button
@@ -243,8 +243,8 @@ export default function Navbar() {
                 )}
               </AnimatePresence>
             }
-            {/* Sign in */}
           </Button>
+        </div>
       </nav>
       <AnimatePresence>
         {menuOpen && (
@@ -286,14 +286,12 @@ export default function Navbar() {
                 "flex gap-x-3 items-center text-muted-foreground font-medium transition",
                 {
                   "text-foreground": bookingOpen,
-                },
+                }
               )}
               variants={itemVariants}
               onClick={() => handleDropdownClick("booking")}
             >
-              Booking{" "}
-              {/* <AnimatePresence mode="wait">
-                {bookingOpen ? ( */}
+              Booking
               <motion.svg
                 variants={chevronVariants}
                 initial="closed"
@@ -329,7 +327,7 @@ export default function Navbar() {
                 "flex items-center gap-x-3 text-muted-foreground font-medium",
                 {
                   "text-foreground": companyOpen,
-                },
+                }
               )}
               onClick={() => handleDropdownClick("company")}
               variants={itemVariants}
@@ -374,11 +372,6 @@ export default function Navbar() {
                       Settings
                     </Button>
                   </Link>
-                  {/* <div className="flex items-center gap-x-3">
-                    <Separator className="flex shrink" />
-                    <span className="font-medium text-foreground">or</span>
-                    <Separator className="flex shrink" />
-                  </div> */}
                   <Link href="/sign-out" className="w-full">
                     <Button className="flex items-center gap-x-2 w-full bg-background text-foreground hover:bg-background/60">
                       <svg
@@ -476,7 +469,7 @@ const ListItem = React.forwardRef<
           ref={ref}
           className={cn(
             "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
-            className,
+            className
           )}
           {...props}
         >
