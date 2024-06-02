@@ -165,7 +165,7 @@ export default function Footer() {
   };
 
   return (
-    <main className="lg:px-40 lg:py-4 px-6 rounded-t-2xl bg-rose-400/20">
+    <main className="lg:px-40 lg:py-4 px-6 bg-secondary">
       {/* <div className="flex flex-col justify-center items-center">
         <div className="flex flex-col gap-y-2">
           <h2 className="text-3xl font-bold tracking-tight">
@@ -264,7 +264,7 @@ export default function Footer() {
         ))}
       </div>
       <Separator className="my-4 flex shrink" />
-      <div className="mb-4 flex items-center justify-between">
+      <div className="pb-4 flex items-center justify-between">
         <span className="duration-0 text-muted-foreground text-xs">
           © Radiair. All rights reserved.
         </span>

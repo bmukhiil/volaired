@@ -15,12 +15,13 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { Progress } from "@/components/ui/progress";
+import { cn } from "@/lib/utils";
 import { DatePickerWithRange } from "@/components/ui/date-range-picker";
 import { Label } from "@/components/ui/label";
 import { useAtom } from "jotai";
 import { dateRangeAtom } from "@/lib/atoms";
 
-export default function CreateTripButton() {
+export default function CreateTripButton({ children }) {
   const [progress, setProgress] = useState(25);
   const [step, setStep] = useState(1);
   const [tripName, setTripName] = useState("");
@@ -83,7 +84,7 @@ export default function CreateTripButton() {
   return (
     <Drawer>
       <DrawerTrigger>
-        <motion.li className="text-sm font-medium text-muted-foreground flex items-center gap-x-2">
+        {/* <motion.li className="text-sm font-medium text-muted-foreground flex items-center gap-x-2">
           <div className="bg-background p-1 rounded-lg">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -99,7 +100,8 @@ export default function CreateTripButton() {
             </svg>
           </div>
           Create a trip
-        </motion.li>
+        </motion.li> */}
+        {children}
       </DrawerTrigger>
       <DrawerContent className="h-[60dvh]">
         <DrawerHeader>

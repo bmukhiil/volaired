@@ -10,6 +10,7 @@ import { Separator } from "../ui/separator";
 import { createClient } from "@/lib/supabase/client";
 import Image from "next/image";
 import radiair_full_logo_light from "../../../public/radiair_full_logo_light.webp";
+import radiair_full_logo_dark from "../../../public/radiair_full_logo_dark.webp";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -103,7 +104,12 @@ export default function Navbar() {
         >
           <Image
             src={radiair_full_logo_light}
-            className="w-28 h-auto"
+            className="w-28 h-auto dark:hidden"
+            alt="radiair logo"
+          />
+          <Image
+            src={radiair_full_logo_dark}
+            className="w-28 h-auto hidden dark:block"
             alt="radiair logo"
           />
         </Link>
@@ -119,15 +125,12 @@ export default function Navbar() {
                     <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
                       <li className="row-span-3">
                         <NavigationMenuLink asChild>
-                          <a
-                            className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
-                            href="/"
-                          >
+                          <div className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md">
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               viewBox="0 0 20 20"
                               fill="currentColor"
-                              class="size-5"
+                              class="size-5 text-primary"
                             >
                               <path
                                 fill-rule="evenodd"
@@ -144,10 +147,10 @@ export default function Navbar() {
                               and paste into your apps. Accessible.
                               Customizable. Open Source.
                             </p>
-                          </a>
+                          </div>
                         </NavigationMenuLink>
                       </li>
-                      <ListItem href="/docs" title="Introduction">
+                      <ListItem href="/trips" title="View all trips">
                         Re-usable components built using Radix UI and Tailwind
                         CSS.
                       </ListItem>
@@ -307,7 +310,25 @@ export default function Navbar() {
             <AnimatePresence>
               {tripOpen && (
                 <motion.ul className="ml-2 flex flex-col gap-y-2">
-                  <CreateTripButton />
+                  <CreateTripButton>
+                    <motion.li className="text-sm font-medium text-muted-foreground flex items-center gap-x-2">
+                      <div className="bg-background p-1 rounded-lg">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                          class="size-5 text-foreground"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            d="M2.5 3A1.5 1.5 0 0 0 1 4.5v4A1.5 1.5 0 0 0 2.5 10h6A1.5 1.5 0 0 0 10 8.5v-4A1.5 1.5 0 0 0 8.5 3h-6Zm11 2A1.5 1.5 0 0 0 12 6.5v7a1.5 1.5 0 0 0 1.5 1.5h4a1.5 1.5 0 0 0 1.5-1.5v-7A1.5 1.5 0 0 0 17.5 5h-4Zm-10 7A1.5 1.5 0 0 0 2 13.5v2A1.5 1.5 0 0 0 3.5 17h6a1.5 1.5 0 0 0 1.5-1.5v-2A1.5 1.5 0 0 0 9.5 12h-6Z"
+                            clip-rule="evenodd"
+                          />
+                        </svg>
+                      </div>
+                      Create a trip
+                    </motion.li>
+                  </CreateTripButton>
                   <motion.li className="text-sm font-medium text-muted-foreground flex items-center gap-x-2">
                     <div className="bg-background p-1 rounded-lg">
                       <svg

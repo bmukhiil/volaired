@@ -263,7 +263,7 @@ export default function Home() {
             </DropdownMenu>
           </div>
         </div>
-        <div className="mx-6 mt-6">
+        <div className="mx-6 py-6">
           {/* {/* <div className="flex lg:justify-center bg-secondary rounded-lg" */}
           <AnimatePresence mode="wait">
             {position === "flights" && (

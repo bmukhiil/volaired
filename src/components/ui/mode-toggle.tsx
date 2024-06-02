@@ -14,6 +14,7 @@ import {
 
 export function ModeToggle() {
   const { setTheme } = useTheme();
+  setTheme("light");
 
   return (
     <DropdownMenu>
@@ -25,7 +26,7 @@ export function ModeToggle() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="bg-background" align="end">
-        <DropdownMenuItem onClick={() => setTheme("light")}>
+        {/* <DropdownMenuItem onClick={() => setTheme("light")}>
           Light
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setTheme("dark")}>
@@ -33,7 +34,10 @@ export function ModeToggle() {
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setTheme("system")}>
           System
-        </DropdownMenuItem>
+        </DropdownMenuItem> */}
+        <DropdownMenuItem>Light</DropdownMenuItem>
+        <DropdownMenuItem>Dark</DropdownMenuItem>
+        <DropdownMenuItem>System</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
