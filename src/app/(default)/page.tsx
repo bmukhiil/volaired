@@ -296,7 +296,7 @@ export default function Home() {
                     <DrawerTrigger>
                       <div
                         className={cn(
-                          "flex gap-x-2 h-10 w-full rounded-md border border-input bg-background px-4 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
+                          "flex gap-x-2 h-10 w-full rounded-md border border-input bg-background px-4 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                         )}
                       >
                         <svg
@@ -557,7 +557,7 @@ export default function Home() {
                   </Button>
                 </Link>
                 <AnimatePresence>
-                  {adultCount + childCount + infantCount > 1 &&
+                  {adultCount + childCount + infantCount > 0 &&
                     tripCreateSuggestion && (
                       <motion.div
                         className="bg-gradient-to-br from-fuchsia-400 to-indigo-500 p-[3px] mt-4 rounded-xl flex justify-center items-center shadow-sm"
@@ -607,7 +607,7 @@ export default function Home() {
                               </svg>
                               <div className="flex flex-col gap-x-2">
                                 <span className="font-semibold">
-                                  Create a trip plan?
+                                  Create a group?
                                 </span>
                                 <p className="text-foreground/60 text-sm">
                                   We&apos;ve noticed you have more than one
@@ -622,7 +622,7 @@ export default function Home() {
                                   >
                                     Close
                                   </Button>
-                                  <Link href="/trips/create">
+                                  <Link href="/groups/create">
                                     <Button className="flex items-center gap-x-2">
                                       <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -678,7 +678,7 @@ export default function Home() {
                     <DrawerTrigger>
                       <div
                         className={cn(
-                          "flex gap-x-2 h-10 w-full rounded-md border border-input bg-background px-4 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
+                          "flex gap-x-2 h-10 w-full rounded-md border border-input bg-background px-4 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                         )}
                       >
                         <svg

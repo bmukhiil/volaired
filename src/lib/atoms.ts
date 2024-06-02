@@ -1,6 +1,6 @@
 import { atom } from "jotai";
 
-const adultCountAtom = atom(2);
+const adultCountAtom = atom(1);
 const childCountAtom = atom(0);
 const infantCountAtom = atom(0);
 
