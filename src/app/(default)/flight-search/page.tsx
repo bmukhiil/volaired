@@ -9,6 +9,17 @@ import { useAtomValue } from "jotai";
 import { departureAirportAtom, destinationAirportAtom } from "@/lib/atoms";
 import { Button } from "@/components/ui/button";
 import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
+
+import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
@@ -55,45 +66,61 @@ export default function FlightsPage() {
     fetchFlights();
   }, []);
 
-  // if (loading) {
-  //   return (
-  //     <AnimatePresence>
-  //       <motion.div
-  //         initial={{ opacity: 0 }}
-  //         animate={{ opacity: 1 }}
-  //         exit={{ opacity: 0 }}
-  //         className="w-screen h-[95vh] flex flex-col gap-y-6 justify-center items-center overflow-hidden z-50"
-  //       >
-  //         {/* <Loader2 className="text-indigo-500 animate-spin w-8 h-8" /> */}
-  //         <h1 className="text-4xl font-bold tracking-tight">volaired</h1>
-  //         <motion.div
-  //           className="bg-primary w-28 h-28"
-  //           animate={{
-  //             scale: [0.9, 1.1, 1.1, 0.9, 0.9],
-  //             rotate: [0, 0, 180, 180, 0],
-  //             borderRadius: ["0%", "0%", "50%", "50%", "0%"],
-  //           }}
-  //           transition={{
-  //             duration: 1.8,
-  //             ease: "easeInOut",
-  //             times: [0, 0.2, 0.5, 0.8, 1],
-  //             repeat: Infinity,
-  //             repeatDelay: 1.2,
-  //           }}
-  //         />
-  //         <span className="font-medium text-lg">Fetching your flights...</span>
-  //       </motion.div>
-  //     </AnimatePresence>
-  //   );
-  // }
-
   return (
-    <>
-      <div>
-        <span className="font-medium">
-          {departureAirport.city}, {departureAirport.country} -{" "}
-          {destinationAirport.city}, {destinationAirport.country}
-        </span>
+    <div className="bg-background flex flex-col gap-y-3">
+      <div className="p-6 border-b bg-secondary flex justify-between">
+        <Drawer>
+          <DrawerTrigger className="w-full">
+            <div className="flex items-center justify-between">
+              <div className="flex font-medium items-center gap-x-3 ">
+                {departureAirport.city} ({departureAirport.iataCode})
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  class="size-4"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M2 10a.75.75 0 0 1 .75-.75h12.59l-2.1-1.95a.75.75 0 1 1 1.02-1.1l3.5 3.25a.75.75 0 0 1 0 1.1l-3.5 3.25a.75.75 0 1 1-1.02-1.1l2.1-1.95H2.75A.75.75 0 0 1 2 10Z"
+                    clip-rule="evenodd"
+                  />
+                </svg>{" "}
+                {destinationAirport.city} ({destinationAirport.iataCode})
+              </div>
+              <Button
+                size="icon"
+                className="bg-background active:bg-background/70 flex items-center justify-center"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  class="size-4 text-primary"
+                >
+                  <path d="m5.433 13.917 1.262-3.155A4 4 0 0 1 7.58 9.42l6.92-6.918a2.121 2.121 0 0 1 3 3l-6.92 6.918c-.383.383-.84.685-1.343.886l-3.154 1.262a.5.5 0 0 1-.65-.65Z" />
+                  <path d="M3.5 5.75c0-.69.56-1.25 1.25-1.25H10A.75.75 0 0 0 10 3H4.75A2.75 2.75 0 0 0 2 5.75v9.5A2.75 2.75 0 0 0 4.75 18h9.5A2.75 2.75 0 0 0 17 15.25V10a.75.75 0 0 0-1.5 0v5.25c0 .69-.56 1.25-1.25 1.25h-9.5c-.69 0-1.25-.56-1.25-1.25v-9.5Z" />
+                </svg>
+              </Button>
+            </div>
+          </DrawerTrigger>
+          <DrawerContent>
+            <DrawerHeader>
+              <DrawerTitle>Are you absolutely sure?</DrawerTitle>
+              <DrawerDescription>
+                This action cannot be undone.
+              </DrawerDescription>
+            </DrawerHeader>
+            <DrawerFooter>
+              <Button>Submit</Button>
+              <DrawerClose>
+                <Button variant="outline" className="w-full">
+                  Cancel
+                </Button>
+              </DrawerClose>
+            </DrawerFooter>
+          </DrawerContent>
+        </Drawer>
       </div>
       <div className="flex flex-col gap-y-1">
         <div className="flex justify-end">
@@ -172,7 +199,7 @@ export default function FlightsPage() {
           <div className="bg-gradient-to-br from-fuchsia-400 to-indigo-500 p-[3px] rounded-xl flex justify-center items-center shadow-sm">
             <div className="bg-background rounded-lg w-full h-full flex items-center justify-center">
               <div className="w-full rounded-lg flex justify-center items-center bg-secondary">
-                <div className="flex gap-x-2 items-start w-full p-4 rounded-lg bg-transparent">
+                <div className="flex gap-x-2 items-start w-full p-4 rounded-lg bg-secondary">
                   {/* <svg
                       fill="url(#grad1)"
                       xmlns="http://www.w3.org/2000/svg"
@@ -211,7 +238,7 @@ export default function FlightsPage() {
                     </svg> */}
                   <div className="flex flex-col gap-x-2 w-full gap-y-4">
                     {/* <span className="font-semibold">Recommended</span> */}
-                    <div className="w-full border-b border-dashed pb-4 flex flex-col gap-y-2">
+                    <div className="w-full border-b border-dashed pb-4 flex flex-col gap-y-2 bg-secondary">
                       <span className="text-sm font-medium">
                         Tue June 11, 2024
                       </span>
@@ -234,7 +261,7 @@ export default function FlightsPage() {
                         </div>
                       </div>
                     </div>
-                    <div className="w-full flex flex-col gap-y-2">
+                    <div className="w-full flex flex-col gap-y-2  bg-secondary">
                       <span className="text-sm font-medium">
                         Fri June 14, 2024
                       </span>
@@ -261,14 +288,17 @@ export default function FlightsPage() {
                       <span className="text-xl text-center font-medium">
                         CA $1,234.56
                       </span>
-                      <div className="flex items-center gap-x-1">
+                      <div className="flex items-center gap-x-2">
                         <Button className="w-full">Select</Button>
-                        <Button size="icon" className="w-10 h-10 bg-background">
+                        {/* <Button
+                          size="icon"
+                          className="flex grow w-8/12 h-10 bg-background"
+                        >
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 20 20"
                             fill="currentColor"
-                            class="size-5 text-foreground"
+                            class="size-5 text-primary"
                           >
                             <path
                               fill-rule="evenodd"
@@ -276,7 +306,7 @@ export default function FlightsPage() {
                               clip-rule="evenodd"
                             />
                           </svg>
-                        </Button>
+                        </Button> */}
                       </div>
                     </div>
                   </div>
@@ -285,7 +315,7 @@ export default function FlightsPage() {
             </div>
           </div>
           <div>
-            <div className="w-full p-4 shadow-sm rounded-lg border border-dashed flex flex-col gap-y-2">
+            <div className="w-full p-4 shadow-sm rounded-lg border border-dashed flex flex-col gap-y-2  bg-secondary">
               <span className="text-sm font-medium">Tue June 11, 2024</span>
               <div className="w-full flex h-full">
                 <div className="flex flex-col grow gap-y-1">
@@ -306,7 +336,7 @@ export default function FlightsPage() {
                 </div>
               </div>
             </div>
-            <div className="w-full p-4 shadow-sm rounded-lg border border-dashed border-t-0 flex flex-col gap-y-2">
+            <div className="w-full p-4 shadow-sm rounded-lg border border-dashed border-t-0 flex flex-col gap-y-2  bg-secondary">
               <span className="text-sm font-medium">Fri June 14, 2024</span>
               <div className="w-full flex h-full">
                 <div className="flex flex-col grow gap-y-1">
@@ -335,7 +365,7 @@ export default function FlightsPage() {
             </div>
           </div>
           <div>
-            <div className="w-full p-4 shadow-sm rounded-lg border border-dashed flex flex-col gap-y-2">
+            <div className="w-full p-4 shadow-sm rounded-lg border border-dashed flex flex-col gap-y-2 bg-secondary">
               <span className="text-sm font-medium">Tue June 11, 2024</span>
               <div className="w-full flex h-full">
                 <div className="flex flex-col grow gap-y-1">
@@ -356,7 +386,7 @@ export default function FlightsPage() {
                 </div>
               </div>
             </div>
-            <div className="w-full p-4 shadow-sm rounded-lg border border-dashed border-t-0 flex flex-col gap-y-2">
+            <div className="w-full p-4 shadow-sm rounded-lg border border-dashed border-t-0 flex flex-col gap-y-2  bg-secondary">
               <span className="text-sm font-medium">Fri June 14, 2024</span>
               <div className="w-full flex h-full">
                 <div className="flex flex-col grow gap-y-1">
@@ -386,6 +416,6 @@ export default function FlightsPage() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

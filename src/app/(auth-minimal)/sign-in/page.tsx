@@ -19,6 +19,7 @@ export default function SignUpPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
     setEmailError(false);
@@ -43,18 +44,20 @@ export default function SignUpPage() {
   };
 
   const handleSignin = async () => {
+    setLoading(true);
     if (!testEmail(email) || email.length === 0) {
       setEmailError(true);
     }
-    if (password.length === 0) {
-      setPasswordError(true);
-      return;
-    } else if (emailError || passwordError) {
-      return;
-    }
+    // if (password.length === 0) {
+    //   setPasswordError(true);
+    //   return;
+    // } else if (emailError || passwordError) {
+    //   return;
+    // }
 
     try {
-      await signin({ email, password });
+      await signin({ email });
+      setLoading(false);
     } catch (error) {
       setEmailError(true);
       setPasswordError(true);
@@ -67,10 +70,10 @@ export default function SignUpPage() {
       <div className="bg-secondary flex flex-col gap-y-6">
         <div className="flex flex-col gap-y-2">
           <h1 className="text-2xl font-semibold tracking-tight">
-            Welcome back traveler
+            Sign in or create an account
           </h1>
           <p className="text-sm text-muted-foreground">
-            Sign in to your account
+            Let's get you up and flying.
           </p>
         </div>
         <div className="flex flex-col gap-y-2">
@@ -124,7 +127,7 @@ export default function SignUpPage() {
               )}
             </AnimatePresence>
           </div>
-          <div className="flex flex-col gap-y-1">
+          {/* <div className="flex flex-col gap-y-1">
             <div className="flex flex-col gap-y-2">
               <div className="flex justify-between items-center">
                 <Label htmlFor="password">Password</Label>
@@ -165,14 +168,33 @@ export default function SignUpPage() {
                 </motion.p>
               )}
             </AnimatePresence>
-          </div>
+          </div> */}
         </div>
         <div>
-          <Button className="w-full" onClick={handleSignin}>
-            Sign In
+          <Button disabled={loading} className="w-full" onClick={handleSignin}>
+            {loading ? (
+              <motion.div
+                key="loading"
+                className="bg-background w-6 h-6"
+                animate={{
+                  scale: [0.9, 1.1, 1.1, 0.9, 0.9],
+                  rotate: [0, 0, 180, 180, 0],
+                  borderRadius: ["0%", "0%", "50%", "50%", "0%"],
+                }}
+                transition={{
+                  duration: 1.8,
+                  ease: "easeInOut",
+                  times: [0, 0.2, 0.5, 0.8, 1],
+                  repeat: Infinity,
+                  repeatDelay: 1.2,
+                }}
+              />
+            ) : (
+              "Continue"
+            )}
           </Button>
         </div>
-        <div className="text-center">
+        {/* <div className="text-center">
           <p className="text-muted-foreground text-sm font-medium">
             Don't have an account?{" "}
             <Link
@@ -182,7 +204,7 @@ export default function SignUpPage() {
               Sign up
             </Link>
           </p>
-        </div>
+        </div> */}
         {/* <AnimatePresence>
           {loginError && (
             <motion.div

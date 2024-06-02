@@ -1,6 +1,6 @@
 import { atom } from "jotai";
 
-const adultCountAtom = atom(2);
+const adultCountAtom = atom(1);
 const childCountAtom = atom(0);
 const infantCountAtom = atom(0);
 
@@ -17,6 +17,11 @@ const destinationAirportAtom = atom({
   country: "Canada",
 });
 
+const dateRangeAtom = atom({
+  from: new Date(),
+  to: new Date(),
+});
+
 const flightOffersAtom = atom([]);
 const flightOfferFiltersAtom = atom([]);
 
@@ -31,4 +36,5 @@ export {
   flightOffersAtom,
   flightOfferFiltersAtom,
   userDataAtom,
+  dateRangeAtom,
 };

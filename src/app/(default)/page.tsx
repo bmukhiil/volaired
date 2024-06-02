@@ -49,6 +49,7 @@ import {
   departureAirportAtom,
   destinationAirportAtom,
   flightOffersAtom,
+  dateRangeAtom,
   infantCountAtom,
 } from "@/lib/atoms";
 
@@ -68,11 +69,6 @@ const jsonLd = {
   //   },
   // },
 };
-
-const dateRangeAtom = atom({
-  from: new Date(),
-  to: new Date(),
-});
 
 export default function Home() {
   const [position, setPosition] = useState("flights");
@@ -148,12 +144,19 @@ export default function Home() {
   const updateDateRange = (dateRange) => {
     const { from, to } = dateRange;
 
-    const formattedDateRange = {
-      from: Math.floor(from.getTime() / 1000), // Convert 'from' date to epoch time
-      to: Math.floor(to.getTime() / 1000), // Convert 'to' date to epoch time
-    };
+    if (from && to) {
+      const formattedDateRange = {
+        from: Math.floor(from.getTime() / 1000), // Convert 'from' date to epoch time
+        to: Math.floor(to.getTime() / 1000), // Convert 'to' date to epoch time
+      };
 
-    setDateRange(formattedDateRange);
+      setDateRange(formattedDateRange);
+    } else {
+      // Handle the case when 'from' or 'to' is undefined
+      console.error(
+        "Invalid date range selected. Both 'from' and 'to' dates must be defined.",
+      );
+    }
   };
 
   const handleSearch = async () => {
@@ -557,7 +560,7 @@ export default function Home() {
                   </Button>
                 </Link>
                 <AnimatePresence>
-                  {adultCount + childCount + infantCount > 1 &&
+                  {adultCount + childCount + infantCount > 0 &&
                     tripCreateSuggestion && (
                       <motion.div
                         className="bg-gradient-to-br from-fuchsia-400 to-indigo-500 p-[3px] mt-4 rounded-xl flex justify-center items-center shadow-sm"
@@ -607,7 +610,7 @@ export default function Home() {
                               </svg>
                               <div className="flex flex-col gap-x-2">
                                 <span className="font-semibold">
-                                  Create a trip plan?
+                                  Create a group?
                                 </span>
                                 <p className="text-foreground/60 text-sm">
                                   We&apos;ve noticed you have more than one
@@ -622,7 +625,7 @@ export default function Home() {
                                   >
                                     Close
                                   </Button>
-                                  <Link href="/trips/create">
+                                  <Link href="/groups/create">
                                     <Button className="flex items-center gap-x-2">
                                       <svg
                                         xmlns="http://www.w3.org/2000/svg"

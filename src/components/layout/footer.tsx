@@ -10,6 +10,9 @@ import { Button } from "../ui/button";
 import { ModeToggle } from "@/components/ui/mode-toggle";
 import Link from "next/link";
 import { CustomDashedCard } from "../ui/custom-card";
+import { Input } from "../ui/input";
+import radiair_full_logo_light from "../../../public/radiair_full_logo_light.webp";
+import Image from "next/image";
 
 const World = dynamic(() => import("../ui/globe").then((m) => m.World), {
   ssr: false,
@@ -29,6 +32,8 @@ export default function Footer() {
   const [arcs, setArcs] = useState<Arc[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [email, setEmail] = useState<string>("");
+  const [emailError, setEmailError] = useState(false);
 
   const footer = [
     {
@@ -41,12 +46,22 @@ export default function Footer() {
         // },
         {
           name: "Blog",
-          href: "#hero",
+          href: "/blog",
           title: "Read our Blog",
         },
         {
+          name: "Company",
+          href: "/company",
+          title: "Learn more about Radiair",
+        },
+        {
+          name: "Terms of Use",
+          href: "/terms",
+          title: "Read our Terms of Use",
+        },
+        {
           name: "Privacy Policy",
-          href: "#hero",
+          href: "/privacy",
           title: "Read our Privacy Policy",
         },
       ],
@@ -55,15 +70,19 @@ export default function Footer() {
       name: "Resources",
       links: [
         {
+          name: "Become a Partner",
+          href: "/partnerships",
+          title: "Become a Partner",
+        },
+        {
           name: "Help & Support",
-          href: "#hero",
+          href: "/support",
           title: "Get Help & Support",
         },
       ],
     },
   ];
 
-  // const globeConfig = {
   //   pointSize: 1000,
   //   globeColor: "#18181b",
   //   showAtmosphere: false,
@@ -140,9 +159,14 @@ export default function Footer() {
   //   fetchArcs();
   // }, []);
 
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmailError(false);
+    setEmail(e.target.value);
+  };
+
   return (
-    <main className="lg:px-40 lg:py-4 px-6 pt-20 rounded-t-2xl bg-rose-400/20">
-      <div className="flex flex-col justify-center items-center">
+    <main className="lg:px-40 lg:py-4 px-6 rounded-t-2xl bg-rose-400/20">
+      {/* <div className="flex flex-col justify-center items-center">
         <div className="flex flex-col gap-y-2">
           <h2 className="text-3xl font-bold tracking-tight">
             Here&apos;s a globe.
@@ -155,7 +179,6 @@ export default function Footer() {
         <CustomDashedCard className="my-8 flex items-center justify-center">
           {loading ? (
             <div className="flex items-center justify-center flex-col">
-              {/* <Loader2 className="text-indigo-500 animate-spin w-8 h-8" /> */}
               <motion.div
                 className="bg-primary w-24 h-24"
                 animate={{
@@ -173,44 +196,6 @@ export default function Footer() {
               />
               <div className="text-muted-foreground mt-4 font-medium tracking-tight flex items-center gap-x-2">
                 Loading...
-                {/* <div className="flex">
-                  <motion.div
-                    className="bg-primary w-1 h-1 rounded-full"
-                    animate={{
-                      translateY: [0, -4, 0],
-                    }}
-                    transition={{
-                      duration: 1,
-                      // times: [0, 0.2, 0.6, 1],
-                      repeat: Infinity,
-                      repeatDelay: 1,
-                    }}
-                  />
-                  <motion.div
-                    className="bg-primary w-1 h-1 rounded-full"
-                    animate={{
-                      translateY: [-4, 0, -4],
-                    }}
-                    transition={{
-                      duration: 1,
-                      // times: [0, 0.2, 0.4, 0.6],
-                      repeat: Infinity,
-                      repeatDelay: 1,
-                    }}
-                  />
-                  <motion.div
-                    className="bg-primary w-1 h-1 rounded-full"
-                    animate={{
-                      translateY: [0, -4, 0],
-                    }}
-                    transition={{
-                      duration: 1,
-                      // times: [0, 0.2, 0.6, 1],
-                      repeat: Infinity,
-                      repeatDelay: 1,
-                    }}
-                  />
-                </div> */}
               </div>
             </div>
           ) : (
@@ -225,30 +210,37 @@ export default function Footer() {
           )}
         </CustomDashedCard>
       </div>
-      <Separator className="my-4 -mx-6 w-screen" />
+      <Separator className="my-4 -mx-6 w-screen" /> */}
       <div className="py-14 text-center flex gap-y-6 flex-col">
         <div className="flex flex-col gap-y-4 items-center">
           <span className="text-3xl tracking-tight font-bold text-foreground duration-0">
-            <span className="text-indigo-500">Explore</span> the Volaired
+            <span className="text-indigo-500">Explore</span> the Radiair
             Advantage
           </span>
           <p className="text-muted-foreground duration-0 lg:w-[80dvh]">
-            Volaired simplifies your travel experience with intelligent flight
+            Radiair simplifies your travel experience with intelligent flight
             recommendations, seamless group coordination, and personalized
             itineraries.
           </p>
         </div>
-        <Link href="#hero">
-          <Button className="border border-indigo-400 shadow-inner">
-            Sign up for early access
+        <div className="flex flex-col gap-y-1">
+          <Input
+            value={email}
+            onChange={(e) => handleEmailChange(e)}
+            placeholder="Enter your email"
+          />
+          <Button className="border border-indigo-400 shadow-inner w-full">
+            Join newsletter
           </Button>
-        </Link>
+        </div>
       </div>
       <Separator className="my-4 flex shrink" />
-      <div className="mt-14">
-        <span className="font-semibold tracking-tight text-2xl text-foreground duration-0">
-          Volaired
-        </span>
+      <div className="mt-8">
+        <Image
+          src={radiair_full_logo_light}
+          className="w-32 h-auto"
+          alt="Radiair logo"
+        />
       </div>
       <div className="mt-8 flex gap-x-20">
         {footer.map((section) => (
@@ -274,7 +266,7 @@ export default function Footer() {
       <Separator className="my-4 flex shrink" />
       <div className="mb-4 flex items-center justify-between">
         <span className="duration-0 text-muted-foreground text-xs">
-          © Volaired. All rights reserved.
+          © Radiair. All rights reserved.
         </span>
         <ModeToggle />
       </div>
