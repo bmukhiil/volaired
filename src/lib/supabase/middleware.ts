@@ -1,7 +1,11 @@
 import { createServerClient, type CookieOptions } from "@supabase/ssr";
-import { NextResponse, type NextRequest } from "next/server";
+import { cookies } from "next/headers";
+import { NextResponse, NextRequest } from "next/server";
 
-export async function updateSession(request: NextRequest) {
+export async function updateSession(
+  request: NextRequest,
+  protectedRoutes: string[],
+) {
   let response = NextResponse.next({
     request: {
       headers: request.headers,
@@ -54,7 +58,51 @@ export async function updateSession(request: NextRequest) {
     },
   );
 
-  await supabase.auth.getUser();
+  const authPaths = ["/sign-in", "/sign-up"];
+
+  const { data, error } = await supabase
+    .from("user_profiles")
+    .select("email_verified, has_completed_profile_setup, user_id")
+    .eq("user_id", (await supabase.auth.getUser()).data?.user?.id)
+    .single();
+
+  let user = data
+    ? { ...data, ...(await supabase.auth.getUser()).data?.user }
+    : null;
+
+  const user_email = request.cookies.get("user_email");
+  if (!user_email && request.nextUrl.pathname.startsWith("/auth/verify")) {
+    return NextResponse.redirect(new URL("/sign-in", request.nextUrl));
+  }
+
+  console.log(user);
+
+  if (
+    user?.email_verified === true &&
+    request.nextUrl.pathname.startsWith("/auth/verify")
+  ) {
+    return NextResponse.redirect(new URL("/", request.nextUrl));
+  }
+
+  if (
+    user &&
+    authPaths.some((path) => request.nextUrl.pathname.startsWith(path))
+  ) {
+    return NextResponse.redirect(new URL("/", request.nextUrl));
+  }
+
+  if (user && request.nextUrl.pathname === "/profile/setup") {
+    if (user.has_completed_profile_setup) {
+      return NextResponse.redirect(new URL("/", request.nextUrl));
+    }
+  }
+
+  if (
+    !user &&
+    protectedRoutes.some((path) => request.nextUrl.pathname.startsWith(path))
+  ) {
+    return NextResponse.redirect(new URL("/sign-in", request.nextUrl));
+  }
 
   return response;
 }
