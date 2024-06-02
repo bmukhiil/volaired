@@ -60,49 +60,49 @@ export async function updateSession(
 
   const authPaths = ["/sign-in", "/sign-up"];
 
-  const { data, error } = await supabase
-    .from("user_profiles")
-    .select("email_verified, has_completed_profile_setup, user_id")
-    .eq("user_id", (await supabase.auth.getUser()).data?.user?.id)
-    .single();
+  // const { data, error } = await supabase
+  //   .from("user_profiles")
+  //   .select("email_verified, has_completed_profile_setup, user_id")
+  //   .eq("user_id", (await supabase.auth.getUser()).data?.user?.id)
+  //   .single();
 
-  let user = data
-    ? { ...data, ...(await supabase.auth.getUser()).data?.user }
-    : null;
+  // let user = data
+  //   ? { ...data, ...(await supabase.auth.getUser()).data?.user }
+  //   : null;
 
-  const user_email = request.cookies.get("user_email");
-  if (!user_email && request.nextUrl.pathname.startsWith("/auth/verify")) {
-    return NextResponse.redirect(new URL("/sign-in", request.nextUrl));
-  }
+  // const user_email = request.cookies.get("user_email");
+  // if (!user_email && request.nextUrl.pathname.startsWith("/auth/verify")) {
+  //   return NextResponse.redirect(new URL("/sign-in", request.nextUrl));
+  // }
 
-  console.log(user);
+  // console.log(user);
 
-  if (
-    user?.email_verified === true &&
-    request.nextUrl.pathname.startsWith("/auth/verify")
-  ) {
-    return NextResponse.redirect(new URL("/", request.nextUrl));
-  }
+  // if (
+  //   user?.email_verified === true &&
+  //   request.nextUrl.pathname.startsWith("/auth/verify")
+  // ) {
+  //   return NextResponse.redirect(new URL("/", request.nextUrl));
+  // }
 
-  if (
-    user &&
-    authPaths.some((path) => request.nextUrl.pathname.startsWith(path))
-  ) {
-    return NextResponse.redirect(new URL("/", request.nextUrl));
-  }
+  // if (
+  //   user &&
+  //   authPaths.some((path) => request.nextUrl.pathname.startsWith(path))
+  // ) {
+  //   return NextResponse.redirect(new URL("/", request.nextUrl));
+  // }
 
-  if (user && request.nextUrl.pathname === "/profile/setup") {
-    if (user.has_completed_profile_setup) {
-      return NextResponse.redirect(new URL("/", request.nextUrl));
-    }
-  }
+  // if (user && request.nextUrl.pathname === "/profile/setup") {
+  //   if (user.has_completed_profile_setup) {
+  //     return NextResponse.redirect(new URL("/", request.nextUrl));
+  //   }
+  // }
 
-  if (
-    !user &&
-    protectedRoutes.some((path) => request.nextUrl.pathname.startsWith(path))
-  ) {
-    return NextResponse.redirect(new URL("/sign-in", request.nextUrl));
-  }
+  // if (
+  //   !user &&
+  //   protectedRoutes.some((path) => request.nextUrl.pathname.startsWith(path))
+  // ) {
+  //   return NextResponse.redirect(new URL("/sign-in", request.nextUrl));
+  // }
 
   return response;
 }
