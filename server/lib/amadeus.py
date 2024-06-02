@@ -19,13 +19,13 @@ class AmadeusSingleton:
     def search_flights(self, request):
         departureDate = request["departureDate"]
         returnDate = request["returnDate"]
-        # travelers = request["travelers"]
+        travelers = request["travelers"]
         startCity = request["startCity"]
         endCity = request["endCity"]
-        currency = request["currency"]
+        #currency = request["currency"]
 
         body = {
-            "currencyCode": currency,
+            "currencyCode": "USD",
             "originDestinations": [
                 {
                     "id": "1",
@@ -122,6 +122,47 @@ class AmadeusSingleton:
     
 
     def search_hotels(self, request):
-        return 0
+        
+        checkInDate = request["checkInDate"]
+        checkOutDate = request["checkOutDate"]
+        city = request["city"]
+        guests = request["guests"]
+        
+        hotel_data = self.amadeus.reference_data.locations.hotels.by_city.get(
+        cityCode=city  # City code for Paris
+    )
+        hotel_id = []
+        
+        for item in hotel_data.data:
+            hotel_id.append(item["hotelId"])
+            
+        hotel_offers = []
+        
+        
+        available_hotel_offers = self.amadeus.shopping.hotel_offers_search.get(
+            hotelIds='RTPAR001', adults='2', checkInDate='2024-07-02', checkOutDate='2024-07-04'
+        )
+            
+        
+        hotel_offers.append(available_hotel_offers.data)
+
+        extracted_data = []
+        print(hotel_offers)
+        hotel_offers_data = hotel_offers[0]
+
+        for offer in hotel_offers_data[0]['offers']:
+            entry = {
+                'checkInDate': offer['checkInDate'],
+                'checkOutDate': offer['checkOutDate'],
+                'Description': offer['room']['description']['text'],
+                'city': hotel_offers_data[0]['hotel']['cityCode'],
+                'price': offer['price']['total'],
+                'hotelName': hotel_offers_data[0]['hotel']['name']
+            }
+            extracted_data.append(entry)
+            
+        print(json.dumps(extracted_data, indent=2))
+
+        return extracted_data
 
 amadeus_instance = AmadeusSingleton()

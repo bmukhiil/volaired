@@ -10,15 +10,15 @@ CORS(app)
 @api.route('/flights/search')
 class FlightsSearch(Resource):
 	def get(self):
-		pass
-
-	def post(self):
-   # Logic to search for flights based on criteria
+		   # Logic to search for flights based on criteria
 		request_data = request.json
 		r_data = amadeus_instance.search_flights(request_data)
 		print(r_data)
 
 		return r_data
+
+	def post(self):
+		pass
 	
 
 @api.route('/flights/add-to-plan')
@@ -30,7 +30,10 @@ class FlightsAddToPlan(Resource):
 @api.route('/hotels/search')
 class HotelsSearch(Resource):
 	def get(self):
-		return {'message': 'Searching for hotels...'}
+		request_data = request.json
+		r_data = amadeus_instance.search_hotels(request_data)
+		print(r_data)
+		return r_data
 	
 @api.route('/hotels/add-to-plan')
 class HotelsAddToPlan(Resource):
