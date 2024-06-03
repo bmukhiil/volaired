@@ -10,7 +10,7 @@ const protectedRoutes = [
 ];
 
 export async function middleware(request: NextRequest) {
-  return await updateSession(request, protectedRoutes);
+  // return await updateSession(request, protectedRoutes);
 }
 
 export const config = {
