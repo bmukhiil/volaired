@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import { useState } from 'react';
 import { Button } from "@/components/ui/button";
@@ -19,6 +19,7 @@ type SheetSide = (typeof SHEET_SIDES)[number];
 export function Sidebar() {
   const [pinnedItems, setPinnedItems] = useState([1, 2, 3]);
   const [allItems, setAllItems] = useState([1, 2, 3]);
+  const [nextId, setNextId] = useState(4);
 
   const handleDeletePinned = (index: number) => {
     const newPinnedItems = [...pinnedItems];
@@ -30,6 +31,13 @@ export function Sidebar() {
     const newAllItems = [...allItems];
     newAllItems.splice(index, 1);
     setAllItems(newAllItems);
+  };
+
+  const handleCreateGroup = () => {
+    const newId = nextId;
+    //setPinnedItems([...pinnedItems, newId]);
+    setAllItems([...allItems, newId]);
+    setNextId(newId + 1);
   };
 
   return (
@@ -76,9 +84,13 @@ export function Sidebar() {
               </div>
             </div>
             <div className="flex justify-center mt-4 mb-4">
-              <SheetClose asChild>
-                <Button type="submit" className="w-full max-w-xs">+ Create Group</Button>
-              </SheetClose>
+              <Button
+                type="button"
+                onClick={handleCreateGroup}
+                className="w-full max-w-xs"
+              >
+                + Create Group
+              </Button>
             </div>
           </SheetContent>
         </Sheet>
