@@ -63,6 +63,8 @@ class ItenerariesAdd(Resource):
       
       response = supabase_instance.insert_data("itineraries",item)
       return response
+   
+
 
 # run the app
 if __name__ == "__main__":

@@ -30,4 +30,7 @@ available_hotel_offers = amadeus.shopping.hotel_offers_search.get(
 )
 
 print(available_hotel_offers.data)
+
+hotel_response = {}
+
     
