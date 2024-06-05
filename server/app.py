@@ -77,7 +77,26 @@ class ItenerariesAdd(Resource):
 class ItenerariesGet(Resource):
    def get(self):
       request_data = request.json
+      flights = {}
       response = supabase_instance.fetch_data("itineraries","trip_id",request_data["tripId"])
+      return response
+   
+@api.route("/itineraries/add/flight")
+class AddFlightToItinerary(Resource):
+   def post(self):
+      request_data = request.json
+      item = {
+         "trip_id": request_data["tripId"],
+         "itinerary_id": request_data["itineraryId"],
+         "departure_airport": request_data["departureAirport"],
+         "arrival_airport": request_data["arrivalAirport"],
+         "departure_date": request_data["departureDate"],
+         "arrival_date": request_data["arrivalDate"],
+         #"response": request_data["response"]
+      }
+      
+      response = supabase_instance.insert_data("itinerary_flight",item)
+      
       return response
    
 
