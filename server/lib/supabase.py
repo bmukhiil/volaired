@@ -14,8 +14,10 @@ class SupabaseSingleton:
         KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVremh0dmJpc2Z3Y2psbmpic3ZlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTUwNjY4NzgsImV4cCI6MjAzMDY0Mjg3OH0.Eh5DQF_Gfsx5ZNS-M77NRhDWZ-HfPK0VjZ3R1ft1uUc"
         self.supabase: Client = create_client(URL, KEY)
 
-    def fetch_data(self, table_name):
-        response = self.supabase.table(table_name).select("*").execute()
+    def fetch_data(self, table_name, column_name, value):
+        response = self.supabase.table(table_name).select("*").eq(column_name, value).execute()
+        
+        return response.data
 
     def insert_data(self, table_name, data):
         data, count = self.supabase.table(table_name).insert(data).execute()

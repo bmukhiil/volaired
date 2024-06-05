@@ -51,6 +51,15 @@ class TripsAdd(Resource):
       response = supabase_instance.insert_data("trips",item)
       return response
    
+@api.route("/trips/get")
+class TripsGet(Resource):
+   def get(self):
+      request_data = request.json
+      response = supabase_instance.fetch_data("trips","creator_email",request_data["creatorEmail"])
+      return response
+   
+   
+   
 @api.route("/itineraries/add")
 class ItenerariesAdd(Resource):
    def post(self):
@@ -62,6 +71,13 @@ class ItenerariesAdd(Resource):
       }
       
       response = supabase_instance.insert_data("itineraries",item)
+      return response
+   
+@api.route("/itineraries/get")
+class ItenerariesGet(Resource):
+   def get(self):
+      request_data = request.json
+      response = supabase_instance.fetch_data("itineraries","trip_id",request_data["tripId"])
       return response
    
 

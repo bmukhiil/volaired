@@ -12,8 +12,8 @@ export default function TripsPage() {
           Trip Plans 
           </h3>
           <div className="flex h-screen p-3 space-x-7">
-          <Skeleton className=" h-4/6 flex-1 max-w-96 bg-gray-100 border border-gray-200"/>
-          <Skeleton className=" h-4/6 flex-1 max-w-96 bg-gray-100 border border-gray-200"/>
+          <Skeleton className=" h-4/6 flex-1 w-fill bg-gray-100 border border-gray-200"/>
+          <Skeleton className=" h-4/6 flex-1 w-fill bg-gray-100 border border-gray-200"/>
           </div>
         </div>
       </div>
