@@ -97,108 +97,108 @@ export default function FlightsPage() {
     async function fetchFlights() {
       setLoading(true);
       try {
-        const response = await fetch(
-          `http://127.0.0.1:8000/flights/search?origin=${origin}&destination=${destination}&startDate=${startDate}&endDate=${endDate}&filters=${filters}&currency=USD`,
-        ).then((res) => res.json());
-        setFlights(response);
-        // setFlights([
-        //   {
-        //     id: 1,
-        //     outboundTotalDuration: "PT2H30M",
-        //     inboundTotalDuration: "PT5H6M",
-        //     flightPath: [
-        //       {
-        //         departureAirport: "YVR",
-        //         departureTime: "2024-06-06T08:00:00",
-        //         arrivalAirport: "YYZ",
-        //         arrivalTime: "2024-06-06T13:30:00",
-        //         airlines: "AC",
-        //         duration: "PT2H30M",
-        //       },
-        //       {
-        //         departureAirport: "YYZ",
-        //         departureTime: "2024-06-13T07:15:00",
-        //         arrivalAirport: "YVR",
-        //         arrivalTime: "2024-06-13T09:21:00",
-        //         airlines: "AC",
-        //         duration: "PT5H6M",
-        //       },
-        //     ],
-        //     price: 3105.8,
-        //   },
-        //   {
-        //     id: 2,
-        //     outboundTotalDuration: "PT2H30M",
-        //     inboundTotalDuration: "PT5H6M",
-        //     flightPath: [
-        //       {
-        //         departureAirport: "YVR",
-        //         departureTime: "2024-06-06T08:00:00",
-        //         arrivalAirport: "YYZ",
-        //         arrivalTime: "2024-06-06T13:30:00",
-        //         airlines: "AC",
-        //         duration: "PT2H30M",
-        //       },
-        //       {
-        //         departureAirport: "YYZ",
-        //         departureTime: "2024-06-13T07:45:00",
-        //         arrivalAirport: "YVR",
-        //         arrivalTime: "2024-06-13T09:51:00",
-        //         airlines: "AC",
-        //         duration: "PT5H6M",
-        //       },
-        //     ],
-        //     price: 3105.8,
-        //   },
-        //   {
-        //     id: 3,
-        //     outboundTotalDuration: "PT2H30M",
-        //     inboundTotalDuration: "PT5H6M",
-        //     flightPath: [
-        //       {
-        //         departureAirport: "YVR",
-        //         departureTime: "2024-06-06T08:00:00",
-        //         arrivalAirport: "YYZ",
-        //         arrivalTime: "2024-06-06T13:30:00",
-        //         airlines: "AC",
-        //         duration: "PT2H30M",
-        //       },
-        //       {
-        //         departureAirport: "YYZ",
-        //         departureTime: "2024-06-13T10:15:00",
-        //         arrivalAirport: "YVR",
-        //         arrivalTime: "2024-06-13T12:21:00",
-        //         airlines: "AC",
-        //         duration: "PT5H6M",
-        //       },
-        //     ],
-        //     price: 3105.8,
-        //   },
-        //   {
-        //     id: 4,
-        //     outboundTotalDuration: "PT2H30M",
-        //     inboundTotalDuration: "PT5H6M",
-        //     flightPath: [
-        //       {
-        //         departureAirport: "YVR",
-        //         departureTime: "2024-06-06T08:00:00",
-        //         arrivalAirport: "YYZ",
-        //         arrivalTime: "2024-06-06T13:30:00",
-        //         airlines: "AC",
-        //         duration: "PT2H30M",
-        //       },
-        //       {
-        //         departureAirport: "YYZ",
-        //         departureTime: "2024-06-13T12:00:00",
-        //         arrivalAirport: "YVR",
-        //         arrivalTime: "2024-06-13T14:06:00",
-        //         airlines: "AC",
-        //         duration: "PT5H6M",
-        //       },
-        //     ],
-        //     price: 3105.8,
-        //   },
-        // ]);
+        // const response = await fetch(
+        //   `http://127.0.0.1:8000/flights/search?origin=${origin}&destination=${destination}&startDate=${startDate}&endDate=${endDate}&filters=${filters}&currency=USD`
+        // ).then((res) => res.json());
+        // setFlights(response);
+        setFlights([
+          {
+            id: 1,
+            outboundTotalDuration: "PT2H30M",
+            inboundTotalDuration: "PT5H6M",
+            flightPath: [
+              {
+                departureAirport: "YVR",
+                departureTime: "2024-06-06T08:00:00",
+                arrivalAirport: "YYZ",
+                arrivalTime: "2024-06-06T13:30:00",
+                airlines: "AC",
+                duration: "PT2H30M",
+              },
+              {
+                departureAirport: "YYZ",
+                departureTime: "2024-06-13T07:15:00",
+                arrivalAirport: "YVR",
+                arrivalTime: "2024-06-13T09:21:00",
+                airlines: "AC",
+                duration: "PT5H6M",
+              },
+            ],
+            price: 3105.8,
+          },
+          {
+            id: 2,
+            outboundTotalDuration: "PT2H30M",
+            inboundTotalDuration: "PT5H6M",
+            flightPath: [
+              {
+                departureAirport: "YVR",
+                departureTime: "2024-06-06T08:00:00",
+                arrivalAirport: "YYZ",
+                arrivalTime: "2024-06-06T13:30:00",
+                airlines: "AC",
+                duration: "PT2H30M",
+              },
+              {
+                departureAirport: "YYZ",
+                departureTime: "2024-06-13T07:45:00",
+                arrivalAirport: "YVR",
+                arrivalTime: "2024-06-13T09:51:00",
+                airlines: "AC",
+                duration: "PT5H6M",
+              },
+            ],
+            price: 3105.8,
+          },
+          {
+            id: 3,
+            outboundTotalDuration: "PT2H30M",
+            inboundTotalDuration: "PT5H6M",
+            flightPath: [
+              {
+                departureAirport: "YVR",
+                departureTime: "2024-06-06T08:00:00",
+                arrivalAirport: "YYZ",
+                arrivalTime: "2024-06-06T13:30:00",
+                airlines: "AC",
+                duration: "PT2H30M",
+              },
+              {
+                departureAirport: "YYZ",
+                departureTime: "2024-06-13T10:15:00",
+                arrivalAirport: "YVR",
+                arrivalTime: "2024-06-13T12:21:00",
+                airlines: "AC",
+                duration: "PT5H6M",
+              },
+            ],
+            price: 3105.8,
+          },
+          {
+            id: 4,
+            outboundTotalDuration: "PT2H30M",
+            inboundTotalDuration: "PT5H6M",
+            flightPath: [
+              {
+                departureAirport: "YVR",
+                departureTime: "2024-06-06T08:00:00",
+                arrivalAirport: "YYZ",
+                arrivalTime: "2024-06-06T13:30:00",
+                airlines: "AC",
+                duration: "PT2H30M",
+              },
+              {
+                departureAirport: "YYZ",
+                departureTime: "2024-06-13T12:00:00",
+                arrivalAirport: "YVR",
+                arrivalTime: "2024-06-13T14:06:00",
+                airlines: "AC",
+                duration: "PT5H6M",
+              },
+            ],
+            price: 3105.8,
+          },
+        ]);
       } catch (error) {
         console.error(error);
       }
@@ -232,13 +232,16 @@ export default function FlightsPage() {
   // }
 
   return (
-    <div className="bg-background flex flex-col gap-y-3">
-      <div className="p-6 border-b bg-secondary flex justify-between">
+    <div className="bg-background flex flex-col gap-y-3 px-3 pb-4">
+      <div className="-mx-3 px-3 py-2 border-b bg-secondary flex justify-between">
         <Drawer>
           <DrawerTrigger className="w-full">
             <div className="flex items-center justify-between">
               <div className="flex font-medium items-center gap-x-3 ">
-                {departureAirport.city} ({departureAirport.iataCode})
+                {departureAirport.city || origin}
+                {departureAirport.city && (
+                  <span>({departureAirport.iataCode}) </span>
+                )}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 20 20"
@@ -251,7 +254,10 @@ export default function FlightsPage() {
                     clip-rule="evenodd"
                   />
                 </svg>{" "}
-                {destinationAirport.city} ({destinationAirport.iataCode})
+                {destinationAirport.city || destination}{" "}
+                {destinationAirport.city && (
+                  <span>({destinationAirport.iataCode}) </span>
+                )}
               </div>
               <Button
                 size="icon"
@@ -454,6 +460,16 @@ export default function FlightsPage() {
                         CA $1,234.56
                       </span>
                       <div className="flex items-center gap-x-2">
+                        <Button size="icon">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="currentColor"
+                            class="size-6"
+                          >
+                            <path d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z" />
+                          </svg>
+                        </Button>
                         <Button className="w-full">Select</Button>
                         {/* <Button
                           size="icon"
@@ -564,76 +580,142 @@ export default function FlightsPage() {
 
                 return (
                   <div key={index}>
-                    <div className="w-full p-4 shadow-sm rounded-lg border border-dashed flex flex-col gap-y-2  bg-secondary">
-                      <span className="text-sm font-medium">
-                        {originDepartureDate}
-                      </span>
-                      <div className="w-full flex justify-between h-full items-center">
-                        <div className="flex flex-col">
-                          <span className="font-medium text-lg">
-                            {originDepartureTime}
+                    <Drawer>
+                      <DrawerTrigger className="w-full">
+                        <div className="w-full p-4 shadow-sm rounded-lg border border-dashed flex flex-col gap-y-2  bg-secondary">
+                          <span className="text-sm font-medium">
+                            {originDepartureDate}
                           </span>
-                          <span className="font-medium text-muted-foreground text-sm">
-                            {roundtrip.flightPath[0].departureAirport}
-                          </span>
+                          <div className="w-full flex justify-between h-full items-center">
+                            <div className="flex flex-col">
+                              <span className="font-medium text-lg">
+                                {originDepartureTime}
+                              </span>
+                              <span className="font-medium text-muted-foreground text-sm">
+                                {roundtrip.flightPath[0].departureAirport}
+                              </span>
+                            </div>
+                            <div className="flex flex-col items-center">
+                              <span className="font-medium text-muted-foreground text-sm">
+                                {outboundTotalDuration}
+                              </span>
+                              <span className="font-medium text-sm bg-background px-2 py-1 rounded-2xl">
+                                {numStops} stops
+                              </span>
+                            </div>
+                            <div className="flex flex-col items-end">
+                              <span className="font-medium text-lg">
+                                {originArrivalTime}
+                              </span>
+                              <span className="font-medium text-muted-foreground text-sm">
+                                {roundtrip.flightPath[0].arrivalAirport}
+                              </span>
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-x-2 mt-2">
+                            <Skeleton className="w-6 h-6 rounded-full" />{" "}
+                            airline info
+                          </div>
                         </div>
-                        <div className="flex flex-col items-center">
-                          <span className="font-medium text-muted-foreground text-sm">
-                            {outboundTotalDuration}
+                        <div className="w-full p-4 shadow-sm rounded-lg border border-dashed border-t-0 flex flex-col gap-y-2  bg-secondary">
+                          <span className="text-sm font-medium">
+                            {destinationDepartureDate}
                           </span>
-                          <span className="font-medium text-sm bg-background px-2 py-1 rounded-2xl">
-                            {numStops} stops
-                          </span>
+                          <div className="w-full flex justify-between h-full items-center">
+                            <div className="flex flex-col">
+                              <span className="font-medium text-lg">
+                                {destinationDepartureTime}
+                              </span>
+                              <span className="font-medium text-muted-foreground text-sm">
+                                {roundtrip.flightPath[0].departureAirport}
+                              </span>
+                            </div>
+                            <div className="flex flex-col items-center">
+                              <span className="font-medium text-muted-foreground text-sm">
+                                {inboundTotalDuration}
+                              </span>
+                              <span className="font-medium text-sm bg-background px-2 py-1 rounded-2xl">
+                                {numStops} stops
+                              </span>
+                            </div>
+                            <div className="flex flex-col items-end">
+                              <span className="font-medium text-lg">
+                                {destinationArrivalTime}
+                              </span>
+                              <span className="font-medium text-muted-foreground text-sm">
+                                {roundtrip.flightPath[0].arrivalAirport}
+                              </span>
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-x-2 mt-2">
+                            <Skeleton className="w-6 h-6 rounded-full" />{" "}
+                            airline info
+                          </div>
                         </div>
-                        <div className="flex flex-col items-end">
-                          <span className="font-medium text-lg">
-                            {originArrivalTime}
+                        <div className="p-4 bg-secondary border border-dashed border-t-0 rounded-lg w-full flex flex-col gap-y-2 shadow-sm">
+                          <span className="text-xl text-center font-medium">
+                            {currency} ${roundtrip.price}
                           </span>
-                          <span className="font-medium text-muted-foreground text-sm">
-                            {roundtrip.flightPath[0].arrivalAirport}
-                          </span>
+                          <div className="w-full flex gap-x-1">
+                            <Button
+                              size="icon"
+                              className="bg-background hover:bg-background/60"
+                            >
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                                class="size-5 text-muted-foreground/60"
+                              >
+                                <path d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z" />
+                              </svg>
+                            </Button>
+                            <Button className="w-full">Select</Button>
+                          </div>
                         </div>
-                      </div>
-                      <div>airline info</div>
-                    </div>
-                    <div className="w-full p-4 shadow-sm rounded-lg border border-dashed border-t-0 flex flex-col gap-y-2  bg-secondary">
-                      <span className="text-sm font-medium">
-                        {destinationDepartureDate}
-                      </span>
-                      <div className="w-full flex justify-between h-full items-center">
-                        <div className="flex flex-col">
-                          <span className="font-medium text-lg">
-                            {destinationDepartureTime}
-                          </span>
-                          <span className="font-medium text-muted-foreground text-sm">
-                            {roundtrip.flightPath[0].departureAirport}
-                          </span>
-                        </div>
-                        <div className="flex flex-col items-center">
-                          <span className="font-medium text-muted-foreground text-sm">
-                            {inboundTotalDuration}
-                          </span>
-                          <span className="font-medium text-sm bg-background px-2 py-1 rounded-2xl">
-                            {numStops} stops
-                          </span>
-                        </div>
-                        <div className="flex flex-col items-end">
-                          <span className="font-medium text-lg">
-                            {destinationArrivalTime}
-                          </span>
-                          <span className="font-medium text-muted-foreground text-sm">
-                            {roundtrip.flightPath[0].arrivalAirport}
-                          </span>
-                        </div>
-                      </div>
-                      <div>airline info</div>
-                    </div>
-                    <div className="p-4 bg-secondary border border-dashed border-t-0 rounded-lg w-full flex flex-col gap-y-2 shadow-sm">
-                      <span className="text-xl text-center font-medium">
-                        {currency} ${roundtrip.price}
-                      </span>
-                      <Button className="w-full">Select</Button>
-                    </div>
+                      </DrawerTrigger>
+                      <DrawerContent className="bg-secondary">
+                        <DrawerHeader>
+                          <DrawerTitle className="flex flex-col items-start gap-y-2">
+                            <h2>Flight Details</h2>
+                            <p className="text-muted-foreground font-medium text-sm">
+                              {originDepartureDate} - {destinationArrivalDate}
+                            </p>
+                            <div className="flex items-center gap-x-2 mt-1">
+                              <Skeleton className="w-6 h-6 rounded-full" />
+                              <span className="font-medium text-base">
+                                Airline info
+                              </span>
+                            </div>
+                          </DrawerTitle>
+                          <DrawerDescription className="flex flex-col justify-start items-start mt-4">
+                            <div>
+                              <span className="text-foreground text-base font-semibold">
+                                {origin} to {destination}
+                              </span>
+                            </div>
+                            <div>
+                              <span className="text-foreground text-base font-semibold">
+                                {destination} to {origin}
+                              </span>
+                            </div>
+                            <div className="flex w-full justify-center items-center">
+                              <span className="text-foreground text-2xl font-semibold tracking-tight">
+                                {currency} ${roundtrip.price}
+                              </span>
+                            </div>
+                          </DrawerDescription>
+                        </DrawerHeader>
+                        <DrawerFooter>
+                          <Button>Select</Button>
+                          <DrawerClose>
+                            <Button className="w-full" variant="outline">
+                              Close
+                            </Button>
+                          </DrawerClose>
+                        </DrawerFooter>
+                      </DrawerContent>
+                    </Drawer>
                   </div>
                 );
               })}

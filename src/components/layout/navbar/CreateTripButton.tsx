@@ -11,6 +11,8 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
+import { Textarea } from "@/components/ui/textarea";
+
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
@@ -43,13 +45,13 @@ export default function CreateTripButton({ children }) {
   };
 
   const handleNextStep = () => {
-    if (step === 4) return;
-    if (step === 3) {
+    if (step === 3) return;
+    if (step === 2) {
       setLoading(true);
       // Simulate trip creation process
       setTimeout(() => {
         setLoading(false);
-        setStep(4);
+        setStep(3);
         setProgress(100);
         setTripCreated(true);
         // Optionally, close the drawer or show a success message here
@@ -61,25 +63,15 @@ export default function CreateTripButton({ children }) {
     }
   };
 
-  const handleTripCreation = () => {};
-
-  const updateDateRange = (dateRange) => {
-    const { from, to } = dateRange;
-
-    if (from && to) {
-      const formattedDateRange = {
-        from: new Date(from * 1000), // Convert 'from' epoch time to Date object
-        to: new Date(to * 1000), // Convert 'to' epoch time to Date object
-      };
-
-      setDateRange(formattedDateRange);
-    } else {
-      // Handle the case when 'from' or 'to' is undefined
-      console.error(
-        "Invalid date range selected. Both 'from' and 'to' dates must be defined.",
-      );
-    }
+  const resetCreateTripDetails = () => {
+    setStep(1);
+    setProgress(25);
+    setTripName("");
+    setTripDescription("");
+    setTripCreated(false);
   };
+
+  const handleTripCreation = () => {};
 
   return (
     <Drawer>
@@ -106,8 +98,8 @@ export default function CreateTripButton({ children }) {
       <DrawerContent className="h-[60dvh]">
         <DrawerHeader>
           <DrawerTitle className="flex flex-col items-center gap-y-2">
-            <Progress value={progress} className="w-10 h-3" />
-            Create a trip plan
+            {/* <Progress value={progress} className="w-10 h-3" /> */}
+            Create a new trip
           </DrawerTitle>
           <DrawerDescription className="mt-4">
             <p className="pb-4">
@@ -117,6 +109,7 @@ export default function CreateTripButton({ children }) {
             <AnimatePresence mode="wait" custom={direction}>
               {step === 1 && (
                 <motion.div
+                  transition={{ duration: 0.15 }}
                   key="step-1"
                   custom={direction}
                   initial={{
@@ -145,16 +138,21 @@ export default function CreateTripButton({ children }) {
                       htmlFor="trip-description"
                       className="text-foreground"
                     >
-                      Trip Description
+                      Trip Description (optional)
                     </Label>
                     {/* max certain characters */}
-                    <Input
+                    {/* <Input
                       value={tripDescription}
                       onChange={(e) => setTripDescription(e.target.value)}
                       placeholder="Trip description"
+                    /> */}
+                    <Textarea
+                      placeholder="Trip description"
+                      value={tripDescription}
+                      onChange={(e) => setTripDescription(e.target.value)}
                     />
                   </div>
-                  <div className="flex w-full flex-col justify-start items-start gap-y-1">
+                  {/* <div className="flex w-full flex-col justify-start items-start gap-y-1">
                     <Label
                       htmlFor="trip-destination"
                       className="text-foreground"
@@ -165,11 +163,12 @@ export default function CreateTripButton({ children }) {
                       className="w-full"
                       onDateChange={updateDateRange}
                     />
-                  </div>
+                  </div> */}
                 </motion.div>
               )}
               {step === 2 && (
                 <motion.div
+                  transition={{ duration: 0.15 }}
                   key="step-2"
                   custom={direction}
                   initial={{
@@ -183,14 +182,33 @@ export default function CreateTripButton({ children }) {
                   }}
                   className="flex flex-col justify-start items-start gap-y-1"
                 >
-                  <Label htmlFor="trip-description" className="text-foreground">
-                    Trip description
+                  <Label htmlFor="budget-price" className="text-foreground">
+                    What's your budget? (optional)
                   </Label>
-                  <Input placeholder="Trip description" />
+                  <Input id="budget-price" placeholder="$1,000" />
+                  <div className="flex gap-x-1">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      class="size-4"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0Zm-7-4a1 1 0 1 1-2 0 1 1 0 0 1 2 0ZM9 9a.75.75 0 0 0 0 1.5h.253a.25.25 0 0 1 .244.304l-.459 2.066A1.75 1.75 0 0 0 10.747 15H11a.75.75 0 0 0 0-1.5h-.253a.25.25 0 0 1-.244-.304l.459-2.066A1.75 1.75 0 0 0 9.253 9H9Z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                    <span className="text-left text-xs font-medium">
+                      This can be an estimate or the total amount you plan to
+                      spend
+                    </span>
+                  </div>
                 </motion.div>
               )}
               {step === 3 && (
                 <motion.div
+                  transition={{ duration: 0.15 }}
                   key="step-3"
                   custom={direction}
                   initial={{
@@ -202,12 +220,26 @@ export default function CreateTripButton({ children }) {
                     opacity: 0,
                     x: direction === "right" ? "-100%" : "100%",
                   }}
-                  className="flex flex-col justify-start items-start gap-y-1"
                 >
-                  <Label htmlFor="trip-destination" className="text-foreground">
-                    Trip destination
-                  </Label>
-                  <Input placeholder="Trip destination" />
+                  <div className="flex flex-col justify-center items-center gap-y-1 mt-10">
+                    <div>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        class="size-24 text-primary"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm13.36-1.814a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z"
+                          clip-rule="evenodd"
+                        />
+                      </svg>
+                    </div>
+                    <p className="text-foreground text-2xl font-bold tracking-tight">
+                      Trip created
+                    </p>
+                  </div>
                 </motion.div>
               )}
             </AnimatePresence>
@@ -234,13 +266,24 @@ export default function CreateTripButton({ children }) {
               </svg>
               Back
             </Button>
+            {/* <Button>Create trip</Button> */}
             <Button
               disabled={loading}
               onClick={handleNextStep}
               className="w-full flex items-center gap-x-2"
             >
-              {step === 3 && !loading ? (
-                "Create Trip"
+              {step === 2 && !loading ? (
+                <div className="flex gap-x-2 items-center">
+                  Create Trip
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    class="size-5"
+                  >
+                    <path d="M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z" />
+                  </svg>
+                </div>
               ) : loading ? (
                 <motion.div
                   className="bg-secondary w-5 h-5"
@@ -257,22 +300,10 @@ export default function CreateTripButton({ children }) {
                     repeatDelay: 1.2,
                   }}
                 />
-              ) : step === 4 ? (
-                <>
-                  Check out trip
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    class="size-5"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M2 10a.75.75 0 0 1 .75-.75h12.59l-2.1-1.95a.75.75 0 1 1 1.02-1.1l3.5 3.25a.75.75 0 0 1 0 1.1l-3.5 3.25a.75.75 0 1 1-1.02-1.1l2.1-1.95H2.75A.75.75 0 0 1 2 10Z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-                </>
+              ) : step === 3 ? (
+                <DrawerClose onClick={resetCreateTripDetails}>
+                  Close
+                </DrawerClose>
               ) : (
                 <>
                   Next

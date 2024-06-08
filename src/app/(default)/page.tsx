@@ -610,11 +610,11 @@ export default function Home() {
                               </svg>
                               <div className="flex flex-col gap-x-2">
                                 <span className="font-semibold">
-                                  Create a group?
+                                  Create a trip?
                                 </span>
                                 <p className="text-foreground/60 text-sm">
-                                  We&apos;ve noticed you have more than one
-                                  traveller.
+                                  We can help you organize your trip with a trip
+                                  plan.
                                 </p>
                                 <div className="mt-4 flex gap-x-2 justify-between items-center">
                                   <Button
@@ -627,6 +627,7 @@ export default function Home() {
                                   </Button>
                                   <Link href="/groups/create">
                                     <Button className="flex items-center gap-x-2">
+                                      Create
                                       <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         viewBox="0 0 20 20"
@@ -635,7 +636,6 @@ export default function Home() {
                                       >
                                         <path d="M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z" />
                                       </svg>
-                                      Create
                                     </Button>
                                   </Link>
                                 </div>
@@ -1003,7 +1003,7 @@ export default function Home() {
                                   >
                                     Close
                                   </Button>
-                                  <Link href="/trips/create">
+                                  <Link href="/trips">
                                     <Button className="flex items-center gap-x-2">
                                       <svg
                                         xmlns="http://www.w3.org/2000/svg"
