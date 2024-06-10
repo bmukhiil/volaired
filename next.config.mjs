@@ -27,6 +27,9 @@ const nextConfig = {
   //     },
   //   ];
   // },
+  images: {
+    domains: ["itin-dev.sfo2.cdn.digitaloceanspaces.com"],
+  },
 };
 
 export default nextConfig;

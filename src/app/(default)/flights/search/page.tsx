@@ -101,108 +101,110 @@ export default function FlightsPage() {
         //   `http://127.0.0.1:8000/flights/search?origin=${origin}&destination=${destination}&startDate=${startDate}&endDate=${endDate}&filters=${filters}&currency=USD`
         // ).then((res) => res.json());
         // setFlights(response);
-        setFlights([
-          {
-            id: 1,
-            outboundTotalDuration: "PT2H30M",
-            inboundTotalDuration: "PT5H6M",
-            flightPath: [
-              {
-                departureAirport: "YVR",
-                departureTime: "2024-06-06T08:00:00",
-                arrivalAirport: "YYZ",
-                arrivalTime: "2024-06-06T13:30:00",
-                airlines: "AC",
-                duration: "PT2H30M",
-              },
-              {
-                departureAirport: "YYZ",
-                departureTime: "2024-06-13T07:15:00",
-                arrivalAirport: "YVR",
-                arrivalTime: "2024-06-13T09:21:00",
-                airlines: "AC",
-                duration: "PT5H6M",
-              },
-            ],
-            price: 3105.8,
-          },
-          {
-            id: 2,
-            outboundTotalDuration: "PT2H30M",
-            inboundTotalDuration: "PT5H6M",
-            flightPath: [
-              {
-                departureAirport: "YVR",
-                departureTime: "2024-06-06T08:00:00",
-                arrivalAirport: "YYZ",
-                arrivalTime: "2024-06-06T13:30:00",
-                airlines: "AC",
-                duration: "PT2H30M",
-              },
-              {
-                departureAirport: "YYZ",
-                departureTime: "2024-06-13T07:45:00",
-                arrivalAirport: "YVR",
-                arrivalTime: "2024-06-13T09:51:00",
-                airlines: "AC",
-                duration: "PT5H6M",
-              },
-            ],
-            price: 3105.8,
-          },
-          {
-            id: 3,
-            outboundTotalDuration: "PT2H30M",
-            inboundTotalDuration: "PT5H6M",
-            flightPath: [
-              {
-                departureAirport: "YVR",
-                departureTime: "2024-06-06T08:00:00",
-                arrivalAirport: "YYZ",
-                arrivalTime: "2024-06-06T13:30:00",
-                airlines: "AC",
-                duration: "PT2H30M",
-              },
-              {
-                departureAirport: "YYZ",
-                departureTime: "2024-06-13T10:15:00",
-                arrivalAirport: "YVR",
-                arrivalTime: "2024-06-13T12:21:00",
-                airlines: "AC",
-                duration: "PT5H6M",
-              },
-            ],
-            price: 3105.8,
-          },
-          {
-            id: 4,
-            outboundTotalDuration: "PT2H30M",
-            inboundTotalDuration: "PT5H6M",
-            flightPath: [
-              {
-                departureAirport: "YVR",
-                departureTime: "2024-06-06T08:00:00",
-                arrivalAirport: "YYZ",
-                arrivalTime: "2024-06-06T13:30:00",
-                airlines: "AC",
-                duration: "PT2H30M",
-              },
-              {
-                departureAirport: "YYZ",
-                departureTime: "2024-06-13T12:00:00",
-                arrivalAirport: "YVR",
-                arrivalTime: "2024-06-13T14:06:00",
-                airlines: "AC",
-                duration: "PT5H6M",
-              },
-            ],
-            price: 3105.8,
-          },
-        ]);
+        setTimeout(() => {
+          setFlights([
+            {
+              id: 1,
+              outboundTotalDuration: "PT2H30M",
+              inboundTotalDuration: "PT5H6M",
+              flightPath: [
+                {
+                  departureAirport: "YVR",
+                  departureTime: "2024-06-06T08:00:00",
+                  arrivalAirport: "YYZ",
+                  arrivalTime: "2024-06-06T13:30:00",
+                  airlines: "AC",
+                  duration: "PT2H30M",
+                },
+                {
+                  departureAirport: "YYZ",
+                  departureTime: "2024-06-13T07:15:00",
+                  arrivalAirport: "YVR",
+                  arrivalTime: "2024-06-13T09:21:00",
+                  airlines: "AC",
+                  duration: "PT5H6M",
+                },
+              ],
+              price: 3105.8,
+            },
+            {
+              id: 2,
+              outboundTotalDuration: "PT2H30M",
+              inboundTotalDuration: "PT5H6M",
+              flightPath: [
+                {
+                  departureAirport: "YVR",
+                  departureTime: "2024-06-06T08:00:00",
+                  arrivalAirport: "YYZ",
+                  arrivalTime: "2024-06-06T13:30:00",
+                  airlines: "AC",
+                  duration: "PT2H30M",
+                },
+                {
+                  departureAirport: "YYZ",
+                  departureTime: "2024-06-13T07:45:00",
+                  arrivalAirport: "YVR",
+                  arrivalTime: "2024-06-13T09:51:00",
+                  airlines: "AC",
+                  duration: "PT5H6M",
+                },
+              ],
+              price: 3105.8,
+            },
+            {
+              id: 3,
+              outboundTotalDuration: "PT2H30M",
+              inboundTotalDuration: "PT5H6M",
+              flightPath: [
+                {
+                  departureAirport: "YVR",
+                  departureTime: "2024-06-06T08:00:00",
+                  arrivalAirport: "YYZ",
+                  arrivalTime: "2024-06-06T13:30:00",
+                  airlines: "AC",
+                  duration: "PT2H30M",
+                },
+                {
+                  departureAirport: "YYZ",
+                  departureTime: "2024-06-13T10:15:00",
+                  arrivalAirport: "YVR",
+                  arrivalTime: "2024-06-13T12:21:00",
+                  airlines: "AC",
+                  duration: "PT5H6M",
+                },
+              ],
+              price: 3105.8,
+            },
+            {
+              id: 4,
+              outboundTotalDuration: "PT2H30M",
+              inboundTotalDuration: "PT5H6M",
+              flightPath: [
+                {
+                  departureAirport: "YVR",
+                  departureTime: "2024-06-06T08:00:00",
+                  arrivalAirport: "YYZ",
+                  arrivalTime: "2024-06-06T13:30:00",
+                  airlines: "AC",
+                  duration: "PT2H30M",
+                },
+                {
+                  departureAirport: "YYZ",
+                  departureTime: "2024-06-13T12:00:00",
+                  arrivalAirport: "YVR",
+                  arrivalTime: "2024-06-13T14:06:00",
+                  airlines: "AC",
+                  duration: "PT5H6M",
+                },
+              ],
+              price: 3105.8,
+            },
+          ]);
+          setLoading(false);
+        }, 3000);
       } catch (error) {
         console.error(error);
       }
-      setLoading(false);
     }
     fetchFlights();
   }, []);
@@ -583,7 +585,7 @@ export default function FlightsPage() {
                     <Drawer>
                       <DrawerTrigger className="w-full">
                         <div className="w-full p-4 shadow-sm rounded-lg border border-dashed flex flex-col gap-y-2  bg-secondary">
-                          <span className="text-sm font-medium">
+                          <span className="text-sm text-left font-medium">
                             {originDepartureDate}
                           </span>
                           <div className="w-full flex justify-between h-full items-center">
@@ -599,7 +601,7 @@ export default function FlightsPage() {
                               <span className="font-medium text-muted-foreground text-sm">
                                 {outboundTotalDuration}
                               </span>
-                              <span className="font-medium text-sm bg-background px-2 py-1 rounded-2xl">
+                              <span className="font-medium text-xs bg-background px-2 py-1 rounded-2xl">
                                 {numStops} stops
                               </span>
                             </div>
@@ -618,7 +620,7 @@ export default function FlightsPage() {
                           </div>
                         </div>
                         <div className="w-full p-4 shadow-sm rounded-lg border border-dashed border-t-0 flex flex-col gap-y-2  bg-secondary">
-                          <span className="text-sm font-medium">
+                          <span className="text-left text-sm font-medium">
                             {destinationDepartureDate}
                           </span>
                           <div className="w-full flex justify-between h-full items-center">
@@ -634,7 +636,7 @@ export default function FlightsPage() {
                               <span className="font-medium text-muted-foreground text-sm">
                                 {inboundTotalDuration}
                               </span>
-                              <span className="font-medium text-sm bg-background px-2 py-1 rounded-2xl">
+                              <span className="font-medium text-xs bg-background px-2 py-1 rounded-2xl">
                                 {numStops} stops
                               </span>
                             </div>
