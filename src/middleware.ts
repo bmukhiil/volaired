@@ -6,11 +6,13 @@ const protectedRoutes = [
   "/settings",
   "/sign-out",
   "/profile/setup",
+  "/trips/*",
   // "/auth/verify",
 ];
 
 export async function middleware(request: NextRequest) {
-  // return await updateSession(request, protectedRoutes);
+  console.log("middleware");
+  return await updateSession(request, protectedRoutes);
 }
 
 export const config = {

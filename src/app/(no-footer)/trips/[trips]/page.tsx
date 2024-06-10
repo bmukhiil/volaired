@@ -7,10 +7,27 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { AnimatePresence, motion } from "framer-motion";
 import { Input } from "@/components/ui/input";
 import { useChat } from "ai/react";
+import Link from "next/link";
+import { Separator } from "@/components/ui/separator";
+import { cn } from "@/lib/utils";
+import { toast } from "sonner";
+import {
+  Collapsible,
+  CollapsibleBody,
+  CollapsibleHeader,
+} from "@/components/ui/collapsible";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import TripSettingsButton from "@/components/ui/TripSettings";
 
 export default function TripPage() {
   const { messages, input, handleInputChange, handleSubmit, data } = useChat();
-  const [isOverview, setIsOverview] = useState(true);
   // const { input, handleInputChange, handleSubmit, data } = useChat();
 
   // const messages = [
@@ -21,7 +38,28 @@ export default function TripPage() {
   // ];
 
   return (
-    <div className="-m-4">
+    <div className="-m-4 flex flex-col gap-y-6">
+      {/* <Button
+        asChild
+        className="w-full bg-background text-foreground flex gap-x-2"
+      >
+        <Link href="/trips">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            class="size-5"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M18 10a.75.75 0 0 1-.75.75H4.66l2.1 1.95a.75.75 0 1 1-1.02 1.1l-3.5-3.25a.75.75 0 0 1 0-1.1l3.5-3.25a.75.75 0 1 1 1.02 1.1l-2.1 1.95h12.59A.75.75 0 0 1 18 10Z"
+              clip-rule="evenodd"
+            />
+          </svg>
+          Back to Trips
+        </Link>
+      </Button>
+      <Separator /> */}
       <Tabs
         defaultValue="trip-plan"
         className="lg:hidden flex justify-center flex-col"
@@ -86,7 +124,7 @@ export default function TripPage() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="flex flex-col gap-y-6"
+              className="flex flex-col"
             >
               <div className="bg-black relative overflow-hidden rounded-xl p-2">
                 <Image
@@ -108,16 +146,7 @@ export default function TripPage() {
                         <path d="M18.75 12.75h1.5a.75.75 0 0 0 0-1.5h-1.5a.75.75 0 0 0 0 1.5ZM12 6a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5h-7.5A.75.75 0 0 1 12 6ZM12 18a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5h-7.5A.75.75 0 0 1 12 18ZM3.75 6.75h1.5a.75.75 0 1 0 0-1.5h-1.5a.75.75 0 0 0 0 1.5ZM5.25 18.75h-1.5a.75.75 0 0 1 0-1.5h1.5a.75.75 0 0 1 0 1.5ZM3 12a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5h-7.5A.75.75 0 0 1 3 12ZM9 3.75a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5ZM12.75 12a2.25 2.25 0 1 1 4.5 0 2.25 2.25 0 0 1-4.5 0ZM9 15.75a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5Z" />
                       </svg>
                     </Button>
-                    <Button size="icon" className="bg-background rounded-xl">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                        class="size-6 text-foreground"
-                      >
-                        <path d="M18.75 12.75h1.5a.75.75 0 0 0 0-1.5h-1.5a.75.75 0 0 0 0 1.5ZM12 6a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5h-7.5A.75.75 0 0 1 12 6ZM12 18a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5h-7.5A.75.75 0 0 1 12 18ZM3.75 6.75h1.5a.75.75 0 1 0 0-1.5h-1.5a.75.75 0 0 0 0 1.5ZM5.25 18.75h-1.5a.75.75 0 0 1 0-1.5h1.5a.75.75 0 0 1 0 1.5ZM3 12a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5h-7.5A.75.75 0 0 1 3 12ZM9 3.75a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5ZM12.75 12a2.25 2.25 0 1 1 4.5 0 2.25 2.25 0 0 1-4.5 0ZM9 15.75a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5Z" />
-                      </svg>
-                    </Button>
+                    <TripSettingsButton />
                   </div>
                   <div className="flex flex-col gap-y-4 p-5">
                     <div>
@@ -146,7 +175,19 @@ export default function TripPage() {
                             className="w-8 h-8 rounded-full ring-2 ring-secondary -translate-x-1"
                           />
                         </div>
-                        <div className="w-8 h-8 bg-secondary rounded-full flex items-center justify-center">
+                        <div
+                          onClick={() =>
+                            toast("Event has been created", {
+                              description:
+                                "Sunday, December 03, 2023 at 9:00 AM",
+                              action: {
+                                label: "Undo",
+                                onClick: () => console.log("Undo"),
+                              },
+                            })
+                          }
+                          className="w-8 h-8 bg-secondary rounded-full flex items-center justify-center"
+                        >
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 20 20"
@@ -161,28 +202,10 @@ export default function TripPage() {
                   </div>
                 </div>
               </div>
-              <div className="mt-6 flex flex-col gap-y-4">
-                <div className="flex items-center gap-x-2">
-                  <div
-                    className="hover:bg-background p-1 rounded-lg"
-                    onClick={() => setIsOverview(!isOverview)}
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                      class="size-5"
-                    >
-                      <path
-                        fill-rule="evenodd"
-                        d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
-                        clip-rule="evenodd"
-                      />
-                    </svg>
-                  </div>
-                  <h2 className="font-semibold text-2xl">Your Overview</h2>
-                </div>
-                <div className="mx-10 flex flex-col gap-y-8">
+              <Collapsible open={true} className="mt-4">
+                <CollapsibleHeader>Your Overview</CollapsibleHeader>
+                <CollapsibleBody>
+                  {" "}
                   <div className="flex flex-col gap-y-2">
                     <h3 className="font-semibold text-xl">Notes</h3>
                     <div className="w-full bg-background p-2 rounded-xl flex flex-col gap-y-1">
@@ -286,8 +309,103 @@ export default function TripPage() {
                       Create a new item
                     </span>
                   </Button>
-                </div>
-              </div>
+                </CollapsibleBody>
+              </Collapsible>
+              <Collapsible open={true}>
+                <CollapsibleHeader>Your Plan</CollapsibleHeader>
+                <CollapsibleBody>
+                  <div className="flex flex-col gap-y-2">
+                    <h3 className="font-semibold text-xl">Itinerary</h3>
+                    <div className="w-full bg-background p-2 rounded-xl flex flex-col gap-y-1">
+                      <li className="bg-secondary py-1 px-2 rounded-lg flex items-center justify-between text-sm font-medium gap-x-2">
+                        Lorem ipsum dolor sit amet.
+                        <Image
+                          src="https://itin-dev.sfo2.cdn.digitaloceanspaces.com/profilePicture/nSFC74Naxn1NTZ4l"
+                          alt=""
+                          width={50}
+                          height={50}
+                          className="w-6 h-6 rounded-full"
+                        />
+                      </li>
+                      <li className="bg-secondary py-1 px-2 rounded-lg flex items-center justify-between text-sm font-medium gap-x-2">
+                        The quick brown fox jumps over the lazy dog.
+                        <Image
+                          src="https://itin-dev.sfo2.cdn.digitaloceanspaces.com/profilePicture/nSFC74Naxn1NTZ4l"
+                          alt=""
+                          width={50}
+                          height={50}
+                          className="w-6 h-6 rounded-full"
+                        />
+                      </li>
+                      <span className="text-center text-xs text-muted-foreground">
+                        +3 more
+                      </span>
+                      <span className="justify-center flex items-center text-sm mt-2 font-medium gap-x-1">
+                        View more details
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                          class="size-5"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            d="M2 10a.75.75 0 0 1 .75-.75h12.59l-2.1-1.95a.75.75 0 1 1 1.02-1.1l3.5 3.25a.75.75 0 0 1 0 1.1l-3.5 3.25a.75.75 0 1 1-1.02-1.1l2.1-1.95H2.75A.75.75 0 0 1 2 10Z"
+                            clip-rule="evenodd"
+                          />
+                        </svg>
+                      </span>
+                    </div>
+                  </div>
+                  <div className="flex flex-col gap-y-2">
+                    <h3 className="font-semibold text-xl">Budget</h3>
+                    <div className="w-full bg-background p-2 rounded-xl flex flex-col gap-y-1">
+                      <div className="flex justify-between items-center">
+                        <span className="text-sm font-semibold">
+                          Total Budget
+                        </span>
+                        <Button
+                          size="icon"
+                          className="w-8 h-8 bg-secondary rounded-lg hover:bg-secondary/60"
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                            class="size-4 text-foreground"
+                          >
+                            <path d="M10 3a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM10 8.5a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM11.5 15.5a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0Z" />
+                          </svg>
+                        </Button>
+                      </div>
+                      <div className="flex justify-between items-end">
+                        <h4 className="font-semibold text-xl">$1,000.00</h4>
+                        <span className="font-medium text-xs">
+                          Total: $1,500.00
+                        </span>
+                      </div>
+                      <div className="relative bg-muted-foreground/50 w-full h-2 rounded-full">
+                        <span className="absolute bg-primary w-3/4 h-2 rounded-full" />
+                      </div>
+                      <span className="justify-center flex items-center text-sm mt-2 font-medium gap-x-1">
+                        View more details
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                          class="size-5"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            d="M2 10a.75.75 0 0 1 .75-.75h12.59l-2.1-1.95a.75.75 0 1 1 1.02-1.1l3.5 3.25a.75.75 0 0 1 0 1.1l-3.5 3.25a.75.75 0 1 1-1.02-1.1l2.1-1.95H2.75A.75.75 0 0 1 2 10Z"
+                            clip-rule="evenodd"
+                          />
+                        </svg>
+                      </span>
+                    </div>
+                  </div>
+                </CollapsibleBody>
+              </Collapsible>
             </motion.div>
           </AnimatePresence>
         </TabsContent>
