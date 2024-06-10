@@ -437,16 +437,17 @@ export default function TripPage() {
                         Copilot
                       </h1>
                       <p className="text-sm font-medium text-muted-foreground text-center">
-                        👋 Hi, I’m Copilot. I can help you plan your trip and
-                        also add them to your itinerary for for future planning.
+                        👋 Hi, I&apos;m Copilot. I can help you plan your trip
+                        and also add them to your itinerary for for future
+                        planning.
                       </p>
                       <div className="bg-background font-medium text-sm rounded-xl px-4 py-2 border shadow-sm">
                         Can you recommend places to visit that everyone in our
                         group would enjoy?
                       </div>
                       <div className="bg-background font-medium text-sm rounded-xl px-4 py-2 border shadow-sm">
-                        Are there any unique attractions that fit our group's
-                        interests?
+                        Are there any unique attractions that fit our
+                        group&apos;s interests?
                       </div>
                     </div>
                   </>

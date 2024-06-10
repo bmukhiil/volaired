@@ -20,7 +20,7 @@ export default function AuthLayout({ children }) {
           <div className="pt-20 justify-between flex flex-col lg:pt-28 lg:w-3/4 w-full bg-secondary">
             {children}
             <footer className="mb-6 px-6 lg:px-28 font-medium text-xs text-muted-foreground">
-              By continuing, you agree to Volaired's{" "}
+              By continuing, you agree to Radiair&apos;s{" "}
               <Link href="/terms" className="underline hover:text-foreground">
                 Terms of Service
               </Link>{" "}
