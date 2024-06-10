@@ -95,7 +95,7 @@ export default function CreateTrip() {
               </FormItem>
             )}
           />
-          <Button type="submit">Submit</Button>
+          <Button type="submit">Create trip</Button>
         </form>
       </Form>
     </div>
