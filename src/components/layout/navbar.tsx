@@ -22,7 +22,6 @@ import {
   NavigationMenuTrigger,
   NavigationMenuViewport,
 } from "@/components/ui/navigation-menu";
-import CreateTripButton from "./navbar/CreateTripButton";
 
 const itemVariants: Variants = {
   open: {
@@ -130,7 +129,7 @@ export default function Navbar() {
                               xmlns="http://www.w3.org/2000/svg"
                               viewBox="0 0 20 20"
                               fill="currentColor"
-                              class="size-5 text-primary"
+                              className="size-5 text-primary"
                             >
                               <path
                                 fill-rule="evenodd"
@@ -199,7 +198,7 @@ export default function Navbar() {
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 20 20"
                   fill="currentColor"
-                  class="size-5"
+                  className="size-5"
                 >
                   <path
                     fill-rule="evenodd"
@@ -227,7 +226,7 @@ export default function Navbar() {
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
                     fill="currentColor"
-                    class="size-5 text-foreground duration-0"
+                    className="size-5 text-foreground duration-0"
                   >
                     <path d="M6.28 5.22a.75.75 0 0 0-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 1 0 1.06 1.06L10 11.06l3.72 3.72a.75.75 0 1 0 1.06-1.06L11.06 10l3.72-3.72a.75.75 0 0 0-1.06-1.06L10 8.94 6.28 5.22Z" />
                   </motion.svg>
@@ -236,7 +235,7 @@ export default function Navbar() {
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
                     fill="currentColor"
-                    class="size-5 text-foreground duration-0"
+                    className="size-5 text-foreground duration-0"
                   >
                     <path
                       fill-rule="evenodd"
@@ -315,7 +314,7 @@ export default function Navbar() {
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 20 20"
                 fill="currentColor"
-                class="size-5"
+                className="size-5"
               >
                 <path
                   fill-rule="evenodd"
@@ -336,7 +335,7 @@ export default function Navbar() {
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 20 20"
                         fill="currentColor"
-                        class="size-5"
+                        className="size-5"
                       >
                         <path
                           fill-rule="evenodd"
@@ -353,7 +352,7 @@ export default function Navbar() {
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 20 20"
                         fill="currentColor"
-                        class="size-5"
+                        className="size-5"
                       >
                         <path
                           fill-rule="evenodd"

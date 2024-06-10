@@ -13,6 +13,7 @@ const cspHeader = `
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: "standalone",
   reactStrictMode: false,
   // headers: async () => {
   //   return [

@@ -15,7 +15,13 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 
-export function DatePickerWithRange({ onDateChange, className }) {
+export function DatePickerWithRange({
+  onDateChange,
+  className,
+}: {
+  onDateChange: (newDate: DateRange) => void;
+  className: string;
+}) {
   // const today = new Date();
   const [date, setDate] = React.useState<DateRange | undefined>({
     from: undefined,
@@ -69,7 +75,7 @@ export function DatePickerWithRange({ onDateChange, className }) {
             mode="range"
             defaultMonth={date?.from}
             selected={date}
-            onSelect={handleDataSelect}
+            // onSelect={handleDataSelect}
           />
         </PopoverContent>
       </Popover>
