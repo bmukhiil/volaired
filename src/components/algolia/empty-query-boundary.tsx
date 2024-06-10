@@ -10,7 +10,9 @@ const EmptyQueryBoundaryFallback = () => {
   );
 };
 
-const EmptyQueryBoundary = ({ children }) => {
+import { ReactNode } from "react";
+
+const EmptyQueryBoundary = ({ children }: { children: ReactNode }) => {
   const { indexUiState } = useInstantSearch();
 
   if (!indexUiState.query) {

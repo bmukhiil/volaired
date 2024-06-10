@@ -12,6 +12,7 @@ export default function InfiniteHits({
   setOpen,
   type,
 }: {
+  setOpen: (value: boolean) => void;
   type: "departure" | "destination";
 }) {
   const { hits, isLastPage, showMore } = useInfiniteHits();

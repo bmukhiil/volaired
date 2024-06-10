@@ -32,7 +32,7 @@ export default function Partnerships() {
           <li>Benefit from dedicated support and joint marketing efforts.</li>
         </ul>
       </div>
-      <div class="section">
+      <div className="section">
         <h2 className="font-bold tracking-tight text-3xl">Who Can Partner?</h2>
         <p className="mt-2 text-muted-foreground">
           We welcome partnerships from:
@@ -45,7 +45,7 @@ export default function Partnerships() {
         </ul>
       </div>
 
-      <div class="section">
+      <div className="section">
         <h2 className="font-bold tracking-tight text-3xl">Success Stories</h2>
         <p>
           Our existing partners have seen significant benefits from
@@ -55,7 +55,7 @@ export default function Partnerships() {
         {/* <!-- Add testimonials or case studies here --> */}
       </div>
 
-      <div class="section">
+      <div className="section">
         <h2 className="text-3xl font-bold tracking-tight">
           Partnership Opportunities
         </h2>
@@ -70,7 +70,7 @@ export default function Partnerships() {
         </ul>
       </div>
 
-      {/* <div class="section contact-form">
+      {/* <div className="section contact-form">
         <h2>Get in Touch</h2>
         <p>Ready to partner with Radiair? Let's revolutionize travel together.</p>
         <form action="/submit-partnership" method="post">
