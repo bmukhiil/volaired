@@ -37,8 +37,8 @@ export default function AuthLayout({ children }) {
           <div className="hidden lg:flex bg-background border-l border-dashed justify-center items-center">
             <div className="bg-background px-32 flex flex-col gap-y-4">
               <h2 className="text-3xl tracking-tight">
-                "Volaired is hands-down, the best platform for booking flights
-                and hotels. I use it for all my trips."
+                &quot;Volaired is hands-down, the best platform for booking
+                flights and hotels. I use it for all my trips.&quot;
               </h2>
               <div className="flex gap-x-4 items-center w-1/2 bg-secondary p-4 rounded-xl shadow-sm">
                 <Avatar>
