@@ -10,6 +10,7 @@ import { Separator } from "../ui/separator";
 import { createClient } from "@/lib/supabase/client";
 import Image from "next/image";
 import radiair_full_logo_light from "../../../public/radiair_full_logo_light.webp";
+import radiair_full_logo_dark from "../../../public/radiair_full_logo_dark.webp";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -21,7 +22,6 @@ import {
   NavigationMenuTrigger,
   NavigationMenuViewport,
 } from "@/components/ui/navigation-menu";
-import CreateTripButton from "./navbar/CreateTripButton";
 
 const itemVariants: Variants = {
   open: {
@@ -103,7 +103,12 @@ export default function Navbar() {
         >
           <Image
             src={radiair_full_logo_light}
-            className="w-28 h-auto"
+            className="w-28 h-auto dark:hidden"
+            alt="radiair logo"
+          />
+          <Image
+            src={radiair_full_logo_dark}
+            className="w-28 h-auto hidden dark:block"
             alt="radiair logo"
           />
         </Link>
@@ -119,15 +124,12 @@ export default function Navbar() {
                     <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
                       <li className="row-span-3">
                         <NavigationMenuLink asChild>
-                          <a
-                            className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
-                            href="/"
-                          >
+                          <div className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md">
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               viewBox="0 0 20 20"
                               fill="currentColor"
-                              class="size-5"
+                              className="size-5 text-primary"
                             >
                               <path
                                 fill-rule="evenodd"
@@ -144,10 +146,10 @@ export default function Navbar() {
                               and paste into your apps. Accessible.
                               Customizable. Open Source.
                             </p>
-                          </a>
+                          </div>
                         </NavigationMenuLink>
                       </li>
-                      <ListItem href="/docs" title="Introduction">
+                      <ListItem href="/trips" title="View all trips">
                         Re-usable components built using Radix UI and Tailwind
                         CSS.
                       </ListItem>
@@ -196,7 +198,7 @@ export default function Navbar() {
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 20 20"
                   fill="currentColor"
-                  class="size-5"
+                  className="size-5"
                 >
                   <path
                     fill-rule="evenodd"
@@ -224,7 +226,7 @@ export default function Navbar() {
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
                     fill="currentColor"
-                    class="size-5 text-foreground duration-0"
+                    className="size-5 text-foreground duration-0"
                   >
                     <path d="M6.28 5.22a.75.75 0 0 0-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 1 0 1.06 1.06L10 11.06l3.72 3.72a.75.75 0 1 0 1.06-1.06L11.06 10l3.72-3.72a.75.75 0 0 0-1.06-1.06L10 8.94 6.28 5.22Z" />
                   </motion.svg>
@@ -233,7 +235,7 @@ export default function Navbar() {
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
                     fill="currentColor"
-                    class="size-5 text-foreground duration-0"
+                    className="size-5 text-foreground duration-0"
                   >
                     <path
                       fill-rule="evenodd"
@@ -277,53 +279,9 @@ export default function Navbar() {
             }}
             className="gap-y-4 flex flex-col px-6 py-4 absolute bg-secondary w-full shadow-xl rounded-b-2xl"
           >
-            <motion.div
-              className={cn(
-                "flex gap-x-3 items-center text-muted-foreground font-medium transition",
-                {
-                  "text-foreground": tripOpen,
-                },
-              )}
-              variants={itemVariants}
-              onClick={() => handleDropdownClick("booking")}
-            >
+            <Link className="text-muted-foreground font-medium" href="/trips">
               Trips
-              <motion.svg
-                variants={chevronVariants}
-                initial="closed"
-                animate={tripOpen ? "open" : "closed"}
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                class="size-5"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
-                  clip-rule="evenodd"
-                />
-              </motion.svg>
-            </motion.div>
-            <AnimatePresence>
-              {tripOpen && (
-                <motion.ul className="ml-2 flex flex-col gap-y-2">
-                  <CreateTripButton />
-                  <motion.li className="text-sm font-medium text-muted-foreground flex items-center gap-x-2">
-                    <div className="bg-background p-1 rounded-lg">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                        class="size-5 text-foreground"
-                      >
-                        <path d="M14 17h2.75A2.25 2.25 0 0 0 19 14.75v-9.5A2.25 2.25 0 0 0 16.75 3H14v14ZM12.5 3h-5v14h5V3ZM3.25 3H6v14H3.25A2.25 2.25 0 0 1 1 14.75v-9.5A2.25 2.25 0 0 1 3.25 3Z" />
-                      </svg>
-                    </div>
-                    View your trips
-                  </motion.li>
-                </motion.ul>
-              )}
-            </AnimatePresence>
+            </Link>
             <motion.div
               className="text-muted-foreground font-medium"
               variants={itemVariants}
@@ -356,7 +314,7 @@ export default function Navbar() {
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 20 20"
                 fill="currentColor"
-                class="size-5"
+                className="size-5"
               >
                 <path
                   fill-rule="evenodd"
@@ -377,7 +335,7 @@ export default function Navbar() {
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 20 20"
                         fill="currentColor"
-                        class="size-5"
+                        className="size-5"
                       >
                         <path
                           fill-rule="evenodd"
@@ -394,7 +352,7 @@ export default function Navbar() {
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 20 20"
                         fill="currentColor"
-                        class="size-5"
+                        className="size-5"
                       >
                         <path
                           fill-rule="evenodd"

@@ -73,7 +73,7 @@ export default function SignUpPage() {
             Sign in or create an account
           </h1>
           <p className="text-sm text-muted-foreground">
-            Let's get you up and flying.
+            Let&apos;s get you up and flying.
           </p>
         </div>
         <div className="flex flex-col gap-y-2">

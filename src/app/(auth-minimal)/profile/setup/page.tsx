@@ -39,14 +39,12 @@ export default function ProfileSetup() {
   const [lastNameError, setLastNameError] = useState(false);
   const [loading, setLoading] = useState(false);
   const [date, setDate] = useState<Date>();
-  const [birthYear, setBirthYear] = useState<number>();
-
-  const handleFirstNameChange = (e) => {
+  const handleFirstNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFirstNameError(false);
     setFirstName(e.target.value);
   };
 
-  const handleLastNameChange = (e) => {
+  const handleLastNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLastNameError(false);
     setLastName(e.target.value);
   };

@@ -13,6 +13,7 @@ const cspHeader = `
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: "standalone",
   reactStrictMode: false,
   // headers: async () => {
   //   return [
@@ -27,6 +28,9 @@ const nextConfig = {
   //     },
   //   ];
   // },
+  images: {
+    domains: ["itin-dev.sfo2.cdn.digitaloceanspaces.com"],
+  },
 };
 
 export default nextConfig;

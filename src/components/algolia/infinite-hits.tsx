@@ -12,6 +12,7 @@ export default function InfiniteHits({
   setOpen,
   type,
 }: {
+  setOpen: (value: boolean) => void;
   type: "departure" | "destination";
 }) {
   const { hits, isLastPage, showMore } = useInfiniteHits();
@@ -39,7 +40,7 @@ export default function InfiniteHits({
     }
   }, [isLastPage, showMore]);
 
-  const handleLocSelect = (hit) => {
+  const handleLocSelect = (hit: any) => {
     setAirport({
       iataCode: hit.iata_code,
       name: hit.name,
@@ -66,10 +67,10 @@ export default function InfiniteHits({
                 onClick={() => handleLocSelect(hit)}
               >
                 <h2 className="font-medium text-base text-foreground tracking-tight">
-                  {hit.name} ({hit.iata_code})
+                  {String(hit.name)} ({String(hit.iata_code)})
                 </h2>
                 <p className="text-sm text-muted-foreground font-normal">
-                  {hit.city}, {hit.country}
+                  {String(hit.city)}, {String(hit.country)}
                   <Snippet attribute="description" hit={hit} />
                 </p>
               </Button>

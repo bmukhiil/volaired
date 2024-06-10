@@ -33,8 +33,8 @@ import InfiniteHits from "./algolia/infinite-hits";
 import { departureAirportAtom, destinationAirportAtom } from "@/lib/atoms";
 
 const searchClient = algoliasearch(
-  process.env.NEXT_PUBLIC_ALGOLIA_APPLICATION_ID,
-  process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY,
+  process.env.NEXT_PUBLIC_ALGOLIA_APPLICATION_ID ?? "",
+  process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY ?? "",
 );
 
 interface Airport {

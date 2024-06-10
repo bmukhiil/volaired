@@ -70,6 +70,8 @@ export async function updateSession(
   //   ? { ...data, ...(await supabase.auth.getUser()).data?.user }
   //   : null;
 
+  const user = await supabase.auth.getUser();
+
   // const user_email = request.cookies.get("user_email");
   // if (!user_email && request.nextUrl.pathname.startsWith("/auth/verify")) {
   //   return NextResponse.redirect(new URL("/sign-in", request.nextUrl));
@@ -97,12 +99,12 @@ export async function updateSession(
   //   }
   // }
 
-  // if (
-  //   !user &&
-  //   protectedRoutes.some((path) => request.nextUrl.pathname.startsWith(path))
-  // ) {
-  //   return NextResponse.redirect(new URL("/sign-in", request.nextUrl));
-  // }
+  if (
+    !user &&
+    protectedRoutes.some((path) => request.nextUrl.pathname.startsWith(path))
+  ) {
+    return NextResponse.redirect(new URL("/sign-in", request.nextUrl));
+  }
 
   return response;
 }

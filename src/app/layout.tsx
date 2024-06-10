@@ -88,7 +88,9 @@ export default function RootLayout({
       <html lang="en" className="scroll-smooth" suppressHydrationWarning>
         <Providers>
           {/* <ThemeProvider attribute="class" defaultTheme="system" enableSystem> */}
-          <body className={cn("overflow-x-hidden", inter.className)}>
+          <body
+            className={cn("overflow-x-hidden bg-background", inter.className)}
+          >
             {children}
             <SpeedInsights />
             <Analytics />

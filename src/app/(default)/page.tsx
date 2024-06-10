@@ -100,7 +100,7 @@ export default function Home() {
     },
   ];
 
-  const handleIncrementCount = (type, increment) => {
+  const handleIncrementCount = (type: string, increment: number) => {
     switch (type) {
       case "adult":
         setAdultCount((prevCount) => prevCount + increment);
@@ -116,7 +116,7 @@ export default function Home() {
     }
   };
 
-  const handleDecrementCount = (type, decrement) => {
+  const handleDecrementCount = (type: string, decrement: number) => {
     if (type === "adult" && adultCount === 0) return;
     if (type === "child" && childCount === 0) return;
     if (type === "infant" && infantCount === 0) return;
@@ -141,23 +141,23 @@ export default function Home() {
     setInfantCount(0);
   };
 
-  const updateDateRange = (dateRange) => {
-    const { from, to } = dateRange;
+  // const updateDateRange = (dateRange) => {
+  //   const { from, to } = dateRange;
 
-    if (from && to) {
-      const formattedDateRange = {
-        from: Math.floor(from.getTime() / 1000), // Convert 'from' date to epoch time
-        to: Math.floor(to.getTime() / 1000), // Convert 'to' date to epoch time
-      };
+  //   if (from && to) {
+  //     const formattedDateRange = {
+  //       from: new Date(Math.floor(from.getTime() / 1000)), // Convert 'from' date to Date object
+  //       to: new Date(Math.floor(to.getTime() / 1000)), // Convert 'to' date to Date object
+  //     };
 
-      setDateRange(formattedDateRange);
-    } else {
-      // Handle the case when 'from' or 'to' is undefined
-      console.error(
-        "Invalid date range selected. Both 'from' and 'to' dates must be defined.",
-      );
-    }
-  };
+  //     setDateRange(formattedDateRange);
+  //   } else {
+  //     // Handle the case when 'from' or 'to' is undefined
+  //     console.error(
+  //       "Invalid date range selected. Both 'from' and 'to' dates must be defined."
+  //     );
+  //   }
+  // };
 
   const handleSearch = async () => {
     setLoading(true);
@@ -232,7 +232,7 @@ export default function Home() {
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 20 20"
                       fill="currentColor"
-                      class="size-4"
+                      className="size-4"
                     >
                       <path
                         fill-rule="evenodd"
@@ -250,6 +250,7 @@ export default function Home() {
                 >
                   {activityMenu.map((item) => (
                     <DropdownMenuRadioItem
+                      key={item.id}
                       className={cn({
                         "bg-background": position === item.id,
                       })}
@@ -263,7 +264,7 @@ export default function Home() {
             </DropdownMenu>
           </div>
         </div>
-        <div className="mx-6 mt-6">
+        <div className="mx-6 py-6">
           {/* {/* <div className="flex lg:justify-center bg-secondary rounded-lg" */}
           <AnimatePresence mode="wait">
             {position === "flights" && (
@@ -281,7 +282,7 @@ export default function Home() {
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 20 20"
                       fill="currentColor"
-                      class="size-5 rotate-90"
+                      className="size-5 rotate-90"
                     >
                       <path
                         fill-rule="evenodd"
@@ -292,7 +293,7 @@ export default function Home() {
                   </Button>
                 </div>
                 <AirportSelect type="destination" />
-                <DatePickerWithRange onDateChange={updateDateRange} />
+                {/* <DatePickerWithRange onDateChange={updateDateRange} /> */}
                 <div className="flex flex-col gap-y-1">
                   <Label htmlFor="travelers">Travelers</Label>
                   <Drawer>
@@ -306,7 +307,7 @@ export default function Home() {
                           xmlns="http://www.w3.org/2000/svg"
                           viewBox="0 0 20 20"
                           fill="currentColor"
-                          class="size-5"
+                          className="size-5"
                         >
                           <path d="M10 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM6 8a2 2 0 1 1-4 0 2 2 0 0 1 4 0ZM1.49 15.326a.78.78 0 0 1-.358-.442 3 3 0 0 1 4.308-3.516 6.484 6.484 0 0 0-1.905 3.959c-.023.222-.014.442.025.654a4.97 4.97 0 0 1-2.07-.655ZM16.44 15.98a4.97 4.97 0 0 0 2.07-.654.78.78 0 0 0 .357-.442 3 3 0 0 0-4.308-3.517 6.484 6.484 0 0 1 1.907 3.96 2.32 2.32 0 0 1-.026.654ZM18 8a2 2 0 1 1-4 0 2 2 0 0 1 4 0ZM5.304 16.19a.844.844 0 0 1-.277-.71 5 5 0 0 1 9.947 0 .843.843 0 0 1-.277.71A6.975 6.975 0 0 1 10 18a6.974 6.974 0 0 1-4.696-1.81Z" />
                         </svg>
@@ -361,7 +362,7 @@ export default function Home() {
                                     xmlns="http://www.w3.org/2000/svg"
                                     viewBox="0 0 20 20"
                                     fill="currentColor"
-                                    class="size-5 text-foreground"
+                                    className="size-5 text-foreground"
                                   >
                                     <path
                                       fill-rule="evenodd"
@@ -384,7 +385,7 @@ export default function Home() {
                                     xmlns="http://www.w3.org/2000/svg"
                                     viewBox="0 0 20 20"
                                     fill="currentColor"
-                                    class="size-5 text-foreground"
+                                    className="size-5 text-foreground"
                                   >
                                     <path d="M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z" />
                                   </svg>
@@ -411,7 +412,7 @@ export default function Home() {
                                     xmlns="http://www.w3.org/2000/svg"
                                     viewBox="0 0 20 20"
                                     fill="currentColor"
-                                    class="size-5 text-foreground"
+                                    className="size-5 text-foreground"
                                   >
                                     <path
                                       fill-rule="evenodd"
@@ -434,7 +435,7 @@ export default function Home() {
                                     xmlns="http://www.w3.org/2000/svg"
                                     viewBox="0 0 20 20"
                                     fill="currentColor"
-                                    class="size-5 text-foreground"
+                                    className="size-5 text-foreground"
                                   >
                                     <path d="M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z" />
                                   </svg>
@@ -461,7 +462,7 @@ export default function Home() {
                                     xmlns="http://www.w3.org/2000/svg"
                                     viewBox="0 0 20 20"
                                     fill="currentColor"
-                                    class="size-5 text-foreground"
+                                    className="size-5 text-foreground"
                                   >
                                     <path
                                       fill-rule="evenodd"
@@ -484,7 +485,7 @@ export default function Home() {
                                     xmlns="http://www.w3.org/2000/svg"
                                     viewBox="0 0 20 20"
                                     fill="currentColor"
-                                    class="size-5 text-foreground"
+                                    className="size-5 text-foreground"
                                   >
                                     <path d="M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z" />
                                   </svg>
@@ -546,7 +547,7 @@ export default function Home() {
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 20 20"
                             fill="currentColor"
-                            class="size-5"
+                            className="size-5"
                           >
                             <path
                               fill-rule="evenodd"
@@ -576,7 +577,7 @@ export default function Home() {
                                 fill="url(#grad1)"
                                 xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 24 24"
-                                class="size-6"
+                                className="size-6"
                               >
                                 <defs>
                                   <linearGradient
@@ -610,11 +611,11 @@ export default function Home() {
                               </svg>
                               <div className="flex flex-col gap-x-2">
                                 <span className="font-semibold">
-                                  Create a group?
+                                  Create a trip?
                                 </span>
                                 <p className="text-foreground/60 text-sm">
-                                  We&apos;ve noticed you have more than one
-                                  traveller.
+                                  We can help you organize your trip with a trip
+                                  plan.
                                 </p>
                                 <div className="mt-4 flex gap-x-2 justify-between items-center">
                                   <Button
@@ -625,17 +626,9 @@ export default function Home() {
                                   >
                                     Close
                                   </Button>
-                                  <Link href="/groups/create">
+                                  <Link href="/trips">
                                     <Button className="flex items-center gap-x-2">
-                                      <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 20 20"
-                                        fill="currentColor"
-                                        class="size-5"
-                                      >
-                                        <path d="M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z" />
-                                      </svg>
-                                      Create
+                                      Go to Trips
                                     </Button>
                                   </Link>
                                 </div>
@@ -663,7 +656,7 @@ export default function Home() {
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 20 20"
                       fill="currentColor"
-                      class="size-5 rotate-90"
+                      className="size-5 rotate-90"
                     >
                       <path
                         fill-rule="evenodd"
@@ -674,7 +667,7 @@ export default function Home() {
                   </Button>
                 </div>
                 <AirportSelect type="destination" />
-                <DatePickerWithRange onDateChange={updateDateRange} />
+                {/* <DatePickerWithRange onDateChange={updateDateRange} /> */}
                 <div className="flex flex-col gap-y-1">
                   <Label htmlFor="travelers">Travelers</Label>
                   <Drawer>
@@ -688,7 +681,7 @@ export default function Home() {
                           xmlns="http://www.w3.org/2000/svg"
                           viewBox="0 0 20 20"
                           fill="currentColor"
-                          class="size-5"
+                          className="size-5"
                         >
                           <path d="M10 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM6 8a2 2 0 1 1-4 0 2 2 0 0 1 4 0ZM1.49 15.326a.78.78 0 0 1-.358-.442 3 3 0 0 1 4.308-3.516 6.484 6.484 0 0 0-1.905 3.959c-.023.222-.014.442.025.654a4.97 4.97 0 0 1-2.07-.655ZM16.44 15.98a4.97 4.97 0 0 0 2.07-.654.78.78 0 0 0 .357-.442 3 3 0 0 0-4.308-3.517 6.484 6.484 0 0 1 1.907 3.96 2.32 2.32 0 0 1-.026.654ZM18 8a2 2 0 1 1-4 0 2 2 0 0 1 4 0ZM5.304 16.19a.844.844 0 0 1-.277-.71 5 5 0 0 1 9.947 0 .843.843 0 0 1-.277.71A6.975 6.975 0 0 1 10 18a6.974 6.974 0 0 1-4.696-1.81Z" />
                         </svg>
@@ -743,7 +736,7 @@ export default function Home() {
                                     xmlns="http://www.w3.org/2000/svg"
                                     viewBox="0 0 20 20"
                                     fill="currentColor"
-                                    class="size-5 text-foreground"
+                                    className="size-5 text-foreground"
                                   >
                                     <path
                                       fill-rule="evenodd"
@@ -766,7 +759,7 @@ export default function Home() {
                                     xmlns="http://www.w3.org/2000/svg"
                                     viewBox="0 0 20 20"
                                     fill="currentColor"
-                                    class="size-5 text-foreground"
+                                    className="size-5 text-foreground"
                                   >
                                     <path d="M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z" />
                                   </svg>
@@ -793,7 +786,7 @@ export default function Home() {
                                     xmlns="http://www.w3.org/2000/svg"
                                     viewBox="0 0 20 20"
                                     fill="currentColor"
-                                    class="size-5 text-foreground"
+                                    className="size-5 text-foreground"
                                   >
                                     <path
                                       fill-rule="evenodd"
@@ -816,7 +809,7 @@ export default function Home() {
                                     xmlns="http://www.w3.org/2000/svg"
                                     viewBox="0 0 20 20"
                                     fill="currentColor"
-                                    class="size-5 text-foreground"
+                                    className="size-5 text-foreground"
                                   >
                                     <path d="M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z" />
                                   </svg>
@@ -843,7 +836,7 @@ export default function Home() {
                                     xmlns="http://www.w3.org/2000/svg"
                                     viewBox="0 0 20 20"
                                     fill="currentColor"
-                                    class="size-5 text-foreground"
+                                    className="size-5 text-foreground"
                                   >
                                     <path
                                       fill-rule="evenodd"
@@ -866,7 +859,7 @@ export default function Home() {
                                     xmlns="http://www.w3.org/2000/svg"
                                     viewBox="0 0 20 20"
                                     fill="currentColor"
-                                    class="size-5 text-foreground"
+                                    className="size-5 text-foreground"
                                   >
                                     <path d="M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z" />
                                   </svg>
@@ -925,7 +918,7 @@ export default function Home() {
                           xmlns="http://www.w3.org/2000/svg"
                           viewBox="0 0 20 20"
                           fill="currentColor"
-                          class="size-5"
+                          className="size-5"
                         >
                           <path
                             fill-rule="evenodd"
@@ -954,7 +947,7 @@ export default function Home() {
                                 fill="url(#grad1)"
                                 xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 24 24"
-                                class="size-6"
+                                className="size-6"
                               >
                                 <defs>
                                   <linearGradient
@@ -1003,13 +996,13 @@ export default function Home() {
                                   >
                                     Close
                                   </Button>
-                                  <Link href="/trips/create">
+                                  <Link href="/trips">
                                     <Button className="flex items-center gap-x-2">
                                       <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         viewBox="0 0 20 20"
                                         fill="currentColor"
-                                        class="size-5"
+                                        className="size-5"
                                       >
                                         <path d="M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z" />
                                       </svg>
@@ -1038,7 +1031,7 @@ export default function Home() {
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 20 20"
                   fill="currentColor"
-                  class="size-5"
+                  className="size-5"
                 >
                   <path
                     fill-rule="evenodd"
@@ -1069,7 +1062,7 @@ export default function Home() {
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
                     fill="currentColor"
-                    class="size-5"
+                    className="size-5"
                   >
                     <path
                       fill-rule="evenodd"
