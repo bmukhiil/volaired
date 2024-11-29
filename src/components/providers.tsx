@@ -1,4 +1,6 @@
 "use client";
+/* eslint-disable */
+
 
 import { Provider } from "jotai";
 import { ThemeProvider } from "./theme-provider";

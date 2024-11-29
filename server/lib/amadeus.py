@@ -100,6 +100,7 @@ class AmadeusSingleton:
                 "inboundTotalDuration": item["itineraries"][1]["duration"],
                 "flightPath": [],
                 "price": float(item["price"]["total"]),
+                "response": item
             }
 
             for itinerary in item["itineraries"]:
@@ -120,7 +121,49 @@ class AmadeusSingleton:
         print(json.dumps(formatted_data, indent=2))
 
         return jsonify(formatted_data)
+    
+    def price_check(self, request):
+        price = self.amadeus.shopping.flight_offers.pricing.post(request.response)
+        
+        return price
+    
+    def purchase_ticket(self, request):
+        
+        traveler = {
+            'id': '1',
+            'dateOfBirth': '1982-01-16',
+            'name': {
+                'firstName': 'JORGE',
+                'lastName': 'GONZALES'
+            },
+            'gender': 'MALE',
+            'contact': {
+                'emailAddress': 'jorge.gonzales833@telefonica.es',
+                'phones': [{
+                    'deviceType': 'MOBILE',
+                    'countryCallingCode': '34',
+                    'number': '480080076'
+                }]
+            },
+            'documents': [{
+                'documentType': 'PASSPORT',
+                'birthPlace': 'Madrid',
+                'issuanceLocation': 'Madrid',
+                'issuanceDate': '2015-04-14',
+                'number': '00000000',
+                'expiryDate': '2025-04-14',
+                'issuanceCountry': 'ES',
+                'validityCountry': 'ES',
+                'nationality': 'ES',
+                'holder': True
+            }]
+        }
+        
+        ticket = self.amadeus.booking.flight_orders.post(request.response, traveler)
 
+        return ticket
+    
+    
     def search_hotels(self, request):
 
         checkInDate = request["checkInDate"]
@@ -129,7 +172,7 @@ class AmadeusSingleton:
         guests = request["guests"]
 
         hotel_data = self.amadeus.reference_data.locations.hotels.by_city.get(
-            cityCode=city  # City code for Paris
+            cityCode=city  
         )
         hotel_id = []
 
