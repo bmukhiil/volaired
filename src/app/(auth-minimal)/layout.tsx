@@ -52,7 +52,7 @@ export default function AuthLayout({
                 <div>
                   <h3 className="font-medium">Mohith B.</h3>
                   <p className="text-sm text-muted-foreground">
-                    Software Engineer @ Volaired
+                    Software Engineer @ Radiar
                   </p>
                 </div>
               </div>

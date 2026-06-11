@@ -39,11 +39,6 @@ export default function Footer() {
     {
       name: "Company",
       links: [
-        // {
-        //   name: "Terms of Service",
-        //   href: "/terms",
-        //   title: "Read our Terms of Service"
-        // },
         {
           name: "Blog",
           href: "/blog",
@@ -83,147 +78,26 @@ export default function Footer() {
     },
   ];
 
-  //   pointSize: 1000,
-  //   globeColor: "#18181b",
-  //   showAtmosphere: false,
-  //   atmosphereColor: "#FFFFDC",
-  //   atmosphereAltitude: 0.1,
-  //   emissive: "#062056",
-  //   emissiveIntensity: 0.1,
-  //   shininess: 0.9,
-  //   polygonColor: "rgba(255,255,255,0.7)",
-  //   ambientLight: "#38bdf8",
-  //   directionalLeftLight: "#ffffff",
-  //   directionalTopLight: "#ffffff",
-  //   pointLight: "#ffffff",
-  //   arcLength: 0.9,
-  //   rings: 1,
-  //   maxRings: 3,
-  //   initialPosition: { lat: 22.3193, lng: 114.1694 },
-  //   autoRotate: true,
-  //   autoRotateSpeed: 0.5,
-  // };
-  // const colors = ["#d9dcfc", "#818CF8", "#81c8f8"];
-
-  // useEffect(() => {
-  //   async function fetchArcs() {
-  //     const controller = new AbortController();
-  //     const timeoutId = setTimeout(() => controller.abort(), 15000);
-
-  //     try {
-  //       const response = await fetch(
-  //         `/api/v1/flights/paths/yesterday?limit=10`,
-  //         {
-  //           signal: controller.signal,
-  //           next: {
-  //             revalidate: 43200,
-  //           },
-  //         }
-  //       );
-  //       clearTimeout(timeoutId);
-  //       const data = await response.json();
-  //       const newArcs = data.data.map(
-  //         (flight: EnrichedFlightDetails, index: number) => {
-  //           const [startLat, startLng] = flight.depAirport.coordinates
-  //             .replace(/\s/g, "")
-  //             .split(",");
-  //           const [endLat, endLng] = flight.arrAirport.coordinates
-  //             .replace(/\s/g, "")
-  //             .split(",");
-
-  //           return {
-  //             order: index,
-  //             startLat: parseFloat(startLat),
-  //             startLng: parseFloat(startLng),
-  //             endLat: parseFloat(endLat),
-  //             endLng: parseFloat(endLng),
-  //             arcAlt: 0.1,
-  //             color: colors[Math.floor(Math.random() * (colors.length - 1))],
-  //           };
-  //         }
-  //       );
-
-  //       setArcs(newArcs);
-  //       // setLoading(false);
-  //     } catch (e: any) {
-  //       // setLoading(false);
-  //       setError(true);
-  //       if (e.name === "AbortError") {
-  //         console.error("Request timed out");
-  //       } else {
-  //         console.error("Error fetching arcs:", e.message);
-  //       }
-  //     }
-  //   }
-
-  //   fetchArcs();
-  // }, []);
-
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmailError(false);
     setEmail(e.target.value);
   };
 
   return (
-    <main className="lg:px-40 lg:py-4 px-6 bg-secondary">
-      {/* <div className="flex flex-col justify-center items-center">
-        <div className="flex flex-col gap-y-2">
-          <h2 className="text-3xl font-bold tracking-tight">
-            Here&apos;s a globe.
-          </h2>
-          <h3 className="text-muted-foreground">
-            This globe shows the flight paths of some of the flights from
-            yesterday at exactly this time.
-          </h3>
-        </div>
-        <CustomDashedCard className="my-8 flex items-center justify-center">
-          {loading ? (
-            <div className="flex items-center justify-center flex-col">
-              <motion.div
-                className="bg-primary w-24 h-24"
-                animate={{
-                  scale: [0.9, 1.1, 1.1, 0.9, 0.9],
-                  rotate: [0, 0, 180, 180, 0],
-                  borderRadius: ["0%", "0%", "50%", "50%", "0%"],
-                }}
-                transition={{
-                  duration: 1.8,
-                  ease: "easeInOut",
-                  times: [0, 0.2, 0.5, 0.8, 1],
-                  repeat: Infinity,
-                  repeatDelay: 1.2,
-                }}
-              />
-              <div className="text-muted-foreground mt-4 font-medium tracking-tight flex items-center gap-x-2">
-                Loading...
-              </div>
-            </div>
-          ) : (
-            <div className="flex flex-col gap-y-2 items-center justify-center">
-              <World data={arcs} globeConfig={globeConfig} />
-              {error && (
-                <span className="text-rose-500 font-medium">
-                  Error fetching flight paths
-                </span>
-              )}
-            </div>
-          )}
-        </CustomDashedCard>
-      </div>
-      <Separator className="my-4 -mx-6 w-screen" /> */}
+    <main className="w-full max-w-screen overflow-x-hidden bg-secondary">
       <div className="py-14 text-center flex gap-y-6 flex-col">
         <div className="flex flex-col gap-y-4 items-center">
           <span className="text-3xl tracking-tight font-bold text-foreground duration-0">
             <span className="text-indigo-500">Explore</span> the Radiair
             Advantage
           </span>
-          <p className="text-muted-foreground duration-0 lg:w-[80dvh]">
+          <p className="text-muted-foreground duration-0 lg:max-w-[80vw]">
             Radiair simplifies your travel experience with intelligent flight
             recommendations, seamless group coordination, and personalized
             itineraries.
           </p>
         </div>
-        <div className="flex flex-col gap-y-1">
+        <div className="flex flex-col gap-y-1 w-full max-w-md mx-auto">
           <Input
             value={email}
             onChange={(e) => handleEmailChange(e)}
@@ -234,15 +108,15 @@ export default function Footer() {
           </Button>
         </div>
       </div>
-      <Separator className="my-4 flex shrink" />
-      <div className="mt-8">
+      <Separator className="my-4 w-full" />
+      <div className="mt-8 flex justify-center">
         <Image
           src={radiair_full_logo_light}
           className="w-32 h-auto"
           alt="Radiair logo"
         />
       </div>
-      <div className="mt-8 flex gap-x-20">
+      <div className="mt-8 flex flex-wrap gap-x-10 lg:gap-x-20 justify-center">
         {footer.map((section) => (
           <div key={section.name} className="flex flex-col gap-y-2">
             <span className="font-medium tracking-tight text-foreground duration-0">
@@ -263,7 +137,7 @@ export default function Footer() {
           </div>
         ))}
       </div>
-      <Separator className="my-4 flex shrink" />
+      <Separator className="my-4 w-full" />
       <div className="pb-4 flex items-center justify-between">
         <span className="duration-0 text-muted-foreground text-xs">
           © Radiair. All rights reserved.

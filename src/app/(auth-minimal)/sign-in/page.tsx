@@ -4,7 +4,8 @@ import { ChangeEvent, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { signin, signinGoogle } from "@/lib/supabase/actions";
+import { signin } from "@/lib/supabase/actions";
+import { signinGoogle } from "@/lib/supabase/signin"
 import { testEmail } from "@/lib/validate";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
@@ -77,18 +78,15 @@ export default function SignUpPage() {
           </p>
         </div>
         <div className="flex flex-col gap-y-2">
-          <Button
-            onClick={() => signinGoogle()}
-            className="w-full flex items-center gap-x-3"
-            variant="outline"
-          >
-            Continue with Google
-            <Image src={GoogleGLogo} alt="Google G Logo" className="w-4 h-4" />
-          </Button>
-          {/* <Button className="w-full" variant="outline">
-            Continue with Google
-          </Button> */}
-        </div>
+      <Button
+        onClick={signinGoogle}
+        className="w-full flex items-center gap-x-3"
+        variant="outline"
+      >
+        Continue with Google
+        <Image src={GoogleGLogo} alt="Google G Logo" className="w-4 h-4" />
+      </Button>
+    </div>
         <div className="flex items-center gap-x-2">
           <Separator className="flex shrink" />
           <span className="text-sm font-medium">or</span>

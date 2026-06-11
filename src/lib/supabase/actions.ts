@@ -7,6 +7,8 @@ import { EmailOtpType } from "@supabase/supabase-js";
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 
+
+
 export async function signin({ email }: { email: string }) {
   const supabase = createClient();
 
@@ -167,15 +169,22 @@ export async function signOut() {
 }
 
 export async function signinGoogle() {
-  const supabase = createClient();
-  const { data, error } = await supabase.auth.signInWithOAuth({
-    provider: "google",
-    options: {
-      redirectTo: "http://localhost:3000/auth/callback",
-    },
-  });
+  const supabase = createClient(); // Ensures client-side usage
+  try {
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        redirectTo: `http://localhost:3000/auth/callback`, // Ensure this matches your Supabase settings
+      },
+    });
 
-  if (data.url) {
-    redirect(data.url); // use the redirect API for your server framework
+    if (error) {
+      console.error("Error signing in:", error.message);
+      throw error;
+    }
+
+    console.log("Sign-in successful:", data);
+  } catch (err) {
+    console.error("Unexpected error:", err);
   }
 }
