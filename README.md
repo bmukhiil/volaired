@@ -4,6 +4,16 @@
 
 Volaired is a travel-planning web app that combines flight discovery, trip organization, collaboration surfaces, and an assistant-style chat flow. The repo includes authenticated app routes, trip creation flows, search-oriented UI, and a streaming chat endpoint rather than just a landing page.
 
+The current UI is branded as Radiair in parts of the app. The repo name stayed Volaired while the product direction and interface evolved.
+
+## Preview
+
+![Volaired landing page](./docs/assets/volaired-hero.png)
+
+![Volaired trip dashboard](./docs/assets/volaired-trips.png)
+
+![Volaired create trip flow](./docs/assets/volaired-create-trip.png)
+
 ## What Works
 
 - Landing and marketing pages
@@ -29,9 +39,9 @@ Volaired is a travel-planning web app that combines flight discovery, trip organ
 
 ## Proof of Work
 
-- Flight search demo asset: ![Flight Search](./public/flight_search_demo_light.webp)
-- Chat/copilot asset: ![Copilot Chat](./public/copilot_chat.webp)
-- Collaboration asset: ![Collaboration](./public/collab_iphone_light.webp)
+- Marketing screenshot assets in [docs/assets](./docs/assets)
+- Product-specific demo images in `public/flight_search_demo_light.webp`, `public/copilot_chat.webp`, and `public/collab_iphone_light.webp`
+
 - Implemented routes include `/(default)/flights/search`, `/(no-footer)/trips/create`, `/(no-footer)/trips/[uuid]`, and `api/chat`
 
 ## Run Locally
@@ -39,4 +49,15 @@ Volaired is a travel-planning web app that combines flight discovery, trip organ
 ```bash
 npm install
 npm run dev
+```
+
+Then open `http://localhost:3000`.
+
+Some flows expect public Supabase and Algolia environment variables:
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
+NEXT_PUBLIC_ALGOLIA_APPLICATION_ID=
+NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY=
 ```

@@ -86,17 +86,13 @@ export default function RootLayout({
   return (
     <CookiesProvider>
       <html lang="en" className="scroll-smooth" suppressHydrationWarning>
-        <Providers>
-          {/* <ThemeProvider attribute="class" defaultTheme="system" enableSystem> */}
-          <body
-            className={cn("overflow-x-hidden bg-background", inter.className)}
-          >
+        <body className={cn("overflow-x-hidden bg-background", inter.className)}>
+          <Providers>
             {children}
             <SpeedInsights />
             <Analytics />
-          </body>
-          {/* </ThemeProvider> */}
-        </Providers>
+          </Providers>
+        </body>
       </html>
     </CookiesProvider>
   );

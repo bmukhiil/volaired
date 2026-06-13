@@ -12,7 +12,7 @@ import { useState } from "react";
 import { DateRange } from "react-day-picker";
 import { format, addDays } from "date-fns";
 
-export function MainPage() {
+function MainPage() {
   const [date, setDate] = useState<DateRange | undefined>({
     from: new Date(),
     to: addDays(new Date(), 7),
